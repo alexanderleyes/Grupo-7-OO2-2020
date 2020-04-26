@@ -1,0 +1,26 @@
+package test;
+
+import java.time.LocalDate;
+
+import negocio.PersonaABM;
+
+public class testPersona {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		PersonaABM abmPersona = new PersonaABM();
+		
+		
+		try {
+			long idPersona = abmPersona.agregar("Alexander", "Leyes", LocalDate.of(1986, 11, 4), 32525748);
+			
+			//System.out.println(abmPersona.traer(idPersona));
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

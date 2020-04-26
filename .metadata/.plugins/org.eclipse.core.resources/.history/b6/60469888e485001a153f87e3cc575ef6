@@ -1,0 +1,21 @@
+package test;
+
+import datos.TipoEmpleado;
+import negocio.TipoEmpleadoABM;
+
+public class testEmpleado {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		TipoEmpleado tipoEmpleado = new TipoEmpleado();
+		TipoEmpleadoABM abmTipoEmpleado = new TipoEmpleadoABM();
+		
+		abmTipoEmpleado.agregar(idTipoEmpleado, nombre, descripcion, sueldoBasico)
+		abmTipoEmpleado
+		
+		
+	}
+
+}
