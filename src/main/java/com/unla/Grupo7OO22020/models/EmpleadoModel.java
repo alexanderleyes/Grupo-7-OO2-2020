@@ -1,8 +1,9 @@
 package com.unla.Grupo7OO22020.models;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class EmpleadoModel {
+public class EmpleadoModel extends PersonaModel{
 	
 	private long idEmpleado;
 	private String usuario;
@@ -10,18 +11,20 @@ public class EmpleadoModel {
 	private LocalTime horaIngreso;
 	private LocalTime horasXjornada;
 	private double plusSueldo;
+	private boolean baja;	
 	
-	public EmpleadoModel() {}
 	
-	public EmpleadoModel(long idEmpleado, String usuario, String password, LocalTime horaIngreso,
-			LocalTime horasXjornada, double plusSueldo) {
-		super();
-		this.idEmpleado = idEmpleado;
-		this.usuario = usuario;
-		this.password = password;
-		this.horaIngreso = horaIngreso;
-		this.horasXjornada = horasXjornada;
-		this.plusSueldo = plusSueldo;
+	public EmpleadoModel(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni, long idEmpleado, String usuario, String password, LocalTime horaIngreso,
+			LocalTime horasXjornada, double plusSueldo, boolean baja) {
+		super(idPersona, nombre, apellido, fechaNacimiento, dni);
+		
+		this.idEmpleado 	= idEmpleado;
+		this.usuario 		= usuario;
+		this.password 		= password;
+		this.horaIngreso 	= horaIngreso;
+		this.horasXjornada 	= horasXjornada;
+		this.plusSueldo 	= plusSueldo;
+		this.baja			= baja;
 	}
 
 
@@ -84,14 +87,22 @@ public class EmpleadoModel {
 		this.plusSueldo = plusSueldo;
 	}
 
+	
+	
+	public boolean isBaja() {
+		return baja;
+	}
+
+	public void setBaja(boolean baja) {
+		this.baja = baja;
+	}
 
 	@Override
 	public String toString() {
 		return "EmpleadoModel [idEmpleado=" + idEmpleado + ", usuario=" + usuario + ", password=" + password
-				+ ", plusSueldo=" + plusSueldo + "]";
-	}
-	
-	
+				+ ", horaIngreso=" + horaIngreso + ", horasXjornada=" + horasXjornada + ", plusSueldo=" + plusSueldo
+				+ ", baja=" + baja + "]";
+	}	
 	
 	
 	
