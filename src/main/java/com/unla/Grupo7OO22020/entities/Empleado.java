@@ -1,19 +1,23 @@
 package com.unla.Grupo7OO22020.entities;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="empleado")
-@PrimaryKeyJoinColumn(name = "idEmpleado")
-public class Empleado extends Persona {
-		
-
+public class Empleado {
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idEmpleado;
+	
 	@Column(name="usuario")
 	private String usuario;	
 
@@ -29,24 +33,26 @@ public class Empleado extends Persona {
 	@Column(name="plusSueldo")
 	private double plusSueldo;
 	
-	@Column(name="baja")
-	private boolean baja;
-	
 	public Empleado() {};
 	
-	public Empleado(/*H*/long idPersona,	String nombre, String apellido, LocalDate fechaNacimiento,	 int dni, /*H*/ long idEmpleado, String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
-			double plusSueldo, boolean baja) {
-		super(idPersona, nombre, apellido, fechaNacimiento, dni);
-		
-		//this.idEmpleado = idEmpleado;
+	public Empleado(long idEmpleado, String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
+			double plusSueldo) {
+		super();
+		this.idEmpleado = idEmpleado;
 		this.usuario = usuario;
 		this.password = password;
 		this.horaIngreso = horaIngreso;
 		this.horasXjornada = horasXjornada;
 		this.plusSueldo = plusSueldo;
-		this.baja		= baja;
 	}
 
+	public long getIdEmpleado() {
+		return idEmpleado;
+	}
+
+	public void setIdEmpleado(long idEmpleado) {
+		this.idEmpleado = idEmpleado;
+	}
 
 	public String getUsuario() {
 		return usuario;
@@ -87,15 +93,6 @@ public class Empleado extends Persona {
 	public void setPlusSueldo(double plusSueldo) {
 		this.plusSueldo = plusSueldo;
 	}
-
-	public boolean isBaja() {
-		return baja;
-	}
-	
-	public void setBaja(boolean baja) {
-		this.baja = baja;
-	}
 		
-	
 
 }
