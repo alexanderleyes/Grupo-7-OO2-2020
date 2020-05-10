@@ -10,6 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
+import com.unla.Grupo7OO22020.services.IEmpleadoService;
+import com.unla.Grupo7OO22020.services.IGerenteService;
+import com.unla.Grupo7OO22020.services.IPersonaService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 
 
@@ -20,6 +23,18 @@ public class HomeController {
 	@Autowired
 	@Qualifier("sucursalService")
 	private ISucursalService sucursalService;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
+	
+	@Autowired
+	@Qualifier("gerenteService")
+	private IGerenteService gerenteService;
+	
+	@Autowired
+	@Qualifier("personaService")
+	private IPersonaService personaService;
 	
 	@GetMapping("/")
 	public ModelAndView home(){
@@ -35,9 +50,26 @@ public class HomeController {
 	
 	@GetMapping("/locales")
 	public ModelAndView locales(){
-		System.out.println("enruta: " +ViewRouteHelper.locales);
+			System.out.println("enruta: " +ViewRouteHelper.locales);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.locales);
 			mav.addObject("sucursales", sucursalService.getAll());
+			return mav;			
+		}
+	
+	@GetMapping("/empleado_idx")
+	public ModelAndView empleados(){
+			System.out.println("enruta: " +ViewRouteHelper.empleado_idx);
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.empleado_idx);
+			mav.addObject("empleados", empleadoService.getAll());			
+			return mav;			
+		}
+	
+	
+	@GetMapping("/persona_idx")
+	public ModelAndView clientes(){
+			System.out.println("enruta: " +ViewRouteHelper.persona_idx);
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.persona_idx);			
+			mav.addObject("personas", personaService.getAll());		
 			return mav;			
 		}
 }

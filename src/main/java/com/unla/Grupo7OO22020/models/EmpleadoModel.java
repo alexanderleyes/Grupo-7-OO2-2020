@@ -1,5 +1,6 @@
 package com.unla.Grupo7OO22020.models;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -11,22 +12,22 @@ public class EmpleadoModel extends PersonaModel{
 	private LocalTime horaIngreso;
 	private LocalTime horasXjornada;
 	private double plusSueldo;
-	private boolean baja;	
+	private boolean baja;		
 	
+	public EmpleadoModel() {};
 	
 	public EmpleadoModel(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni, long idEmpleado, String usuario, String password, LocalTime horaIngreso,
-			LocalTime horasXjornada, double plusSueldo, boolean baja) {
+			LocalTime horasXjornada, double plusSueldo) {
 		super(idPersona, nombre, apellido, fechaNacimiento, dni);
 		
-		this.idEmpleado 	= idEmpleado;
-		this.usuario 		= usuario;
-		this.password 		= password;
-		this.horaIngreso 	= horaIngreso;
+		this.setIdEmpleado(idEmpleado);
+		this.usuario 		= apellido;
+		this.password 		= Integer.toString(dni);
+		this.horaIngreso 	= horaIngreso; 
 		this.horasXjornada 	= horasXjornada;
 		this.plusSueldo 	= plusSueldo;
-		this.baja			= baja;
+		this.baja			= false;
 	}
-
 
 	public long getIdEmpleado() {
 		return idEmpleado;

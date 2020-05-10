@@ -12,4 +12,7 @@ import com.unla.Grupo7OO22020.entities.Empleado;
 public interface IEmpleadoRepository extends JpaRepository<Empleado, Serializable>{
 	
 	public Empleado findByUsuario(String usuario);
+
+	public Empleado findByIdPersona(long idEmpleado);
+	
 }

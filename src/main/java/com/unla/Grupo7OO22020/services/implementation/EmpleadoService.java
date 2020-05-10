@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.EmpleadoConverter;
 import com.unla.Grupo7OO22020.entities.Empleado;
+import com.unla.Grupo7OO22020.entities.Persona;
 import com.unla.Grupo7OO22020.models.EmpleadoModel;
+import com.unla.Grupo7OO22020.models.PersonaModel;
 import com.unla.Grupo7OO22020.repositories.IEmpleadoRepository;
 import com.unla.Grupo7OO22020.services.IEmpleadoService;
 
@@ -59,6 +61,15 @@ public class EmpleadoService implements  IEmpleadoService{
 		} catch(Exception e) {
 			return false;
 		}		
+	}
+
+	
+
+	@Override
+	public EmpleadoModel findByIdEmpleado(long idEmpleado) {	
+		Empleado empleado = null;
+		empleado = empleadoRepository.findByIdPersona(idEmpleado);			
+		return empleadoConverter.entityToModel(empleado);
 	}
 	
 	

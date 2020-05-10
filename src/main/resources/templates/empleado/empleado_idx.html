@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>TPC - Democtatizacion de Stock</title>
+ <title>TPC - Empleados</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -46,7 +46,7 @@
 
       <div class="profile">
         <img src="../img/alexander.jpg" alt="" class="img-fluid rounded-circle">
-        <!--<h1 class="text-light"><a href="index.html"><span th:text="${gerente.usuario}" /></a></h1>-->
+         <!-- <h1 class="text-light"><a href="index.html"><span th:text="${empleado.usuario}" /></a></h1>-->
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -59,11 +59,15 @@
       <nav class="nav-menu">
         <ul>
           <li class="active"><a href="index.html"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
-          <li><a th:href="@{/empleado_idx}"><i class="bx bx-user"></i> <span>Empleados</span></a></li>
+          <li><a href="#about"><i class="bx bx-user"></i> <span>Empleados</span></a></li>
           <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
           <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
-          <li><a th:href="@{/locales}"><i class="bx bx-server"></i> Locales</a></li>
-          <li><a th:href="@{/persona_idx}"><i class="bx bx-envelope"></i> Clientes</a></li>
+          
+          <form th:action="@{/home/locales}" method="post" role="form">
+          	<li><a  type="submit" href="#"><i class="bx bx-server" ></i> Locales</a></li>
+          </form>
+          
+          <li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -71,20 +75,110 @@
 
     </div>
   </header><!-- End Header -->
-	
+
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-
+	
         <div class="d-flex justify-content-between align-items-center">
-          <h2>INICIO</h2>
+          <h2>Administrar Empleados</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
             <li>Inventario 002</li>
           </ol>
         </div>
+        
+        <br><br><br>
+        
+        
+					
+        <table class="table"   >
+			<thead>
+				<tr >
+					<th>ID </th>
+					<th>Nombre </th>
+					<th>Apellido</th>
+					<th>Fecha Nacimiento</th>
+					<th>Dni</th>
+					<th>Hora Ingreso</th>
+					<th>Jornada </th>
+					<th>Plus Sueldo</th>
+					<th>Baja</th>					
+				</tr>
+			</thead>
+			<tbody>				
+			
+				<tr th:each="empleado: ${empleados}">
+					<form th:action="@{/empleado/modificar/{id}(id=${empleado.idPersona})}" method="post" role="form" >
+						<td><span th:text=${empleado.idPersona}/></td>
+						<td><span th:text=${empleado.nombre}/></td>
+						<td><span th:text=${empleado.apellido}/></td>
+						<td><span th:text=${empleado.fechaNacimiento}/></td>
+						<td><span th:text=${empleado.dni}/></td>
+						<td><span th:text=${empleado.horaIngreso}/></td>
+						<td><span th:text=${empleado.horasXjornada}/></td>
+						<td><span th:text=${empleado.plusSueldo}/></td>
+						<td><span th:text=${empleado.baja}/></td>
+						<td>
+							<input type="submit" name="modificar" value="M" />						
+						</td>
+					</form>
+						<td>
+							<form th:action="@{/empleado/eliminar/{id}(id=${empleado.idPersona})}" method="post" role="form" >
+								<input type="submit"  name="eliminar" value="X" />
+							</form>
+						</td>			
+				</tr>
+			</tbody>
+		</table>    
+		  
+	 <br><br><br>
+	 
+	<form th:action="@{/empleado/agregar}" th:object="${EmpleadoModel}" method="post" role="form" >
+              <div class="form-row" >              
+                <div class="form-group col-md-6">
+                  <label for="name">Nombre</label>
+                  <input type="text" name="nombre" class="form-control" id="nombre" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Apellido</label>
+                  <input type="text" name="apellido" class="form-control"  id="apellido" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Fecha de Nacimiento</label>
+                  <input type="date" name="fechaNacimiento" class="form-control" id="fechaNacimiento" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">DNI</label>
+                  <input type="number" name="dni" class="form-control"  id="dni" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div> 
+                <div class="form-group col-md-6">
+                  <label for="name">HoraIngreso</label>
+                  <input type=time name="horaIngreso" class="form-control" id="horaIngreso" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Jornada</label>
+                  <input type="time" name="horasXjornada" class="form-control"  id="horasXjornada" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                 <div class="form-group col-md-6">
+                  <label for="name">Plus Sueldo</label>
+                  <input type=number name="plusSueldo" class="form-control"  id="plusSueldo" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>    
+                                      
+              </div>   
+                         
+              <div class="text-left"><button type="submit">Agregar</button></div>
+            </form>	
+     
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -104,7 +198,7 @@
           <div class="portfolio-info">
             <h3>Project information</h3>
             <ul>
-              <li><strong>Category</strong>: Web design</li>
+              <li><strong>Category</strong>: OO2"</li>
               <li><strong>Client</strong>: ASU Company</li>
               <li><strong>Project date</strong>: 01 March, 2020</li>
               <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>

@@ -1,5 +1,6 @@
 package com.unla.Grupo7OO22020.entities;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -7,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="empleado")
@@ -21,9 +24,11 @@ public class Empleado extends Persona {
 	private String password;
 
 	@Column(name="horaIngreso")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalTime horaIngreso;
 
 	@Column(name="horasXjornada")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalTime horasXjornada;
 	
 	@Column(name="plusSueldo")
@@ -34,13 +39,27 @@ public class Empleado extends Persona {
 	
 	public Empleado() {};
 	
+	
 	public Empleado(/*H*/long idPersona,	String nombre, String apellido, LocalDate fechaNacimiento,	 int dni, /*H*/ long idEmpleado, String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
 			double plusSueldo, boolean baja) {
 		super(idPersona, nombre, apellido, fechaNacimiento, dni);
 		
-		//this.idEmpleado = idEmpleado;
+		
 		this.usuario = usuario;
 		this.password = password;
+		this.horaIngreso = horaIngreso;
+		this.horasXjornada = horasXjornada;
+		this.plusSueldo = plusSueldo;
+		this.baja		= baja;
+	}
+	
+	public Empleado(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento,	int dni, String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
+			double plusSueldo, boolean baja) {
+		super(idPersona, nombre, apellido, fechaNacimiento, dni);
+		
+		
+		this.usuario = apellido;
+		this.password = Integer.toString(dni);
 		this.horaIngreso = horaIngreso;
 		this.horasXjornada = horasXjornada;
 		this.plusSueldo = plusSueldo;

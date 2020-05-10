@@ -1,7 +1,9 @@
 package com.unla.Grupo7OO22020.entities;
 
-import java.time.LocalDate;
 
+
+
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +41,14 @@ public class Persona {
 	public Persona(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni) {
 		super();
 		this.idPersona = idPersona;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaNacimiento = fechaNacimiento;
+		this.dni = dni;
+	}
+	
+	public Persona(String nombre, String apellido, LocalDate fechaNacimiento, int dni) {
+		super();		
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNacimiento = fechaNacimiento;

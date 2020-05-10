@@ -1,5 +1,6 @@
 package com.unla.Grupo7OO22020.models;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class PersonaModel {
@@ -12,14 +13,18 @@ public class PersonaModel {
 	public int dni;	
 	
 	
+	public PersonaModel() {};
+	
 	public PersonaModel(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni) {
 		super();
-		this.idPersona = idPersona;
+		this.setIdPersona(idPersona);
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNacimiento = fechaNacimiento;
 		this.dni = dni;
 	}
+	
+
 	
 		
 	public long getIdPersona() {

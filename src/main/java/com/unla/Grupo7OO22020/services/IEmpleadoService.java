@@ -10,4 +10,6 @@ public interface IEmpleadoService {
 	public EmpleadoModel insertOrUpdate(EmpleadoModel empleadoModel);
 	public boolean remove(long idEmpleado);
 	public EmpleadoModel findByUsuario(String Usuario);
+	public Object findByIdEmpleado(long idEmpleado);
+	
 }
