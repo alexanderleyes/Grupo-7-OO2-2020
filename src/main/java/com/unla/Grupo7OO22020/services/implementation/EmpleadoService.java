@@ -63,8 +63,6 @@ public class EmpleadoService implements  IEmpleadoService{
 		}		
 	}
 
-	
-
 	@Override
 	public EmpleadoModel findByIdEmpleado(long idEmpleado) {	
 		Empleado empleado = null;

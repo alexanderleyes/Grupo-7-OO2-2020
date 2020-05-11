@@ -40,7 +40,7 @@ public class Empleado extends Persona {
 	public Empleado() {};
 	
 	
-	public Empleado(/*H*/long idPersona,	String nombre, String apellido, LocalDate fechaNacimiento,	 int dni, /*H*/ long idEmpleado, String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
+	public Empleado(/*H*/long idPersona, String nombre, String apellido, LocalDate fechaNacimiento,	 int dni, /*H*/ String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
 			double plusSueldo, boolean baja) {
 		super(idPersona, nombre, apellido, fechaNacimiento, dni);
 		
@@ -51,20 +51,8 @@ public class Empleado extends Persona {
 		this.horasXjornada = horasXjornada;
 		this.plusSueldo = plusSueldo;
 		this.baja		= baja;
-	}
+	}	
 	
-	public Empleado(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento,	int dni, String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
-			double plusSueldo, boolean baja) {
-		super(idPersona, nombre, apellido, fechaNacimiento, dni);
-		
-		
-		this.usuario = apellido;
-		this.password = Integer.toString(dni);
-		this.horaIngreso = horaIngreso;
-		this.horasXjornada = horasXjornada;
-		this.plusSueldo = plusSueldo;
-		this.baja		= baja;
-	}
 
 
 	public String getUsuario() {

@@ -13,6 +13,6 @@ public class EmpleadoConverter {
 	}
 	
 	public Empleado modelToEntity(EmpleadoModel empleadoModel) {
-		return new Empleado(empleadoModel.getIdPersona(), empleadoModel.getNombre(), empleadoModel.getApellido(), empleadoModel.getFechaNacimiento(), empleadoModel.getDni(), /**/ empleadoModel.getIdEmpleado(), empleadoModel.getUsuario(), empleadoModel.getPassword(), empleadoModel.getHoraIngreso(), empleadoModel.getHorasXjornada(), empleadoModel.getPlusSueldo(), empleadoModel.isBaja());
+		return new Empleado(empleadoModel.getIdPersona(), empleadoModel.getNombre(), empleadoModel.getApellido(), empleadoModel.getFechaNacimiento(), empleadoModel.getDni(), /**/ empleadoModel.getUsuario(), empleadoModel.getPassword(), empleadoModel.getHoraIngreso(), empleadoModel.getHorasXjornada(), empleadoModel.getPlusSueldo(), empleadoModel.isBaja());
 	}
 }

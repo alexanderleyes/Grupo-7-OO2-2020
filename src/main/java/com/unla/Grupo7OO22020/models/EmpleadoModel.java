@@ -1,6 +1,6 @@
 package com.unla.Grupo7OO22020.models;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -22,7 +22,7 @@ public class EmpleadoModel extends PersonaModel{
 		
 		this.setIdEmpleado(idEmpleado);
 		this.usuario 		= apellido;
-		this.password 		= Integer.toString(dni);
+		this.password 		= password;
 		this.horaIngreso 	= horaIngreso; 
 		this.horasXjornada 	= horasXjornada;
 		this.plusSueldo 	= plusSueldo;

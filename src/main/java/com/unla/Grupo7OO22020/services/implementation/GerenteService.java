@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.GerenteConverter;
+import com.unla.Grupo7OO22020.entities.Empleado;
 import com.unla.Grupo7OO22020.entities.Gerente;
 import com.unla.Grupo7OO22020.models.GerenteModel;
 import com.unla.Grupo7OO22020.repositories.IGerenteRepository;
@@ -52,8 +53,7 @@ public class GerenteService implements  IGerenteService{
 			Gerente gerente = null;
 			gerente = gerenteRepository.findByDni(dni);
 			
-			if(gerente == null) {
-				System.out.println("Gerente null");
+			if(gerente == null) {				
 				gerente = new Gerente();
 				gerente.setUsuario("dummy");
 			}else {
@@ -68,8 +68,7 @@ public class GerenteService implements  IGerenteService{
 		Gerente gerente = null;
 		gerente = gerenteRepository.findByUsuario(usuario);
 		
-		if(gerente == null) {
-			System.out.println("Gerente null");
+		if(gerente == null) {			
 			gerente = new Gerente();
 			gerente.setUsuario("dummy");
 		}else {
@@ -94,6 +93,14 @@ public class GerenteService implements  IGerenteService{
 		} catch(Exception e) {
 			return false;
 		}		
+	}
+
+
+	@Override
+	public Object findByIdGerente(long id) {
+		Gerente empleado = null;
+		empleado = gerenteRepository.findByIdPersona(id);			
+		return gerenteConverter.entityToModel(empleado);
 	}
 	
 	

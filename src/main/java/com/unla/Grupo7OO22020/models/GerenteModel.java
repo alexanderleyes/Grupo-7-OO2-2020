@@ -1,26 +1,25 @@
 package com.unla.Grupo7OO22020.models;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.unla.Grupo7OO22020.entities.Empleado;
-
-public class GerenteModel extends Empleado {
+public class GerenteModel extends EmpleadoModel {
 
 	private long idGerente;
-	private LocalDate fechaAscenso;
+	private String fechaAscenso;
 	
 	public GerenteModel() {}
 	
 	
 	public GerenteModel(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni, long idEmpleado, String usuario, String password, LocalTime horaIngreso,
-			LocalTime horasXjornada, double plusSueldo, boolean baja,/*H*/long idGerente, LocalDate fechaAscenso) {
-		super(idPersona, nombre, apellido, fechaNacimiento, dni, idEmpleado, usuario, password, horaIngreso, horasXjornada, plusSueldo, baja);
+			LocalTime horasXjornada, double plusSueldolong, long idGerente, String fechaAscenso) {
+		super(idPersona, nombre, apellido, fechaNacimiento, dni, idEmpleado, usuario, password, horaIngreso, horasXjornada,  plusSueldolong);
 		
 		this.idGerente = idGerente;
 		this.fechaAscenso = fechaAscenso;
-	}
+	}	
+	
 	
 	public long getIdGerente() {
 		return idGerente;
@@ -28,10 +27,10 @@ public class GerenteModel extends Empleado {
 	public void setIdGerente(long idGerente) {
 		this.idGerente = idGerente;
 	}
-	public LocalDate getFechaAscenso() {
+	public String getFechaAscenso() {
 		return fechaAscenso;
 	}
-	public void setFechaAscenso(LocalDate fechaAscenso) {
+	public void setFechaAscenso(String fechaAscenso) {
 		this.fechaAscenso = fechaAscenso;
 	}
 	

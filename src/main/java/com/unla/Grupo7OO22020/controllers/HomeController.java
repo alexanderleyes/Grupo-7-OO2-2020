@@ -14,6 +14,7 @@ import com.unla.Grupo7OO22020.services.IEmpleadoService;
 import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IPersonaService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
+import com.unla.Grupo7OO22020.services.IVendedorService;
 
 
 @Controller
@@ -33,6 +34,10 @@ public class HomeController {
 	private IGerenteService gerenteService;
 	
 	@Autowired
+	@Qualifier("vendedorService")
+	private IVendedorService vendedorService;
+	
+	@Autowired
 	@Qualifier("personaService")
 	private IPersonaService personaService;
 	
@@ -45,6 +50,11 @@ public class HomeController {
 	@GetMapping("/loginfail")
 	public ModelAndView loginfail(){
 		return new ModelAndView(ViewRouteHelper.login);			
+	}
+	
+	@GetMapping("/home")
+	public ModelAndView loginok(){
+		return new ModelAndView(ViewRouteHelper.login_ok);			
 	}
 	
 	
@@ -61,6 +71,22 @@ public class HomeController {
 			System.out.println("enruta: " +ViewRouteHelper.empleado_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.empleado_idx);
 			mav.addObject("empleados", empleadoService.getAll());			
+			return mav;			
+		}
+	
+	@GetMapping("/gerente_idx")
+	public ModelAndView gerentes(){
+			System.out.println("enruta: " +ViewRouteHelper.gerente_idx);
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.gerente_idx);
+			mav.addObject("gerentes", gerenteService.getAll());			
+			return mav;			
+		}
+	
+	@GetMapping("/vendedor_idx")
+	public ModelAndView vendedores(){
+			System.out.println("enruta: " +ViewRouteHelper.vendedor_idx);
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.vendedor_idx);
+			mav.addObject("vendedores", vendedorService.getAll());			
 			return mav;			
 		}
 	

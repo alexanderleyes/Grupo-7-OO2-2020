@@ -14,6 +14,21 @@ public class ViewRouteHelper {
 	public final static String locales = "/home/locales";
 	
 	
+	/*GERENTE*/
+	public final static String gerente_idx = "empleado/gerente_idx";
+	
+	public final static String gerente_insert = "empleado/gerente_mod";
+	
+	public final static String gerente_reload = "redirect:/gerente_idx";
+	
+	
+	/*VENDEDOR*/
+	public final static String vendedor_idx = "empleado/vendedor_idx";
+	
+	public final static String vendedor_insert = "empleado/vendedor_mod";
+	
+	public final static String vendedor_reload = "redirect:/vendedor_idx";
+	
 	/*EMPLEADOS*/
 	public final static String empleado_idx = "empleado/empleado_idx";
 	
@@ -21,8 +36,7 @@ public class ViewRouteHelper {
 	
 	public final static String empleado_reload = "redirect:/empleado_idx";
 	
-	
-	/*CLEINTES*/
+	/*CLIENTES*/
 	public final static String persona_idx = "persona/persona_idx";
 	
 	public final static String  personas_insert = "persona/persona_mod";

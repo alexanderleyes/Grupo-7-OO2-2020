@@ -16,5 +16,7 @@ public interface IGerenteRepository extends JpaRepository<Gerente, Serializable>
 	public Gerente findByDni(int dni);
 	public Gerente findByUsuario(String Usuario);
 	public List<Gerente> findAll();
+	public Gerente findByIdPersona(long id);
+	
 
 }

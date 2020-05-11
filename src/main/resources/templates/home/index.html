@@ -45,8 +45,8 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <img src="../img/alexander.jpg" alt="" class="img-fluid rounded-circle">
-        <!--<h1 class="text-light"><a href="index.html"><span th:text="${gerente.usuario}" /></a></h1>-->
+        <img src="../img/hero.jpg" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html"><span th:text="${user.usuario}" /></a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -59,7 +59,8 @@
       <nav class="nav-menu">
         <ul>
           <li class="active"><a href="index.html"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
-          <li><a th:href="@{/empleado_idx}"><i class="bx bx-user"></i> <span>Empleados</span></a></li>
+          <li><a th:href="@{/vendedor_idx}"><i class="bx bx-user"></i> <span>Vendedores</span></a></li>
+          <li><a th:href="@{/gerente_idx}"><i class="bx bx-user"></i> <span>Gerentes</span></a></li>
           <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
           <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
           <li><a th:href="@{/locales}"><i class="bx bx-server"></i> Locales</a></li>
