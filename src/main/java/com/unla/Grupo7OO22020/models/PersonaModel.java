@@ -1,6 +1,6 @@
 package com.unla.Grupo7OO22020.models;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 
 public class PersonaModel {

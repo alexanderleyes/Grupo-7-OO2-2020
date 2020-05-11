@@ -36,10 +36,17 @@ public class ViewRouteHelper {
 	
 	public final static String empleado_reload = "redirect:/empleado_idx";
 	
-	/*CLIENTES*/
+	/*PERSONAS*/
 	public final static String persona_idx = "persona/persona_idx";
 	
-	public final static String  personas_insert = "persona/persona_mod";
+	public final static String personas_insert = "persona/persona_mod";
 	
-	public final static String  personas_reload = "redirect:/persona_idx";
+	public final static String personas_reload = "redirect:/persona_idx";
+	
+	/*CLIENTES*/
+	public final static String cliente_idx = "cliente/cliente_idx";
+	
+	public final static String cliente_insert = "cliente/cliente_mod";
+	
+	public final static String clientes_reload = "redirect:/cliente_idx";
 }

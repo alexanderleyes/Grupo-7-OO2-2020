@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
+import com.unla.Grupo7OO22020.services.IClienteService;
 import com.unla.Grupo7OO22020.services.IEmpleadoService;
 import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IPersonaService;
@@ -40,6 +41,10 @@ public class HomeController {
 	@Autowired
 	@Qualifier("personaService")
 	private IPersonaService personaService;
+
+	@Autowired
+	@Qualifier("clienteService")
+	private IClienteService clienteService;
 	
 	@GetMapping("/")
 	public ModelAndView home(){
@@ -92,10 +97,18 @@ public class HomeController {
 	
 	
 	@GetMapping("/persona_idx")
-	public ModelAndView clientes(){
+	public ModelAndView clientes01(){
 			System.out.println("enruta: " +ViewRouteHelper.persona_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.persona_idx);			
 			mav.addObject("personas", personaService.getAll());		
+			return mav;			
+		}
+	
+	@GetMapping("/cliente_idx")
+	public ModelAndView clientes(){
+			System.out.println("enruta: " +ViewRouteHelper.cliente_idx);
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.cliente_idx);			
+			mav.addObject("clientes", clienteService.getAll());		
 			return mav;			
 		}
 }
