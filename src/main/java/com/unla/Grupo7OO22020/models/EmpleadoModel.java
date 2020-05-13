@@ -21,7 +21,7 @@ public class EmpleadoModel extends PersonaModel{
 		super(idPersona, nombre, apellido, fechaNacimiento, dni);
 		
 		this.setIdEmpleado(idEmpleado);
-		this.usuario 		= apellido;
+		this.usuario 		= usuario;
 		this.password 		= password;
 		this.horaIngreso 	= horaIngreso; 
 		this.horasXjornada 	= horasXjornada;

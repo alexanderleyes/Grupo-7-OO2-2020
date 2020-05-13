@@ -56,20 +56,8 @@
         </div>
       </div>
 
-      <nav class="nav-menu">
-        <ul>
-          <li class="active"><a href="index.html"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
-          <li><a th:href="@{/vendedor_idx}"><i class="bx bx-user"></i> <span>Vendedores</span></a></li>
-          <li><a th:href="@{/gerente_idx}"><i class="bx bx-user"></i> <span>Gerentes</span></a></li>
-          <li><a th:href="@{/cliente_idx}"><i class="bx bx-user"></i> <span>Clientes</span></a></li>
-          <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-          <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
-          <li><a th:href="@{/locales}"><i class="bx bx-server"></i> Locales</a></li>
-          <li><a th:href="@{/persona_idx}"><i class="bx bx-envelope"></i> Clientes</a></li>
+      	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
-
-        </ul>
-      </nav><!-- .nav-menu -->
       <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
     </div>
@@ -160,6 +148,7 @@
   <script src="../vendor/aos/aos.js"></script>
 
   <!-- Template Main JS File -->
+  
   <script src="../js/main.js"></script>
 
 </body>

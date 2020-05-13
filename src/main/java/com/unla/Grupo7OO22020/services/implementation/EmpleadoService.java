@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.EmpleadoConverter;
 import com.unla.Grupo7OO22020.entities.Empleado;
-import com.unla.Grupo7OO22020.entities.Persona;
 import com.unla.Grupo7OO22020.models.EmpleadoModel;
-import com.unla.Grupo7OO22020.models.PersonaModel;
 import com.unla.Grupo7OO22020.repositories.IEmpleadoRepository;
 import com.unla.Grupo7OO22020.services.IEmpleadoService;
 

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
- <title>TPC - Locales</title>
+ <title>TPC - Local</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -45,8 +45,8 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <img src="../img/alexander.jpg" alt="" class="img-fluid rounded-circle">
-         <!-- <h1 class="text-light"><a href="index.html"><span th:text="${empleado.usuario}" /></a></h1>-->
+        <img src="../img/hero.jpg" alt="" class="img-fluid rounded-circle">
+        <!--<h1 class="text-light"><a href="index.html"><span th:text="${user.usuario}" /></a></h1>-->
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -56,21 +56,8 @@
         </div>
       </div>
 
-      <nav class="nav-menu">
-        <ul>
-          <li class="active"><a href="index.html"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
-          <li><a href="#about"><i class="bx bx-user"></i> <span>Empleados</span></a></li>
-          <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-          <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
-          
-          <form th:action="@{/home/locales}" method="post" role="form">
-          	<li><a  type="submit" href="#"><i class="bx bx-server" ></i> Locales</a></li>
-          </form>
-          
-          <li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
+      	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
-        </ul>
-      </nav><!-- .nav-menu -->
       <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
     </div>
@@ -91,32 +78,81 @@
         </div>
         
         <br><br><br><br><br><br><br><br>
-        <table class="table"   >
+         <table class="table" id="table"  >
 			<thead>
 				<tr >
-					<th>Sucursal </th>
-					<th>Gerente</th>
-					<th>Telefono</th>
+					<th>ID </th>
+					<th>Telefono </th>
 					<th>Localidad</th>
 					<th>Direccion</th>
 					<th>Latitud</th>
-					<th>Longitud</th>
+					<th>Longitud</th>	
+					<th></th>						
 				</tr>
 			</thead>
-			<tbody>
-				<tr  th:each="sucursal: ${sucursales}" ;>
-					<td><span th:text=${sucursal.idSucursal}/></td>
-					<td><span th:text=${sucursal.Gerente.nombre}/></td>
-					<td><span th:text=${sucursal.telefono}/></td>
-					<td><span th:text=${sucursal.localidad}/></td>
-					<td><span th:text=${sucursal.direccion}/></td>
-					<td><span th:text=${sucursal.latitud}/></td>
-					<td><span th:text=${sucursal.longitud}/></td>
+			<tbody>				
+				
+				<tr th:each="local: ${locales}">
+					<form th:action="@{/local/modificar/{id}(id=${local.idLocal})}" method="post" role="form" >
+						<td><span th:text=${local.idLocal}/></td>
+						<td><span th:text=${local.telefono}/></td>
+						<td><span th:text=${local.localidad}/></td>
+						<td><span th:text=${local.direccion}/></td>
+						<td><span th:text=${local.latitud}/></td>
+						<td><span th:text=${local.longitud}/></td>	
+						<td>
+							<input type="submit" name="modificar" value="M" />						
+						</td>
+					</form>	
+					
+					<td>
+						<form th:action="@{/local/eliminar/{id}(id=${local.idLocal})}" method="post" role="form" >
+							<input type="submit"  name="eliminar" value="X" />
+						</form>
+					</td>
 				</tr>
+				
 			</tbody>
-		</table>
+		</table>  
+		
         
-
+		<br><br><br>
+				 
+	<form th:action="@{/local/agregar}" th:object="${LocalModel}" method="post" role="form" >
+              <div class="form-row" ;>              
+                <div class="form-group col-md-6">
+                  <label for="name">Direccion</label>
+                  <input type="text"name="direccion" class="form-control" id="direccion" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                  <label for="name">Localidad</label>
+                  <input type="text"  name="localidad" class="form-control"  id="localidad" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                
+                                         
+                <div class="form-group col-md-6">
+                  <label for="float">Latitud</label>
+                  <input type="number"  name="latitud" class="form-control"  id="latitud" step="any" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                  <label for="name">Telefono</label>
+                  <input type="number"  name="telefono" class="form-control" id="telefono" step="any" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Longitud</label>
+                  <input type="number" name="longitud" class="form-control"  id="longitud"  step="any" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div> 
+                                                
+              </div>          
+              <div class="text-left"><button type="submit">Agregar</button></div>    
+       </form>	
         
 
       </div>
@@ -191,7 +227,24 @@
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-
+	<script>
+	
+	var table = document.getElementById('table'), idx;			
+		for(var i=0; i<table.rows.length; i++)
+		{	
+			
+			table.rows[i].onclick = function(){
+					idx = this.rowIndex;	
+					console.log(this.cells[1].innerHTML)
+					//document.getElementById("id".value) = this.cells[0].innerHTML;
+					//document.getElementById("nombre".value) = this.cells[1].innerHTML;
+					//document.getElementById("apellido".value) = this.cells[2].innerHTML;
+					//document.getElementById("fechaNacimientdo".value) = this.cells[3].innerHTML;
+					//document.getElementById("dni".value) = this.cells[4].innerHTML;
+				}
+			}	
+	
+		</script>
 </body>
 
 </html>

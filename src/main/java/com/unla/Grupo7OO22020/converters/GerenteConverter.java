@@ -1,7 +1,5 @@
 package com.unla.Grupo7OO22020.converters;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 import org.springframework.stereotype.Component;
 

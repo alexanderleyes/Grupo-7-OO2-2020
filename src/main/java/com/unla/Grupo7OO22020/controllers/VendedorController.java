@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.VendedorModel;
+import com.unla.Grupo7OO22020.services.ILocalService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
 
 @Controller
@@ -23,19 +24,28 @@ public class VendedorController {
 	@Qualifier("vendedorService")
 	private IVendedorService vendedorService;
 	
+
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
+	
 	
 	@PostMapping("/agregar")	
 	public String agregarVendedor(VendedorModel vendedorModel){		
-		System.out.println("emp add: " );						
+		System.out.println("emp add: " );	
+		System.out.println("vend: "+ vendedorModel.apellido + " -- " + vendedorModel.getIdLocal());	
+		vendedorModel.setLocalModel(localService.findByIdLocal(vendedorModel.getIdLocal()));
+		vendedorModel.setPassword(String.valueOf(vendedorModel.getDni()));
+		vendedorModel.setUsuario(vendedorModel.getApellido());
 		vendedorModel = vendedorService.insertOrUpdate(vendedorModel);				
 		return ViewRouteHelper.vendedor_reload;
 	}
 	
 	@PostMapping("/modificar/{id}")	
 	public ModelAndView  modificar( @PathVariable("id") long idPersona){		
-		System.out.println("MOD vendedor: "  );
-		
+		System.out.println("MOD vendedor: "  );		
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.vendedor_insert);
+		mav.addObject("locales", localService.getAll());
 		mav.addObject("vendedor", vendedorService.findByIdVendedor(idPersona));
 		return mav;
 	}

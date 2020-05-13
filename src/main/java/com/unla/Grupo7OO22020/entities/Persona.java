@@ -1,8 +1,5 @@
 package com.unla.Grupo7OO22020.entities;
 
-
-
-
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,9 +21,11 @@ public class Persona {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long idPersona;
 	
+	
 	@Column(name="nombre")
 	public String nombre;
 	
+
 	@Column(name="apellido")	
 	public String apellido;
 	

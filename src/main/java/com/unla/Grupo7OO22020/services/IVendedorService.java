@@ -12,6 +12,6 @@ public interface IVendedorService {
 	public VendedorModel findByApellido(String Apellido);
 	public VendedorModel findByDni(int dni);
 	public VendedorModel findByUsuario(String usuario);
-	public Object findByIdVendedor(long id);
+	public VendedorModel findByIdVendedor(long id);
 	
 }

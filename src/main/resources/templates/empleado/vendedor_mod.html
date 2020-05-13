@@ -45,8 +45,8 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <img src="../../img/alexander.jpg" alt="" class="img-fluid rounded-circle">
-         <!-- <h1 class="text-light"><a href="index.html"><span th:text="${vendedor.usuario}" /></a></h1>-->
+        <img src="../../img/hero.jpg" alt="" class="img-fluid rounded-circle">
+        <!--<h1 class="text-light"><a href="index.html"><span th:text="${user.usuario}" /></a></h1>-->
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -56,18 +56,8 @@
         </div>
       </div>
 
-      <nav class="nav-menu">
-        <ul>
-          <li class="active"><a href="index.html"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
-          <li><a th:href="@{/empleado_idx}"><i class="bx bx-user"></i> <span>Empleados</span></a></li>
-          <li><a th:href="@{/vendedor_idx}"><i class="bx bx-user"></i> <span>Vendedors</span></a></li>
-          <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-          <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
-          <li><a th:href="@{/locales}"><i class="bx bx-server"></i> Locales</a></li>
-          <li><a th:href="@{/persona_idx}"><i class="bx bx-envelope"></i> Clientes</a></li>
+      	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
-        </ul>
-      </nav><!-- .nav-menu -->
       <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
     </div>
@@ -135,17 +125,24 @@
                   <input type="number" th:field="${vendedor.plusSueldo}" name=plusSueldo class="form-control"  id="plusSueldo" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
                   <div class="validate"></div>
                 </div>
-                <br>  
+                <br> 
+                
+                <div class="form-group col-md-6">
+                <span th:text=${vendedor.localModel.idLocal}/>
+				 <label for="name">Local</label>				
+				    <select class="form-control"  id="idLocal"  name="idLocal" th:selected="${vendedor.localModel.idLocal}"/>	
+				     <option th:value="${vendedor.localModel.idLocal}" th:text="${vendedor.localModel.direccion}"></option> 			   
+				    <option th:each="local : ${locales}" th:value="${local.idLocal}" th:text="${local.direccion}"></option>
+				    </select>
+				</div>
+				 
                  <div class="form-group col-md-6">
                   <label for="name">Baja</label>
                   <input type="checkbox" th:field="${vendedor.baja}" name="baja" class="form-control"  id="baja" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
                   <div class="validate"></div>
                 </div>
-                 <div class="form-group col-md-6">
-                  <label for="name">Fecha de Ascenso</label>
-                  <input type="date" th:field="${vendedor.fechaAscenso}" name="fechaAscenso" class="form-control"  id="baja" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
-                  <div class="validate"></div>
-                </div>
+                
+               
                 <br>                                                    
               </div>         
               

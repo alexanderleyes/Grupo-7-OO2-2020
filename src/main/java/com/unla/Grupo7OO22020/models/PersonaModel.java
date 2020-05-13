@@ -22,10 +22,7 @@ public class PersonaModel {
 		this.apellido = apellido;
 		this.fechaNacimiento = fechaNacimiento;
 		this.dni = dni;
-	}
-	
-
-	
+	}	
 		
 	public long getIdPersona() {
 		return idPersona;

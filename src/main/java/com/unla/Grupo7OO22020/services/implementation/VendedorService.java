@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.VendedorConverter;
-import com.unla.Grupo7OO22020.entities.Empleado;
 import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.repositories.IVendedorRepository;
@@ -69,14 +68,11 @@ public class VendedorService implements  IVendedorService{
 		Vendedor vendedor = null;
 		vendedor = vendedorRepository.findByUsuario(usuario);
 		
-		if(vendedor == null) {
-			System.out.println("Vendedor null");
-			vendedor = new Vendedor();
-			vendedor.setUsuario("dummy");
-		}else {
-			return vendedorConverter.entityToModel(vendedor);
-		}			
-		return vendedorConverter.entityToModel(vendedor);
+		if(vendedor != null) {			
+			return vendedorConverter.entityToModel(vendedor);			
+		}				
+		return null ;
+		
 }	
 	
 	
@@ -99,7 +95,7 @@ public class VendedorService implements  IVendedorService{
 
 
 	@Override
-	public Object findByIdVendedor(long id) {
+	public VendedorModel findByIdVendedor(long id) {
 		Vendedor empleado = null;
 		empleado = vendedorRepository.findByIdPersona(id);			
 		return vendedorConverter.entityToModel(empleado);

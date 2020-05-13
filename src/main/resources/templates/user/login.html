@@ -75,7 +75,7 @@
 		
         <div class="row" data-aos="fade-in">      
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-             <form th:action="@{/user/login}" th:object="${LoginModel}" method="post" role="form" class="php-email-form2">
+             <form th:action="@{/user/login}" th:object="${LoginModel}" method="post" role="form" class="php-email-form2" name="formIngreso" id="formIngreso">
               <div class="form-row">              
                 <div class="form-group col-md-6">
                   <label for="name">Usuario</label>
@@ -129,8 +129,7 @@
   <script src="vendor/aos/aos.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="js/main.js"></script>
-
+  <script src="js/main.js"></script>	
 </body>
 
 </html>

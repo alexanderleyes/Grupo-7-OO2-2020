@@ -45,8 +45,8 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <img src="../img/alexander.jpg" alt="" class="img-fluid rounded-circle">
-         <!-- <h1 class="text-light"><a href="index.html"><span th:text="${vendedor.usuario}" /></a></h1>-->
+        <img src="../img/hero.jpg" alt="" class="img-fluid rounded-circle">
+        <!--<h1 class="text-light"><a href="index.html"><span th:text="${user.usuario}" /></a></h1>-->
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -56,18 +56,8 @@
         </div>
       </div>
 
-      <nav class="nav-menu">
-        <ul>
-          <li class="active"><a href="@{/home"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
-          <li><a th:href="@{/empleado_idx}"><i class="bx bx-user"></i> <span>Empleados</span></a></li>
-          <li><a th:href="@{/vendedor_idx}"><i class="bx bx-user"></i> <span>Vendedors</span></a></li>
-          <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-          <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
-          <li><a th:href="@{/locales}"><i class="bx bx-server"></i> Locales</a></li>
-          <li><a th:href="@{/persona_idx}"><i class="bx bx-envelope"></i> Clientes</a></li>
+      	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
-        </ul>
-      </nav><!-- .nav-menu -->
       <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
     </div>
@@ -101,7 +91,8 @@
 					<th>Dni</th>
 					<th>Hora Ingreso</th>
 					<th>Jornada </th>
-					<th>Plus Sueldo</th>					
+					<th>Plus Sueldo</th>
+					<th>Local</th>				
 					<th>Baja</th>					
 				</tr>
 			</thead>
@@ -116,7 +107,8 @@
 						<td><span th:text=${vendedor.dni}/></td>
 						<td><span th:text=${vendedor.horaIngreso}/></td>
 						<td><span th:text=${vendedor.horasXjornada}/></td>
-						<td><span th:text=${vendedor.plusSueldo}/></td>						
+						<td><span th:text=${vendedor.plusSueldo}/></td>	
+						<td><span th:text=${vendedor.local.direccion}/></td>						
 						<td><span th:text=${vendedor.baja}/></td>
 						<td>
 							<input type="submit" name="modificar" value="M" />						
@@ -169,7 +161,15 @@
 				  <label for="name">Plus Sueldo</label>
 				  <input type=number name="plusSueldo" class="form-control"  id="plusSueldo" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
 				  <div class="validate"></div>
-				</div>				                                    
+				</div>	
+				
+				<div class="form-group col-md-6">
+				 <label for="name">Local</label>				
+				    <select class="form-control"  id="idLocal"  name="idLocal" />				   
+				    <option th:each="local : ${locales}" th:value="${local.idLocal}" th:text="${local.direccion}"></option>
+				    </select>
+				</div>
+							                                    
 			</div>		                        
 			<div class="text-left">
 				 <div class="text-left"><button type="submit">Agregar</button></div>				

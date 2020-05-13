@@ -13,18 +13,15 @@ import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.services.IClienteService;
 import com.unla.Grupo7OO22020.services.IEmpleadoService;
 import com.unla.Grupo7OO22020.services.IGerenteService;
+import com.unla.Grupo7OO22020.services.ILocalService;
 import com.unla.Grupo7OO22020.services.IPersonaService;
-import com.unla.Grupo7OO22020.services.ISucursalService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
 
 
 @Controller
 @RequestMapping("/")
-public class HomeController {		
-		
-	@Autowired
-	@Qualifier("sucursalService")
-	private ISucursalService sucursalService;
+public class HomeController {			
+
 	
 	@Autowired
 	@Qualifier("empleadoService")
@@ -46,12 +43,16 @@ public class HomeController {
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
 	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
+	
 	@GetMapping("/")
 	public ModelAndView home(){
 		return new ModelAndView(ViewRouteHelper.login);				
 	}
 	
-	
+			
 	@GetMapping("/loginfail")
 	public ModelAndView loginfail(){
 		return new ModelAndView(ViewRouteHelper.login);			
@@ -60,16 +61,8 @@ public class HomeController {
 	@GetMapping("/home")
 	public ModelAndView loginok(){
 		return new ModelAndView(ViewRouteHelper.login_ok);			
-	}
+	}	
 	
-	
-	@GetMapping("/locales")
-	public ModelAndView locales(){
-			System.out.println("enruta: " +ViewRouteHelper.locales);
-			ModelAndView mav = new ModelAndView(ViewRouteHelper.locales);
-			mav.addObject("sucursales", sucursalService.getAll());
-			return mav;			
-		}
 	
 	@GetMapping("/empleado_idx")
 	public ModelAndView empleados(){
@@ -91,7 +84,8 @@ public class HomeController {
 	public ModelAndView vendedores(){
 			System.out.println("enruta: " +ViewRouteHelper.vendedor_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.vendedor_idx);
-			mav.addObject("vendedores", vendedorService.getAll());			
+			mav.addObject("vendedores", vendedorService.getAll());	
+			mav.addObject("locales", localService.getAll());	
 			return mav;			
 		}
 	
@@ -109,6 +103,14 @@ public class HomeController {
 			System.out.println("enruta: " +ViewRouteHelper.cliente_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.cliente_idx);			
 			mav.addObject("clientes", clienteService.getAll());		
+			return mav;			
+		}
+	
+	@GetMapping("/local_idx")
+	public ModelAndView locales(){
+			System.out.println("enruta: " +ViewRouteHelper.local_idx);
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.local_idx);			
+			mav.addObject("locales", localService.getAll());		
 			return mav;			
 		}
 }

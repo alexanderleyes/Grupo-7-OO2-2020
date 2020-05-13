@@ -2,6 +2,7 @@ package com.unla.Grupo7OO22020.helpers;
 
 public class ViewRouteHelper {
 	
+
 	/*LOGIN*/
 	public final static String login = "/user/login";
 	
@@ -11,7 +12,11 @@ public class ViewRouteHelper {
 	
 	
 	/*LOCALES*/
-	public final static String locales = "/home/locales";
+	public final static String local_idx = "local/local_idx";
+	
+	public final static String local_insert = "local/local_mod";
+	
+	public final static String local_reload = "redirect:/local_idx";
 	
 	
 	/*GERENTE*/
