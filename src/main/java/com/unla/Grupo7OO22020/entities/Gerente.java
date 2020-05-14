@@ -1,10 +1,9 @@
 package com.unla.Grupo7OO22020.entities;
 
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
-import javax.persistence.Column;
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -15,29 +14,29 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "idGerente")
 public class Gerente extends Empleado {	
 	
-	@Column(name="fechaAscenso")
-	private String fechaAscenso;
+	
+	private LocalDate fechaAscenso;
 	
 	public Gerente(){}	
 	
-	public Gerente(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni,  String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
-			double plusSueldo, boolean baja,/*H*/ String fechaAscenso) {
+	public Gerente(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni,  String usuario, String password, String horaIngreso, String horasXjornada,
+			double plusSueldo, boolean baja,/*H*/ LocalDate fechaAscenso) {
 		super(idPersona, nombre, apellido, fechaNacimiento,	dni, usuario, password, horaIngreso, horasXjornada,	plusSueldo, baja);		
 		this.fechaAscenso = fechaAscenso;
 	}
 
-	public String getFechaAscenso() {
+	public LocalDate getFechaAscenso() {
 		return fechaAscenso;
 	}
 
-	public void setFechaAscenso(String fechaAscenso) {
+	public void setFechaAscenso(LocalDate fechaAscenso) {
 		this.fechaAscenso = fechaAscenso;
 	}
 
 	@Override
 	public String toString() {
-		return "Gerente [fechaAscenso=" + fechaAscenso + ", idPersona=" + idPersona + ", nombre=" + nombre
-				+ ", apellido=" + apellido + ", fechaNacimiento=" + fechaNacimiento + ", dni=" + dni + "]";
+		return "Gerente [fechaAscenso=" + fechaAscenso + ", idPersona=" + getIdPersona() + ", nombre=" + getNombre()
+				+ ", apellido=" + getApellido() + ", fechaNacimiento=" + getFechaNacimiento() + ", dni=" + getDni() + "]";
 	}
 
 	

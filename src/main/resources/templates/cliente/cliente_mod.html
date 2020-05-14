@@ -76,31 +76,31 @@
           </ol>
         </div>        
        
-		<form th:action="@{/cliente/agregar}" th:object="${ClienteModel}" method="post" role="form" >         
-			 <input type="hidden" th:field="${cliente.idCliente}" name="id" class="form-control" id="idPersona" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+		<form th:action="@{/cliente/agregar}" th:object="${cliente}" method="post" role="form" >         
+			 <input type="hidden" th:field="*{idCliente}" name="id" class="form-control"  />
 			
               <div class="form-row" ;>              
                 <div class="form-group col-md-6">
                   <label for="name">Nombre</label>
-                  <input type="text" th:field="${cliente.nombre}" name="nombre" class="form-control" id="nombre" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="text" th:field="*{nombre}" name="nombre" class="form-control"  />
                   <div class="validate"></div>
                 </div> 
                 <br>
                 <div class="form-group col-md-6">
                   <label for="name">Apellido</label>
-                  <input type="text" th:field="${cliente.apellido}" name="apellido" class="form-control"  id="apellido" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="text" th:field="*{apellido}" name="apellido" class="form-control"  />
                   <div class="validate"></div>
                 </div>
                 <br>
                 <div class="form-group col-md-6">
                   <label for="name">Fecha de Nacimiento</label>
-                  <input type="date" th:field="${cliente.fechaNacimiento}" name="fechaNacimiento" class="form-control" id="fechaNacimiento" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="date" th:field="*{fechaNacimiento}" name="fechaNacimiento" class="form-control" />
                   <div class="validate"></div>
                 </div>
                 <br>
                 <div class="form-group col-md-6">
                   <label for="name">DNI</label>
-                  <input type="number" th:field="${cliente.dni}" name="dni" class="form-control"  id="dni" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="number" th:field="*{dni}" name="dni" class="form-control" />
                   <div class="validate"></div>
                 </div>
                 <br>                                                 

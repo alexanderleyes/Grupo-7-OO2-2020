@@ -1,13 +1,17 @@
 package com.unla.Grupo7OO22020.entities;
 
+
+
 import java.time.LocalDate;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
+
+
 import javax.persistence.InheritanceType;
 
 
@@ -18,22 +22,16 @@ import javax.persistence.InheritanceType;
 public class Persona {	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long idPersona;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	private long idPersona;	
 	
+	private String nombre;		
 	
-	@Column(name="nombre")
-	public String nombre;
+	private String apellido;	
 	
-
-	@Column(name="apellido")	
-	public String apellido;
+	private LocalDate fechaNacimiento;
 	
-	@Column(name="fechaNacimiento")
-	public LocalDate fechaNacimiento;
-	
-	@Column(name="dni")
-	public int dni;
+	private int dni;
 	
 	public Persona(){}
 	
@@ -54,6 +52,8 @@ public class Persona {
 		this.dni = dni;
 	}
 
+	
+	 
 	public long getIdPersona() {
 		return idPersona;
 	}
@@ -77,7 +77,6 @@ public class Persona {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
 
 	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;

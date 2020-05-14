@@ -55,9 +55,8 @@
           <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
         </div>
       </div>
-	
-	
-	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
+
+     	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
       <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
@@ -71,50 +70,77 @@
       <div class="container">
 	
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Modificar Local</h2>
+          <h2>Modificar Cliente</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
             <li>Inventario 002</li>
           </ol>
         </div>        
        
-		<form th:action="@{/local/agregar}" th:object="${LocalModel}" method="post" role="form" >         
-			 <input type="hidden" th:field="${local.idLocal}" name="id" class="form-control" id="idLocal" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
-				<div class="form-row" ;>  
-				
-				<div class="form-group col-md-6">
-                  <label for="name">Direccion</label>
-                  <input type="text" th:field="${local.direccion}" name="direccion" class="form-control" id="direccion" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
-                  <div class="validate"></div>
-                </div>
-                
+		<form th:action="@{/gerente/agregar}" th:object="${gerente}" method="post" role="form" >    
+	
+			 <input type="hidden" th:field="*{idPersona}" class="form-control"  />
+			
+              <div class="form-row" ;>              
                 <div class="form-group col-md-6">
-                  <label for="name">Localidad</label>
-                  <input type="text" th:field="${local.localidad}" name="localidad" class="form-control"  id="localidad" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
-                  <div class="validate"></div>
-                </div>
-                
-                                         
-                <div class="form-group col-md-6">
-                  <label for="float">Latitud</label>
-                  <input type="number" th:field="${local.latitud}" name="latitud" class="form-control"  id="latitud" step="any" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
-                  <div class="validate"></div>
-                </div>
-                
-                <div class="form-group col-md-6">
-                  <label for="name">Telefono</label>
-                  <input type="number" th:field="${local.telefono}" name="telefono" class="form-control" id="telefono" step="any" data-msg="Ingrese al menos 4 characteres" />
-                  <div class="validate"></div>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Longitud</label>
-                  <input type="number" th:field="${local.longitud}" name="longitud" class="form-control"  id="longitud"  step="any" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <label for="name">Nombre</label>
+                  <input type="text" th:field="*{nombre}" class="form-control" />
                   <div class="validate"></div>
                 </div> 
-                                                
-              </div>     
+                <br>
+                <div class="form-group col-md-6">
+                  <label for="name">Apellido</label>
+                  <input type="text" th:field="*{apellido}"  class="form-control"   />
+                  <div class="validate"></div>
+                </div>
+                <br>
+                <div class="form-group col-md-6">
+                  <label for="name">Fecha de Nacimiento</label>
+                  <input type="date" th:field="*{fechaNacimiento}"class="form-control"  />
+                  <div class="validate"></div>
+                </div>
+                <br>
+                <div class="form-group col-md-6">
+                  <label for="name">DNI</label>
+                  <input type="number" th:field="*{dni}"  class="form-control"  />
+                  <div class="validate"></div>
+                </div>
+                <br>
+                
+                <div class="form-group col-md-6">
+                  <label for="name">Horario de Ingreso</label>
+                  <input type="time" th:field="*{horaIngreso}"  class="form-control"   />
+                  <div class="validate"></div>
+                </div>
+                <br>
+                
+                 <div class="form-group col-md-6">
+                  <label for="name">Jornada</label>
+                  <input type="time" th:field="*{horasXjornada}"  class="form-control"   />
+                  <div class="validate"></div>
+                </div>
+                <br>  
+                 <div class="form-group col-md-6">
+                  <label for="name">Plus Sueldo</label>
+                  <input type="number" th:field="*{plusSueldo}" class="form-control" step="any"  />
+                  <div class="validate"></div>
+                </div>
+                <br>  
+                 <div class="form-group col-md-6">
+                  <label for="name">Baja</label>
+                  <input type="checkbox" th:field="*{baja}" name="baja" class="form-control"  id="baja" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                 <div class="form-group col-md-6">
+                  <label for="name">Fecha de Ascenso</label>
+                  <input type="date" th:field="*{fechaAscenso}" name="fechaAscenso" class="form-control"  id="baja" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <div class="validate"></div>
+                </div>
+                <br>                                                    
+              </div>         
               
-              	<div class="text-left"><button type="submit">Confirmar</button></div>    
+              
+            <div class="text-left"><button type="submit">Confirmar</button></div>    
               </form>	
         
 

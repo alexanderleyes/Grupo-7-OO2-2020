@@ -2,7 +2,6 @@ package com.unla.Grupo7OO22020.entities;
 
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,32 +17,32 @@ import javax.persistence.Table;
 public class Vendedor extends Empleado {	
 	
 	@ManyToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	private Local local;
+	private Sucursal sucursal;
 	
 	public Vendedor(){}	
 	
 	
-	public Vendedor(Local local, /**/ long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni,  String usuario, String password, LocalTime horaIngreso, LocalTime horasXjornada,
+	public Vendedor(Sucursal sucursal, /**/ long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni,  String usuario, String password, String horaIngreso, String horasXjornada,
 			double plusSueldo, boolean baja) {		
 		super(idPersona, nombre, apellido, fechaNacimiento,	dni, usuario, password, horaIngreso, horasXjornada,	plusSueldo, baja);	
 		
-		this.setLocal(local);
+		this.setSucursal(sucursal);
 		
 	}
 		
-	public Local getLocal() {
-		return local;
+	public Sucursal getSucursal() {
+		return sucursal;
 	}
 
-	public void setLocal(Local local) {
-		this.local = local;
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Vendedor [, idVendedor=" + idPersona + ", nombre=" + nombre
-				+ ", apellido=" + apellido + ", fechaNacimiento=" + fechaNacimiento + ", dni=" + dni + "]";
+		return "Vendedor [, idVendedor=" + getIdPersona() + ", nombre=" + getNombre()
+				+ ", apellido=" + getApellido() + ", fechaNacimiento=" + getFechaNacimiento() + ", dni=" + getDni() + "]";
 	}
 
 	

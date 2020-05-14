@@ -2,8 +2,8 @@ package com.unla.Grupo7OO22020.models;
 
 public class LoginModel {
 
-	public String usuario;
-	public String password;
+	private String usuario;
+	private String password;
 	
 	public LoginModel() {}
 			

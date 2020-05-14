@@ -125,46 +125,46 @@
 		  
 	 <br><br><br>
 		<div class="row" data-aos="fade-in">      
-			<form th:action="@{/gerente/agregar}" th:object="${GerenteModel}" method="post" role="form" >
+			<form th:action="@{/gerente/agregar}" th:object="${gerente}" method="post" role="form" >
        		<div class="form-row" >              
 				<div class="form-group col-md-6">
 				  <label for="name">Nombre</label>
-				  <input type="text" name="nombre" class="form-control" id="nombre" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <input type="text" th:field="*{nombre}" class="form-control"  />
 				  <div class="validate"></div>
 				</div>
 				<div class="form-group col-md-6">
 				  <label for="name">Apellido</label>
-				  <input type="text" name="apellido" class="form-control"  id="apellido" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <input type="text"  th:field="*{apellido}" class="form-control"   />
 				  <div class="validate"></div>
 				</div>
 				<div class="form-group col-md-6">
-				  <label for="name">Fecha de Nacimiento</label>
-				  <input type="date" name="fechaNacimiento" class="form-control" id="fechaNacimiento" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <label for="name">Fecha de Nacimiento</label>				 
+				  <input type=date  th:field="*{fechaNacimiento}" class="form-control" />
 				  <div class="validate"></div>
 				</div>
 				<div class="form-group col-md-6">
 				  <label for="name">DNI</label>
-				  <input type="number" name="dni" class="form-control"  id="dni" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <input type="number"  th:field="*{dni}" class="form-control"  id="dni"  />
 				  <div class="validate"></div>
 				</div> 
 				<div class="form-group col-md-6">
 				  <label for="name">HoraIngreso</label>
-				  <input type=time name="horaIngreso" class="form-control" id="horaIngreso" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <input type=time  th:field="*{horaIngreso}" class="form-control"  />
 				  <div class="validate"></div>
 				</div>
 				<div class="form-group col-md-6">
 				  <label for="name">Jornada</label>
-				  <input type="time" name="horasXjornada" class="form-control"  id="horasXjornada" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <input type="time"  th:field="*{horasXjornada}" class="form-control"   />
 				  <div class="validate"></div>
 				</div>
 				 <div class="form-group col-md-6">
 				  <label for="name">Plus Sueldo</label>
-				  <input type=number name="plusSueldo" class="form-control"  id="plusSueldo" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <input type=number  th:field="*{plusSueldo}" class="form-control"   />
 				  <div class="validate"></div>
 				</div>
 				 <div class="form-group col-md-6">
 				  <label for="name">Fecha Ascenso</label>
-				  <input type=date name="fechaAscenso" class="form-control"  id="fechaAscenso" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <input type=date  th:field="*{fechaAscenso}" class="form-control" />
 				  <div class="validate"></div>
 				</div>		                                     
 			</div>		                        

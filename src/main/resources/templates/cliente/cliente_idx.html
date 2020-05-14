@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html >
 
 <head>
   <meta charset="utf-8">
@@ -116,28 +116,32 @@
         
 		<br><br><br>
 		
-	<form th:action="@{/cliente/agregar}" th:object="${ClienteModel}" method="post" role="form" >
-              <div class="form-row" ;>              
+	<form action="#" th:action="@{/cliente/agregar}"th:object="${cliente}" method="post">
+              <div class="form-row">  
+                          
                 <div class="form-group col-md-6">
                   <label for="name">Nombre</label>
-                  <input type="text" name="nombre" class="form-control" id="nombre" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="text" th:field="*{nombre}" class="form-control"  />
                   <div class="validate"></div>
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Apellido</label>
-                  <input type="text" name="apellido" class="form-control"  id="apellido" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                
+                 <div class="form-group col-md-6">
+                  <label for="apellido">Apellido</label>
+                  <input type="text" th:field="*{apellido}" class="form-control"  />
                   <div class="validate"></div>
                 </div>
+                
                 <div class="form-group col-md-6">
-                  <label for="name">Fecha de Nacimiento</label>
-                  <input type="date" name="fechaNacimiento" class="form-control" id="fechaNacimiento" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+				  <label for="name">Fecha de Nacimiento</label>
+				  <input type=date  th:field="*{fechaNacimiento}" class="form-control" />
+				  <div class="validate"></div>
+				</div>
+                
+                 <div class="form-group col-md-6">
+                  <label for="dni">Dni</label>
+                  <input type="number" th:field="*{dni}" class="form-control" step="any" />
                   <div class="validate"></div>
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="name">DNI</label>
-                  <input type="number" name="dni" class="form-control"  id="dni" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
-                  <div class="validate"></div>
-                </div> 
                                                 
               </div>          
               <div class="text-left"><button type="submit">Agregar</button></div>    

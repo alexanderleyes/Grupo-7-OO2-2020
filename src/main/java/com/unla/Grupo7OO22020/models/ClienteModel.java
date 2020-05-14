@@ -23,8 +23,8 @@ public class ClienteModel extends PersonaModel{
 
 	@Override
 	public String toString() {
-		return "ClienteModel [idCliente=" + idCliente + ", idPersona=" + idPersona + ", nombre=" + nombre
-				+ ", apellido=" + apellido + ", fechaNacimiento=" + fechaNacimiento + ", dni=" + dni + "]";
+		return "ClienteModel [idCliente=" + idCliente + ", idPersona=" + getIdPersona() + ", nombre=" + getNombre()
+				+ ", apellido=" + getApellido() + ", fechaNacimiento=" + getFechaNacimiento() + ", dni=" + getDni() + "]";
 	}
 
 	

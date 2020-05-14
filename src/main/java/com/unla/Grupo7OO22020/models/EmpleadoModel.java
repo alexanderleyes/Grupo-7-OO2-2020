@@ -9,15 +9,15 @@ public class EmpleadoModel extends PersonaModel{
 	private long idEmpleado;
 	private String usuario;
 	private String password;
-	private LocalTime horaIngreso;
-	private LocalTime horasXjornada;
+	private String horaIngreso;
+	private String horasXjornada;
 	private double plusSueldo;
 	private boolean baja;		
 	
 	public EmpleadoModel() {};
 	
-	public EmpleadoModel(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni, long idEmpleado, String usuario, String password, LocalTime horaIngreso,
-			LocalTime horasXjornada, double plusSueldo) {
+	public EmpleadoModel(long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni, long idEmpleado, String usuario, String password, String horaIngreso,
+			String horasXjornada, double plusSueldo) {
 		super(idPersona, nombre, apellido, fechaNacimiento, dni);
 		
 		this.setIdEmpleado(idEmpleado);
@@ -29,67 +29,56 @@ public class EmpleadoModel extends PersonaModel{
 		this.baja			= false;
 	}
 
+	
+
 	public long getIdEmpleado() {
 		return idEmpleado;
 	}
-
 
 	public void setIdEmpleado(long idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
 
-
 	public String getUsuario() {
 		return usuario;
 	}
-
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
-	public LocalTime getHoraIngreso() {
+	public String getHoraIngreso() {
 		return horaIngreso;
 	}
 
-
-	public void setHoraIngreso(LocalTime horaIngreso) {
+	public void setHoraIngreso(String horaIngreso) {
 		this.horaIngreso = horaIngreso;
 	}
 
-
-	public LocalTime getHorasXjornada() {
+	public String getHorasXjornada() {
 		return horasXjornada;
 	}
 
-
-	public void setHorasXjornada(LocalTime horasXjornada) {
+	public void setHorasXjornada(String horasXjornada) {
 		this.horasXjornada = horasXjornada;
 	}
-
 
 	public double getPlusSueldo() {
 		return plusSueldo;
 	}
 
-
 	public void setPlusSueldo(double plusSueldo) {
 		this.plusSueldo = plusSueldo;
 	}
 
-	
-	
 	public boolean isBaja() {
 		return baja;
 	}
@@ -103,7 +92,9 @@ public class EmpleadoModel extends PersonaModel{
 		return "EmpleadoModel [idEmpleado=" + idEmpleado + ", usuario=" + usuario + ", password=" + password
 				+ ", horaIngreso=" + horaIngreso + ", horasXjornada=" + horasXjornada + ", plusSueldo=" + plusSueldo
 				+ ", baja=" + baja + "]";
-	}	
+	}
+
+	
 	
 	
 	

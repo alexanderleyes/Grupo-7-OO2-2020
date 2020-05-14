@@ -1,20 +1,44 @@
-package com.unla.Grupo7OO22020.models;
+package com.unla.Grupo7OO22020.entities;
 
 
-public class LocalModel extends EmpleadoModel {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private long idLocal;
+
+@Entity
+@Table(name="sucursal")
+public class Sucursal {	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idSucursal;	
+	
+	@Column(name="telefono")	
 	private long telefono;
+	
+	@Column(name="localidad")	
 	private String localidad;
+	
+	@Column(name="direccion")	
 	private String direccion;
+	
+	@Column(name="latitud")	
 	private double latitud;
+	
+	@Column(name="longitud")	
 	private double longitud;
+
+	public Sucursal() {}
 	
-	public LocalModel() {}	
 	
-	public LocalModel(long idLocal, long telefono, String localidad, String direccion, double latitud, double longitud) {
+
+	public Sucursal(long idSucursal, long telefono, String localidad, String direccion, double latitud, double longitud) {
 		super();
-		this.idLocal = idLocal;
+		this.idSucursal = idSucursal;
 		this.telefono = telefono;
 		this.localidad = localidad;
 		this.direccion = direccion;
@@ -22,13 +46,12 @@ public class LocalModel extends EmpleadoModel {
 		this.longitud = longitud;
 	}
 
-
-	public long getIdLocal() {
-		return idLocal;
+	public long getIdSucursal() {
+		return idSucursal;
 	}
 
-	public void setIdLocal(long idLocal) {
-		this.idLocal = idLocal;
+	public void setIdSucursal(long idSucursal) {
+		this.idSucursal = idSucursal;
 	}
 
 	public long getTelefono() {
@@ -71,13 +94,12 @@ public class LocalModel extends EmpleadoModel {
 		this.longitud = longitud;
 	}
 
+	
+	
 
-	@Override
-	public String toString() {
-		return "LocalModel [idLocal=" + idLocal + ", telefono=" + telefono + ", localidad=" + localidad + ", direccion="
-				+ direccion + ", latitud=" + latitud + ", longitud=" + longitud + "]";
-	}	
+
 	
 	
-		
+	
+
 }

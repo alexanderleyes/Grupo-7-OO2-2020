@@ -5,27 +5,27 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
- <title>TPC - Local</title>
+ <title>TPC - Clientes</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../../img/favicon.png" rel="icon">
-  <link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="../../../../img/favicon.png" rel="icon">
+  <link href="../../../../img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="../vendor/owl.carousel/../owl.carousel.min.css" rel="stylesheet">
-  <link href="../vendor/aos/aos.css" rel="stylesheet">
+  <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="../../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="../../vendor/owl.carousel/../../owl.carousel.min.css" rel="stylesheet">
+  <link href="../../vendor/aos/aos.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="../css/style.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: iPortfolio - v1.2.1
@@ -45,7 +45,7 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <img src="../img/hero.jpg" alt="" class="img-fluid rounded-circle">
+        <img src="../../img/hero.jpg" alt="" class="img-fluid rounded-circle">
         <!--<h1 class="text-light"><a href="index.html"><span th:text="${user.usuario}" /></a></h1>-->
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -55,8 +55,9 @@
           <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
         </div>
       </div>
-
-      	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
+	
+	
+	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
       <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
@@ -70,89 +71,51 @@
       <div class="container">
 	
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Administrar Locales</h2>
+          <h2>Modificar Sucursal</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
             <li>Inventario 002</li>
           </ol>
-        </div>
-        
-        <br><br><br><br><br><br><br><br>
-         <table class="table" id="table"  >
-			<thead>
-				<tr >
-					<th>ID </th>
-					<th>Telefono </th>
-					<th>Localidad</th>
-					<th>Direccion</th>
-					<th>Latitud</th>
-					<th>Longitud</th>	
-					<th></th>						
-				</tr>
-			</thead>
-			<tbody>				
+        </div>        
+       
+		<form th:action="@{/sucursal/agregar}" th:object="${sucursal}" method="post" role="form" >         
+			 <input type="hidden" th:field="*{idSucursal}" class="form-control" />
+				<div class="form-row" ;>  
 				
-				<tr th:each="local: ${locales}">
-					<form th:action="@{/local/modificar/{id}(id=${local.idLocal})}" method="post" role="form" >
-						<td><span th:text=${local.idLocal}/></td>
-						<td><span th:text=${local.telefono}/></td>
-						<td><span th:text=${local.localidad}/></td>
-						<td><span th:text=${local.direccion}/></td>
-						<td><span th:text=${local.latitud}/></td>
-						<td><span th:text=${local.longitud}/></td>	
-						<td>
-							<input type="submit" name="modificar" value="M" />						
-						</td>
-					</form>	
-					
-					<td>
-						<form th:action="@{/local/eliminar/{id}(id=${local.idLocal})}" method="post" role="form" >
-							<input type="submit"  name="eliminar" value="X" />
-						</form>
-					</td>
-				</tr>
-				
-			</tbody>
-		</table>  
-		
-        
-		<br><br><br>
-				 
-	<form th:action="@{/local/agregar}" th:object="${LocalModel}" method="post" role="form" >
-              <div class="form-row" ;>              
-                <div class="form-group col-md-6">
+				<div class="form-group col-md-6">
                   <label for="name">Direccion</label>
-                  <input type="text"name="direccion" class="form-control" id="direccion" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="text" th:field="*{direccion}" class="form-control"  />
                   <div class="validate"></div>
                 </div>
                 
                 <div class="form-group col-md-6">
                   <label for="name">Localidad</label>
-                  <input type="text"  name="localidad" class="form-control"  id="localidad" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="text" th:field="*{localidad}"  class="form-control" />
                   <div class="validate"></div>
                 </div>
                 
                                          
                 <div class="form-group col-md-6">
                   <label for="float">Latitud</label>
-                  <input type="number"  name="latitud" class="form-control"  id="latitud" step="any" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="number" th:field="*{latitud}" class="form-control" step="any" />
                   <div class="validate"></div>
                 </div>
                 
                 <div class="form-group col-md-6">
                   <label for="name">Telefono</label>
-                  <input type="number"  name="telefono" class="form-control" id="telefono" step="any" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="number" th:field="*{telefono}" class="form-control" step="any" />
                   <div class="validate"></div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name">Longitud</label>
-                  <input type="number" name="longitud" class="form-control"  id="longitud"  step="any" data-rule="minlen:4" data-msg="Ingrese al menos 4 characteres" />
+                  <input type="number" th:field="*{longitud}" class="form-control" step="any" />
                   <div class="validate"></div>
                 </div> 
                                                 
-              </div>          
-              <div class="text-left"><button type="submit">Agregar</button></div>    
-       </form>	
+              </div>     
+              
+              	<div class="text-left"><button type="submit">Confirmar</button></div>    
+              </form>	
         
 
       </div>
@@ -165,9 +128,9 @@
         <div class="portfolio-details-container">
 
           <div class="owl-carousel portfolio-details-carousel">
-            <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt="">
+            <img src="../../img/portfolio-details-1.jpg" class="img-fluid" alt="">
+            <img src="../../img/portfolio-details-2.jpg" class="img-fluid" alt="">
+            <img src="../../img/portfolio-details-3.jpg" class="img-fluid" alt="">
           </div>
 
           <div class="portfolio-info">
@@ -213,22 +176,22 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="../vendor/php-email-form/validate.js"></script>
-  <script src="../vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="../vendor/counterup/counterup.min.js"></script>
-  <script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../vendor/venobox/venobox.min.js"></script>
-  <script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="../vendor/typed.js/typed.min.js"></script>
-  <script src="../vendor/aos/aos.js"></script>
+  <script src="../../vendor/jquery/jquery.min.js"></script>
+  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="../../vendor/php-email-form/validate.js"></script>
+  <script src="../../vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="../../vendor/counterup/counterup.min.js"></script>
+  <script src="../../vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../../vendor/venobox/venobox.min.js"></script>
+  <script src="../../vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="../../vendor/typed.js/typed.min.js"></script>
+  <script src="../../vendor/aos/aos.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="../js/main.js"></script>
+  <script src="../../js/main.js"></script>
 	<script>
-	
+	window.onload = function(){
 	var table = document.getElementById('table'), idx;			
 		for(var i=0; i<table.rows.length; i++)
 		{	
@@ -237,13 +200,13 @@
 					idx = this.rowIndex;	
 					console.log(this.cells[1].innerHTML)
 					//document.getElementById("id".value) = this.cells[0].innerHTML;
-					//document.getElementById("nombre".value) = this.cells[1].innerHTML;
+					document.getElementById("nombre".value) = this.cells[1].innerHTML;
 					//document.getElementById("apellido".value) = this.cells[2].innerHTML;
 					//document.getElementById("fechaNacimientdo".value) = this.cells[3].innerHTML;
 					//document.getElementById("dni".value) = this.cells[4].innerHTML;
 				}
 			}	
-	
+	}
 		</script>
 </body>
 

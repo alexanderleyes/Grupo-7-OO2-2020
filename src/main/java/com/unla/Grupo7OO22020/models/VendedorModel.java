@@ -5,53 +5,46 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 
+
 public class VendedorModel extends EmpleadoModel {
 
 	private long idVendedor;
-	private LocalModel localModel;
-	private long idLocal;
+	private SucursalModel sucursalModel;
+	
 	
 	public VendedorModel() {}	
 	
 	
-	public VendedorModel(long idPersona, LocalModel localModel,  long idLocal, String nombre, String apellido, LocalDate fechaNacimiento, int dni, long idEmpleado, String usuario, String password, LocalTime horaIngreso,
-			LocalTime horasXjornada, double plusSueldolong, long idVendedor) {
-		super(idPersona, nombre, apellido, fechaNacimiento, dni, idEmpleado, usuario, password, horaIngreso, horasXjornada,  plusSueldolong);
-		
-		this.idVendedor = idVendedor;
-		this.localModel	= localModel;
-		this.idLocal = idLocal;
-		
-	}	
+	public VendedorModel(long idPersona, SucursalModel sucursalModel, String nombre, String apellido, LocalDate fechaNacimiento, int dni, long idEmpleado, String usuario, String password, String horaIngreso,
+			String horasXjornada, double plusSueldolong, long idVendedor) {
+		super(idPersona, nombre, apellido, fechaNacimiento, dni, idEmpleado, usuario, password, horaIngreso, horasXjornada,  plusSueldolong);		
+		this.idVendedor = idVendedor;		
+	}
 	
 	
+	
+
 	public long getIdVendedor() {
 		return idVendedor;
 	}
+
+
 	public void setIdVendedor(long idVendedor) {
 		this.idVendedor = idVendedor;
 	}
 
 
-	public LocalModel getLocalModel() {
-		return localModel;
+	public SucursalModel getSucursalModel() {
+		return sucursalModel;
 	}
 
 
-	public void setLocalModel(LocalModel local) {
-		this.localModel = local;
-	}
-
-
-	public long getIdLocal() {
-		return idLocal;
-	}
-
-
-	public void setIdLocal(long idLocal) {
-		this.idLocal = idLocal;
-	}
+	public void setSucursalModel(SucursalModel sucursalModel) {
+		this.sucursalModel = sucursalModel;
+	}		
 	
+	
+		
 	
 	
 		

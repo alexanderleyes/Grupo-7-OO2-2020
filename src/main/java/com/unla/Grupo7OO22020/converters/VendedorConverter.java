@@ -12,16 +12,16 @@ import com.unla.Grupo7OO22020.models.VendedorModel;
 public class VendedorConverter {
 	
 	@Autowired
-	@Qualifier("localConverter")
-	private LocalConverter localConverter;
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;
 	
 	public VendedorModel entityToModel(Vendedor vendedor) {
-		return new VendedorModel(vendedor.getIdPersona(),  localConverter.entityToModel(vendedor.getLocal()), vendedor.getLocal().getIdLocal(), vendedor.getNombre(), vendedor.getApellido(), vendedor.getFechaNacimiento(), vendedor.getDni(), vendedor.getIdPersona(), vendedor.getUsuario(), vendedor.getPassword(), vendedor.getHoraIngreso(),
+		return new VendedorModel(vendedor.getIdPersona(),  sucursalConverter.entityToModel(vendedor.getSucursal()), vendedor.getNombre(), vendedor.getApellido(), vendedor.getFechaNacimiento(), vendedor.getDni(), vendedor.getIdPersona(), vendedor.getUsuario(), vendedor.getPassword(), vendedor.getHoraIngreso(),
 				vendedor.getHorasXjornada(), vendedor.getPlusSueldo(), vendedor.getIdPersona());
 	}
 	
 	public Vendedor modelToEntity(VendedorModel vendedorModel) {
-		return new Vendedor(localConverter.modelToEntity(vendedorModel.getLocalModel()), vendedorModel.getIdPersona(),vendedorModel.getNombre(), vendedorModel.getApellido(), vendedorModel.getFechaNacimiento(), vendedorModel.getDni(),  vendedorModel.getUsuario(), 
+		return new Vendedor(sucursalConverter.modelToEntity(vendedorModel.getSucursalModel()), vendedorModel.getIdPersona(),vendedorModel.getNombre(), vendedorModel.getApellido(), vendedorModel.getFechaNacimiento(), vendedorModel.getDni(),  vendedorModel.getUsuario(), 
 				vendedorModel.getPassword(), vendedorModel.getHoraIngreso(), vendedorModel.getHorasXjornada(), vendedorModel.getPlusSueldo(), vendedorModel.isBaja());
 	}
 }
