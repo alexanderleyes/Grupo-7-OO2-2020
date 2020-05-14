@@ -109,14 +109,14 @@
                 
                 <div class="form-group col-md-6">
                   <label for="name">Horario de Ingreso</label>
-                  <input type="number" th:field="*{horaIngreso}" class="form-control"   />
+                  <input type="time" th:field="*{horaIngreso}" class="form-control"   />
                   <div class="validate"></div>
                 </div>
                 <br>
                 
                  <div class="form-group col-md-6">
                   <label for="name">Jornada</label>
-                  <input type="number" th:field="*{horasXjornada}"  class="form-control" />
+                  <input type="time" th:field="*{horasXjornada}"  class="form-control" />
                   <div class="validate"></div>
                 </div>
                 <br>  
@@ -127,12 +127,11 @@
                 </div>
                 <br> 
                 
-                <div class="form-group col-md-6">
-               
-				 <label for="name">Sucursal</label>				
-				    <select class="form-control"  id="idSucursal"  name="idSucursal" th:selected="${vendedor.sucursalModel.idSucursal}"/>	
-				     <option th:value="${vendedor.sucursalModel.idSucursal}" th:text="${vendedor.sucursalModel.direccion}"></option> 			   
-				    <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}" th:text="${sucursal.direccion}"></option>
+                               
+				 <div class="form-group col-md-6">
+				 <label for="name">Local</label>				
+				    <select class="form-control"  th:field="*{sucursal.idSucursal}" >				   
+				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">/	
 				    </select>
 				</div>
 				 

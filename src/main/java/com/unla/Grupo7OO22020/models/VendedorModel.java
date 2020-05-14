@@ -2,14 +2,14 @@ package com.unla.Grupo7OO22020.models;
 
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+
 
 
 
 public class VendedorModel extends EmpleadoModel {
 
 	private long idVendedor;
-	private SucursalModel sucursalModel;
+	private SucursalModel sucursal;
 	
 	
 	public VendedorModel() {}	
@@ -20,9 +20,7 @@ public class VendedorModel extends EmpleadoModel {
 		super(idPersona, nombre, apellido, fechaNacimiento, dni, idEmpleado, usuario, password, horaIngreso, horasXjornada,  plusSueldolong);		
 		this.idVendedor = idVendedor;		
 	}
-	
-	
-	
+		
 
 	public long getIdVendedor() {
 		return idVendedor;
@@ -34,14 +32,17 @@ public class VendedorModel extends EmpleadoModel {
 	}
 
 
-	public SucursalModel getSucursalModel() {
-		return sucursalModel;
+	public SucursalModel getSucursal() {
+		return sucursal;
 	}
 
 
-	public void setSucursalModel(SucursalModel sucursalModel) {
-		this.sucursalModel = sucursalModel;
-	}		
+	public void setSucursal(SucursalModel sucursal) {
+		this.sucursal = sucursal;
+	}
+
+
+		
 	
 	
 		

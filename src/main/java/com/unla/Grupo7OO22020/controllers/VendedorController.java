@@ -49,11 +49,12 @@ public class VendedorController {
 	@PostMapping("/agregar")	
 	public String agregarVendedor(VendedorModel vendedorModel){
 		System.out.println("emp add: ");	
-		System.out.println("emp add: " + vendedorModel.getSucursalModel().getIdSucursal());		
+		System.out.println("emp add: " + vendedorModel.getSucursal().getIdSucursal());		
 	
 		vendedorModel.setPassword(String.valueOf(vendedorModel.getDni()));
 		vendedorModel.setUsuario(vendedorModel.getApellido());
-		//vendedorModel = vendedorService.insertOrUpdate(vendedorModel);				
+		vendedorModel.setSucursal(sucursalService.findByIdSucursal(vendedorModel.getSucursal().getIdSucursal()));
+		vendedorModel = vendedorService.insertOrUpdate(vendedorModel);				
 		return (ViewRouteHelper.vendedor_reload);
 	}
 	
@@ -63,6 +64,7 @@ public class VendedorController {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.vendedor_insert);
 		mav.addObject("sucursales", sucursalService.getAll());
 		mav.addObject("vendedor", vendedorService.findByIdVendedor(idPersona));
+		
 		return mav;
 	}
 	

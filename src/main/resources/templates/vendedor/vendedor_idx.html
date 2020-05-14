@@ -157,19 +157,20 @@
 				  <input type="time" th:field= "*{horasXjornada} "class="form-control" />
 				  <div class="validate"></div>
 				</div>
+				
+				
 				 <div class="form-group col-md-6">
 				  <label for="name">Plus Sueldo</label>
 				  <input type=number th:field= "*{plusSueldo}" class="form-control" />
 				  <div class="validate"></div>
-				</div>		
+				</div>
 				
 				<div class="form-group col-md-6">
-					<label for="name">Plus Sueldo</label>
-						<select placeholder="Sucursal" th:field="*{sucursal}" >
-							<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}" />				
-						</select>
-				 	<div class="validate"></div>
-				</div>			
+				 <label for="name">Local</label>				
+				    <select class="form-control"  th:field="*{sucursal.idSucursal}" >				   
+				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">/	
+				    </select>
+				</div>
 			
 							                                    
 			</div>		                        
