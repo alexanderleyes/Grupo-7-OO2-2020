@@ -18,6 +18,7 @@ public class ViewRouteHelper {
 	
 	public final static String sucursal_reload = "redirect:/" + sucursal_idx;
 	
+	public final static String cercana_view = "fragments/sucursalCercana";
 	
 	/*GERENTE*/
 	public final static String gerente_idx = "gerente/gerente_idx";

@@ -4,6 +4,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.unla.Grupo7OO22020.models.SucursalModel;
+
 
 public class Funciones {
 	
@@ -282,5 +284,20 @@ public class Funciones {
 			}
 		}
 		return val;
-	}		
+	}	
+	
+	public static double distancia(SucursalModel sucursal, SucursalModel sucursal2) {
+		double radioTierra = 6371; //en kilómetros
+		double dLat = Math.toRadians(sucursal.getLatitud() - sucursal2.getLatitud());
+		double dLng = Math.toRadians(sucursal.getLongitud()- sucursal2.getLongitud());
+		double sindLat = Math.sin(dLat / 2);
+		double sindLng = Math.sin(dLng / 2);
+		double va1 = Math.pow(sindLat, 2)
+				+ Math.pow(sindLng, 2) * Math.cos(Math.toRadians(sucursal.getLatitud())) * Math.cos(Math.toRadians(sucursal2.getLatitud()));
+		double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
+
+		double distanciaPivote = radioTierra * va2;
+
+		return distanciaPivote;
+	}
 }

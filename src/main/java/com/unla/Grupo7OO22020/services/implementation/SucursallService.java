@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.entities.Sucursal;
+import com.unla.Grupo7OO22020.helpers.Funciones;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.repositories.ISucursalRepository;
 import com.unla.Grupo7OO22020.services.ISucursalService;
@@ -55,7 +56,31 @@ public class SucursallService implements  ISucursalService{
 	
 		
 			
-		
+	@Override
+	public Sucursal distancias(SucursalModel sucursal) {
+		List<Sucursal> sucursales = sucursalRepository.findAll();
+		SucursalModel sucursal2;
+		SucursalModel sucpivote = new SucursalModel();
+
+		double distancia = 400000000;
+		for(int indice = 0;indice< sucursales.size();indice++)
+		{		
+			sucursal2 = sucursalConverter.entityToModel(sucursales.get(indice));			
+
+			if(sucursal2.getIdSucursal() != sucursal.getIdSucursal()){				
+
+				double distanciaPivote = Funciones.distancia(sucursal, sucursal2);
+
+				if  (distanciaPivote < distancia) {
+					 sucpivote = sucursal2;
+					distancia = distanciaPivote;					
+				}							
+			}		
+		}		
+
+		return sucursalConverter.modelToEntity(sucpivote);
+
+	}
 	
 	
 	

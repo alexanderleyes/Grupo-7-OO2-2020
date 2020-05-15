@@ -57,4 +57,13 @@ public class SucursalController {
 		sucursalService.remove(idSucursal);
 		return ViewRouteHelper.sucursal_reload;
 	}
+	
+	@GetMapping("/cercana/{id}")
+	public ModelAndView cercanas(@PathVariable("id") long id) {
+		System.out.println("cerc sucursal: " + id);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.cercana_view);
+		SucursalModel sucursal = sucursalService.findByIdSucursal(id);
+		mAV.addObject("sucursal", sucursalService.distancias(sucursal));
+		return mAV;
+	}
 }
