@@ -1,0 +1,17 @@
+<form action="#" th:action="@{/lote/create}" th:object="${lote}" method="get">
+	<p>Cantidad: <input type="text" th:field="*{cantidad}" /></p>
+	<!-- <p>Birthdate: <input type="date" th:field="*{birthdate}" /></p> -->
+	
+	<label class="col-sm-2 control-label">Producto:</label><br>
+                
+                  
+                 <select class="form-control" th:field="*{idProducto}"><br>
+                         <option th:each="producto : ${productos}"
+                            th:value="${(producto.idProducto)- 1}"
+                            th:utext="${producto.descripcion}"/>
+                  </select>
+                
+              
+	
+	<input type="submit" value="crear"/>
+</form>
