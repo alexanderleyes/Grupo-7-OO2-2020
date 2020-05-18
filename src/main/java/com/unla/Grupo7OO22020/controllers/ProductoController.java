@@ -30,6 +30,7 @@ public class ProductoController {
 	@GetMapping("/producto_idx")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.producto_idx);
+		mAV.addObject("producto", new Producto());
 		mAV.addObject("productos", productoService.getAll());
 		
 		return mAV;
@@ -69,9 +70,9 @@ public class ProductoController {
 	
 	
 	@PostMapping("/delete/{id}")
-	public RedirectView delete(@PathVariable("id") int id) {
+	public String delete(@PathVariable("id") int id) {
 		productoService.remove(id);
-		return new RedirectView(ViewRouteHelper.producto_reload);
+		return ViewRouteHelper.producto_reload;
 	}
 	
 	@PostMapping("/agregar")	
