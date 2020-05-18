@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
- <title>TPC - Clientes</title>
+ <title>TPC - Lote</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -56,7 +56,7 @@
         </div>
       </div>
 
-     	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
+      	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
       <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
@@ -70,41 +70,41 @@
       <div class="container">
 	
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Administrar Clientes</h2>
+          <h2>Administrar Lotes</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
             <li>Inventario 002</li>
           </ol>
-        </div>
+        </div>        
+       
         
-        <br><br><br><br><br><br><br><br>
+        <br><br><br><br><br>
+        
+         <div id="div-select-cercana" class="row"></div>
+         
          <table class="table" id="table"  >
 			<thead>
 				<tr >
 					<th>ID </th>
-					<th>Nombre </th>
-					<th>Apellido</th>
-					<th>Fecha Nacimiento</th>
-					<th>Dni</th>	
-					<th></th>						
+					<th>Cantidad </th>
+					<th>ID Producto</th>						
+					<th>Descripcion</th>						
 				</tr>
 			</thead>
 			<tbody>				
 				
-				<tr th:each="cliente: ${clientes}">
-					<form th:action="@{/cliente/modificar/{id}(id=${cliente.idPersona})}" method="post" role="form" >
-						<td><span th:text=${cliente.idPersona}/></td>
-						<td><span th:text=${cliente.nombre}/></td>
-						<td><span th:text=${cliente.apellido}/></td>
-						<td><span th:text=${cliente.fechaNacimiento}/></td>
-						<td><span th:text=${cliente.dni}/></td>	
-						<td>
-							<input type="submit" name="modificar" value="M" />						
-						</td>
-					</form>	
-					
-					<td>
-						<form th:action="@{/cliente/eliminar/{id}(id=${cliente.idPersona})}" method="post" role="form" >
+				<tr th:each="lote: ${lotes}">
+					<form th:action="@{/lote/modificar/{id}(id=${lote.idLote})}" method="post" role="form">
+								<td><span th:text="${lote.idLote}" /></td>
+								<td><span th:text="${lote.cantidad}" /></td>
+								<td><span th:text="${lote.idProducto}" /></td>
+								<!-- <td><span th:text="${productos.get(lote.idProducto).getDescripcion()}" /></td> -->
+								<td>
+								<td><input type="submit" name="modificar" value="M" /></td>
+							</form>
+
+							<td>
+						<form th:action="@{/lote/delete/{id}(id=${lote.idLote})}" method="post" role="form" >
 							<input type="submit"  name="eliminar" value="X" />
 						</form>
 					</td>
@@ -115,33 +115,25 @@
 		
         
 		<br><br><br>
-		
-	<form action="#" th:action="@{/cliente/agregar}"th:object="${cliente}" method="post">
-              <div class="form-row" ;>  
-                          
+				 
+	<a href="/lote/new" class="btn btn-primary">Crear nuevo Lote</a>			 
+	<!--<form th:action="@{/lote/new}" th:object="${lote}" method="post" role="form" >
+              <div class="form-row" ;>              
                 <div class="form-group col-md-6">
-                  <label for="name">Nombre</label>
-                  <input type="text" th:field="*{nombre}" class="form-control"  />
+                  <label for="name">Cantidad</label>
+                  <input type="text" th:field="*{cantidad}" class="form-control"  />
                   <div class="validate"></div>
                 </div>
-                
                  <div class="form-group col-md-6">
-                  <label for="apellido">Apellido</label>
-                  <input type="text" th:field="*{apellido}" class="form-control"  />
-                  <div class="validate"></div>
-                </div>
-                
-                <div class="form-group col-md-6">
-				  <label for="name">Fecha de Nacimiento</label>
-				  <input type=date  th:field="*{fechaNacimiento}" class="form-control" />
-				  <div class="validate"></div>
-				</div>
-                
-                 <div class="form-group col-md-6">
-                  <label for="dni">Dni</label>
-                  <input type="number" th:field="*{dni}" class="form-control" step="any" />
-                  <div class="validate"></div>
-                </div>
+                  <label for="name">Producto</label>
+                   
+                 <select class="form-control" th:field="*{idProducto}"><br>
+                         <option th:each="producto : ${productos}"
+                            th:value="${(producto.idProducto)- 1}"
+                            th:utext="${producto.descripcion}"/>
+                  </select>
+                </div> --> 
+                 
                                                 
               </div>          
               <div class="text-left"><button type="submit">Agregar</button></div>    
@@ -220,24 +212,7 @@
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-	<script>
-	
-	var table = document.getElementById('table'), idx;			
-		for(var i=0; i<table.rows.length; i++)
-		{	
-			
-			table.rows[i].onclick = function(){
-					idx = this.rowIndex;	
-					console.log(this.cells[1].innerHTML)
-					//document.getElementById("id".value) = this.cells[0].innerHTML;
-					//document.getElementById("nombre".value) = this.cells[1].innerHTML;
-					//document.getElementById("apellido".value) = this.cells[2].innerHTML;
-					//document.getElementById("fechaNacimientdo".value) = this.cells[3].innerHTML;
-					//document.getElementById("dni".value) = this.cells[4].innerHTML;
-				}
-			}	
-	
-		</script>
+
 </body>
 
 </html>

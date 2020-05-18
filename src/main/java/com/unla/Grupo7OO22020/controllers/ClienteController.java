@@ -23,6 +23,7 @@ public class ClienteController {
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
 	
+	
 	@GetMapping("/cliente_idx")
 	public ModelAndView clientes(){
 			System.out.println("enruta: " +ViewRouteHelper.cliente_idx);

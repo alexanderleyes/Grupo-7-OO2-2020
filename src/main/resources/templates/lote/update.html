@@ -1,0 +1,14 @@
+<form action="#" th:action="@{/lote/create}" th:object="${lote}" method="get">
+	<label for="lblDNI">ID LOTE</label><br>
+        <input type="number"  class="form-control" th:field="${lote.idLote}"/> </br></br>
+		<label for="lblNombre">CANTIDAD</label><br>
+		<input type="number"  class="form-control"th:field="${lote.cantidad}"/> </br>
+		<label for="lblNombre">id Producto</label><br>
+		<input type="number"  class="form-control"th:field="${lote.idProducto}"/> </br>
+		
+
+	<input type="submit" value="Edit" />
+</form>
+<form action="#" th:action="@{/lote/delete/{id}(id=${lote.idLote})}" method="post">
+	<input type="submit" value="delete lote" />
+</form>
