@@ -14,7 +14,7 @@ import com.unla.Grupo7OO22020.repositories.ISucursalRepository;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 
 @Service("sucursalService")
-public class SucursallService implements  ISucursalService{
+public class SucursalService implements  ISucursalService{
 
 
 	

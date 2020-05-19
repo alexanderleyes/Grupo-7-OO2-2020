@@ -10,6 +10,7 @@ public interface ISucursalService {
 	public boolean remove(long id);
 	public SucursalModel insertOrUpdate(SucursalModel sucursalModel);
 	public SucursalModel findByIdSucursal(long id);
-	Sucursal distancias(SucursalModel sucursal);	
+	Sucursal distancias(SucursalModel sucursal);
+	
 	
 }

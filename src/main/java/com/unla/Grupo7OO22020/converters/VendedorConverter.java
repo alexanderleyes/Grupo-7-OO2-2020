@@ -21,6 +21,7 @@ public class VendedorConverter {
 	}
 	
 	public Vendedor modelToEntity(VendedorModel vendedorModel) {
+		System.out.println(vendedorModel.getSucursal());
 		return new Vendedor(sucursalConverter.modelToEntity(vendedorModel.getSucursal()), vendedorModel.getIdPersona(),vendedorModel.getNombre(), vendedorModel.getApellido(), vendedorModel.getFechaNacimiento(), vendedorModel.getDni(),  vendedorModel.getUsuario(), 
 				vendedorModel.getPassword(), vendedorModel.getHoraIngreso(), vendedorModel.getHorasXjornada(), vendedorModel.getPlusSueldo(), vendedorModel.isBaja());
 	}

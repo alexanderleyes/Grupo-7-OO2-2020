@@ -45,7 +45,7 @@ public class LoteController {
 		
 	@PostMapping("/agregar")	
 	public String agregar(@ModelAttribute("lote") LoteModel loteModel){		
-		loteModel.setProducto(productoService.findById(loteModel.getProducto().getIdProducto()));		
+		loteModel.setProducto(productoService.findByIdProducto(loteModel.getProducto().getIdProducto()));		
 		loteModel = loteService.insertOrUpdate(loteModel);		
 		return ViewRouteHelper.lote_reload;
 	}	

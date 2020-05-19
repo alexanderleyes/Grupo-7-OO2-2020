@@ -74,4 +74,20 @@ public class ViewRouteHelper {
 	public final static String producto_insert = "producto/producto_mod";
 
 	public final static String producto_reload = "redirect:/"+ producto_idx;
+	
+	/*PEDIDOS*/
+
+	public final static String estadoVenta_idx = "estadoVenta/estadoVenta_idx";
+
+	public final static String estadoVenta_insert = "estadoVenta/estadoVenta_mod";
+
+	public final static String estadoVenta_reload = "redirect:/"+ estadoVenta_idx;	
+	
+	/*PEDIDOS*/
+
+	public final static String pedido_idx = "pedido/pedido_idx";
+
+	public final static String pedido_insert = "pedido/pedido_mod";
+
+	public final static String pedido_reload = "redirect:/"+ pedido_idx;	
 }

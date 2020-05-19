@@ -41,6 +41,12 @@ public class ProductoModel{
 	public void setPrecioUnitario(double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
+
+	@Override
+	public String toString() {
+		return "ProductoModel [idProducto=" + idProducto + ", descripcion=" + descripcion + ", precioUnitario="
+				+ precioUnitario + "]";
+	}
 	
 	
 	

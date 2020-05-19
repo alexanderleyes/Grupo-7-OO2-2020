@@ -14,6 +14,7 @@ public class SucursalConverter {
 	}
 	
 	public Sucursal modelToEntity(SucursalModel sucursalModel) {
+		
 		return new Sucursal(sucursalModel.getIdSucursal(), sucursalModel.getTelefono(), sucursalModel.getLocalidad(), sucursalModel.getDireccion(), sucursalModel.getLatitud(), sucursalModel.getLongitud());
 	}
 }

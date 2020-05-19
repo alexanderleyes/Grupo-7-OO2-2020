@@ -113,7 +113,7 @@ public class SucursalModel extends EmpleadoModel {
 
 	@Override
 	public String toString() {
-		return "LocalModel [idLocal=" + idSucursal + ", telefono=" + telefono + ", localidad=" + localidad + ", direccion="
+		return "SucursalModel [idSucursal=" + idSucursal + ", telefono=" + telefono + ", localidad=" + localidad + ", direccion="
 				+ direccion + ", latitud=" + latitud + ", longitud=" + longitud + "]";
 	}	
 	

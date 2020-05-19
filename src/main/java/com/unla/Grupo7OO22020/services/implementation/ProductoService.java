@@ -49,16 +49,18 @@ public class ProductoService implements IProductoService{
 	}
 
 
-	@Override
-	public ProductoModel findById(long id) {
-		return productoConverter.entityToModel(productoRepository.findByIdProducto(id));
-		
-	}
-
+	
 
 	@Override
 	public ProductoModel findByDescripcion(String descripcion) {
 		return productoConverter.entityToModel(productoRepository.findByDescripcion(descripcion));
+	}
+
+
+	@Override
+	public ProductoModel findByIdProducto(long id) {
+		return productoConverter.entityToModel(productoRepository.findByIdProducto(id));	
+		
 	}
 
 	

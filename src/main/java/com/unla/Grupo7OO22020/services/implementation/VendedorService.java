@@ -78,7 +78,7 @@ public class VendedorService implements  IVendedorService{
 	
 	
 	@Override
-	public VendedorModel insertOrUpdate(VendedorModel vendedorModel) {
+	public VendedorModel insertOrUpdate(VendedorModel vendedorModel) {		
 		Vendedor vendedor = vendedorRepository.save(vendedorConverter.modelToEntity(vendedorModel));
 		return vendedorConverter.entityToModel(vendedor);
 	}

@@ -43,7 +43,7 @@ public class ProductoController {
 				
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_insert);
 		mav.addObject("producto", new Producto());
-		mav.addObject("producto", productoService.findById(idProducto));
+		mav.addObject("producto", productoService.findByIdProducto(idProducto));
 		return mav;
 	}
 	
@@ -56,7 +56,7 @@ public class ProductoController {
 	 @GetMapping("/update/{id}")
 		public ModelAndView update(@PathVariable("id") int id) {
 			ModelAndView mAV = new ModelAndView(ViewRouteHelper.producto_insert);
-			mAV.addObject("producto", productoService.findById(id));
+			mAV.addObject("producto", productoService.findByIdProducto(id));
 			return mAV;
 			
 		}
@@ -64,7 +64,7 @@ public class ProductoController {
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.producto_insert);
-		mAV.addObject("producto", productoService.findById(id));
+		mAV.addObject("producto", productoService.findByIdProducto(id));
 		return mAV;
 	}
 	
