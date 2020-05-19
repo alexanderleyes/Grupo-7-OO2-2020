@@ -85,10 +85,9 @@
          <table class="table" id="table"  >
 			<thead>
 				<tr >
-					<th>ID </th>
+					<th>Lote ID </th>
 					<th>Cantidad </th>
-					<th>ID Producto</th>						
-					<th>Descripcion</th>						
+					<th>Producto</th>											
 				</tr>
 			</thead>
 			<tbody>				
@@ -97,14 +96,12 @@
 					<form th:action="@{/lote/modificar/{id}(id=${lote.idLote})}" method="post" role="form">
 								<td><span th:text="${lote.idLote}" /></td>
 								<td><span th:text="${lote.cantidad}" /></td>
-								<td><span th:text="${lote.idProducto}" /></td>
-								<!-- <td><span th:text="${productos.get(lote.idProducto).getDescripcion()}" /></td> -->
-								<td>
+								<td><span th:text="${lote.producto.descripcion}" /></td>								
 								<td><input type="submit" name="modificar" value="M" /></td>
 							</form>
 
 							<td>
-						<form th:action="@{/lote/delete/{id}(id=${lote.idLote})}" method="post" role="form" >
+						<form th:action="@{/lote/eliminar/{id}(id=${lote.idLote})}" method="post" role="form" >
 							<input type="submit"  name="eliminar" value="X" />
 						</form>
 					</td>
@@ -114,30 +111,26 @@
 		</table>  
 		
         
-		<br><br><br>
-				 
-	<a href="/lote/new" class="btn btn-primary">Crear nuevo Lote</a>			 
-	<!--<form th:action="@{/lote/new}" th:object="${lote}" method="post" role="form" >
-              <div class="form-row" ;>              
-                <div class="form-group col-md-6">
-                  <label for="name">Cantidad</label>
-                  <input type="text" th:field="*{cantidad}" class="form-control"  />
-                  <div class="validate"></div>
-                </div>
-                 <div class="form-group col-md-6">
-                  <label for="name">Producto</label>
-                   
-                 <select class="form-control" th:field="*{idProducto}"><br>
-                         <option th:each="producto : ${productos}"
-                            th:value="${(producto.idProducto)- 1}"
-                            th:utext="${producto.descripcion}"/>
-                  </select>
-                </div> --> 
-                 
-                                                
-              </div>          
-              <div class="text-left"><button type="submit">Agregar</button></div>    
-       </form>	
+	<br><br><br>				 
+		 
+		 
+	 <h2>Nuevo Lote</h2>		 
+	<form th:action="@{/lote/agregar}" th:object="${lote}" method="post" role="form" >
+		<div class="form-row" ;>              
+			<div class="form-group col-md-6">
+		    	<label for="name">Cantidad</label>
+		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  />
+		    	<div class="validate"></div>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="name">Producto</label>		     
+		   		<select class="form-control"  th:field="*{producto.idProducto}"><br>
+		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
+		    	</select>
+	     	</div>                              
+        </div>          
+		<div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>    
+	</form>	
         
 
       </div>

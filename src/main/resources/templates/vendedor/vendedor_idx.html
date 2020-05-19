@@ -168,14 +168,14 @@
 				<div class="form-group col-md-6">
 				 <label for="name">Local</label>				
 				    <select class="form-control"  th:field="*{sucursal.idSucursal}" >				   
-				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">/	
+				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
 				    </select>
 				</div>
 			
 							                                    
 			</div>		                        
 			<div class="text-left">
-				 <div class="text-left"><button type="submit">Agregar</button></div>				
+				 <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>				
 			</div>
 		</form>	
      

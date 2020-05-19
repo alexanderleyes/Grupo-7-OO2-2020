@@ -6,25 +6,26 @@ import com.unla.Grupo7OO22020.entities.Lote;
 
 public class LoteModel {
 	
-	private long idLote;
-	
-	private int cantidad;
-	
-	private long idProducto;
-	
-	public LoteModel() {
-	}
+	private long idLote;	
+	private int cantidad;	
+	private ProductoModel producto;
 	
 	
-		public LoteModel(long idLote, int cantidad, long idProducto) {
+	
+	public LoteModel() {}	
+	
+	public LoteModel(long idLote, int cantidad, ProductoModel producto) {
 		super();
 		this.idLote = idLote;
 		this.cantidad = cantidad;
-		this.idProducto = idProducto;
+		this.producto = producto;
 	}
-
-
-
+	
+	public LoteModel(int cantidad, ProductoModel producto) {
+		super();		
+		this.cantidad = cantidad;
+		this.producto = producto;
+	}
 
 	public long getIdLote() {
 		return idLote;
@@ -47,26 +48,12 @@ public class LoteModel {
 	}
 
 
-	public long getIdProducto() {
-		return idProducto;
+	public ProductoModel getProducto() {
+		return producto;
 	}
 
 
-	public void setIdProducto(long idProducto) {
-		this.idProducto = idProducto;
+	public void setProducto(ProductoModel producto) {
+		this.producto = producto;
 	}
-
-
-	
-
-
-	
-
-
-	
-
-	
-	
-	
-
 }

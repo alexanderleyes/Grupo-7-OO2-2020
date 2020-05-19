@@ -146,7 +146,7 @@
               </div>         
               
               
-            <div class="text-left"><button type="submit">Confirmar</button></div>    
+            <div class="text-left"><button type="submit" class="btn btn-primary">Confirmar</button></div>    
               </form>	
         
 
@@ -222,24 +222,7 @@
 
   <!-- Template Main JS File -->
   <script src="../../js/main.js"></script>
-	<script>
-	window.onload = function(){
-	var table = document.getElementById('table'), idx;			
-		for(var i=0; i<table.rows.length; i++)
-		{	
-			
-			table.rows[i].onclick = function(){
-					idx = this.rowIndex;	
-					console.log(this.cells[1].innerHTML)
-					//document.getElementById("id".value) = this.cells[0].innerHTML;
-					document.getElementById("nombre".value) = this.cells[1].innerHTML;
-					//document.getElementById("apellido".value) = this.cells[2].innerHTML;
-					//document.getElementById("fechaNacimientdo".value) = this.cells[3].innerHTML;
-					//document.getElementById("dni".value) = this.cells[4].innerHTML;
-				}
-			}	
-	}
-		</script>
+	
 </body>
 
 </html>

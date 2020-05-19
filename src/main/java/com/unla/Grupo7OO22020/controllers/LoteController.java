@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo7OO22020.entities.Lote;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.ClienteModel;
@@ -36,69 +37,31 @@ public class LoteController {
 	@GetMapping("/lote_idx")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.lote_idx);
+		mAV.addObject("lote", new Lote());
 		mAV.addObject("lotes", loteService.getAll());
 		mAV.addObject("productos", productoService.getAll());
 		return mAV;
 	}
-	
-	@GetMapping("/new")
-	public ModelAndView create() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LOTE_NEW);
-		mAV.addObject("lote", new LoteModel());
-		mAV.addObject("productos", productoService.getAll());
-		return mAV;
-	}
-	
-	@GetMapping("/create")
-	public RedirectView create(@ModelAttribute("lote") LoteModel loteModel) {
-		loteService.insertOrUpdate(loteModel);
-		return new RedirectView(ViewRouteHelper.lote_reload);
-	}
-	
+		
 	@PostMapping("/agregar")	
-	public String agregar(@ModelAttribute("lote") LoteModel loteModel){	
-		
-		loteModel = loteService.insertOrUpdate(loteModel);
-		
+	public String agregar(@ModelAttribute("lote") LoteModel loteModel){		
+		loteModel.setProducto(productoService.findById(loteModel.getProducto().getIdProducto()));		
+		loteModel = loteService.insertOrUpdate(loteModel);		
 		return ViewRouteHelper.lote_reload;
+	}	
+	
+	
+	 @PostMapping("/modificar/{id}")
+	 public ModelAndView update(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.lote_insert);
+		mav.addObject("productos", productoService.getAll());
+		mav.addObject("lote", loteService.findById(id));
+		return mav;	
 	}
-	
-	 @GetMapping("/update/{id}")
-		public ModelAndView update1(@PathVariable("id") int id) {
-			ModelAndView mav = new ModelAndView(ViewRouteHelper.LOTE_UPDATE);
-			mav.addObject("lote", new Producto());
-			mav.addObject("lote", loteService.findById(id));
-			return mav;
-			
-		}
-	
-	 @GetMapping("/modificar/{id}")
-		public ModelAndView update(@PathVariable("id") int id) {
-			ModelAndView mav = new ModelAndView(ViewRouteHelper.lote_insert);
-			mav.addObject("lote", new Producto());
-			mav.addObject("lote", loteService.findById(id));
-			return mav;
-			
-		}
-	
-	@GetMapping("/{id}")
-	public ModelAndView get(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.lote_reload);
-	
-		mAV.addObject("lote", loteService.findById(id));
-		mAV.addObject("producto", productoService.findById(loteService.findById(id).getIdProducto()));
-		mAV.addObject("productos", productoService.getAll());
-		
-		return mAV;
-	}
-			
-	
-	
-	 
 
-	@GetMapping("/delete/{id}")
-	public RedirectView delete(@PathVariable("id") int id) {
+	@PostMapping("/eliminar/{id}")
+	public String delete(@PathVariable("id") int id) {
 		loteService.remove(id);
-		return new RedirectView(ViewRouteHelper.lote_reload);
+		return ViewRouteHelper.lote_reload;
 	}
 }

@@ -1,13 +1,16 @@
 package com.unla.Grupo7OO22020.entities;
 
 import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,17 +26,13 @@ public class Lote {
 	private long idLote;
 	
 	@Column(name="cantidad")
-	private int cantidad;
-	
+	private int cantidad;	
 	
 	@Column(name="fechaIngreso")
 	@CreationTimestamp
 	private LocalDate fechaIngreso;
 	
-	private long idProducto;
-	
-	@ManyToOne
-	@JoinColumn(name="producto")
+	@OneToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Producto producto;
 	
 
@@ -43,11 +42,11 @@ public class Lote {
 
 		
 
-	public Lote(long idLote, int cantidad, long idProducto) {
+	public Lote(long idLote, int cantidad, Producto producto) {
 		super();
 		this.idLote = idLote;
 		this.cantidad = cantidad;
-		this.idProducto = idProducto;
+		this.producto = producto;
 		
 	}
 
@@ -98,51 +97,4 @@ public class Lote {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-
-
-
-	public long getIdProducto() {
-		return idProducto;
-	}
-
-
-
-	public void setIdProducto(long idProducto) {
-		this.idProducto = idProducto;
-	}
-
-
-
-
-
-
-
-
-	
-	
-
-
-	
-
-	
-
-
 }
-
-
-
-	
-
-
-
-	
-
-
-
-	
-	
-	
-	
-	
-
-

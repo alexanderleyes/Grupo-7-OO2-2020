@@ -77,19 +77,25 @@
         </div>        
        
 		<form th:action="@{/lote/agregar}" th:object="${lote}" method="post" role="form" >         
-	<input type="hidden" th:field="*{idLote}" name="id" class="form-control"  />
+		<input type="hidden" th:field="*{idLote}" name="id" class="form-control"  />
 			
               <div class="form-row" ;>              
                 <div class="form-group col-md-6">
                   <label for="name">Cantidad</label>
-                  <input type="text" th:field="*{cantidad}" name="cantidad" class="form-control"  />
+                  <input type="number" step="any" th:field="*{cantidad}" name="cantidad" class="form-control"  />
                   <div class="validate"></div>
                 </div> 
-                <br>
+               <div class="form-group col-md-6">
+				<label for="name">Producto</label>		     
+		   		<select class="form-control"  th:field="*{producto.idProducto}"><br>
+		   			<option th:value="${(lote.producto.idProducto)}" th:text="${lote.producto.descripcion}"/>	
+		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
+		    	</select>
+	     	</div>
                                                       
               </div> 
               
-              	<div class="text-left"><button type="submit">Confirmar</button></div>    
+              	<div class="text-left"><button type="submit" class="btn btn-primary">Confirmar</button></div>    
               </form>	
         
 
