@@ -18,7 +18,8 @@ public class VendedorModel extends EmpleadoModel {
 	public VendedorModel(long idPersona, SucursalModel sucursalModel, String nombre, String apellido, LocalDate fechaNacimiento, int dni, long idEmpleado, String usuario, String password, String horaIngreso,
 			String horasXjornada, double plusSueldolong, long idVendedor) {
 		super(idPersona, nombre, apellido, fechaNacimiento, dni, idEmpleado, usuario, password, horaIngreso, horasXjornada,  plusSueldolong);		
-		this.idVendedor = idVendedor;		
+		this.idVendedor = idVendedor;
+		this.sucursal	= sucursalModel;
 	}
 		
 

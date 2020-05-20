@@ -1,6 +1,5 @@
 package com.unla.Grupo7OO22020.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,19 +17,19 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	public long idPedido;	
 	
-	@ManyToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private Sucursal sucOrigen;	
 
-	@ManyToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private Sucursal sucDestino;	
 	
-	@ManyToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private Vendedor vendedorSolicita;	
 
-	@ManyToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private Vendedor vendedorDespacha;	
 	
-	@ManyToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private Producto producto;	
 		
 	@Column(name="cantidad")

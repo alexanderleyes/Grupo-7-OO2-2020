@@ -58,17 +58,14 @@ public class PedidoController {
 		mav.addObject("vendedores", vendedorService.getAll());
 		mav.addObject("productos", productoService.getAll());		
 		return mav;
-	}
-	
-	
+	}	
 	
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.pedido_insert);
 		mAV.addObject("pedido", pedidoService.findById(id));
 		return mAV;
-	}
-	
+	}	
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable("id") int id) {
@@ -77,35 +74,17 @@ public class PedidoController {
 	}
 	
 	@PostMapping("/agregar")	
-	public String agregar(@ModelAttribute("pedido") PedidoModel pedidoModel){	
-		
+	public String agregar(@ModelAttribute("pedido") PedidoModel pedidoModel){			
 		
 		pedidoModel.setSucOrigen(sucursalService.findByIdSucursal(pedidoModel.getSucOrigen().getIdSucursal()));
 		pedidoModel.setSucDestino(sucursalService.findByIdSucursal(pedidoModel.getSucDestino().getIdSucursal()));
 		pedidoModel.setVendedorSolicita(vendedorService.findByIdVendedor(pedidoModel.getVendedorSolicita().getIdPersona()));
 		pedidoModel.setVendedorDespacha(vendedorService.findByIdVendedor(pedidoModel.getVendedorDespacha().getIdPersona()));	
 		pedidoModel.setProducto(productoService.findByIdProducto(pedidoModel.getProducto().getIdProducto()));
-		System.out.println("ven  " + (vendedorService.findByIdVendedor(pedidoModel.getVendedorSolicita().getIdPersona())).getApellido()/*.getSucursal().getIdSucursal()*/);
 
-		/*System.out.println("suc  " + sucursalService.findByIdSucursal(pedidoModel.getSucOrigen().getIdSucursal()));
-		System.out.println("suc  " + sucursalService.findByIdSucursal(pedidoModel.getSucDestino().getIdSucursal()));
-		System.out.println("ven  " + vendedorService.findByIdVendedor(pedidoModel.getVendedorSolicita().getIdPersona()));
-		System.out.println("ven  " + vendedorService.findByIdVendedor(pedidoModel.getVendedorDespacha().getIdPersona()));
-		System.out.println("pro  " + productoService.findByIdProducto(pedidoModel.getProducto().getIdProducto()));*/
-
-		//pedidoModel = pedidoService.insertOrUpdate(pedidoModel);
+		pedidoModel = pedidoService.insertOrUpdate(pedidoModel);
 		
 		return ViewRouteHelper.pedido_reload;
 	}
-	
-	/*
-	
-	@GetMapping("/by_name/{name}")
-	public ModelAndView getByName(@PathVariable("name") String name) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_UPDATE);
-		mAV.addObject("producto", productoService.findByDescripcion(name));
-		return mAV;
-	}*/
-	
 	
 }

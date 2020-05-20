@@ -1,16 +1,13 @@
 package com.unla.Grupo7OO22020.entities;
 
-
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name="vendedor")
