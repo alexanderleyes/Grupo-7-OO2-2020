@@ -1,10 +1,22 @@
-<div class="col-lg-4 mb-4">
+ <div class="col-lg-4 mb-4">
 	<div class="card h-100" th:object="${sucursal}">
-		La sucursal mas Cercana es:
-		<h4 class="card-header" th:text="${sucursal.direccion}" />
+		Las tres sucursales mas cercanas:
+		<table border="1px">
+		<thead>
+		<tr>
+			<th>Direccion</th>
+			<th>Localidad</th>
+		</tr>
+	</thead>
+		<tbody>
+		<tr th:each="sucursal : ${sucursales}">
+				<td><span th:text="${sucursal.direccion}" /></td>
+				<td><span th:text="${sucursal.localidad}" /></td>
+		</tr>
+	</tbody>
 	
-		<!-- <div class="card-footer">
-			<a class="btn btn-primary" th:href="@{/person/{id}(id=${person.id})}">View</a>
-		</div> -->
-	</div>
+		</table>
+		</div>
+		
 </div>
+

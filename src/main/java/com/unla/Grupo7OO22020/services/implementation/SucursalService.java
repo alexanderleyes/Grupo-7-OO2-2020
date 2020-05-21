@@ -1,5 +1,7 @@
 package com.unla.Grupo7OO22020.services.implementation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,39 +55,42 @@ public class SucursalService implements  ISucursalService{
 		return sucursalConverter.entityToModel(sucursal);
 	}
 	
-	
-		
 			
-	@Override
-	public Sucursal distancias(SucursalModel sucursal) {
-		List<Sucursal> sucursales = sucursalRepository.findAll();
-		SucursalModel sucursal2;
-		SucursalModel sucpivote = new SucursalModel();
 
-		double distancia = 400000000;
+	@Override
+	public List<Sucursal> distancias(SucursalModel sucursal) {
+		List<Sucursal> sucursales = sucursalRepository.findAll();
+		List<Sucursal>sucursalesCom =new ArrayList<Sucursal>();
+		double[] miArray = new double[] {999999999,999999999,999999999, 999999999};
+
+		long[] idArray = new long[] {0,0,0, 0};
+		SucursalModel sucursal2;
 		for(int indice = 0;indice< sucursales.size();indice++)
 		{		
 			sucursal2 = sucursalConverter.entityToModel(sucursales.get(indice));			
 
 			if(sucursal2.getIdSucursal() != sucursal.getIdSucursal()){				
+				double distanciaPivote = Funciones.distancia(sucursal, sucursal2);			 
+				for(int i = 0 ; i<3; i++ ) {				
+					if  (distanciaPivote < miArray[i]) {
+							for(int j=2; j>=i ; j=j-1) {					
+							miArray[j+1]=miArray[j];
+							idArray[j+1]=idArray[j];	
+						}
+						miArray[i]=distanciaPivote;
+						idArray[i]=sucursal2.getIdSucursal();
+						break;
+					}
+				}				
+			}
+		}
+		
+		sucursalesCom.add(sucursalRepository.findByIdSucursal(idArray[0]));
+		sucursalesCom.add(sucursalRepository.findByIdSucursal(idArray[1]));		
+		sucursalesCom.add(sucursalRepository.findByIdSucursal(idArray[2]));
+		return sucursalesCom;
+}
 
-				double distanciaPivote = Funciones.distancia(sucursal, sucursal2);
+	
 
-				if  (distanciaPivote < distancia) {
-					 sucpivote = sucursal2;
-					distancia = distanciaPivote;					
-				}							
-			}		
-		}		
-
-		return sucursalConverter.modelToEntity(sucpivote);
-
-	}
-	
-	
-	
-	
-	
-	
-	
 }
