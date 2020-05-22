@@ -15,11 +15,11 @@ import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
 
 
-@Controller
-@RequestMapping("user")
+//@Controller
+//@RequestMapping("user")
 public class LoginController{	
 	
-	@Autowired
+	/*@Autowired
 	@Qualifier("vendedorService")
 	private IVendedorService vendedorService;
 	
@@ -76,7 +76,7 @@ public class LoginController{
 	}
 	
 	
-	
+	*/
 	
 		
 }

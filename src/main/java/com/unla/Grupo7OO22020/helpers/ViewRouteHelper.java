@@ -90,4 +90,8 @@ public class ViewRouteHelper {
 	public final static String pedido_insert = "pedido/pedido_mod";
 
 	public final static String pedido_reload = "redirect:/"+ pedido_idx;	
+	
+	
+	/*USER*/
+	public final static String logout = "user/logout";
 }
