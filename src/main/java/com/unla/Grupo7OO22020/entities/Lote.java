@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,6 +36,9 @@ public class Lote {
 	@OneToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Producto producto;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="sucursal_id", nullable=true)
+	private Sucursal sucursal;
 
 
 	public Lote() {		
@@ -97,4 +101,18 @@ public class Lote {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
+
+
+
+	public Sucursal getSucursal() {
+		return sucursal;
+	}
+
+
+
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
+	}
+	
+	
 }

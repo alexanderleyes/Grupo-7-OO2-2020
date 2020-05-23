@@ -1,22 +1,5 @@
- <div class="col-lg-4 mb-4">
-	<div class="card h-100" th:object="${sucursal}">
-		Las tres sucursales mas cercanas:
-		<table border="1px">
-		<thead>
-		<tr>
-			<th>Direccion</th>
-			<th>Localidad</th>
-		</tr>
-	</thead>
-		<tbody>
-		<tr th:each="sucursal : ${sucursales}">
-				<td><span th:text="${sucursal.direccion}" /></td>
-				<td><span th:text="${sucursal.localidad}" /></td>
-		</tr>
-	</tbody>
-	
-		</table>
-		</div>
+  				    <select class="form-control" id="sucDestino.idSucursal" name="sucDestino.idSucursal" >	
+  				    		  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
 		
-</div>
+  				    </select>
 

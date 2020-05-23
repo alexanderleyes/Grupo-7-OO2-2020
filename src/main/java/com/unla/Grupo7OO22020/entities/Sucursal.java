@@ -1,12 +1,18 @@
 package com.unla.Grupo7OO22020.entities;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 
 @Entity
@@ -31,6 +37,9 @@ public class Sucursal {
 	
 	@Column(name="longitud")	
 	private double longitud;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="sucursal")
+	private Set<Lote> lotes = new HashSet<Lote>();
 
 	public Sucursal() {}
 	
@@ -92,6 +101,18 @@ public class Sucursal {
 
 	public void setLongitud(double longitud) {
 		this.longitud = longitud;
+	}
+
+
+
+	public Set<Lote> getLotes() {
+		return lotes;
+	}
+
+
+
+	public void setLotes(Set<Lote> lotes) {
+		this.lotes = lotes;
 	}
 
 	

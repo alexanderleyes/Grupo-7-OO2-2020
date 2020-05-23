@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.entities.Pedido;
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.PedidoModel;
+import com.unla.Grupo7OO22020.models.ProductoModel;
+import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.services.IPedidoService;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
@@ -85,6 +88,22 @@ public class PedidoController {
 		pedidoModel = pedidoService.insertOrUpdate(pedidoModel);
 		
 		return ViewRouteHelper.pedido_reload;
+	}
+	
+	@GetMapping("/cercana/{id}/{idp}/{cant}")
+	public ModelAndView cercanas(@PathVariable("id") long id,@PathVariable("idp") long idp,@PathVariable("cant") int cant) {
+		System.out.println("cerc sucursal: " + id);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.cercana_view);
+		SucursalModel sucursal = sucursalService.findByIdSucursal(id);
+		
+		ProductoModel producto = productoService.findByIdProducto(idp);
+		
+		mAV.addObject("sucursal", new Sucursal());
+		mAV.addObject("producto", new Sucursal());
+		mAV.addObject(sucursalService.distancias(sucursal, producto, cant));
+		mAV.addObject("sucursales", sucursalService.distancias(sucursal,producto,cant));
+		return mAV;
+		
 	}
 	
 }

@@ -1,10 +1,4 @@
 package com.unla.Grupo7OO22020.controllers;
-
-
-
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.SucursalModel;
+import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 
 @Controller
@@ -26,6 +20,10 @@ public class SucursalController {
 	@Autowired
 	@Qualifier("sucursalService")
 	private ISucursalService sucursalService;
+	
+	@Autowired
+	@Qualifier("productoService")
+	private IProductoService productoService;
 	
 	
 	@GetMapping("/sucursal_idx")
@@ -60,25 +58,6 @@ public class SucursalController {
 		return ViewRouteHelper.sucursal_reload;
 	}
 	
-	/*@GetMapping("/cercana/{id}")
-	public ModelAndView cercanas(@PathVariable("id") long id) {
-		System.out.println("cerc sucursal: " + id);
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.cercana_view);
-		SucursalModel sucursal = sucursalService.findByIdSucursal(id);
-		mAV.addObject("sucursal", sucursalService.distancias(sucursal));
-		return mAV;
-		
-	}*/
 	
-	@GetMapping("/cercana/{id}")
-	public ModelAndView cercanas(@PathVariable("id") long id) {
-		System.out.println("cerc sucursal: " + id);
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.cercana_view);
-		SucursalModel sucursal = sucursalService.findByIdSucursal(id);
-		mAV.addObject("sucursal", new Sucursal());
-		mAV.addObject(sucursalService.distancias(sucursal));
-		mAV.addObject("sucursales", sucursalService.distancias(sucursal));
-		return mAV;
 		
-	}
 }
