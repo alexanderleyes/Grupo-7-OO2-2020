@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,19 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-/*import src.main.java.com.unla.ghsicilianotfi.entities.Column;
-import src.main.java.com.unla.ghsicilianotfi.entities.CreationTimestamp;
-import src.main.java.com.unla.ghsicilianotfi.entities.Entity;
-import src.main.java.com.unla.ghsicilianotfi.entities.GeneratedValue;
-import src.main.java.com.unla.ghsicilianotfi.entities.HashSet;
-import src.main.java.com.unla.ghsicilianotfi.entities.Id;
-import src.main.java.com.unla.ghsicilianotfi.entities.LocalDateTime;
-import src.main.java.com.unla.ghsicilianotfi.entities.OneToMany;
-import src.main.java.com.unla.ghsicilianotfi.entities.Set;
-import src.main.java.com.unla.ghsicilianotfi.entities.String;
-import src.main.java.com.unla.ghsicilianotfi.entities.Table;
-import src.main.java.com.unla.ghsicilianotfi.entities.UpdateTimestamp;
-import src.main.java.com.unla.ghsicilianotfi.entities.UserRole;*/
+
 
 @Entity
 @Table(name="user")
@@ -44,6 +33,8 @@ public class User {
 	@Column(name="password", nullable=false, length=60)
 	private String password;
 	
+	private long id_empleado;	
+	
 	@Column(name="enabled")
 	private boolean enabled;
 	
@@ -55,10 +46,17 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
+	@OneToMany(cascade= CascadeType.REFRESH, fetch=FetchType.LAZY, mappedBy="user")
 	private Set<UserRole> userRoles = new HashSet<UserRole>();
 
 	public User() {}
+	
+	public User(long id_empleado, String username, String password, boolean enabled) {
+		this.id_empleado = id_empleado;
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+	}
 	
 	public User(String username, String password, boolean enabled) {
 		this.username = username;
@@ -91,6 +89,14 @@ public class User {
 
 	public String getPassword() {
 		return password;
+	}
+	
+	public long getId_empleado() {
+		return id_empleado;
+	}
+
+	public void setId_empleado(long id_empleado) {
+		this.id_empleado = id_empleado;
 	}
 
 	public void setPassword(String password) {

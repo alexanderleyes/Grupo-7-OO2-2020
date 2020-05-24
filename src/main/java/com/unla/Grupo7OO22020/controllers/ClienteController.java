@@ -2,6 +2,7 @@ package com.unla.Grupo7OO22020.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +30,10 @@ public class ClienteController {
 			System.out.println("enruta: " +ViewRouteHelper.cliente_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.cliente_idx);
 			mav.addObject("cliente", new Cliente());
-			mav.addObject("clientes", clienteService.getAll());		
+			mav.addObject("clientes", clienteService.getAll());	
+			
+			Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			mav.addObject("user", userDet);
 			return mav;			
 		}
 	
@@ -47,6 +51,9 @@ public class ClienteController {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.cliente_insert);
 		mav.addObject("cliente", new Cliente());
 		mav.addObject("cliente", clienteService.findByIdCliente(idCliente));
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
 		return mav;
 	}
 	

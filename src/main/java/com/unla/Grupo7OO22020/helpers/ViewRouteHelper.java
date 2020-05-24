@@ -7,7 +7,7 @@ public class ViewRouteHelper {
 	/*LOGIN*/
 	public final static String login = "/user/login";
 
-	public final static String login_ok = "/home/index";
+	public final static String login_ok = "/home/index"; 
 
 	public final static String login_fail = "redirect:/loginfail";
 

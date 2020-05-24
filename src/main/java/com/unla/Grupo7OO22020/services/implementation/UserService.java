@@ -44,4 +44,21 @@ public class UserService implements UserDetailsService {
 		}
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
+	
+	
+	public com.unla.Grupo7OO22020.entities.User save(com.unla.Grupo7OO22020.entities.User user) {	
+		return userRepository.save(user);
+	}
+	
+	public boolean existe(com.unla.Grupo7OO22020.entities.User user) {
+		com.unla.Grupo7OO22020.entities.User userAux = userRepository.findByUsername(user);
+		if ( userAux == null) {
+			return false;
+		} else {
+		  return true;	
+		}
+	}
+		
+		
 }
+	

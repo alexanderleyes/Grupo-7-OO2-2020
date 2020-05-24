@@ -47,6 +47,11 @@ public class UserRole {
 		this.user = user;
 		this.role = role;
 	}
+	
+	public UserRole(User user, String role) {		
+		this.user = user;
+		this.role = role;
+	}
 
 	public int getId() {
 		return id;

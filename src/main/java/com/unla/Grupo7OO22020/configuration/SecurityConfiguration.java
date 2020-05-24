@@ -29,8 +29,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
+	    String[] resources = new String[]{"/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/vendor/**"};
+		
 		http.authorizeRequests()
-				.antMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*", "/vendor/bootstrap/js/*").permitAll()
+				.antMatchers(resources).permitAll()
 				.anyRequest().authenticated()
 			.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/loginprocess")
@@ -39,5 +42,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
 	}
+	
+	public BCryptPasswordEncoder passwordEncoder() {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		//El numero 4 representa que tan fuerte quieres la encriptacion.
+		//Se puede en un rango entre 4 y 31. 
+		//Si no pones un numero el programa utilizara uno aleatoriamente cada vez
+		//que inicies la aplicacion, por lo cual tus contrasenas encriptadas no funcionaran bien
+        return bCryptPasswordEncoder;
+    }
+	
+
+	
+   
 }
 
