@@ -33,6 +33,7 @@ public class User {
 	@Column(name="password", nullable=false, length=60)
 	private String password;
 	
+	@Column(nullable = true)
 	private long id_empleado;	
 	
 	@Column(name="enabled")
