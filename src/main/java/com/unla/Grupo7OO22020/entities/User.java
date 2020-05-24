@@ -33,9 +33,6 @@ public class User {
 	@Column(name="password", nullable=false, length=60)
 	private String password;
 	
-	@Column(nullable = true)
-	private long id_empleado;	
-	
 	@Column(name="enabled")
 	private boolean enabled;
 	
@@ -52,8 +49,7 @@ public class User {
 
 	public User() {}
 	
-	public User(long id_empleado, String username, String password, boolean enabled) {
-		this.id_empleado = id_empleado;
+	public User(long id_empleado, String username, String password, boolean enabled) {	
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
@@ -92,14 +88,6 @@ public class User {
 		return password;
 	}
 	
-	public long getId_empleado() {
-		return id_empleado;
-	}
-
-	public void setId_empleado(long id_empleado) {
-		this.id_empleado = id_empleado;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
