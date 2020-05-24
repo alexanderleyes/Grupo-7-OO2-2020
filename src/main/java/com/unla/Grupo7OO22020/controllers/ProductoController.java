@@ -1,6 +1,8 @@
 package com.unla.Grupo7OO22020.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +22,7 @@ import com.unla.Grupo7OO22020.services.IProductoService;
 
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/producto")
 public class ProductoController {
 	
@@ -29,11 +32,13 @@ public class ProductoController {
 	
 	@GetMapping("/producto_idx")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.producto_idx);
-		mAV.addObject("producto", new Producto());
-		mAV.addObject("productos", productoService.getAll());
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_idx);
+		mav.addObject("producto", new Producto());
+		mav.addObject("productos", productoService.getAll());
 		
-		return mAV;
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
+		return mav;
 	}
 	
 	
@@ -44,6 +49,9 @@ public class ProductoController {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_insert);
 		mav.addObject("producto", new Producto());
 		mav.addObject("producto", productoService.findByIdProducto(idProducto));
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
 		return mav;
 	}
 	
@@ -52,20 +60,26 @@ public class ProductoController {
 	productoModel = productoService.insertOrUpdate(productoModel);			
 	return ViewRouteHelper.producto_reload;
 	}
-	
+
 	 @GetMapping("/update/{id}")
-		public ModelAndView update(@PathVariable("id") int id) {
-			ModelAndView mAV = new ModelAndView(ViewRouteHelper.producto_insert);
-			mAV.addObject("producto", productoService.findByIdProducto(id));
-			return mAV;
-			
-		}
+	public ModelAndView update(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_insert);
+		mav.addObject("producto", productoService.findByIdProducto(id));
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
+		return mav;
+		
+	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.producto_insert);
-		mAV.addObject("producto", productoService.findByIdProducto(id));
-		return mAV;
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_insert);
+		mav.addObject("producto", productoService.findByIdProducto(id));
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
+		return mav;
 	}
 	
 	
@@ -79,16 +93,5 @@ public class ProductoController {
 	public String agregar(@ModelAttribute("producto") ProductoModel productoModel){		
 		productoModel = productoService.insertOrUpdate(productoModel);			
 		return ViewRouteHelper.producto_reload;
-	}
-	
-	/*
-	
-	@GetMapping("/by_name/{name}")
-	public ModelAndView getByName(@PathVariable("name") String name) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_UPDATE);
-		mAV.addObject("producto", productoService.findByDescripcion(name));
-		return mAV;
-	}*/
-	
-	
+	}	
 }

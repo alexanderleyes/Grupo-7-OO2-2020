@@ -1,9 +1,9 @@
 package com.unla.Grupo7OO22020.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.Grupo7OO22020.entities.Lote;
-import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
-import com.unla.Grupo7OO22020.models.ClienteModel;
 import com.unla.Grupo7OO22020.models.LoteModel;
 import com.unla.Grupo7OO22020.services.ILoteService;
 import com.unla.Grupo7OO22020.services.IProductoService;
@@ -36,11 +33,14 @@ public class LoteController {
 			
 	@GetMapping("/lote_idx")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.lote_idx);
-		mAV.addObject("lote", new Lote());
-		mAV.addObject("lotes", loteService.getAll());
-		mAV.addObject("productos", productoService.getAll());
-		return mAV;
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.lote_idx);
+		mav.addObject("lote", new Lote());
+		mav.addObject("lotes", loteService.getAll());
+		mav.addObject("productos", productoService.getAll());
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
+		return mav;
 	}
 		
 	@PostMapping("/agregar")	
@@ -56,6 +56,9 @@ public class LoteController {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.lote_insert);
 		mav.addObject("productos", productoService.getAll());
 		mav.addObject("lote", loteService.findById(id));
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
 		return mav;	
 	}
 

@@ -7,7 +7,7 @@ public class ViewRouteHelper {
 	/*LOGIN*/
 	public final static String login = "/user/login";
 
-	public final static String login_ok = "/home/index";
+	public final static String login_ok = "/home/index"; 
 
 	public final static String login_fail = "redirect:/loginfail";
 
@@ -90,4 +90,8 @@ public class ViewRouteHelper {
 	public final static String pedido_insert = "pedido/pedido_mod";
 
 	public final static String pedido_reload = "redirect:/"+ pedido_idx;	
+	
+	
+	/*USER*/
+	public final static String logout = "user/logout";
 }

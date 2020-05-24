@@ -1,6 +1,7 @@
 package com.unla.Grupo7OO22020.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,13 +43,16 @@ public class PedidoController {
 	
 	@GetMapping("/pedido_idx")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.pedido_idx);
-		mAV.addObject("pedido", new Pedido());
-		mAV.addObject("pedidos", pedidoService.getAll());
-		mAV.addObject("sucursales", sucursalService.getAll());
-		mAV.addObject("vendedores", vendedorService.getAll());
-		mAV.addObject("productos", productoService.getAll());
-		return mAV;
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.pedido_idx);
+		mav.addObject("pedido", new Pedido());
+		mav.addObject("pedidos", pedidoService.getAll());
+		mav.addObject("sucursales", sucursalService.getAll());
+		mav.addObject("vendedores", vendedorService.getAll());
+		mav.addObject("productos", productoService.getAll());
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
+		return mav;
 	}
 
 	@PostMapping("/modificar/{id}")	
@@ -59,15 +63,21 @@ public class PedidoController {
 		mav.addObject("pedido", pedidoService.findById(idPedido));
 		mav.addObject("sucursales", sucursalService.getAll());
 		mav.addObject("vendedores", vendedorService.getAll());
-		mav.addObject("productos", productoService.getAll());		
+		mav.addObject("productos", productoService.getAll());
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
 		return mav;
 	}	
 	
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.pedido_insert);
-		mAV.addObject("pedido", pedidoService.findById(id));
-		return mAV;
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.pedido_insert);
+		mav.addObject("pedido", pedidoService.findById(id));
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
+		return mav;
 	}	
 	
 	@PostMapping("/delete/{id}")

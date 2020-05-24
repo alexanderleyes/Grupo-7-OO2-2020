@@ -42,25 +42,11 @@
 
   <!-- ======= Header ======= -->
   <header id="header">
-    <div class="d-flex flex-column">
-
-      <div class="profile">
-        <img src="../img/hero.jpg" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><span th:text="${user.usuario}" /></a></h1>
-        <div class="social-links mt-3 text-center">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-      </div>
+    
 
       	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
-      <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
-
-    </div>
+     
   </header><!-- End Header -->
 	
   <main id="main">
@@ -77,20 +63,33 @@
           </ol>
         </div>
 
-      </div>
+		<td><span th:text=${empleado.idPersona}/></td>
+		<td><span th:text=${empleado.nombre}/></td>
+		
+		
+		<br><br><br>Aca Deberia mostrar la informacion general de un vendedor como las ventas del mes hasta la fecha, los pedidos que realizo y se podria mostrar info general del vendedor.
+		<br><br><br>En caso que se un gerente se podria mostrar la lista de empleados y algo de info.
+		<br><br><br>En ambos casos algo de info de la sucursal a la que pertenecen. Esta pantalla es media general es solo para visualizar algo de datos y tener donde caer despues del login.
+		<br><br><br>Si se loguean en modo admin no se. 
+		
+
+
+
+
+
+
+
+
+			</div>
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
 
-        <div class="portfolio-details-container">
+        
 
-          <div class="owl-carousel portfolio-details-carousel">
-            <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt="">
-          </div>
+         
 
           <div class="portfolio-info">
             <h3>Project information</h3>
@@ -101,15 +100,9 @@
               <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
             </ul>
           </div>
-
         </div>
 
-        <div class="portfolio-description">
-          <h2>This is an example of portfolio detail</h2>
-          <p>
-            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-          </p>
-        </div>
+       
 
       </div>
     </section><!-- End Portfolio Details Section -->
@@ -143,7 +136,6 @@
   <script src="../vendor/counterup/counterup.min.js"></script>
   <script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../vendor/venobox/venobox.min.js"></script>
-  <script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="../vendor/typed.js/typed.min.js"></script>
   <script src="../vendor/aos/aos.js"></script>
 
