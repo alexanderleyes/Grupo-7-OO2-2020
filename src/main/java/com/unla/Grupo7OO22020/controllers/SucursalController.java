@@ -1,15 +1,19 @@
 package com.unla.Grupo7OO22020.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.unla.Grupo7OO22020.entities.Gerente;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.SucursalModel;
+import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 
@@ -25,20 +29,31 @@ public class SucursalController {
 	@Qualifier("productoService")
 	private IProductoService productoService;
 	
+	@Autowired
+	@Qualifier("gerenteService")
+	private IGerenteService gerenteService;
 	
 	@GetMapping("/sucursal_idx")
 	public ModelAndView sucursales(){
 			System.out.println("enruta: " +ViewRouteHelper.sucursal_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.sucursal_idx);	
 			mav.addObject("sucursal", new Sucursal());
-			mav.addObject("sucursales", sucursalService.getAll());		
+			mav.addObject("sucursales", sucursalService.getAll());
+			mav.addObject("gerentes", gerenteService.getAll());
+			mav.addObject("gerente", new Gerente());
+			
+			Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			mav.addObject("user", userDet);
 			return mav;			
 		}
 	
 	@PostMapping("/agregar")	
 	public String agregarSucursal(SucursalModel sucursalModel){		
 		System.out.println("emp add: " );						
-		sucursalModel = sucursalService.insertOrUpdate(sucursalModel);				
+		sucursalModel = sucursalService.insertOrUpdate(sucursalModel);
+		
+		sucursalModel.setGerente(gerenteService.findByIdGerente(sucursalModel.getGerente().getIdGerente()));
+		sucursalModel = sucursalService.insertOrUpdate(sucursalModel);
 		return ViewRouteHelper.sucursal_reload;
 	}
 	
@@ -48,6 +63,9 @@ public class SucursalController {
 		
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.sucursal_insert);
 		mav.addObject("sucursal", sucursalService.findByIdSucursal(id));
+		
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
 		return mav;
 	}
 	

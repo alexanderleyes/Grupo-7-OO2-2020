@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -26,8 +27,10 @@ public class Lote {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private long idLote;
 	
+	
 	@Column(name="cantidad")
 	private int cantidad;	
+	
 	
 	@Column(name="fechaIngreso")
 	@CreationTimestamp
@@ -35,6 +38,7 @@ public class Lote {
 	
 	@OneToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Producto producto;
+	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="sucursal_id", nullable=true)

@@ -76,7 +76,8 @@
 					<th>Localidad</th>
 					<th>Direccion</th>
 					<th>Latitud</th>
-					<th>Longitud</th>	
+					<th>Longitud</th>
+					<th>Gerente</th>	
 					<th></th>						
 				</tr>
 			</thead>
@@ -89,7 +90,8 @@
 						<td><span th:text=${sucursal.localidad}/></td>
 						<td><span th:text=${sucursal.direccion}/></td>
 						<td><span th:text=${sucursal.latitud}/></td>
-						<td><span th:text=${sucursal.longitud}/></td>	
+						<td><span th:text=${sucursal.longitud}/></td>
+						<td><span th:text=${sucursal.gerente.apellido}/></td>		
 						<td>
 							<input type="submit" name="modificar" value="M" />						
 						</td>
@@ -138,8 +140,13 @@
                   <label for="name">Longitud</label>
                   <input type="number" th:field="*{longitud}" class="form-control"  step="any" />
                   <div class="validate"></div>
-                </div> 
-                                                
+                </div>
+                 <div class="form-group col-md-6">
+				 <label for="name">Gerente</label>				
+				    <select class="form-control"  th:field="*{gerente.idPersona}" >				   
+				  		<option  th:each= "g : ${gerentes}" th:value="${g.idPersona}" th:text ="${g.apellido}">	
+				    </select>
+				</div>                                                  
               </div>          
               <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
        </form>	

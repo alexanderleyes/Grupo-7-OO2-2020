@@ -73,7 +73,7 @@ public class VendedorController {
 		String username = vendedorModel.getApellido(); // Al crear un nuevo empleado el usuario por defecto es el apellido
         String passEcriptado = bCryptPasswordEncoder.encode(Integer.toString(vendedorModel.getDni()));   // Al crear un nuevo empleado el password por defecto es el dni
         User user = new User(id_empleado, username, passEcriptado, true);    
-        UserRole role = new UserRole(user , "VENDEDOR");       
+        UserRole role = new UserRole(user , "ROLE_VENDEDOR");       
         user = userService.save(user); 
         userRoleService.insertOrUpdate(role);        
         

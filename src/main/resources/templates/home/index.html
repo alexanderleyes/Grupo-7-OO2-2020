@@ -63,8 +63,16 @@
           </ol>
         </div>
 
-		<td><span th:text=${empleado.idPersona}/></td>
-		<td><span th:text=${empleado.nombre}/></td>
+		<br><td><span th:text=${empleado.idPersona}/></td>
+		<br><td><span th:text=${empleado.nombre}/></td>
+		
+		<div sec:authorize="hasRole('ADMIN')">  soy un admin</div>
+		
+		<div sec:authorize="hasRole('GERENTE')">  soy un gere</div>
+		
+		<div sec:authorize="hasRole('VENDEDOR')">  soy un vendedor</div>
+		
+	<br><div sec:authentication="principal.authorities"></div>
 		
 		
 		<br><br><br>Aca Deberia mostrar la informacion general de un vendedor como las ventas del mes hasta la fecha, los pedidos que realizo y se podria mostrar info general del vendedor.

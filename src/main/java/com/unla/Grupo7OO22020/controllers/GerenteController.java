@@ -61,7 +61,7 @@ public class GerenteController {
 		String username = gerenteModel.getApellido(); // Al crear un nuevo empleado el usuario por defecto es el apellido
         String passEcriptado = bCryptPasswordEncoder.encode(Integer.toString(gerenteModel.getDni()));   // Al crear un nuevo empleado el password por defecto es el dni
         User user = new User(id_empleado, username, passEcriptado, true);       //creo un usuario        
-        UserRole role = new UserRole(user , "GERENTE");       //creo un rol      
+        UserRole role = new UserRole(user , "ROLE_GERENTE");       //creo un rol      
         user = userService.save(user); // guardo usuario
         userRoleService.insertOrUpdate(role);        //guardo el rol luego del usario por que necesita que le usuario este een la BD para que sea coherente la relacion		
 		
