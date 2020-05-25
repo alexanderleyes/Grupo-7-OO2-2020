@@ -75,13 +75,6 @@ public class ViewRouteHelper {
 
 	public final static String producto_reload = "redirect:/"+ producto_idx;
 	
-	/*PEDIDOS*/
-
-	public final static String estadoVenta_idx = "estadoVenta/estadoVenta_idx";
-
-	public final static String estadoVenta_insert = "estadoVenta/estadoVenta_mod";
-
-	public final static String estadoVenta_reload = "redirect:/"+ estadoVenta_idx;	
 	
 	/*PEDIDOS*/
 
@@ -94,4 +87,31 @@ public class ViewRouteHelper {
 	
 	/*USER*/
 	public final static String logout = "user/logout";
+	
+	
+	/*VENTAS*/
+
+	public final static String venta_idx = "venta/venta_idx";
+
+	public final static String venta_insert = "venta/venta_mod";
+
+	public final static String venta_reload = "redirect:/"+ venta_idx;
+	
+	
+	/*ESTADO DE VENTA*/
+
+	public final static String estadoVenta_idx = "estadoVenta/estadoVenta_idx";
+
+	public final static String estadoVenta_insert = "estadoVenta/estadoVenta_mod";
+
+	public final static String estadoVenta_reload = "redirect:/"+ estadoVenta_idx;	
+	
+	
+	/*ITEMS*/
+
+	public final static String item_idx = "item/item_idx";
+
+	public final static String item_insert = "item/item_mod";
+
+	public final static String item_reload = "redirect:/"+ item_idx;	
 }
