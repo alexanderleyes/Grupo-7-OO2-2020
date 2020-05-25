@@ -44,14 +44,27 @@ public class PedidoController {
 	@GetMapping("/pedido_idx")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.pedido_idx);
+		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("user", userDet);
+		
+		System.out.println((SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString() + " -- [ADMIN]"));
+		
+		
+		if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().equals("[ADMIN]")){
+			System.out.println("Carga todo");			
+		}else{
+			System.out.println("Carga uno");
+		}
+		
+		
 		mav.addObject("pedido", new Pedido());
 		mav.addObject("pedidos", pedidoService.getAll());
-		mav.addObject("sucursales", sucursalService.getAll());
+		mav.addObject("sucursalesOri", sucursalService.getAll());
+		mav.addObject("sucursalesDest", sucursalService.getAll());
 		mav.addObject("vendedores", vendedorService.getAll());
 		mav.addObject("productos", productoService.getAll());
 		
-		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		mav.addObject("user", userDet);
+		
 		return mav;
 	}
 

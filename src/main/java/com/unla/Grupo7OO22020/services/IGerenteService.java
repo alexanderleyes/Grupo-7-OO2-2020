@@ -12,6 +12,6 @@ public interface IGerenteService {
 	public GerenteModel findByApellido(String Apellido);
 	public GerenteModel findByDni(int dni);
 	public GerenteModel findByUsuario(String usuario);
-	public Object findByIdGerente(long id);
+	public GerenteModel findByIdGerente(long id);
 	
 }

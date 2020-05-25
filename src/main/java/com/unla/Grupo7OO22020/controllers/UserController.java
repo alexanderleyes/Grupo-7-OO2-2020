@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,26 +40,32 @@ public class UserController {
 	public String logout(Model model) {
 		return ViewRouteHelper.logout;
 	}
+		
+	@GetMapping("")
+	public ModelAndView loginCheckInit()  {return loginCheckBase();}
+		
+	
+	@PostMapping("/loginsuccess")
+	public ModelAndView loginCheckPost()  {return loginCheckBase();}
+		
 	
 	@GetMapping("/loginsuccess")
-	public ModelAndView loginCheck() {
-		ModelAndView mav = new ModelAndView(ViewRouteHelper.login_ok);
-		Object userDet =   SecurityContextHolder.getContext().getAuthentication().getPrincipal();		
-		
+	public ModelAndView loginCheckGet() {return loginCheckBase();}
+	
+	public ModelAndView loginCheckBase() {
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.login_ok);		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();	
 		System.out.println(username);
 		mav.addObject("empleado", empleadoService.findByUsuario(username));			
-		mav.addObject("user", userDet);		
 		return mav ;
 	}
 	
 	@GetMapping("/home")
-	public ModelAndView home() {
-		ModelAndView mav = new ModelAndView(ViewRouteHelper.login_ok);
-		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		mav.addObject("user", userDet);		
-		return mav ;
-	}
+	public ModelAndView home() {return loginCheckBase();}
+	
+	
+	
+	
 	
 		
 

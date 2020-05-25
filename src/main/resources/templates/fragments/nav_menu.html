@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
 <div class="d-flex flex-column" th:fragment="nav_menu">
 	<div class="profile">
         <img src="../img/hero.jpg" alt="" class="img-fluid rounded-circle">       
-       	<h1 class="text-light"><a href="index.html"><span th:text="${user.username}" /></a></h1>        <div class="social-links mt-3 text-center">
+       	<h1 class="text-light"><a href="index.html"><span sec:authentication="name" /></a></h1>        <div class="social-links mt-3 text-center">
        	
        	
       
@@ -24,7 +24,7 @@
 		  <li><a th:href="@{/logout}"><i></i> Cerrar Session </a></li>
       <nav class="nav-menu">
         <ul>
-          <li><a th:href="@{/home}"><i class="bx bx-user"></i> <span>Inicio</span></a></li>
+          <li><a th:href="@{/home}"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
           <li><a th:href="@{/vendedor/vendedor_idx}"><i class="bx bx-user"></i> <span>Vendedores</span></a></li>
           <li><a th:href="@{/gerente/gerente_idx}"><i class="bx bx-user"></i> <span>Gerentes</span></a></li>
           <li><a th:href="@{/cliente/cliente_idx}"><i class="bx bx-user"></i> <span>Clientes</span></a></li>

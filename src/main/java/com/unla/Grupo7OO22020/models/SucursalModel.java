@@ -1,6 +1,7 @@
 package com.unla.Grupo7OO22020.models;
 
 
+
 public class SucursalModel extends EmpleadoModel {
 
 	private long idSucursal;
@@ -9,6 +10,10 @@ public class SucursalModel extends EmpleadoModel {
 	private String direccion;
 	private double latitud;
 	private double longitud;
+	private GerenteModel gerente;
+	
+	
+	
 	
 	public SucursalModel() {}	
 	
@@ -17,7 +22,7 @@ public class SucursalModel extends EmpleadoModel {
 	
 	
 	public SucursalModel(long idSucursal, long telefono, String localidad, String direccion, double latitud,
-			double longitud) {
+			double longitud, GerenteModel gerente) {
 		super();
 		this.idSucursal = idSucursal;
 		this.telefono = telefono;
@@ -25,18 +30,21 @@ public class SucursalModel extends EmpleadoModel {
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
+		this.gerente  = gerente;
+		
 	}
 	
 	
 	
 	public SucursalModel(long telefono, String localidad, String direccion, double latitud,
-			double longitud) {
+			double longitud,  GerenteModel gerente) {
 		super();
 		this.telefono = telefono;
 		this.localidad = localidad;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
+		this.gerente  = gerente;
 	}
 
 
@@ -108,6 +116,17 @@ public class SucursalModel extends EmpleadoModel {
 	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
+
+	public GerenteModel getGerente() {
+		return gerente;
+	}
+
+
+	public void setGerente(GerenteModel gerente) {
+		this.gerente = gerente;
+	}
+
+
 
 
 
