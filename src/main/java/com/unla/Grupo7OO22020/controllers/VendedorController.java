@@ -93,7 +93,7 @@ public class VendedorController {
 	
 	@PostMapping("/modificar_aplicar")	
 	public String modificarVendedor(VendedorModel vendedorModel){ ////no modifica el Usuario y contraseña		System.out.println("emp add: ");		
-	
+		
 		vendedorModel.setSucursal(sucursalService.findByIdSucursal(vendedorModel.getSucursal().getIdSucursal()));
 		vendedorModel = vendedorService.insertOrUpdate(vendedorModel);		
 		

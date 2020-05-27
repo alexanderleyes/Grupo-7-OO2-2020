@@ -25,8 +25,9 @@ public class Pedido {
 	
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private Vendedor vendedorSolicita;	
-
-	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	
+	
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)	
 	private Vendedor vendedorDespacha;	
 	
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
@@ -48,6 +49,18 @@ public class Pedido {
 		this.sucDestino = sucDestino;
 		this.vendedorSolicita = vendedorSolicita;
 		this.vendedorDespacha = vendedorDespacha;
+		this.producto = producto;
+		this.cantidad = cantidad;
+	}
+	
+	
+	public Pedido(long idPedido, Sucursal sucOrigen, Sucursal sucDestino, Vendedor vendedorSolicita,
+			 Producto producto, double cantidad) {
+		super();
+		this.idPedido = idPedido;
+		this.sucOrigen = sucOrigen;
+		this.sucDestino = sucDestino;
+		this.vendedorSolicita = vendedorSolicita;
 		this.producto = producto;
 		this.cantidad = cantidad;
 	}

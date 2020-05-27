@@ -62,7 +62,7 @@
           </ol>
         </div>
         
-        <br><br><br>
+        Hay que decidir si los empleados pueden ver esta lista y si sirve para algo =). No se podria modificar datos de otros empleados logicamente. Falta implementar eso.
         
         
 					
@@ -96,12 +96,12 @@
 						<td><span th:text=${vendedor.sucursal.direccion}/></td>						
 						<td><span th:text=${vendedor.baja}/></td>
 						<td>
-							<input type="submit" name="modificar" value="M" />						
+							<input type="image" src="../../img/icons/lapiz.png"  title="Modificar" />						
 						</td>
 					</form>
 						<td>
 							<form th:action="@{/vendedor/eliminar/{id}(id=${vendedor.idPersona})}" method="post" role="form" >
-								<input type="submit"  name="eliminar" value="X" />
+								<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
 							</form>
 						</td>			
 				</tr>

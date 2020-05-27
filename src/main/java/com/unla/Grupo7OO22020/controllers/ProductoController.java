@@ -2,7 +2,6 @@ package com.unla.Grupo7OO22020.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,22 +32,16 @@ public class ProductoController {
 		mav.addObject("producto", new Producto());
 		mav.addObject("productos", productoService.getAll());
 		
-		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		mav.addObject("user", userDet);
 		return mav;
 	}
 	
 	
 	
 	@PostMapping("/modificar/{id}")	
-	public ModelAndView  modificar( @PathVariable("id") long idProducto){		
-				
+	public ModelAndView  modificar( @PathVariable("id") long idProducto){				
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_insert);
 		mav.addObject("producto", new Producto());
-		mav.addObject("producto", productoService.findByIdProducto(idProducto));
-		
-		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		mav.addObject("user", userDet);
+		mav.addObject("producto", productoService.findByIdProducto(idProducto));		
 		return mav;
 	}
 	
@@ -61,21 +54,14 @@ public class ProductoController {
 	 @GetMapping("/update/{id}")
 	public ModelAndView update(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_insert);
-		mav.addObject("producto", productoService.findByIdProducto(id));
-		
-		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		mav.addObject("user", userDet);
-		return mav;
-		
+		mav.addObject("producto", productoService.findByIdProducto(id));		
+		return mav;		
 	}
 	
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_insert);
-		mav.addObject("producto", productoService.findByIdProducto(id));
-		
-		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		mav.addObject("user", userDet);
+		mav.addObject("producto", productoService.findByIdProducto(id));		
 		return mav;
 	}
 	

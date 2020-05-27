@@ -22,6 +22,11 @@ public class PedidoConverter {
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
 	
+	
+	
+	
+	
+	
 	public PedidoModel entityToModel(Pedido pedido) {
 		return new PedidoModel(
 				pedido.getIdPedido(),
@@ -32,7 +37,28 @@ public class PedidoConverter {
 				productoConverter.entityToModel(pedido.getProducto()), 
 				pedido.getCantidad());
 	}
-
+	
+	public PedidoModel entityToModelSinDespachante(Pedido pedido) {
+		return new PedidoModel(
+				pedido.getIdPedido(),
+				sucursalConverter.entityToModel(pedido.getSucOrigen()),
+				sucursalConverter.entityToModel(pedido.getSucDestino()),
+				vendedorConverter.entityToModel(pedido.getVendedorSolicita()),				
+				productoConverter.entityToModel(pedido.getProducto()), 
+				pedido.getCantidad());
+	}
+	
+	
+	/***********************************************************************************/
+	public Pedido modelToEntitySinDespachante(PedidoModel pedidoModel) {
+		return new Pedido(
+				pedidoModel.getIdPedido(),
+				sucursalConverter.modelToEntity(pedidoModel.getSucOrigen()),
+				sucursalConverter.modelToEntity(pedidoModel.getSucDestino()),
+				vendedorConverter.modelToEntity(pedidoModel.getVendedorSolicita()),				
+				productoConverter.modelToEntity(pedidoModel.getProducto()), 
+				pedidoModel.getCantidad());
+	}
 	public Pedido modelToEntity(PedidoModel pedidoModel) {
 		return new Pedido(
 				pedidoModel.getIdPedido(),

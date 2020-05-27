@@ -73,7 +73,10 @@
 				<tr >
 					<th>Lote ID </th>
 					<th>Cantidad </th>
-					<th>Producto</th>											
+					<th>Producto</th>
+					<th>Sucursal</th>	
+					<th></th>	
+					<th></th>												
 				</tr>
 			</thead>
 			<tbody>				
@@ -82,13 +85,14 @@
 					<form th:action="@{/lote/modificar/{id}(id=${lote.idLote})}" method="post" role="form">
 								<td><span th:text="${lote.idLote}" /></td>
 								<td><span th:text="${lote.cantidad}" /></td>
-								<td><span th:text="${lote.producto.descripcion}" /></td>								
-								<td><input type="submit" name="modificar" value="M" /></td>
+								<td><span th:text="${lote.producto.descripcion}" /></td>
+								<td><span th:text="${lote.sucursal.direccion}" /></td>								
+								<td><input type="image" src="../../img/icons/lapiz.png"  title="Eliminar" /></td>
 							</form>
 
 							<td>
 						<form th:action="@{/lote/eliminar/{id}(id=${lote.idLote})}" method="post" role="form" >
-							<input type="submit"  name="eliminar" value="X" />
+							<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
 						</form>
 					</td>
 				</tr>
@@ -113,7 +117,13 @@
 		   		<select class="form-control"  th:field="*{producto.idProducto}"><br>
 		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
 		    	</select>
-	     	</div>                              
+	     	</div>
+	     	<div class="form-group col-md-6">
+				<label for="name">Sucursal</label>		     
+		   		<select class="form-control"  th:field="*{sucursal.idSucursal}"><br>
+		        	<option th:each="s : ${sucursales}"  th:value="${(s.idSucursal)}" th:text="${s.direccion}"/>		         	
+		    	</select>
+	     	</div>                                     
         </div>          
 		<div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>    
 	</form>	

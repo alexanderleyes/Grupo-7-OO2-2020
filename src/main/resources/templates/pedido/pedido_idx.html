@@ -67,59 +67,121 @@
 						<li>Inventario 002</li>
 					</ol>
 				</div>
-
-
-				<br> <br> <br> <br> <br>
-
-				<div id="div-select-cercana" class="row"></div>
-
+								
+				<div sec:authorize="hasRole('VENDEDOR')"> 
+					<br> <br>
+					<h3>
+						Mios
+					</h3>
+					<table class="table" id="table">
+						<tr>
+							<th scope="col">Id</th>						
+							<th scope="col">Sucursal Solicitada</th>
+							<th scope="col">Producto</th>
+							<th scope="col">Cantidad</th>
+						</tr>
+						
+						<tbody>
+							<tr th:each="pedido : ${pedidosMios}">
+								<form th:action="@{/pedido/modificar/{id}(id=${pedido.idPedido})}" 	method="post" role="form">
+								<td><span th:text="${pedido.idPedido}" /></td>
+								<td><span th:text="${pedido.sucDestino.direccion}" /></td>
+								<!-- <td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"></span></td> -->	
+								<td><span th:text="${pedido.producto.descripcion}" /></td>	
+								<td><span th:text="${pedido.cantidad}" /></td>				
+								<td><input type="image" src="../../img/icons/lapiz.png"  title="Modificar" ></td>
+								</form>
+	
+								<td>
+									<form
+										th:action="@{/pedido/delete/{id}(id=${pedido.idPedido})}"
+										method="post" role="form"> 
+										<input type="image" src="../../img/icons/basura.png"  title="Eliminar"  >
+								</td>
+							</tr>
+	
+						</tbody>
+					</table>
+				
+				
+				<br> <br>
+				<h3>
+					De la sucursal
+				</h3>
 				<table class="table" id="table">
 					<tr>
-						<th scope="col">Id</th>
-						<th scope="col">Sucursal Origen</th>
-						<th scope="col">Sucursal Destino</th>
-						<th scope="col">Vendedor Solicita</th>
-						<th scope="col">Vendedor Despacha</th>
-						<th scope="col">Producto</th>
+						<th scope="col">Id</th>						
+						<th scope="col">Sucursal Solicitada</th>
+						<th scope="col">Despachó</th>
+						<th scope="col">Producto</th>						
 						<th scope="col">Cantidad</th>
-
 					</tr>
-					</thead>
+					
 					<tbody>
 						<tr th:each="pedido : ${pedidos}">
-							<form th:action="@{/pedido/modificar/{id}(id=${pedido.idPedido})}" 	method="post" role="form">
 							<td><span th:text="${pedido.idPedido}" /></td>
-							<td><span th:text="${pedido.sucOrigen.direccion}" /></td>
 							<td><span th:text="${pedido.sucDestino.direccion}" /></td>
-							<td><span th:text="${pedido.vendedorSolicita.nombre}" /></td>
-							<td><span th:text="${pedido.vendedorDespacha.nombre}" /></td>
+							<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"></span></td> 	
 							<td><span th:text="${pedido.producto.descripcion}" /></td>	
-							<td><span th:text="${pedido.cantidad}" /></td>				
-							<td><input type="submit" name="modificar" value="M" /></td>
-							</form>
-
-							<td>
-								<form
-									th:action="@{/pedido/delete/{id}(id=${pedido.idPedido})}"
-									method="post" role="form">
-									<input type="submit" name="eliminar" value="X" />
-								</form>
+							<td><span th:text="${pedido.cantidad}" /></td>
+						<td>
+							
 							</td>
 						</tr>
 
 					</tbody>
 				</table>
+			</div>
+	<!-- ================================================================================================================== -->
+				
+		<div sec:authorize="hasRole('ADMIN')">
+				<h3>
+					Todos Los Pedidos
+				</h3>
+				<table class="table" id="table">
+					<tr>
+						<th scope="col">Id</th>						
+						<th scope="col">Solicita Suc.</th>
+						<th scope="col">Despacha Suc.</th>
+						<th scope="col">Solicita Vend.</th>
+						<th scope="col">Despacha Vend</th>
+						<th scope="col">Producto</th>						
+						<th scope="col">Cantidad</th>
+					</tr>
+					
+					<tbody>
+						<tr th:each="pedido : ${pedidos}">
+							<form th:action="@{/pedido/modificar/{id}(id=${pedido.idPedido})}" 	method="post" role="form">
+								<td><span th:text="${pedido.idPedido}" /></td>
+								<td><span th:text="${pedido.sucOrigen.direccion}" /></td>
+								<td><span th:text="${pedido.sucDestino.direccion}" /></td>
+								<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>							
+								<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"/></td> 	
+								<td><span th:text="${pedido.producto.descripcion}" /></td>
+								<td><span th:text="${pedido.cantidad}" /></td>								
+								<td><input type="image" src="../../img/icons/lapiz.png"  title="Modificar" ></td>								
+							</form>	
+							<td>
+								<form
+									th:action="@{/pedido/delete/{id}(id=${pedido.idPedido})}"
+									method="post" role="form"> 
+									<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
+								</form>	 
+							</td>																			
+						</tr>
+					</tbody>
+				</table>
+		
+		</div>
+				
 
-
-				<br> <br> <br>
-
-		<form action="#" th:action="@{/pedido/agregar}"th:object="${pedido}" method="post">
+		<!--<form action="#" th:action="@{/pedido/agregar}"th:object="${pedido}" method="post">
               <div class="form-row">
               
  				<div class="form-group col-md-6">
 				 <label for="name">Sucursal Origen</label>				
-				    <select  onChange="cambiar();"  class="form-control"  th:field="*{sucOrigen.idSucursal}" >				   
-				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
+				    <select class="form-control"  th:field="*{sucOrigen.idSucursal}" >				   
+				  		<option th:each= "s : ${sucursalesOri}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
 				    </select>
 				</div>
 				
@@ -127,7 +189,7 @@
 				 <label for="name">Sucursal Destino</label>
 				 <div id="sucdestino">				
 				    <select class="form-control"  th:field="*{sucDestino.idSucursal}" >				   
-				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
+				  		<option th:each= "s : ${sucursalesDes}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
 				    </select>
 				    </div>
 				</div>  
@@ -135,32 +197,32 @@
  				<div class="form-group col-md-6">
 				 <label for="name">Vendedor Solicita</label>				
 				    <select class="form-control"  th:field="*{vendedorSolicita.idPersona}" >				   
-				  		<option th:each= "v : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">	
+				  		<option th:each= "v : ${vendedoresOri}" th:value="${v.idPersona}" th:text ="${v.nombre}">	
 				    </select>
 				</div>  		
 				
  				<div class="form-group col-md-6">
 				 <label for="name">Vendedor Despacha</label>				
 				    <select class="form-control"  th:field="*{vendedorDespacha.idPersona}" >				   
-				  		<option th:each= "v : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">	
+				  		<option th:each= "v : ${vendedoresDes}" th:value="${v.idPersona}" th:text ="${v.nombre}">	
 				    </select>
 				</div>  		
 				
  				<div class="form-group col-md-6">
 				 <label for="name">Producto</label>				
 				    <select class="form-control"  th:field="*{producto.idProducto}" >				   
-				  		<option  onChange="cambiar();"  th:each= "p : ${productos}" th:value="${p.idProducto}" th:text ="${p.descripcion}">	
+				  		<option   th:each= "p : ${productos}" th:value="${p.idProducto}" th:text ="${p.descripcion}">	
 				    </select>
 				</div> 												               
 
                  <div class="form-group col-md-6">
                   <label for="cantidad">Cantidad</label>
-                  <input onChange="cambiar();" type="number" id="cantidad.producto" value="" placeholder="10"  class="form-control"  />             
+                  <input  type="number" id="cantidad.producto" value="" placeholder="5"  class="form-control"  />             
                    <div class="validate"></div>
                 </div>                                                                                                                 
               </div>          
               <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
-       </form>	
+       </form>	-->
 
 
 			</div>
@@ -171,34 +233,14 @@
 		<section id="portfolio-details" class="portfolio-details">
 			<div class="container">
 
-				<div class="portfolio-details-container">
-
-					<div class="owl-carousel portfolio-details-carousel">
-						<img src="../img/portfolio-details-1.jpg" class="img-fluid" alt="">
-						<img src="../img/portfolio-details-2.jpg" class="img-fluid" alt="">
-						<img src="../img/portfolio-details-3.jpg" class="img-fluid" alt="">
-					</div>
-
-					<div class="portfolio-info">
-						<h3>Project information</h3>
-						<ul>
-							<li><strong>Category</strong>: OO2"</li>
-							<li><strong>Client</strong>: ASU Company</li>
-							<li><strong>Project date</strong>: 01 March, 2020</li>
-							<li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-						</ul>
-					</div>
-
-				</div>
-
+				
 				<div class="portfolio-description">
-					<h2>This is an example of portfolio detail</h2>
-					<p>Autem ipsum nam porro corporis rerum. Quis eos dolorem eos
-						itaque inventore commodi labore quia quia. Exercitationem
-						repudiandae officiis neque suscipit non officia eaque itaque enim.
-						Voluptatem officia accusantium nesciunt est omnis tempora
-						consectetur dignissimos. Sequi nulla at esse enim cum deserunt
-						eius.</p>
+					<h2>Info</h2>
+					<p>En pedidos mios visualiza los pedidos que realizo este vendedor en particular y puede modificar algo si quiere.
+						En los pedidos de la sucursal solo es para visualizar un general de los pedido que realizo esta sucursal.
+						Los pedidos no se van a hacer aca, la idea es que cuando haga el vendedor una venta ahí verifique el stock y si falta te lleve a una pantalla para hacer el pedido.			
+						<br> Es la parte de ventas en la que esta trabando carla, esa parte es medio complicada pero va a salir.
+					</p>
 				</div>
 
 			</div>

@@ -1,12 +1,21 @@
 package com.unla.Grupo7OO22020.services.implementation;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import com.unla.Grupo7OO22020.converters.GerenteConverter;
 import com.unla.Grupo7OO22020.converters.LoteConverter;
+import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.entities.Lote;
+import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.models.LoteModel;
+import com.unla.Grupo7OO22020.models.PedidoModel;
+import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.repositories.ILoteRepository;
 import com.unla.Grupo7OO22020.services.ILoteService;
 
@@ -24,6 +33,14 @@ public class LoteService implements ILoteService {
 	@Autowired
 	@Qualifier("loteConverter")
 	private LoteConverter loteConverter;
+	
+	@Autowired
+	@Qualifier("gerenteConverter")
+	private GerenteConverter gerenteConverter;
+	
+	@Autowired
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;
 
 	@Override
 	public List<Lote> getAll() {
@@ -57,10 +74,18 @@ public class LoteService implements ILoteService {
 			}
 
 
-
-	
-	
-	
+	@Override
+	public Set<LoteModel> findAllBySucursal(SucursalModel sucursalModel) {
+		
+		Set<Lote> lotesEntities = loteRepository.findAllBySucursal(sucursalConverter.modelToEntity(sucursalModel));
+		
+		Set<LoteModel> lotesModels = new HashSet<LoteModel>();
+		
+		for (Lote l : lotesEntities) {
+			lotesModels.add(loteConverter.entityToModel(l));
+	    }		
+		return lotesModels;	
+	}	
 	
 	}
 

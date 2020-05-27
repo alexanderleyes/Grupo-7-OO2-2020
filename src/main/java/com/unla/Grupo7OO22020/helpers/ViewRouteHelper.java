@@ -94,4 +94,8 @@ public class ViewRouteHelper {
 	
 	/*USER*/
 	public final static String logout = "user/logout";
+	public final static String home = "redirect:/home";
+
+	
+	
 }

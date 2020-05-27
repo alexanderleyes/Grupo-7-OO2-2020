@@ -62,54 +62,57 @@
           </ol>
         </div>        
        
-		<form th:action="@{/pedido/agregar}" th:object="${pedido}" method="post" role="form" >         
-	<input type="hidden" th:field="*{idPedido}" name="id" class="form-control"  />
-	
-			 <div class="form-group col-md-6">
-			 <label for="name">Sucursal Origen</label>				
-			    <select class="form-control"  th:field="*{sucOrigen.idSucursal}" >				   
-			  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">/	
-			    </select>
-			</div>	
-			
-			 <div class="form-group col-md-6">
-			 <label for="name">Sucursal Destino</label>				
-			    <select class="form-control"  th:field="*{sucDestino.idSucursal}" >				   
-			  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">/	
-			    </select>
-			</div>				
-			
-			 <div class="form-group col-md-6">
-			 <label for="name">Vendedor Solicita</label>				
-			    <select class="form-control"  th:field="*{vendedorSolicita.idPersona}" >				   
-			  		<option th:each= "v : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">/	
-			    </select>
-			</div>	
-			
-			 <div class="form-group col-md-6">
-			 <label for="name">Vendedor Despacha</label>				
-			    <select class="form-control"  th:field="*{vendedorDespacha.idPersona}" >				   
-			  		<option th:each= "v : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">/	
-			    </select>
-			</div>							
-			
-			 <div class="form-group col-md-6">
-			 <label for="name">Producto</label>				
-			    <select class="form-control"  th:field="*{producto.idProducto}" >				   
-			  		<option th:each= "p : ${productos}" th:value="${p.idProducto}" th:text ="${p.descripcion}">/	
-			    </select>
-			</div>	
-                
-                <div class="form-group col-md-6">
-                  <label for="name">Cantidad</label>
-                  <input type="text" th:field="*{cantidad}" name="cantidad" class="form-control"  />
-                  <div class="validate"></div>
-                </div>
-                                                      
-              </div> 
+		
+		<form th:action="@{/pedido/agregar}" th:object="${pedido}" method="post" role="form" >    
+		
+			<input type="hidden" th:field="*{idPedido}" class="form-control"  />     
+              <div class="form-row">
               
-              	<div class="text-left"><button type="submit">Confirmar</button></div>    
-              </form>	
+ 				<div class="form-group col-md-6">
+				 <label for="name">Sucursal Origen</label>				
+				    <select class="form-control"  th:field="*{sucOrigen.idSucursal}" >				   
+				  		<option th:each= "s : ${sucursalesOri}" th:value="${s.idSucursal}" th:text ="${s.direccion}"/>	
+				    </select>
+				</div>
+				
+ 				<div class="form-group col-md-6">
+				 <label for="name">Sucursal Destino</label>
+				 <div id="sucdestino">				
+				    <select class="form-control"  th:field="*{sucDestino.idSucursal}" >					    	
+				  		<option th:each= "s : ${sucursalesDes}" th:value="${s.idSucursal}" th:text ="${s.direccion}"/>	
+				    </select>
+				    </div>
+				</div>  
+				
+ 				<div class="form-group col-md-6">
+				 <label for="name">Vendedor Solicita</label>				
+				    <select class="form-control"  th:field="*{vendedorSolicita.idPersona}" >				   
+				  		<option th:each= "v : ${vendedoresOri}" th:value="${v.idPersona}" th:text ="${v.apellido}"/>	
+				    </select>
+				</div>  		
+				
+ 				<div class="form-group col-md-6">
+				 <label for="name">Vendedor Despacha</label>				
+				    <select class="form-control"  th:field="*{vendedorDespacha.idPersona}" >
+				  		<option th:each= "v : ${vendedoresDes}" th:value="${v.idPersona}" th:text ="${v.apellido}"/>	
+				    </select>
+				</div>  		
+				
+ 				<div class="form-group col-md-6">
+				 <label for="name">Producto</label>				
+				    <select class="form-control"  th:field="*{producto.idProducto}">				    		   
+				  		<option   th:each= "p : ${productos}" th:value="${p.idProducto}" th:text ="${p.descripcion}" />	
+				    </select>
+				</div> 												               
+
+                  <div class="form-group col-md-6">
+                  <label for="name">Cantidad</label>
+                  <input type="number" step="any" th:field="*{cantidad}" name="cantidad" class="form-control"  />
+                  <div class="validate"></div>
+                </div>                                                                                                               
+              </div>          
+              <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
+       </form>	
         
 
       </div>
@@ -184,24 +187,7 @@
 
   <!-- Template Main JS File -->
   <script src="../../js/main.js"></script>
-	<script>
-	window.onload = function(){
-	var table = document.getElementById('table'), idx;			
-		for(var i=0; i<table.rows.length; i++)
-		{	
-			
-			table.rows[i].onclick = function(){
-					idx = this.rowIndex;	
-					console.log(this.cells[1].innerHTML)
-					//document.getElementById("id".value) = this.cells[0].innerHTML;
-					document.getElementById("nombre".value) = this.cells[1].innerHTML;
-					//document.getElementById("apellido".value) = this.cells[2].innerHTML;
-					//document.getElementById("fechaNacimientdo".value) = this.cells[3].innerHTML;
-					//document.getElementById("dni".value) = this.cells[4].innerHTML;
-				}
-			}	
-	}
-		</script>
+	
 </body>
 
 </html>

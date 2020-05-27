@@ -40,10 +40,7 @@ public class SucursalController {
 			mav.addObject("sucursal", new Sucursal());
 			mav.addObject("sucursales", sucursalService.getAll());
 			mav.addObject("gerentes", gerenteService.getAll());
-			mav.addObject("gerente", new Gerente());
-			
-			Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			mav.addObject("user", userDet);
+			mav.addObject("gerente", new Gerente());		
 			return mav;			
 		}
 	

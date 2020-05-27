@@ -28,6 +28,20 @@ public class PedidoModel{
 		this.producto = producto;
 		this.cantidad = cantidad;
 	}
+	
+	
+	/*Constructor Sin despachante*/
+	public PedidoModel(long idPedido, SucursalModel sucOrigen, SucursalModel sucDestino, VendedorModel vendedorSolicita,
+			ProductoModel producto, double cantidad) {
+		super();
+		this.setIdPedido(idPedido);
+		this.sucOrigen = sucOrigen;
+		this.sucDestino = sucDestino;
+		this.vendedorSolicita = vendedorSolicita;		
+		this.producto = producto;
+		this.cantidad = cantidad;
+	}
+
 
 	public long getIdPedido() {
 		return idPedido;

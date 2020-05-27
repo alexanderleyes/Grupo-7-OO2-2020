@@ -2,17 +2,23 @@ package com.unla.Grupo7OO22020.services.implementation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.unla.Grupo7OO22020.converters.GerenteConverter;
 import com.unla.Grupo7OO22020.converters.ProductoConverter;
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
+import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.helpers.Funciones;
+import com.unla.Grupo7OO22020.models.GerenteModel;
+import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.repositories.ISucursalRepository;
@@ -30,6 +36,10 @@ public class SucursalService implements  ISucursalService{
 	@Autowired
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
+	
+	@Autowired
+	@Qualifier("gerenteConverter")
+	private GerenteConverter gerenteConverter;
 	
 	@Autowired
 	@Qualifier("sucursalRepository")
@@ -106,6 +116,24 @@ public class SucursalService implements  ISucursalService{
 		
 		return sucursalesCom;
 }
+
+	@Override
+	public SucursalModel findByGerente(GerenteModel gerenteModel) {		
+		return sucursalConverter.entityToModel(sucursalRepository.findByGerente(gerenteConverter.modelToEntity(gerenteModel)));
+	}
+
+	@Override
+	public List<SucursalModel> findAllExcept(SucursalModel sucursalModel) {
+		 ;
+		 
+		 List<Sucursal> sucursalesEntities = sucursalRepository.findAllExcept(sucursalConverter.modelToEntity(sucursalModel));
+		 List<SucursalModel> sucursalesModels = new ArrayList<SucursalModel>();
+		 for (Sucursal s : sucursalesEntities) {
+			 sucursalesModels.add(sucursalConverter.entityToModel(s));
+		 }		 
+		 
+		return sucursalesModels;
+	}
 
 	
 	
