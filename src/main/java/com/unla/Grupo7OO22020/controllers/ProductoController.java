@@ -67,7 +67,7 @@ public class ProductoController {
 	
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@PathVariable("id") int id) {
+	public String delete(@PathVariable("id") long id) {
 		productoService.eliminar(id);
 		return ViewRouteHelper.producto_reload;
 	}

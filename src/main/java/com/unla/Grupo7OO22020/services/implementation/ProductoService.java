@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.ProductoConverter;
 import com.unla.Grupo7OO22020.entities.Producto;
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.repositories.IProductoRepository;
 import com.unla.Grupo7OO22020.repositories.ISucursalRepository;
@@ -56,9 +57,11 @@ public class ProductoService implements IProductoService{
 
 	@Override
 	public boolean eliminar(long id) {
-		if(sucursalRepository.findByProdcuto(productoRepository.findByIdProducto(id)) == null) {
-			remove(id);
+		List<Sucursal> sucursal = sucursalRepository.findByProdcuto(productoRepository.findByIdProducto(id)) ;
+		if(sucursal.size() == 0) {
+			return remove(id);
 		}
+		System.out.println("No se pueden eliminar productos que compongan un lote");
 		return false;
 	}
 	

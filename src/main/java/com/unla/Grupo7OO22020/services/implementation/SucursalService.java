@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.unla.Grupo7OO22020.converters.GerenteConverter;
 import com.unla.Grupo7OO22020.converters.ProductoConverter;
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
+import com.unla.Grupo7OO22020.entities.Lote;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
@@ -21,6 +22,8 @@ import com.unla.Grupo7OO22020.models.GerenteModel;
 import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
+import com.unla.Grupo7OO22020.repositories.ILoteRepository;
+import com.unla.Grupo7OO22020.repositories.IProductoRepository;
 import com.unla.Grupo7OO22020.repositories.ISucursalRepository;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 
@@ -44,6 +47,14 @@ public class SucursalService implements  ISucursalService{
 	@Autowired
 	@Qualifier("sucursalRepository")
 	private ISucursalRepository sucursalRepository;
+	
+	@Autowired
+	@Qualifier("productoRepository")
+	private IProductoRepository productoRepository;
+	
+	@Autowired
+	@Qualifier("loteRepository")
+	private ILoteRepository loteRepository;
 
 	@Override
 	public List<Sucursal> getAll() {
@@ -133,6 +144,27 @@ public class SucursalService implements  ISucursalService{
 		 }		 
 		 
 		return sucursalesModels;
+	}
+
+	
+	@Override
+	public int stock(long idSucursal, long idProducto) {
+	 Set<Lote> stock = loteRepository.findAllBySucursal(sucursalRepository.findByIdSucursal(idSucursal));
+	 List<Lote>lote = new ArrayList<Lote>();
+	 int disponible = 0;
+		
+	 for(Lote l: stock) {
+			if(l.getProducto().equals(productoRepository.findByIdProducto(idProducto)) ) {
+				lote.add(l);
+			}
+			
+		}
+	 
+	 for(Lote l1: lote) {
+		disponible = disponible + l1.getCantidad();
+	 }
+		
+		return disponible;
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.unla.Grupo7OO22020.repositories;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,5 +24,7 @@ public interface ILoteRepository extends JpaRepository<Lote, Serializable>{
 	
 	@Query("SELECT l FROM Lote l WHERE l.sucursal = (:sucursal)")
 	public abstract Set<Lote> findAllBySucursal(@Param("sucursal") Sucursal sucursal );
+	
+	//public Set<Lote> findBySucursalId(long id);
 
 }
