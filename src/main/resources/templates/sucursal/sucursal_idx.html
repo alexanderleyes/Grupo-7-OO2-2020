@@ -93,13 +93,13 @@
 						<td><span th:text=${sucursal.longitud}/></td>
 						<td><span th:text=${sucursal.gerente.apellido}/></td>		
 						<td>
-							<input type="submit" name="modificar" value="M" />						
+							<input type="image" src="../../img/icons/lapiz.png"  title="Modificar" />						
 						</td>
 					</form>	
 					
 					<td>
 						<form th:action="@{/sucursal/eliminar/{id}(id=${sucursal.idSucursal})}" method="post" role="form" >
-							<input type="submit"  name="eliminar" value="X" />
+							<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
 						</form>
 					</td>
 				</tr>

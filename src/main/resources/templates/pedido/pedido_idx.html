@@ -175,7 +175,7 @@
 		</div>
 				
 
-		<!--<form action="#" th:action="@{/pedido/agregar}"th:object="${pedido}" method="post">
+		<form action="#" th:action="@{/pedido/agregar}"th:object="${pedido}" method="post">
               <div class="form-row">
               
  				<div class="form-group col-md-6">
@@ -222,7 +222,7 @@
                 </div>                                                                                                                 
               </div>          
               <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
-       </form>	-->
+       </form>	
 
 
 			</div>
@@ -286,14 +286,9 @@
 	<script src="../js/main.js"></script>
 		<script>
 	
-	//var table = document.getElementById('cantidad'), idx;			
-	//for(var i=0; i<table.rows.length; i++)
-	//{
+	
 		function cambiar(){
-//		table.onChange = function(){
-				//idx = this.rowIndex;	
-				//console.log(this.cells[0].innerHTML)
-				idx=document.getElementById('sucOrigen.idSucursal').value;
+ 	     		idx=document.getElementById('sucOrigen.idSucursal').value;
 				idp=document.getElementById('producto.idProducto').value;
 				cant=document.getElementById('cantidad.producto').value;
 				idx = 0 + idx;
@@ -309,7 +304,7 @@
 						$("#sucdestino").html(result);
 					})
 					.fail(function() {
-						alert("error");
+						alert("No existen sucursales con el producto disponible");
 					});
 				}else $("#sucdestino").html("");
 				
@@ -317,7 +312,7 @@
 				
 				
 			}
-		//}	
+			
 
 	
 		</script>

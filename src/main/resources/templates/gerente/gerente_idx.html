@@ -97,12 +97,12 @@
 						<td><span th:text=${gerente.fechaAscenso}/></td>
 						<td><span th:text=${gerente.baja}/></td>
 						<td>
-							<input type="submit" name="modificar" value="M" />						
+							<input type="image" src="../../img/icons/lapiz.png"  title="Modificar" />						
 						</td>
 					</form>
 						<td>
 							<form th:action="@{/gerente/eliminar/{id}(id=${gerente.idPersona})}" method="post" role="form" >
-								<input type="submit"  name="eliminar" value="X" />
+								<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
 							</form>
 						</td>			
 				</tr>

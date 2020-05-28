@@ -88,14 +88,14 @@
 							<td><span th:text="${producto.idProducto}" /></td>
 							<td><span th:text="${producto.descripcion}" /></td>
 							<td><span th:text="${producto.precioUnitario}" /></td>
-							<td><input type="submit" name="modificar" value="M" /></td>
+							<td><input type="image" src="../../img/icons/lapiz.png"  title="Modificar" /></td>
 							</form>
 
 							<td>
 								<form
 									th:action="@{/producto/delete/{id}(id=${producto.idProducto})}"
 									method="post" role="form">
-									<input type="submit" name="eliminar" value="X" />
+									<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
 								</form>
 							</td>
 						</tr>
