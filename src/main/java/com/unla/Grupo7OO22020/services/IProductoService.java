@@ -13,6 +13,8 @@ public interface IProductoService {
 	public ProductoModel insertOrUpdate(ProductoModel productoModel);
 
 	public boolean remove(long id);
+	
+	public boolean eliminar(long id);
 
 	public ProductoModel findByDescripcion(String name);
 

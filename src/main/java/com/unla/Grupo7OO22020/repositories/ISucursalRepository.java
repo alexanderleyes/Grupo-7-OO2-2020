@@ -23,6 +23,9 @@ public interface ISucursalRepository extends JpaRepository<Sucursal, Serializabl
 	@Query("SELECT s FROM Sucursal s JOIN FETCH s.lotes l WHERE l.producto = (:producto) and l.cantidad >= (:cantidad)")
 	public List<Sucursal>  findByProdcuto(Producto producto, int cantidad);
 	
+	@Query("SELECT s FROM Sucursal s JOIN FETCH s.lotes l WHERE l.producto = (:producto)")
+	public List<Sucursal>  findByProdcuto(Producto producto);
+	
 	@Query("SELECT s FROM Sucursal  s WHERE s <> (:sucursal)")
 	public List<Sucursal>  findAllExcept(Sucursal sucursal);
 	

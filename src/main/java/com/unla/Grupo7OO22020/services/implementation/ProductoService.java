@@ -10,6 +10,7 @@ import com.unla.Grupo7OO22020.converters.ProductoConverter;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.repositories.IProductoRepository;
+import com.unla.Grupo7OO22020.repositories.ISucursalRepository;
 import com.unla.Grupo7OO22020.services.IProductoService;
 
 
@@ -19,6 +20,10 @@ public class ProductoService implements IProductoService{
 	@Autowired
 	@Qualifier("productoRepository")
 	private IProductoRepository productoRepository;
+	
+	@Autowired
+	@Qualifier("sucursalRepository")
+	private ISucursalRepository sucursalRepository;
 	
 	@Autowired
 	@Qualifier("productoConverter")
@@ -49,6 +54,13 @@ public class ProductoService implements IProductoService{
 	}
 
 
+	@Override
+	public boolean eliminar(long id) {
+		if(sucursalRepository.findByProdcuto(productoRepository.findByIdProducto(id)) == null) {
+			remove(id);
+		}
+		return false;
+	}
 	
 
 	@Override
@@ -62,6 +74,9 @@ public class ProductoService implements IProductoService{
 		return productoConverter.entityToModel(productoRepository.findByIdProducto(id));	
 		
 	}
+
+
+	
 
 	
 	
