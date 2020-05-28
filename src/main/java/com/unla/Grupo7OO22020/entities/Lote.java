@@ -43,16 +43,19 @@ public class Lote {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="sucursal_id", nullable=false)
 	private Sucursal sucursal;
+	
+	private boolean disponible;
 
 
 	public Lote() {	}		
 
-	public Lote(long idLote, int cantidad, Producto producto, Sucursal sucursal) {
+	public Lote(long idLote, int cantidad, Producto producto, Sucursal sucursal, boolean disponible) {
 		super();
 		this.idLote = idLote;
 		this.cantidad = cantidad;
 		this.producto = producto;
 		this.sucursal = sucursal;
+		this.disponible= disponible;
 	}
 
 
@@ -114,6 +117,16 @@ public class Lote {
 	public void setSucursal(Sucursal sucursal) {
 		this.sucursal = sucursal;
 	}
+
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
+	
+	
 	
 	
 }

@@ -33,7 +33,8 @@ public class LoteConverter {
 				loteModel.getIdLote(),
 				loteModel.getCantidad(),
 				productoConverter.modelToEntity(loteModel.getProducto()),
-				sucursalConverter.modelToEntity(loteModel.getSucursal()));		
+				sucursalConverter.modelToEntity(loteModel.getSucursal()),
+				loteModel.isDisponible());		
 	}
 
 	

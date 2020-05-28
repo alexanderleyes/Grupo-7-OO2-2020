@@ -59,13 +59,27 @@ public class LoteService implements ILoteService {
 	
 	@Override
 	public boolean remove(long id) {
+		
 		try {
+			
 			loteRepository.deleteById(id);
 			return true;
 		}catch (Exception e) {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean eliminar(long id) {
+		if(loteRepository.findById(id).get().getCantidad() == 0)
+		{
+			return remove(id);
+		}else {
+
+			return false;
+		}
+	}	
+	
 
 
 	@Override
@@ -85,7 +99,10 @@ public class LoteService implements ILoteService {
 			lotesModels.add(loteConverter.entityToModel(l));
 	    }		
 		return lotesModels;	
-	}	
+	}
+
+
+	
 	
 	}
 

@@ -10,10 +10,14 @@ import com.unla.Grupo7OO22020.models.EstadoVentaModel;
 public class EstadoVentaConverter {
 	
 	public EstadoVentaModel entityToModel(EstadoVenta estadoVenta) {
-		return new EstadoVentaModel(estadoVenta.getIdEstadoVenta(), estadoVenta.getNombre(), estadoVenta.getDescripcion());
+		return new EstadoVentaModel(estadoVenta.getIdEstadoVenta(),
+				estadoVenta.getNombre(),
+				estadoVenta.getDescripcion());
 	}
 	
 	public EstadoVenta modelToEntity(EstadoVentaModel estadoVentaModel) {
-		return new EstadoVenta(estadoVentaModel.getIdEstadoVenta(), estadoVentaModel.getNombre(), estadoVentaModel.getDescripcion());
+		return new EstadoVenta(estadoVentaModel.getIdEstadoVenta(),
+				estadoVentaModel.getNombre(),
+				estadoVentaModel.getDescripcion());
 	}
 }

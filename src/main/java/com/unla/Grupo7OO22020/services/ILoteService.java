@@ -17,6 +17,8 @@ public interface ILoteService {
 	public LoteModel insertOrUpdate(LoteModel loteModel);
 	
 	public boolean remove(long id);
+	
+	public boolean eliminar(long id);
 
 	public Set<LoteModel> findAllBySucursal(SucursalModel sucursalModel);
 	

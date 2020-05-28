@@ -10,6 +10,7 @@ public class LoteModel {
 	private int cantidad;	
 	private ProductoModel producto;
 	private SucursalModel sucursal;
+	private boolean disponible;
 	
 	
 	
@@ -21,6 +22,7 @@ public class LoteModel {
 		this.cantidad = cantidad;
 		this.producto = producto;
 		this.sucursal = sucursal;
+		this.disponible = true;
 	}
 	
 	public LoteModel(int cantidad, ProductoModel producto,SucursalModel sucursal) {
@@ -68,6 +70,15 @@ public class LoteModel {
 	public void setSucursal(SucursalModel sucursal) {
 		this.sucursal = sucursal;
 	}
+
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
+	
 	
 	
 }
