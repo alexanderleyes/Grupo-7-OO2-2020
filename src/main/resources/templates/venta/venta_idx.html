@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
- <title>TPC - Sucursal</title>
+ <title>TPC - Venta</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -59,10 +59,14 @@
           <h2>Administrar Ventas</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Inventario 002</li>
+            <li>Ventas</li>
           </ol>
         </div>        
        
+<!--        //"btn btn-primary" -->
+       <div class="text-left"><button id="altaVentaPopUp" class="bx bx-list-plus" title="Agregar una Venta"></button>
+
+       </div> 
         
         <br><br><br><br><br>
         
@@ -76,7 +80,8 @@
 					<th>Vendedor</th>
 					<th>Cliente</th>
 					<th>Estado</th>	
-					<th></th>						
+					<th></th>	
+					<th></th>					
 				</tr>
 			</thead>
 			<tbody>				
@@ -87,7 +92,7 @@
 						<td><span th:text=${venta.sucursal.direccion}/></td>
 						<td><span th:text=${venta.vendedor.nombre}/></td>
 						<td><span th:text=${venta.cliente.nombre}/></td>
-						<td><span th:text=${venta.estado.nombre/></td>
+						<td><span th:text=${venta.estado.nombre}/></td>
 						<td>
 							<input type="submit" name="modificar" value="M" />						
 						</td>
@@ -105,40 +110,94 @@
 		
         
 		<br><br><br>
-				 
-	<form th:action="@{/venta/agregar}" th:object="${sucursal}" method="post" role="form" >
+		
+	<h2>Nueva Venta</h2>				 
+	<form th:action="@{/venta/agregar}" th:object="${venta}" method="post" role="form" >
               <div class="form-row" ;>              
                <div class="form-group col-md-6">
 				 <label for="name">Sucursal</label>				
-				    <select  onChange="cambiar();"  class="form-control"  th:field="*{sucursal.idSucursal}" >				   
+				    <select   class="form-control"  th:field="*{sucursal.idSucursal}" >				   
 				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
 				    </select>
 				</div>
 				
 				<div class="form-group col-md-6">
 				 <label for="name">Vendedor</label>				
-				    <select  onChange="cambiar();"  class="form-control"  th:field="*{vendedor.idPersona}" >				   
-				  		<option th:each= "s : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">	
-				    </select>
+ 				    <select  class="form-control"  th:field="*{vendedor.idPersona}" >				    
+ 				  		<option th:each= "v : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">	
+ 				    </select>
 				</div>
 				
 				<div class="form-group col-md-6">
 				 <label for="name">Cliente</label>				
-				    <select  onChange="cambiar();"  class="form-control"  th:field="*{cliente.idPersona}" >				   
-				  		<option th:each= "s : ${clientes}" th:value="${c.idPersona}" th:text ="${c.nombre}">	
+				    <select   class="form-control"  th:field="*{cliente.idPersona}" >				   
+				  		<option th:each= "c : ${clientes}" th:value="${c.idPersona}" th:text ="${c.nombre}">	
+				    </select>
+				</div>
+				
+<!-- 				<div class="form-group col-md-6"> -->
+<!-- 				 <label for="name">Estado</label>				 -->
+<!-- 				    <select  class="form-control"  th:field="*{estado.idEstadoVenta}" >				    -->
+<!-- 				  		<option th:each= "e : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">	 -->
+<!-- 				    </select> -->
+<!-- 				</div> -->
+                                                
+              </div>          
+               <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>
+              
+  
+       </form>	
+       
+
+             	                                  
+       
+       <!-- Popup -->
+		<div id="popUpVentas" class="modal">
+		
+		  <!-- Modal content -->
+		  <div class="modal-content">
+		    <span class="close">&times;</span>
+		    <p>Agregar una Venta</p>
+		    
+		    
+		    <form th:action="@{/venta/agregar}" th:object="${venta}" method="post" role="form" >
+              <div class="form-row" ;>              
+               <div class="form-group col-md-6">
+				 <label for="name">Sucursal</label>				
+				    <select   class="form-control"  th:field="*{sucursal.idSucursal}" >				   
+				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
 				    </select>
 				</div>
 				
 				<div class="form-group col-md-6">
-				 <label for="name">Estado</label>				
-				    <select  onChange="cambiar();"  class="form-control"  th:field="*{estado.idEstadoVenta}" >				   
-				  		<option th:each= "s : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">	
+				 <label for="name">Vendedor</label>				
+ 				    <select  class="form-control"  th:field="*{vendedor.idPersona}" >				    
+ 				  		<option th:each= "v : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">	
+ 				    </select>
+				</div>
+				
+				<div class="form-group col-md-6">
+				 <label for="name">Cliente</label>				
+				    <select   class="form-control"  th:field="*{cliente.idPersona}" >				   
+				  		<option th:each= "c : ${clientes}" th:value="${c.idPersona}" th:text ="${c.nombre}">	
 				    </select>
 				</div>
+				
+<!-- 				<div class="form-group col-md-6"> -->
+<!-- 				 <label for="name">Estado</label>				 -->
+<!-- 				    <select  class="form-control"  th:field="*{estado.idEstadoVenta}" >				    -->
+<!-- 				  		<option th:each= "e : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">	 -->
+<!-- 				    </select> -->
+<!-- 				</div> -->
                                                 
               </div>          
               <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
-       </form>	
+              
+       		</form>	
+
+		</div>
+		
+		</div>
         
 
       </div>
@@ -150,11 +209,11 @@
 
         <div class="portfolio-details-container">
 
-          <div class="owl-carousel portfolio-details-carousel">
-            <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt="">
-          </div>
+<!--           <div class="owl-carousel portfolio-details-carousel"> -->
+<!--             <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt=""> -->
+<!--             <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt=""> -->
+<!--             <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt=""> -->
+<!--           </div> -->
 
           <div class="portfolio-info">
             <h3>Project information</h3>
@@ -207,7 +266,7 @@
   <script src="../vendor/counterup/counterup.min.js"></script>
   <script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../vendor/venobox/venobox.min.js"></script>
-  <script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
+<!--   <script src="../vendor/owl.carousel/owl.carousel.min.js"></script> -->
   <script src="../vendor/typed.js/typed.min.js"></script>
   <script src="../vendor/aos/aos.js"></script>
 
@@ -220,30 +279,57 @@
 	{	
 		
 		table.rows[i].onclick = function(){
-				idx = this.rowIndex;	
-				console.log(this.cells[0].innerHTML)
-				
-				if($.isNumeric(idx)){
-					$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
-						method: "GET",
-					 	url: "/sucursal/cercana/" + idx,
-					})
-					.done(function(result) {
-						$("#div-select-cercana").html(result);
-					})
-					.fail(function() {
-						alert("error");
-					});
-				}else $("#div-select-cercana").html("");
-				
-				
+			idx = this.rowIndex;	
+			console.log(this.cells[0].innerHTML)
+			
+			if($.isNumeric(idx)){
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+				 	url: "/sucursal/cercana/" + idx,
+				})
+				.done(function(result) {
+					$("#div-select-cercana").html(result);
+				})
+				.fail(function() {
+					alert("error");
+				});
+			} else $("#div-select-cercana").html("");
 				
 				
-			}
-		}	
+		}
+	}
+	
+
+	// POP UP ==============================================================================================
+	
+	// Se obtiene el Popup
+	var modal = document.getElementById("popUpVentas");
+
+	// Se obtiene el botón que lo abre
+	var btn = document.getElementById("altaVentaPopUp");
+
+	// Elemento <span> que cierra el Popup
+	var span = document.getElementsByClassName("close")[0];
+
+	// Cuando se hace click en el botón, se abre el Popup
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	// Cuando se hace click en <span> (x), se cierra el Popup
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	// Cuando se hace click en cualquier espacio fuera del Popup, éste se cierra
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
 
 	
-		</script>
+	</script>
 </body>
 
 </html>

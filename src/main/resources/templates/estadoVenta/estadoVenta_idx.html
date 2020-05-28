@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
- <title>TPC - Item</title>
+ <title>TPC - Estado de Venta</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -56,11 +56,16 @@
       <div class="container">
 	
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Administrar Items</h2>
+          <h2>Administrar Estado de Venta</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Inventario 002</li>
+            <li>Estado de Venta</li>
           </ol>
+          
+          </div>
+          
+          <div class="text-left"><button id="altaEstadoVentaPopUp" class="bx bx-list-plus" title="Agregar un Estado de Venta"></button>
+          
         </div>        
        
         
@@ -68,27 +73,29 @@
         
          <div id="div-select-cercana" class="row"></div>
          
-         <table class="table" id="table"  >
+         <table class="table" id="table">
 			<thead>
 				<tr >
-					<th>Item ID </th>
-					<th>Producto</th>
-					<th>Cantidad </th>
+					<th>ID </th>
+					<th>Nombre</th>
+					<th>Descripción </th>
+					<th> </th>
+					<th> </th>
 																
 				</tr>
 			</thead>
 			<tbody>				
 				
-				<tr th:each="item: ${items}">
-					<form th:action="@{/item/modificar/{id}(id=${item.idItem})}" method="post" role="form">
-								<td><span th:text="${item.idItem}" /></td>
-								<td><span th:text="${item.producto.descripcion}" /></td>
-								<td><span th:text="${item.cantidad}" /></td>								
-								<td><input type="submit" name="modificar" value="M" /></td>
-							</form>
+				<tr th:each="estadoVenta: ${estados}">
+					<form th:action="@{/estadoVenta/modificar/{id}(id=${estadoVenta.idEstadoVenta})}" method="post" role="form">
+					<td><span th:text="${estadoVenta.idEstadoVenta}" /></td>
+					<td><span th:text="${estadoVenta.nombre}" /></td>
+					<td><span th:text="${estadoVenta.descripcion}" /></td>								
+					<td><input type="submit" name="modificar" value="M" /></td>
+				</form>
 
 							<td>
-						<form th:action="@{/item/eliminar/{id}(id=${item.idItem})}" method="post" role="form" >
+						<form th:action="@{/estadoVenta/eliminar/{id}(id=${estadoVenta.idEstadoVenta})}" method="post" role="form" >
 							<input type="submit"  name="eliminar" value="X" />
 						</form>
 					</td>
@@ -101,23 +108,56 @@
 	<br><br><br>				 
 		 
 		 
-	 <h2>Nuevo Item</h2>		 
-	<form th:action="@{/item/agregar}" th:object="${item}" method="post" role="form" >
+	 <h2>Nuevo Estado de Venta</h2>		 
+	<form th:action="@{/estadoVenta/agregar}" th:object="${estadoVenta}" method="post" role="form" >
 		<div class="form-row" ;>      
 			<div class="form-group col-md-6">
-				<label for="name">Producto</label>		     
-		   		<select class="form-control"  th:field="*{producto.idProducto}"><br>
-		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
-		    	</select>
-	     	</div>        
+                  <label for="name">Nombre</label>
+                  <input type="text" th:field="*{nombre}" class="form-control"  />
+                  <div class="validate"></div>
+             </div>        
 			<div class="form-group col-md-6">
-		    	<label for="name">Cantidad</label>
-		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  />
-		    	<div class="validate"></div>
-			</div>                              
+                  <label for="name">Descripción</label>
+                  <input type="text" th:field="*{descripcion}" class="form-control"  />
+                  <div class="validate"></div>
+                </div>                             
         </div>          
 		<div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>    
 	</form>	
+	
+	
+	      <!-- Popup -->
+		<div id="popUpEstadoVentas" class="modal">
+		
+		  <!-- Modal content -->
+		  <div class="modal-content">
+		    <span class="close">&times;</span>
+		    <p>Agregar una Venta</p>
+		    
+				<form th:action="@{/estadoVenta/agregar}" th:object="${estadoVenta}" method="post" role="form" >
+					<div class="form-row" ;>      
+						<div class="form-group col-md-6">
+			                  <label for="name">Nombre</label>
+			                  <input type="text" th:field="*{nombre}" class="form-control"  />
+			                  <div class="validate"></div>
+			             </div>        
+						<div class="form-group col-md-6">
+			                  <label for="name">Descripción</label>
+			                  <input type="text" th:field="*{descripcion}" class="form-control"  />
+			                  <div class="validate"></div>
+			                </div>                             
+			        </div>          
+					<div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>    
+				</form>			    
+		    
+
+		</div>
+		
+		</div>
+	
+	
+	
+	
         
 
       </div>
@@ -129,11 +169,11 @@
 
         <div class="portfolio-details-container">
 
-          <div class="owl-carousel portfolio-details-carousel">
-            <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt="">
-          </div>
+<!--           <div class="owl-carousel portfolio-details-carousel"> -->
+<!--             <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt=""> -->
+<!--             <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt=""> -->
+<!--             <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt=""> -->
+<!--           </div> -->
 
           <div class="portfolio-info">
             <h3>Project information</h3>
@@ -186,12 +226,46 @@
   <script src="../vendor/counterup/counterup.min.js"></script>
   <script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../vendor/venobox/venobox.min.js"></script>
-  <script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
+<!--   <script src="../vendor/owl.carousel/owl.carousel.min.js"></script> -->
   <script src="../vendor/typed.js/typed.min.js"></script>
   <script src="../vendor/aos/aos.js"></script>
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
+
+	<script>
+
+	// POP UP ==============================================================================================
+	
+	// Se obtiene el Popup
+	var modal = document.getElementById("popUpEstadoVentas");
+
+	// Se obtiene el botón que lo abre
+	var btn = document.getElementById("altaEstadoVentaPopUp");
+
+	// Elemento <span> que cierra el Popup
+	var span = document.getElementsByClassName("close")[0];
+
+	// Cuando se hace click en el botón, se abre el Popup
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	// Cuando se hace click en <span> (x), se cierra el Popup
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	// Cuando se hace click en cualquier espacio fuera del Popup, éste se cierra
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+
+	</script>
+  
+  
 
 </body>
 

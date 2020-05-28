@@ -33,8 +33,8 @@ public class Venta {
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private EstadoVenta estado;	
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="item")
-	private Set<Item> items = new HashSet<Item>();
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy="Item")
+//	private Set<Item> items = new HashSet<Item>();
 
 	public Venta() {}
 
@@ -87,12 +87,12 @@ public class Venta {
 		this.estado = estado;
 	}
 
-	public Set<Item> getItems() {
-		return items;
-	}
-
-	public void setItems(Set<Item> items) {
-		this.items = items;
-	}
+//	public Set<Item> getItems() {
+//		return items;
+//	}
+//
+//	public void setItems(Set<Item> items) {
+//		this.items = items;
+//	}
 
 }

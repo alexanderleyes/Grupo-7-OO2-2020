@@ -18,21 +18,25 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private long idItem;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="producto_id", nullable=true)
 	private Producto producto;	
 	
 	@Column(name="cantidad")
-	private double cantidad;	
+	private double cantidad;
+	
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	private Venta venta;	
 
 	public Item() {		
 	}
 
-	public Item(long idLote, Producto producto, double cantidad) {
+	public Item(long idItem, Producto producto, double cantidad /*, Venta venta*/) {
 		super();
-		this.idItem = idLote;
-		this.cantidad = cantidad;
+		this.idItem = idItem;
 		this.producto = producto;
+		this.cantidad = cantidad;
+		// this.venta = venta;
 	}
 
 	public Item(double cantidad) {
@@ -63,5 +67,13 @@ public class Item {
 	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
+
+//	public Venta getVenta() {
+//		return venta;
+//	}
+//
+//	public void setVenta(Venta venta) {
+//		this.venta = venta;
+//	}
 	
 }

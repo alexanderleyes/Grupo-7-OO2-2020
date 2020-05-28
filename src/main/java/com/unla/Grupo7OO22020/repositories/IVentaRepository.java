@@ -14,8 +14,8 @@ import com.unla.Grupo7OO22020.entities.Venta;
 public interface IVentaRepository extends JpaRepository<Venta, Serializable>{	
 	public List<Venta> findAll();
 	
-	@Query("SELECT s FROM Venta v JOIN FETCH v.items i WHERE i.producto = (:producto) and i.cantidad >= (:cantidad)")
-	public List<Venta> findByProducto(Producto producto, int cantidad);
+	//@Query("SELECT s FROM Venta v JOIN FETCH v.items i WHERE i.producto = (:producto) and i.cantidad >= (:cantidad)")
+	//public List<Venta> findByProducto(Producto producto, int cantidad);
 	
 	public Venta findByIdVenta(long id);
 }

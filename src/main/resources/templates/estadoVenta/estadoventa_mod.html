@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
- <title>TPC - Item</title>
+ <title>TPC - Estado de Venta</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -58,29 +58,30 @@
       <div class="container">
 	
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Modificar Item</h2>
+          <h2>Modificar Estado de Venta</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Inventario 002</li>
+            <li>Estado de Venta</li>
           </ol>
         </div>        
        
-		<form th:action="@{/item/agregar}" th:object="${item}" method="post" role="form" >         
-		<input type="hidden" th:field="*{idItem}" name="id" class="form-control"  />
+		<form th:action="@{/estadoVenta/agregar}" th:object="${estadoVenta}" method="post" role="form" >         
+		<input type="hidden" th:field="*{idEstadoVenta}" name="id" class="form-control"  />
 			
               <div class="form-row" ;>
                 <div class="form-group col-md-6">
-					<label for="name">Producto</label>		     
-			   		<select class="form-control"  th:field="*{producto.idProducto}"><br>
-			   			<option th:value="${(item.producto.idProducto)}" th:text="${item.producto.descripcion}"/>	
-			        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
-			    	</select>
-	     		</div>              
-                <div class="form-group col-md-6">
-                  <label for="name">Cantidad</label>
-                  <input type="number" step="any" th:field="*{cantidad}" name="cantidad" class="form-control"  />
+                  <label for="name">Nombre</label>
+                  <input type="text" th:field="*{nombre}" name="nombre" class="form-control"  />
                   <div class="validate"></div>
                 </div> 
+                <br>        
+                    
+                <div class="form-group col-md-6">
+                  <label for="name">Descripción</label>
+                  <input type="text" th:field="*{descripcion}" name="descripcion" class="form-control"  />
+                  <div class="validate"></div>
+                </div> 
+                <br>
                                                       
               </div> 
               

@@ -14,18 +14,24 @@ public class ItemConverter {
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
 	
+	@Autowired
+	@Qualifier("ventaConverter")
+	private VentaConverter ventaConverter;
+	
 	
 	public ItemModel entityToModel(Item item) {
 		return new ItemModel(
 				item.getIdItem(),
 				productoConverter.entityToModel(item.getProducto()),
-				item.getCantidad());
+				item.getCantidad()/*,
+				ventaConverter.entityToModel(item.getVenta())*/);
 	}
 	
 	public Item ModelToEntity(ItemModel itemModel) {
 		return new Item(
 				itemModel.getIdItem(),
 				productoConverter.modelToEntity(itemModel.getProducto()),
-				itemModel.getCantidad());
+				itemModel.getCantidad()/*,
+				ventaConverter.modelToEntity(itemModel.getVenta())*/);
 	}
 }

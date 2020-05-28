@@ -10,7 +10,7 @@ public class VentaModel{
 	private VendedorModel vendedor;
 	private PersonaModel cliente;
 	private EstadoVentaModel estado;
-	private Set<ItemModel> items = new HashSet<ItemModel>();
+	//private Set<ItemModel> items = new HashSet<ItemModel>();
 
 	public VentaModel() {
 	}
@@ -65,13 +65,13 @@ public class VentaModel{
 		this.estado = estado;
 	}
 
-	public Set<ItemModel> getItems() {
-		return items;
-	}
-
-	public void setItems(Set<ItemModel> items) {
-		this.items = items;
-	}
+//	public Set<ItemModel> getItems() {
+//		return items;
+//	}
+//
+//	public void setItems(Set<ItemModel> items) {
+//		this.items = items;
+//	}
 
 	@Override
 	public String toString() {

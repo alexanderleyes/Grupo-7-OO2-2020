@@ -84,14 +84,14 @@
 				<div class="form-group col-md-6">
 				 <label for="name">Cliente</label>				
 				    <select class="form-control"  th:field="*{cliente.idPersona}" >				   
-				  		<option th:each= "s : ${clientes}" th:value="${c.idPersona}" th:text ="${c.nombre}">/	
+				  		<option th:each= "c : ${clientes}" th:value="${c.idPersona}" th:text ="${c.nombre}">/	
 				    </select>
 				</div>				
 				
 				 <div class="form-group col-md-6">
 				 <label for="name">Estado</label>				
-				    <select class="form-control"  th:field="*{estado.idEstadoVenta}" >				   
-				  		<option th:each= "v : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">/	
+				    <select class="form-control"  th:field="*{estadoVenta.idEstadoVenta}" >				   
+				  		<option th:each= "e : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">/	
 				    </select>
 				</div>
                                                 

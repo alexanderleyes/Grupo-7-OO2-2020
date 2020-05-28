@@ -1,4 +1,7 @@
 package com.unla.Grupo7OO22020.controllers;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,9 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.PersonaModel;
+import com.unla.Grupo7OO22020.models.SucursalModel;
+import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.models.VentaModel;
 import com.unla.Grupo7OO22020.services.IClienteService;
 import com.unla.Grupo7OO22020.services.IEstadoVentaService;
@@ -44,28 +51,41 @@ public class VentaController {
 	
 	
 	@GetMapping("/venta_idx")
-	public ModelAndView ventaes(){
+	public ModelAndView index(){
 			System.out.println("enruta: " +ViewRouteHelper.venta_idx);
-			ModelAndView mav = new ModelAndView(ViewRouteHelper.venta_idx);	
-			mav.addObject("venta", new Venta());
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.venta_idx);
+			String username = SecurityContextHolder.getContext().getAuthentication().getName();			
+			VendedorModel vendedorModel= vendedorService.findByUsuario(username);	
+			
+			List<VendedorModel> vendedores = new ArrayList<VendedorModel>();
+			vendedores.add(vendedorModel);
+			mav.addObject("vendedores", vendedores);
+			
+			List<SucursalModel> sucursales = new ArrayList<SucursalModel>();
+			sucursales.add(vendedorModel.getSucursal());
+			mav.addObject("sucursales", sucursales);
+			
+			mav.addObject("sucursal", new Sucursal());
+			mav.addObject("venta", new Venta());			
 			mav.addObject("ventas", ventaService.getAll());	
-			mav.addObject("sucursales", sucursalService.getAll());
-			mav.addObject("vendedores", vendedorService.getAll());
+			
 			mav.addObject("clientes", clienteService.getAll());
 			mav.addObject("estados", estadoVentaService.getAll());
 			
-			Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			mav.addObject("user", userDet);
+			
 			return mav;			
 		}
 	
 	@PostMapping("/agregar")	
 	public String agregarVenta(VentaModel ventaModel){		
-		System.out.println("emp add: " );	
 		ventaModel.setSucursal(sucursalService.findByIdSucursal(ventaModel.getSucursal().getIdSucursal()));
 		ventaModel.setVendedor(vendedorService.findByIdVendedor(ventaModel.getVendedor().getIdPersona()));
 		ventaModel.setCliente((PersonaModel) clienteService.findByIdCliente(ventaModel.getCliente().getIdPersona()));
-		ventaModel.setEstadoVenta(estadoVentaService.findByIdEstadoVenta(ventaModel.getEstadoVenta().getIdEstadoVenta()));	
+		
+		System.out.println( "sucursal " + ventaModel.getSucursal().getIdSucursal());	
+		
+		long id = 1;
+		ventaModel.setEstadoVenta(estadoVentaService.findByIdEstadoVenta(id/*ventaModel.getEstadoVenta().getIdEstadoVenta()*/));	
 
 		ventaModel = ventaService.insertOrUpdate(ventaModel);				
 		return ViewRouteHelper.venta_reload;

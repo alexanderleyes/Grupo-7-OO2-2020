@@ -29,16 +29,15 @@ public class EstadoVentaController {
 			System.out.println("enruta: " +ViewRouteHelper.estadoVenta_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.estadoVenta_idx);	
 			mav.addObject("estadoVenta", new EstadoVenta());
-			mav.addObject("estadoVentas", estadoVentaService.getAll());
+			mav.addObject("estados", estadoVentaService.getAll());
 			
-			Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			mav.addObject("user", userDet);
+			
 			return mav;			
 		}
 	
 	@PostMapping("/agregar")	
 	public String agregarEstadoVenta(EstadoVentaModel estadoVentaModel){		
-		System.out.println("emp add: " );						
+		System.out.println("estado add: " );						
 		estadoVentaModel = estadoVentaService.insertOrUpdate(estadoVentaModel);				
 		return ViewRouteHelper.estadoVenta_reload;
 	}
