@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>TPC - Democratizacion de Stock</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../../img/favicon.png" rel="icon">
+  <link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="../vendor/owl.carousel/../owl.carousel.min.css" rel="stylesheet">
+  <link href="../vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: iPortfolio - v1.2.1
+  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    
+
+      	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
+
+     
+  </header><!-- End Header -->
+	
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+        
+        	<div sec:authorize="hasRole('VENDEDOR')">  
+	        	<ol>
+	            	<li><a href="index.html">Home</a></li>
+	            	<li>Inventario 002</li>
+	          	</ol>       	
+	        	<h1>
+					Sucursal <span th:text=${vendedor.sucursal.idSucursal}/> - <span th:text=${vendedor.sucursal.direccion}/>  		
+				</h1>				
+				<br> <br> <br> <br> <br>
+				<h3>
+					Solicitudes pendientes de envío.		
+				</h3>
+				<table class="table" id="table">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Sucursal Origen</th>					
+						<th scope="col">Vend Solicita</th>	
+						<th scope="col">Vend Despacha</th>					
+						<th scope="col">Producto</th>
+						<th scope="col">Cantidad</th>			
+						<th scope="col"></th>			
+					</tr>
+					<tbody>
+						<tr th:each="pedido : ${pedidos}">
+							<form th:action="@{/pedido/despachar/{id}(id=${pedido.idPedido})}" 	method="post" role="form">
+								<td><span th:text="${pedido.idPedido}" /></td>
+								<td><span th:text="${pedido.sucOrigen.direccion}" /></td>							
+								<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>
+								<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"/></td>
+								<td><span th:text="${pedido.producto.descripcion}" /></td>
+								<td><span th:text="${pedido.cantidad}" /></td>				
+								<td><input type="image" src="../../img/icons/despacha.png"  title="Despachar" /></td>
+							</form>			
+							
+						</tr>		
+					</tbody>
+				</table>
+				
+				Se supone que cuando se loguea a como vendedor aca aparecen las solicitudes de mercaderia que se hicieron a esta sucursal,
+				El vendedor decide preparar el pedido y despacharlo. En ese momento se consume la mercaderia y se agrega al vendedor que 
+				despachó al campo	correspondiente.
+				<br> falta  hacer que desaparezca de la lista cuando ya se despachó.		
+			</div>
+			<!-- ================================================================================================================== -->
+			
+			
+			
+				<div sec:authorize="hasRole('GERENTE')">  
+	        	  <ol>
+	            	<li><a href="index.html">Home</a></li>
+	            	<li>Inventario 002</li>
+	          	</ol>
+	        	
+	        	<h1>
+					Sucursal <span th:text=${sucursal.idSucursal}/> - <span th:text=${sucursal.direccion}/>  		
+				</h1>
+				
+				
+				
+				<br> <br> <br> <br> <br>
+				<h3>
+					Titulo para el gerente		
+				</h3>
+				
+				Aun no se decidio la info que va el gerente en el landing
+					
+				
+				
+				</div>		
+	<!-- ================================================================================================================== -->
+		
+          <div sec:authorize="hasRole('ADMIN')">  
+	        	  <ol>
+	            	<li><a href="index.html">Home</a></li>
+	            	<li>Inventario 002</li>
+	          	</ol>
+	        	
+	        	<h1>
+					El Admnistrador no esta asociado a ninguna sucursal   		
+				</h1>
+				
+					
+				
+				<br> <br> <br> <br> <br>
+				<h3>
+					Titulo para el ADMIN		
+				</h3>
+					
+					Aun no se decidio la info que va el Adminisrador en el landing.
+					Todabia hay pantallazos y errores, aunque tenemos todas las partes contruidas 
+					faltan implementarlas y unirlas al 100% para que todo funcione bien. Por fa revisen!
+				
+				</div>	
+          
+          
+        
+        </div>
+
+			
+		<div sec:authorize="hasRole('ADMIN')">  soy un admin</div>
+		
+		<div sec:authorize="hasRole('GERENTE')">  soy un gere</div>
+		
+		
+		
+	<br><div sec:authentication="principal.authorities"></div>		
+	
+	
+
+
+
+
+
+
+
+
+			</div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        
+
+         
+
+          <div class="portfolio-info">
+            <h3>Project information</h3>
+            <ul>
+              <li><strong>Category</strong>: Web design</li>
+              <li><strong>Client</strong>: ASU Company</li>
+              <li><strong>Project date</strong>: 01 March, 2020</li>
+              <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+            </ul>
+          </div>
+        </div>
+
+       
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>iPortfolio</span></strong>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="../vendor/php-email-form/validate.js"></script>
+  <script src="../vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="../vendor/counterup/counterup.min.js"></script>
+  <script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../vendor/venobox/venobox.min.js"></script>
+  <script src="../vendor/typed.js/typed.min.js"></script>
+  <script src="../vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  
+  <script src="../js/main.js"></script>
+
+</body>
+
+</html>
