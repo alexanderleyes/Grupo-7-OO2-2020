@@ -17,11 +17,15 @@ public interface IPedidoService {
 
 	public boolean remove(long id);	
 
-	public List<PedidoModel> findAllBySucursal(SucursalModel sucursal);
+	public List<PedidoModel> findAllBySucursalDes(SucursalModel sucursal);
 
 	public List<PedidoModel> findAllBySucursalExceptVendedor(SucursalModel sucursal, VendedorModel vendedor);
 
 	public List<PedidoModel> findAllByVendedor(VendedorModel vendedor);
+
+	public List<PedidoModel> findAllBySucursalOri(SucursalModel sucursal);
+
+
 
 	
 

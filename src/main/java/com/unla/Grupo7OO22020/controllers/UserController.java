@@ -86,7 +86,7 @@ public class UserController {
 		   case "[ROLE_VENDEDOR]" :
 			   System.out.println("cosas de vendedor");
 			   VendedorModel vendedorModel =  vendedorService.findByUsuario(username);
-			   List<PedidoModel> pedidos =  pedidoService.findAllBySucursal(vendedorModel.getSucursal());
+			   List<PedidoModel> pedidos =  pedidoService.findAllBySucursalDes(vendedorModel.getSucursal());
 			   mav.addObject("vendedor", vendedorModel);
 			   mav.addObject("pedidos", pedidos);
 			   break;

@@ -28,6 +28,12 @@ public class Vendedor extends Empleado {
 		
 	}
 		
+	public Vendedor(  long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni,  String usuario, String password, String horaIngreso, String horasXjornada,
+			double plusSueldo, boolean baja) {		
+		super(idPersona, nombre, apellido, fechaNacimiento,	dni, usuario, password, horaIngreso, horasXjornada,	plusSueldo, baja);	
+	}
+
+
 	public Sucursal getSucursal() {
 		return sucursal;
 	}

@@ -56,12 +56,15 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-        
+          <h2>Bienvenido</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Inventario 002</li>
+          </ol>
+        </div>        
+                
         	<div sec:authorize="hasRole('VENDEDOR')">  
-	        	<ol>
-	            	<li><a href="index.html">Home</a></li>
-	            	<li>Inventario 002</li>
-	          	</ol>       	
+	        	     	
 	        	<h1>
 					Sucursal <span th:text=${vendedor.sucursal.idSucursal}/> - <span th:text=${vendedor.sucursal.direccion}/>  		
 				</h1>				
@@ -105,10 +108,7 @@
 			
 			
 				<div sec:authorize="hasRole('GERENTE')">  
-	        	  <ol>
-	            	<li><a href="index.html">Home</a></li>
-	            	<li>Inventario 002</li>
-	          	</ol>
+	        	 
 	        	
 	        	<h1>
 					Sucursal <span th:text=${sucursal.idSucursal}/> - <span th:text=${sucursal.direccion}/>  		
@@ -121,18 +121,14 @@
 					Titulo para el gerente		
 				</h3>
 				
-				Aun no se decidio la info que va el gerente en el landing
+				Aca creo que estaria copado que vayan las estadisticas y reportes del proximo hito,
 					
 				
 				
 				</div>		
 	<!-- ================================================================================================================== -->
 		
-          <div sec:authorize="hasRole('ADMIN')">  
-	        	  <ol>
-	            	<li><a href="index.html">Home</a></li>
-	            	<li>Inventario 002</li>
-	          	</ol>
+          <div sec:authorize="hasRole('ADMIN')">         	  
 	        	
 	        	<h1>
 					El Admnistrador no esta asociado a ninguna sucursal   		
@@ -145,7 +141,7 @@
 					Titulo para el ADMIN		
 				</h3>
 					
-					Aun no se decidio la info que va el Adminisrador en el landing.
+					Aun no se decidio la info que va a visualizar el Adminisrador en el landing.
 					Todabia hay pantallazos y errores, aunque tenemos todas las partes contruidas 
 					faltan implementarlas y unirlas al 100% para que todo funcione bien. Por fa revisen!
 				
@@ -153,7 +149,7 @@
           
           
         
-        </div>
+      
 
 			
 		<div sec:authorize="hasRole('ADMIN')">  soy un admin</div>

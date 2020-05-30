@@ -44,10 +44,26 @@ public class PedidoService implements IPedidoService{
 
 	@Override
 	public PedidoModel insertOrUpdate(PedidoModel pedidoModel) {
+		Pedido pedido = null;
+		PedidoModel pedidoModelAux = null;
+		if (pedidoModel.getVendedorDespacha() == null) {
+			pedido = pedidoRepository.save(pedidoConverter.modelToEntitySinDespachante(pedidoModel));
+		}
+		else{
+			pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
+		}
 		
-		Pedido pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
-		return pedidoConverter.entityToModelSinDespachante(pedido);
+		
+		if (pedido.getVendedorDespacha() == null) {
+			pedidoModelAux = pedidoConverter.entityToModelSinDespachante(pedido);
+		}
+		else{
+			pedidoModelAux = pedidoConverter.entityToModel(pedido);
+		}		
+		
+		return pedidoModelAux;
 	}
+	
 
 	@Override
 	public boolean remove(long id) {
@@ -72,8 +88,23 @@ public class PedidoService implements IPedidoService{
 	}
 
 	@Override
-	public List<PedidoModel>  findAllBySucursal(SucursalModel sucursal) {			
-		List<Pedido> pedidosEntities = pedidoRepository.findAllBySucursal(sucursalConverter.modelToEntity(sucursal));
+	public List<PedidoModel>  findAllBySucursalDes(SucursalModel sucursal) {			
+		List<Pedido> pedidosEntities = pedidoRepository.findAllBySucursalDes(sucursalConverter.modelToEntity(sucursal));
+		List<PedidoModel> pedidosModels = new ArrayList<PedidoModel>();
+		for (Pedido p : pedidosEntities) {
+			if (p.getVendedorDespacha() == null) {
+				pedidosModels.add(pedidoConverter.entityToModelSinDespachante(p));
+			}else {
+				pedidosModels.add(pedidoConverter.entityToModel(p));
+			}			
+	    }		
+		return pedidosModels;	
+	}
+	
+	
+	@Override
+	public List<PedidoModel>  findAllBySucursalOri(SucursalModel sucursal) {			
+		List<Pedido> pedidosEntities = pedidoRepository.findAllBySucursalOri(sucursalConverter.modelToEntity(sucursal));
 		List<PedidoModel> pedidosModels = new ArrayList<PedidoModel>();
 		for (Pedido p : pedidosEntities) {
 			if (p.getVendedorDespacha() == null) {

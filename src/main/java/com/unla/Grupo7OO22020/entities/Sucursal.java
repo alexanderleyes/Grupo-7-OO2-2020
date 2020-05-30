@@ -125,6 +125,15 @@ public class Sucursal {
 		this.lotes = lotes;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "Sucursal [idSucursal=" + idSucursal + ", telefono=" + telefono + ", localidad=" + localidad
+				+ ", direccion=" + direccion + ", latitud=" + latitud + ", longitud=" + longitud + ", gerente="
+				+ gerente + ", lotes=" + lotes + "]";
+	}
+
 	
 	
 

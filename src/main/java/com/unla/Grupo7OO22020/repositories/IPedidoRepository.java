@@ -19,7 +19,10 @@ public abstract interface IPedidoRepository extends JpaRepository<Pedido, Serial
 	
 	
 	@Query("SELECT p FROM Pedido p WHERE p.sucDestino=(:sucursal)")
-	public abstract List<Pedido> findAllBySucursal(@Param("sucursal") Sucursal sucursal );
+	public abstract List<Pedido> findAllBySucursalDes(@Param("sucursal") Sucursal sucursal );
+	
+	@Query("SELECT p FROM Pedido p WHERE p.sucOrigen=(:sucursal)")
+	public abstract List<Pedido> findAllBySucursalOri(@Param("sucursal") Sucursal sucursal );
 	
 	@Query("SELECT p FROM Pedido p WHERE p.sucOrigen=(:sucursal) and p.vendedorSolicita <> (:vendedor)")
 	public abstract List<Pedido> findAllBySucursalExceptVendedor(@Param("sucursal") Sucursal sucursal, @Param("vendedor") Vendedor vendedor );

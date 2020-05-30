@@ -82,7 +82,8 @@ public class SucursalController {
 	public String stockSucursal(){	
 		//No le puse parametros de entrada xq no se donde lo van a implementear
 		//Primer parametro es el idSucursal, el segundo es el idProducto
-		int lote =sucursalService.stock(2,2 );
+		//suc, producto
+		int lote =sucursalService.stock(1,2 );
 		System.out.println("Stock disponible del producto seleccionado  -->  " + lote);
 		return ViewRouteHelper.sucursal_reload;
 	}

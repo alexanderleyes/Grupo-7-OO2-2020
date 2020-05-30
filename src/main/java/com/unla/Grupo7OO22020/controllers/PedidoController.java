@@ -72,6 +72,7 @@ public class PedidoController {
 		   case "[ROLE_ADMIN]":				      
 			   System.out.println("cosas de admin");
 			   	mav.addObject("vendedoresOri", vendedorService.getAll());
+				mav.addObject("vendedoresDes", vendedorService.getAll());
 				mav.addObject("sucursalesOri", sucursalService.getAll());
 				mav.addObject("sucursalesDes", sucursalService.getAll());
 				mav.addObject("pedido", new Pedido());
@@ -83,10 +84,27 @@ public class PedidoController {
 		   case "[ROLE_VENDEDOR]" :			   
 			   
 			   System.out.println("cosas de vendedor");
+			   
 			   VendedorModel vendedorModel = vendedorService.findByUsuario(username);
 			   mav.addObject("pedidosMios", pedidoService.findAllByVendedor(vendedorModel));
-			   mav.addObject("pedidos", pedidoService.findAllBySucursal(vendedorModel.getSucursal())); 
-			  
+			   
+			   //Pedidos a mi sucursal
+			   mav.addObject("pedidosDes", pedidoService.findAllBySucursalDes(vendedorModel.getSucursal()));
+			   
+			   //Pedidos desde mi sucrsal
+			   mav.addObject("pedidosOri", pedidoService.findAllBySucursalOri(vendedorModel.getSucursal()));
+			   
+			   List<Vendedor> vendedoresOri = new ArrayList<Vendedor>();
+			   vendedoresOri.add(vendedorConverter.modelToEntity(vendedorService.findByUsuario(username))); // una lista solo conmigo
+			   mav.addObject("vendedoresOri", vendedoresOri);
+			   mav.addObject("vendedoresDes", vendedorService.getAll());
+			   
+			   List<Sucursal> sucursalMia = new ArrayList<Sucursal>();			   
+			   sucursalMia.add(sucursalConverter.modelToEntity(vendedorModel.getSucursal()));
+			   mav.addObject("sucursalesOri", sucursalMia);		
+			   mav.addObject("sucursalesDes", sucursalService.getAll());		   
+			   mav.addObject("productos", productoService.getAll());
+			   mav.addObject("pedido", new PedidoModel());
 			   break;
 		   case "[ROLE_GERENTE]" :					       
 			   System.out.println("cosas de gerente");
@@ -119,12 +137,14 @@ public class PedidoController {
 			   mav.addObject("vendedoresDes", vendedores);
 			   mav.addObject("productos", productoService.getAll());			   
 			   break;
-		   case "[ROLE_VENDEDOR]" :	   
-			   VendedorModel vendedorModel = vendedorService.findByUsuario(username);
+		   case "[ROLE_VENDEDOR]" : 			   
+			   
+			   VendedorModel vendedorModel = vendedorService.findByUsuario(username);			   
 			   List<Sucursal> sucursalMia = new ArrayList<Sucursal>();			   
 			   sucursalMia.add(sucursalConverter.modelToEntity(vendedorModel.getSucursal()));
 			   mav.addObject("sucursalesOri", sucursalMia);
 			   mav.addObject("sucursalesDes", sucursalService.getAll());
+			   
 			   List<Vendedor> vendedoresYo = new ArrayList<Vendedor>();
 			   vendedoresYo.add(vendedorConverter.modelToEntity(vendedorModel));
 			   mav.addObject("vendedoresOri", vendedoresYo);
@@ -133,8 +153,11 @@ public class PedidoController {
 			   
 
 			   System.out.println("cosas de vendedor");
-			//   VendedorModel vendedorModel = vendedorService.findByUsuario(username);
-			   mav.addObject("pedidos", pedidoService.findAllBySucursal(vendedorModel.getSucursal()));			  
+			// pedidos a mi sucursal
+			   mav.addObject("pedidosDes", pedidoService.findAllBySucursalDes(vendedorModel.getSucursal()));			
+			   
+			// pedidos desde mi sucursal
+			   mav.addObject("pedidosOri", pedidoService.findAllBySucursalOri(vendedorModel.getSucursal()));		
 			   break;
 		   case "[ROLE_GERENTE]" :					       
 			   System.out.println("cosas de gerente");
@@ -175,7 +198,6 @@ public class PedidoController {
 		pedidoModel.setSucOrigen(sucursalService.findByIdSucursal(pedidoModel.getSucOrigen().getIdSucursal()));
 		pedidoModel.setSucDestino(sucursalService.findByIdSucursal(pedidoModel.getSucDestino().getIdSucursal()));
 		pedidoModel.setVendedorSolicita(vendedorService.findByIdVendedor(pedidoModel.getVendedorSolicita().getIdPersona()));
-		pedidoModel.setVendedorDespacha(vendedorService.findByIdVendedor(pedidoModel.getVendedorDespacha().getIdPersona()));	
 		pedidoModel.setProducto(productoService.findByIdProducto(pedidoModel.getProducto().getIdProducto()));
 
 		pedidoModel = pedidoService.insertOrUpdate(pedidoModel);
@@ -185,16 +207,27 @@ public class PedidoController {
 	
 	@GetMapping("/cercana/{id}/{idp}/{cant}")
 	public ModelAndView cercanas(@PathVariable("id") long id,@PathVariable("idp") long idp,@PathVariable("cant") int cant) {
-		System.out.println("cerc sucursal: " + id);
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.cercana_view);
-		SucursalModel sucursal = sucursalService.findByIdSucursal(id);
+		ModelAndView mAV = new ModelAndView();
 		
+		System.out.println("cerc sucursal: " + id);
+	
+		SucursalModel sucursal = sucursalService.findByIdSucursal(id);		
 		ProductoModel producto = productoService.findByIdProducto(idp);
 		
 		mAV.addObject("sucursal", new Sucursal());
-		mAV.addObject("producto", new Sucursal());
-		mAV.addObject(sucursalService.distancias(sucursal, producto, cant));
-		mAV.addObject("sucursales", sucursalService.distancias(sucursal,producto,cant));
+		mAV.addObject("producto", new Sucursal());	
+		
+		
+		List<Sucursal> resultado =  sucursalService.distancias(sucursal,producto,cant);
+	
+		if (resultado.size() >0) {
+			mAV.setViewName(ViewRouteHelper.cercana_view); 
+			mAV.addObject("sucursalesDes", resultado);			
+		}
+		else {	
+			mAV.setViewName(ViewRouteHelper.cercana_sin); 		
+		}
+		
 		return mAV;
 		
 	}

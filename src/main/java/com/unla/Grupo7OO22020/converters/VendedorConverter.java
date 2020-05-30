@@ -32,7 +32,43 @@ public class VendedorConverter {
 				vendedor.getIdPersona());
 	}
 	
+	public VendedorModel entityToModelSinSucursal(Vendedor vendedor) {
+		return new VendedorModel(
+				vendedor.getIdPersona(),
+				vendedor.getNombre(),
+				vendedor.getApellido(),
+				vendedor.getFechaNacimiento(),
+				vendedor.getDni(),
+				vendedor.getIdPersona(),
+				vendedor.getUsuario(),
+				vendedor.getPassword(),
+				vendedor.getHoraIngreso(),
+				vendedor.getHorasXjornada(),
+				vendedor.getPlusSueldo(),
+				vendedor.getIdPersona());
+	}
+	
+	
+	
+	
 	public Vendedor modelToEntity(VendedorModel vendedorModel) {
+		return new Vendedor(
+				sucursalConverter.modelToEntity(vendedorModel.getSucursal()),
+				vendedorModel.getIdPersona(),
+				vendedorModel.getNombre(),
+				vendedorModel.getApellido(),
+				vendedorModel.getFechaNacimiento(),
+				vendedorModel.getDni(),
+				vendedorModel.getUsuario(), 
+				vendedorModel.getPassword(),
+				vendedorModel.getHoraIngreso(),
+				vendedorModel.getHorasXjornada(),
+				vendedorModel.getPlusSueldo(),
+				vendedorModel.isBaja());
+	}
+	
+	
+	public Vendedor modelToEntitySinSucursal(VendedorModel vendedorModel) {
 		return new Vendedor(
 				sucursalConverter.modelToEntity(vendedorModel.getSucursal()),
 				vendedorModel.getIdPersona(),
