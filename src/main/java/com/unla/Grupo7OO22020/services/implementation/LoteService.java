@@ -35,6 +35,10 @@ public class LoteService implements ILoteService {
 	private LoteConverter loteConverter;
 	
 	@Autowired
+	@Qualifier("loteService")
+	private ILoteService loteService;
+	
+	@Autowired
 	@Qualifier("gerenteConverter")
 	private GerenteConverter gerenteConverter;
 	
@@ -56,6 +60,11 @@ public class LoteService implements ILoteService {
 		
 	}	
 	
+	@Override
+	public Lote insertOrUpdate(Lote lote) {
+		Lote lote1 = loteRepository.save(lote);
+		return lote1;
+	}
 	
 	@Override
 	public boolean remove(long id) {
@@ -100,6 +109,22 @@ public class LoteService implements ILoteService {
 	    }		
 		return lotesModels;	
 	}
+
+
+	@Override
+	public void deshabilitar(long idLote) {
+		Lote lote = loteRepository.findByIdLote(idLote);
+		
+		if(lote.getCantidad() == 0) {
+		lote.setDisponible(true);
+		loteService.insertOrUpdate(lote);
+		}
+		
+		
+	}
+
+
+	
 
 
 	

@@ -18,7 +18,9 @@ public interface ISucursalService {
 	public List<Sucursal> distancias(SucursalModel sucursal, ProductoModel producto, int cantidad);
 	public SucursalModel findByGerente(GerenteModel gerenteModel );
 	public List<SucursalModel>  findAllExcept(SucursalModel sucursalModel);
-	public int stock (long idSucursal, long idProducto);	
+	public int stock (long idSucursal, long idProducto);
+	public List<Lote> stock  (long idSucursal, long idProducto, int cantidad);
+	public void consumir(long idSucursal, long idProducto, int cantidad);	
 	
 	
 	

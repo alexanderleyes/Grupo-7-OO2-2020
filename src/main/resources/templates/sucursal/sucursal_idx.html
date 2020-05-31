@@ -156,7 +156,11 @@
     <form th:action="@{/sucursal/stock}" th:object="${sucursal}" method="post" role="form" >
               
            <div class="text-left"><button type="submit" class="btn btn-primary">stock</button></div>    
-       </form>         
+       </form>     
+        <form th:action="@{/sucursal/consumir}" th:object="${sucursal}" method="post" role="form" >
+              
+           <div class="text-left"><button type="submit" class="btn btn-primary">consumir</button></div>    
+       </form>     
  
     </section><!-- End Breadcrumbs -->
 

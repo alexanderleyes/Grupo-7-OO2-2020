@@ -22,7 +22,7 @@ public interface ILoteRepository extends JpaRepository<Lote, Serializable>{
 	public Lote findByIdLote(long id);	
 	
 	
-	@Query("SELECT l FROM Lote l WHERE l.sucursal = (:sucursal)")
+	@Query("SELECT l FROM Lote l WHERE l.sucursal = (:sucursal) and l.disponible = 0")
 	public abstract Set<Lote> findAllBySucursal(@Param("sucursal") Sucursal sucursal );
 	
 	//public Set<Lote> findBySucursalId(long id);

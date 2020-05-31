@@ -2,15 +2,19 @@ package com.unla.Grupo7OO22020.services.implementation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.GerenteConverter;
+import com.unla.Grupo7OO22020.converters.LoteConverter;
 import com.unla.Grupo7OO22020.converters.ProductoConverter;
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.entities.Lote;
@@ -25,6 +29,7 @@ import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.repositories.ILoteRepository;
 import com.unla.Grupo7OO22020.repositories.IProductoRepository;
 import com.unla.Grupo7OO22020.repositories.ISucursalRepository;
+import com.unla.Grupo7OO22020.services.ILoteService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 
 @Service("sucursalService")
@@ -41,6 +46,10 @@ public class SucursalService implements  ISucursalService{
 	private ProductoConverter productoConverter;
 	
 	@Autowired
+	@Qualifier("loteConverter")
+	private LoteConverter loteConverter;
+	
+	@Autowired
 	@Qualifier("gerenteConverter")
 	private GerenteConverter gerenteConverter;
 	
@@ -55,6 +64,10 @@ public class SucursalService implements  ISucursalService{
 	@Autowired
 	@Qualifier("loteRepository")
 	private ILoteRepository loteRepository;
+	
+	@Autowired
+	@Qualifier("loteService")
+	private ILoteService loteService;
 
 	@Override
 	public List<Sucursal> getAll() {
@@ -95,15 +108,14 @@ public class SucursalService implements  ISucursalService{
 		SucursalModel sucursal2;		
 		List <Sucursal> sucursales = sucursalRepository.findByProdcuto(productob, cantidad);
 		
+		
 		if(sucursales.size() <=2) {			
 			return sucursales;
 		}
 		
 		for(contador = 0;contador< sucursales.size();contador++)
 		{	
-			sucursal2 = sucursalConverter.entityToModel(sucursales.get(contador));			
-			
-			//if(sucursal2.getIdSucursal() != sucursal.getIdSucursal()){				
+			sucursal2 = sucursalConverter.entityToModel(sucursales.get(contador));							
 				double distanciaPivote = Funciones.distancia(sucursal, sucursal2);			 
 				for(int i = 0 ; i<3; i++ ) {				
 					if  (distanciaPivote < miArray[i]) {
@@ -118,7 +130,6 @@ public class SucursalService implements  ISucursalService{
 						break;
 					}
 				}				
-			//}
 		}
 		
 		sucursalesCom.add(sucursalRepository.findByIdSucursal(idArray[0]));
@@ -167,6 +178,51 @@ public class SucursalService implements  ISucursalService{
 		return disponible;
 	}
 
+	@Override
+	public List<Lote> stock(long idSucursal, long idProducto, int cantidad) {
+		
+		 Set<Lote> stock = loteRepository.findAllBySucursal(sucursalRepository.findByIdSucursal(idSucursal));
+		 List<Lote>lote = new ArrayList<Lote>();
+			
+		 for(Lote l: stock) {
+				if(l.getProducto().equals(productoRepository.findByIdProducto(idProducto)) ) {
+					lote.add(l);
+				}
+				
+		 }
+		return lote;
+	}
+
+	@Override
+	public void consumir(long idSucursal, long idProducto, int cantidad) {
+		List<Lote> lote = stock(idSucursal,idProducto,cantidad);
+		int resta;
+		while (cantidad > 0) {
+			for(Lote l: lote) {	
+
+				if(l.getCantidad() >= cantidad) {
+					resta =l.getCantidad() - cantidad;
+					l.setCantidad(resta);
+					cantidad = 0;				
+					loteService.insertOrUpdate(l);
+					loteService.deshabilitar(l.getIdLote());				
+					break;
+				} else {
+					cantidad = cantidad - l.getCantidad();
+					l.setCantidad(0); 
+					loteService.insertOrUpdate(l);
+					loteService.deshabilitar(l.getIdLote());				
+				}
+
+			}
+
+		}
+		
+		
+	}
+
+	
+	
 	
 	
 

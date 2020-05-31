@@ -22,7 +22,7 @@ public class LoteModel {
 		this.cantidad = cantidad;
 		this.producto = producto;
 		this.sucursal = sucursal;
-		this.disponible = true;
+		this.disponible = false;
 	}
 	
 	public LoteModel(int cantidad, ProductoModel producto,SucursalModel sucursal) {

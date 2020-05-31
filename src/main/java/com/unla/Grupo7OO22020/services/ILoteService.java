@@ -16,11 +16,15 @@ public interface ILoteService {
 	
 	public LoteModel insertOrUpdate(LoteModel loteModel);
 	
+	public Lote insertOrUpdate(Lote lote);
+	
 	public boolean remove(long id);
 	
 	public boolean eliminar(long id);
 
 	public Set<LoteModel> findAllBySucursal(SucursalModel sucursalModel);
+	
+	public void deshabilitar (long idLote);
 	
 
 }
