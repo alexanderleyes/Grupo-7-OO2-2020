@@ -97,6 +97,9 @@ public class ViewRouteHelper {
 
 	public final static String venta_reload = "redirect:/"+ venta_idx;
 	
+	public final static String venta_items = "venta/venta_items";
+
+	
 	
 	/*ESTADO DE VENTA*/
 
@@ -105,6 +108,8 @@ public class ViewRouteHelper {
 	public final static String estadoVenta_insert = "estadoVenta/estadoVenta_mod";
 
 	public final static String estadoVenta_reload = "redirect:/"+ estadoVenta_idx;	
+	
+	
 	
 	
 	/*ITEMS*/

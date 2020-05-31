@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.unla.Grupo7OO22020.entities.Item;
+import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
@@ -21,6 +23,8 @@ import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.models.VentaModel;
 import com.unla.Grupo7OO22020.services.IClienteService;
 import com.unla.Grupo7OO22020.services.IEstadoVentaService;
+import com.unla.Grupo7OO22020.services.IItemService;
+import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
 import com.unla.Grupo7OO22020.services.IVentaService;
@@ -38,8 +42,16 @@ public class VentaController {
 	private ISucursalService sucursalService;
 	
 	@Autowired
+	@Qualifier("productoService")
+	private IProductoService productoService;
+	
+	@Autowired
 	@Qualifier("vendedorService")
 	private IVendedorService vendedorService;
+	
+	@Autowired
+	@Qualifier("itemService")
+	private IItemService itemService;
 	
 	@Autowired
 	@Qualifier("clienteService")
@@ -77,19 +89,37 @@ public class VentaController {
 		}
 	
 	@PostMapping("/agregar")	
-	public String agregarVenta(VentaModel ventaModel){		
+	public ModelAndView agregarVenta(VentaModel ventaModel){
+		ModelAndView mav = new ModelAndView();
+		
 		ventaModel.setSucursal(sucursalService.findByIdSucursal(ventaModel.getSucursal().getIdSucursal()));
 		ventaModel.setVendedor(vendedorService.findByIdVendedor(ventaModel.getVendedor().getIdPersona()));
-		ventaModel.setCliente((PersonaModel) clienteService.findByIdCliente(ventaModel.getCliente().getIdPersona()));
-		
+		ventaModel.setCliente((PersonaModel) clienteService.findByIdCliente(ventaModel.getCliente().getIdPersona()));		
+		mav.addObject("venta", ventaModel);
+		mav.addObject("items", itemService.getAll());
+		mav.addObject("productos", productoService.getAll());
+		mav.addObject("producto", new Producto());
+		mav.addObject("item", new Item());
 		System.out.println( "sucursal " + ventaModel.getSucursal().getIdSucursal());	
 		
 		long id = 1;
 		ventaModel.setEstadoVenta(estadoVentaService.findByIdEstadoVenta(id/*ventaModel.getEstadoVenta().getIdEstadoVenta()*/));	
 
-		ventaModel = ventaService.insertOrUpdate(ventaModel);				
-		return ViewRouteHelper.venta_reload;
+		//ventaModel = ventaService.insertOrUpdate(ventaModel);	
+		
+		
+//		return ViewRouteHelper.venta_reload;
+		
+		mav.setViewName(ViewRouteHelper.venta_items);
+		return mav;	
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@PostMapping("/modificar/{id}")	
 	public ModelAndView modificar( @PathVariable("id") long id){		
@@ -114,8 +144,5 @@ public class VentaController {
 		System.out.println("ERASE venta: " );		
 		ventaService.remove(idVenta);
 		return ViewRouteHelper.venta_reload;
-	}
-	
-	
-		
+	}		
 }
