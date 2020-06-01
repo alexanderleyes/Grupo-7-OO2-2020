@@ -220,7 +220,10 @@ public class SucursalService implements  ISucursalService{
 					cantidad = cantidad - l.getCantidad();
 					l.setCantidad(0); 
 					loteService.insertOrUpdate(l);
-					loteService.deshabilitar(l.getIdLote());				
+					loteService.deshabilitar(l.getIdLote());	
+					if(cantidad==0) {
+						break;
+					}
 				}
 
 			}

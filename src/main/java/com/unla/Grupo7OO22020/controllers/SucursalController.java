@@ -93,7 +93,7 @@ public class SucursalController {
 	public String consumirProducto(){	
 		//primer parametro idSucursal, segundo parmetro idProducto, tercer parametro cantidad
 		//idSucursal,idProducto,cantidad
-		sucursalService.consumir(1, 4, 40);
+		sucursalService.consumir(1, 1, 10);
 			
 		return ViewRouteHelper.sucursal_reload;
 	}
