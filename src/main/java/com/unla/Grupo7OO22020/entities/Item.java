@@ -25,8 +25,8 @@ public class Item {
 	@Column(name="cantidad")
 	private double cantidad;
 	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	private Venta venta;	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Venta venta;	
 
 	public Item() {		
 	}
@@ -68,12 +68,12 @@ public class Item {
 		this.cantidad = cantidad;
 	}
 
-//	public Venta getVenta() {
-//		return venta;
-//	}
-//
-//	public void setVenta(Venta venta) {
-//		this.venta = venta;
-//	}
+	public Venta getVenta() {
+		return venta;
+	}
+
+	public void setVenta(Venta venta) {
+		this.venta = venta;
+	}
 	
 }

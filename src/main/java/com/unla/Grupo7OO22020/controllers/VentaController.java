@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
+import com.unla.Grupo7OO22020.models.ItemModel;
 import com.unla.Grupo7OO22020.models.PersonaModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
@@ -64,8 +66,12 @@ public class VentaController {
 	
 	@GetMapping("/venta_idx")
 	public ModelAndView index(){
-			System.out.println("enruta: " +ViewRouteHelper.venta_idx);
-			ModelAndView mav = new ModelAndView(ViewRouteHelper.venta_idx);
+//			System.out.println("enruta: " +ViewRouteHelper.venta_idx);
+//			ModelAndView mav = new ModelAndView(ViewRouteHelper.venta_idx);
+			System.out.println("enruta: " +ViewRouteHelper.venta_prueba);
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.venta_prueba);
+			
+			
 			String username = SecurityContextHolder.getContext().getAuthentication().getName();			
 			VendedorModel vendedorModel= vendedorService.findByUsuario(username);	
 			
@@ -84,12 +90,17 @@ public class VentaController {
 			mav.addObject("clientes", clienteService.getAll());
 			mav.addObject("estados", estadoVentaService.getAll());
 			
+			mav.addObject("producto", new Producto());
+			mav.addObject("productos", productoService.getAll());
+			
+			mav.addObject("item", new Item());
+			mav.addObject("items", itemService.getAll());
 			
 			return mav;			
 		}
 	
 	@PostMapping("/agregar")	
-	public ModelAndView agregarVenta(VentaModel ventaModel){
+	public /* ModelAndView */ String agregarVenta(VentaModel ventaModel){
 		ModelAndView mav = new ModelAndView();
 		
 		ventaModel.setSucursal(sucursalService.findByIdSucursal(ventaModel.getSucursal().getIdSucursal()));
@@ -105,13 +116,13 @@ public class VentaController {
 		long id = 1;
 		ventaModel.setEstadoVenta(estadoVentaService.findByIdEstadoVenta(id/*ventaModel.getEstadoVenta().getIdEstadoVenta()*/));	
 
-		//ventaModel = ventaService.insertOrUpdate(ventaModel);	
+		ventaModel = ventaService.insertOrUpdate(ventaModel);	
 		
 		
-//		return ViewRouteHelper.venta_reload;
+		return ViewRouteHelper.venta_reload;
 		
-		mav.setViewName(ViewRouteHelper.venta_items);
-		return mav;	
+//		mav.setViewName(ViewRouteHelper.venta_items);
+//		return mav;	
 	}
 	
 	
@@ -145,4 +156,22 @@ public class VentaController {
 		ventaService.remove(idVenta);
 		return ViewRouteHelper.venta_reload;
 	}		
+	
+	
+//	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
+//    public String create(
+//            @RequestParam(value = "stname1") String[] stname1,
+//            @RequestParam(value = "marks1") Integer[] marks1,
+//            BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+//
+//    List<EntityPojo> list = new ArrayList<EntityPojo>();
+//    for(int i=0; i < stname1.length; i++){
+//        EntityPojo pojo = new EntityPojo();
+//        pojo.setStName(stname1[i]);
+//        pojo.setMarks(marks1[i]);
+//        list.add(pojo);
+//    }
+
+	
+
 }

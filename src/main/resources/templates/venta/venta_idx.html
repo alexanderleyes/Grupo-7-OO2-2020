@@ -63,10 +63,17 @@
           </ol>
         </div>        
        
-<!--        //"btn btn-primary" -->
-       <div class="text-left"><button id="altaVentaPopUp" class="bx bx-list-plus" title="Agregar una Venta"></button>
 
-       </div> 
+	<div class="text-left"><button id="altaVentaPopUp" class="bx bx-list-plus" title="Agregar una Venta"></button> -->
+       
+       <!-- Botón que dispara el modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+		  Agregar
+		</button>
+
+       </div>
+      
+        
         
         <br><br><br><br><br>
         
@@ -111,21 +118,137 @@
         
 		<br><br><br>
 		
-	
-       
 
-             	                                  
        
-       <!-- Popup -->
-		<div id="popUpVentas" class="modal">
+<!-- 		<br><br><br> -->
+<!-- 		<input type="button" class="add-row" value="+"> -->
+<!-- 		<input type="button" class="delete-row" value="-"> -->
+<!-- 		<table class="tableItems" id="tableItems"  > -->
+<!-- 			<thead> -->
+<!-- 				<tr > -->
+<!-- 					<th>ID </th> -->
+<!-- 					<th>Item </th>			 -->
+									
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody>				 -->
+				
+<!-- 				<tr> -->
+<!-- 						<td id="id">id</td> -->
+<!-- 						<td id="item">item1</td>					 -->
+						
+					
+<!-- 				</tr> -->
+				
+<!-- 			</tbody> -->
+<!-- 		</table>  -->
+        
+
+<!--       </div> -->
+      
+      
+<!--       Popup -->
+<!-- 		<div id="popUpVentas" class="modal"> -->
 		
-		  <!-- Modal content -->
-		  <div class="modal-content">
-		    <span class="close">&times;</span>
-		    <p>Iniciar una Venta</p>
+<!-- 		  Modal content -->
+<!-- 		  <div class="modal-content"> -->
+<!-- 		    <span class="close">&times;</span> -->
+<!-- 		    <p>Iniciar una Venta</p> -->
 		    
 		    
-		    <form th:action="@{/venta/agregar}" th:object="${venta}" method="post" role="form" >
+<!-- 		    <form th:action="@{/venta/agregar}" th:object="${venta}" method="post" role="form" > -->
+<!--               <div class="form-row" ;>               -->
+<!--                <div class="form-group col-md-6"> -->
+<!-- 				 <label for="name">Sucursal</label>				 -->
+<!-- 				    <select   class="form-control"  th:field="*{sucursal.idSucursal}" >				    -->
+<!-- 				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	 -->
+<!-- 				    </select> -->
+<!-- 				</div> -->
+				
+<!-- 				<div class="form-group col-md-6"> -->
+<!-- 				 <label for="name">Vendedor</label>				 -->
+<!--  				    <select  class="form-control"  th:field="*{vendedor.idPersona}" >				     -->
+<!--  				  		<option th:each= "v : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">	 -->
+<!--  				    </select> -->
+<!-- 				</div> -->
+				
+<!-- 				<div class="form-group col-md-6"> -->
+<!-- 				 <label for="name">Cliente</label>				 -->
+<!-- 				    <select   class="form-control"  th:field="*{cliente.idPersona}" >				    -->
+<!-- 				  		<option th:each= "c : ${clientes}" th:value="${c.idPersona}" th:text ="${c.nombre}">	 -->
+<!-- 				    </select> -->
+<!-- 				</div> -->
+				
+<!-- <!-- 				<div class="form-group col-md-6"> --> -->
+<!-- <!-- 				 <label for="name">Estado</label>				 --> -->
+<!-- <!-- 				    <select  class="form-control"  th:field="*{estado.idEstadoVenta}" >				    --> -->
+<!-- <!-- 				  		<option th:each= "e : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">	 --> -->
+<!-- <!-- 				    </select> --> -->
+<!-- <!-- 				</div> --> -->
+                                                
+<!--               </div>   -->
+<!--               </form>  -->
+              
+<!--                       <form th:object="${item}" method="post" role="form" > -->
+<!--         <div class="form-row" ;>       -->
+<!-- 			<div class="form-group col-md-6"> -->
+<!-- 				<label for="name">Producto</label>		      -->
+<!-- 		   		<select class="form-control"  th:field="*{producto.idProducto}" id="producto"><br> -->
+<!-- 		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	 -->
+<!-- 		    	</select> -->
+<!-- 	     	</div>         -->
+<!-- 			<div class="form-group col-md-6"> -->
+<!-- 		    	<label for="name">Cantidad</label> -->
+<!-- 		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  id="cantidad"/> -->
+<!-- 		    	<div class="validate"></div> -->
+<!-- 			</div>                               -->
+<!--         </div> -->
+<!--         </form>           -->
+<!-- 		<div class="text-left"><input type="button" class="add-row" value="Agregar"></div>     -->
+         
+
+<!-- 	         <table class="table" id="table"  > -->
+<!-- 				<thead> -->
+<!-- 					<tr > -->
+<!-- 						<th>ID </th> -->
+<!-- 						<th>Producto</th> -->
+<!-- 						<th>Cantidad </th> -->
+<!-- 						<th> </th> -->
+<!-- 						<th> </th>																 -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody>	 -->
+					
+<!-- 				</tbody> -->
+<!-- 			</table> -->
+	 
+              
+              
+              
+                      
+<!--               <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>     -->
+              
+<!--        		</form>	 -->
+
+<!-- 		</div> -->
+		
+<!-- 		</div> -->
+		
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Iniciar una Venta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              
+		    
+		    <form th:action="@{/venta/agregar}" th:object="${venta}" method="post" role="form" id="form1" >
               <div class="form-row" ;>              
                <div class="form-group col-md-6">
 				 <label for="name">Sucursal</label>				
@@ -155,39 +278,91 @@
 <!-- 				    </select> -->
 <!-- 				</div> -->
                                                 
-              </div>          
-              <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
+              </div>
+            
               
-       		</form>	
-
-		</div>
+           </form>   
+                
+              
 		
-		</div>
-		<br><br><br>
-		<input type="button" class="add-row" value="+">
-		<input type="button" class="delete-row" value="-">
-		<table class="tableItems" id="tableItems"  >
-			<thead>
-				<tr >
-					<th>ID </th>
-					<th>Item </th>			
-									
-				</tr>
-			</thead>
-			<tbody>				
-				
-				<tr>
-						<td id="id">id</td>
-						<td id="item">item1</td>					
-						
-					
-				</tr>
-				
-			</tbody>
-		</table> 
+<!--         <form th:object="${item}" method="post" role="form" > -->
+		
+<!--         <div class="form-row" ;>       -->
+<!-- 			<div class="form-group col-md-6"> -->
+			 
+			 <table>
+  			<tbody>
+			<tr th:each="item,items : *{items}">
+				<td th:text="${items.count}"/>
+      		
+			
+<!-- 				<label for="name">Producto</label>		      -->
+<!-- 		   		<select class="form-control"  th:field="*{producto.idProducto}" id="producto"><br> -->
+<!-- 		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	 -->
+<!-- 		    	</select> -->
+		    	
+		    	<select th:field="*{items[__${items.index}__].producto}">
+		          <option th:each="p : ${productos}" 
+		                  th:value="${p.idProducto}" 
+		                  th:text="${p.descripcion}"/>
+		        </select>
+		   
+		    	
+		    	
+<!-- 	     	</div>         -->
+<!-- 			<div class="form-group col-md-6"> -->
+		    	<label for="name">Cantidad</label>
+		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  id="cantidad"/>
+		    	<div class="validate"></div>
+<!-- 			</div>                               -->
+<!--         </div> -->
         
+         </tr>	
+        </tbody>
+<!--         </form>  -->
 
+		</table>
+             
+<!-- 		<div class="text-left"><input type="button" class="add-row" value="Agregar" id="btnAgregar"></div>            -->
+         
+			<table class="table" id="table1"  >
+				<thead>
+					<tr >
+						<th>ID </th>
+						<th>Producto</th>
+						<th>Cantidad </th>
+						<th> </th>
+						<th> </th>																
+					</tr>
+				</thead>
+				<tbody>	
+					
+				</tbody>
+			</table>
+
+	  <div class="modal-footer">
+		<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
+<!--       	<button type="submit" class="btn btn-primary">Guardar</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+        
       </div>
+	
+
+	         
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+		
+
+      
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Details Section ======= -->
@@ -286,6 +461,55 @@
 // 		}
 // 	}
 	
+	
+// 	var table = document.getElementById('table1'), idx;			
+// 	for(var i=0; i<table.rows.length; i++)
+// 	{	
+		
+// 		// table.rows[i].onclick = function(){
+// 			$("#btnAgregar").click(function (e){	
+			
+// 			idx = this.rowIndex;	
+// 			console.log(this.cells[0].innerHTML)
+			
+// 			if($.isNumeric(idx)){
+// 				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+// 					method: "POST",
+// 				 	url: "/venta/agregar/",
+// 				})
+// 				.done(function(result) {
+// 					//$("#div-select-cercana").html(result);
+// 				})
+// 				.fail(function() {
+// 					alert("error");
+// 				});
+// 			} //else $("#div-select-cercana").html("");
+				
+				
+// 		}
+// 	}	
+	
+	
+//         $(document).ready(function (){
+//             $("#btn").click(function (e){
+//                 e.preventDefault();
+//                 $.ajax({
+//                     type: "POST",
+//                     async: false,
+//                     url:"page1.php",
+//                     dataType: 'json',
+//                     cache: false,
+//                     success: function (result) {
+//                             $("#myCont").html(result);
+//                     },
+//                     error: function () {
+//                         alert("server error");
+//                     }
+//                 });
+//             });
+//         });	
+	
+	
 
 	// POP UP ==============================================================================================
 	
@@ -314,16 +538,18 @@
 	    modal.style.display = "none";
 	  }
 	}
-	
-	
+
+	 
 	 $(document).ready(function(){
 	        $(".add-row").click(function(){
-// 	            var id = $('idxx').val();
-// 	            var item = $('itemxx').val();
-	            var id = "xxx"
-	            var item = "zzz"
-	            var markup = "<tr><td>" + id + "</td><td>" + item + "</td></tr>";
-	            $("table tbody").append(markup);
+	            var id = ""
+	            var producto =  $("#producto option:selected").text();
+	            var cantidad =  $("#cantidad").val();
+	            if(cantidad > 0 ){            	
+	            
+	            	var markup = "<tr><td>" + id + "</td><td>" + producto + "</td><td> " + cantidad + "</td></tr>" ;
+	            $("#table1 tbody").append(markup);
+	            }
 	        });
 	        
 	        // Find and remove selected table rows
@@ -334,8 +560,10 @@
 	                }
 	            });
 	        });
-	    });    
-	
+	    }); 
+	 
+	 
+	 
 	
 	</script>
 </body>

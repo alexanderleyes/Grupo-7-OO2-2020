@@ -101,6 +101,11 @@ public class ViewRouteHelper {
 
 	
 	
+	public final static String venta_prueba = "venta/venta_prueba";
+	
+	
+	
+	
 	/*ESTADO DE VENTA*/
 
 	public final static String estadoVenta_idx = "estadoVenta/estadoVenta_idx";
