@@ -77,14 +77,27 @@ public class ViewRouteHelper {
 
 	public final static String producto_reload = "redirect:/"+ producto_idx;
 	
-	/*PEDIDOS*/
+	/*VENTAS*/
+
+	public final static String venta_idx = "venta/venta_idx";
+
+	public final static String venta_insert = "venta/venta_mod";
+
+	public final static String venta_reload = "redirect:/"+ venta_idx;
+	
+	public final static String venta_items = "venta/venta_items";
+	
+	public final static String venta_detalles = "venta/venta_det";
+
+	
+	
+	/*ESTADO DE VENTA*/
 
 	public final static String estadoVenta_idx = "estadoVenta/estadoVenta_idx";
 
 	public final static String estadoVenta_insert = "estadoVenta/estadoVenta_mod";
 
 	public final static String estadoVenta_reload = "redirect:/"+ estadoVenta_idx;	
-	
 	/*PEDIDOS*/
 
 	public final static String pedido_idx = "pedido/pedido_idx";
@@ -98,6 +111,12 @@ public class ViewRouteHelper {
 	public final static String logout = "user/logout";
 	public final static String home = "redirect:/home";
 
-	
+	/*ITEMS*/
+
+	public final static String item_idx = "item/item_idx";
+
+	public final static String item_insert = "item/item_mod";
+
+	public final static String item_reload = "redirect:/"+ item_idx;	
 	
 }
