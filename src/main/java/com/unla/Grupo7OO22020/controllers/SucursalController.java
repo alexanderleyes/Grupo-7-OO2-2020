@@ -1,4 +1,7 @@
 package com.unla.Grupo7OO22020.controllers;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.entities.Gerente;
+import com.unla.Grupo7OO22020.entities.Lote;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.SucursalModel;
@@ -40,10 +44,7 @@ public class SucursalController {
 			mav.addObject("sucursal", new Sucursal());
 			mav.addObject("sucursales", sucursalService.getAll());
 			mav.addObject("gerentes", gerenteService.getAll());
-			mav.addObject("gerente", new Gerente());
-			
-			Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			mav.addObject("user", userDet);
+			mav.addObject("gerente", new Gerente());		
 			return mav;			
 		}
 	
@@ -77,5 +78,24 @@ public class SucursalController {
 	}
 	
 	
+	@PostMapping("/stock")	
+	public String stockSucursal(){	
+		//No le puse parametros de entrada xq no se donde lo van a implementear
+		//Primer parametro es el idSucursal, el segundo es el idProducto
+		//suc, producto
+		
+		int lote =sucursalService.stock(1,4);
+		System.out.println("Stock disponible del producto seleccionado  -->  " + lote);
+		return ViewRouteHelper.sucursal_reload;
+	}
+	
+	@PostMapping("/consumir")	
+	public String consumirProducto(){	
+		//primer parametro idSucursal, segundo parmetro idProducto, tercer parametro cantidad
+		//idSucursal,idProducto,cantidad
+		sucursalService.consumir(1, 1, 10);
+			
+		return ViewRouteHelper.sucursal_reload;
+	}
 		
 }

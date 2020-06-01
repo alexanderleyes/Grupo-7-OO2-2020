@@ -11,10 +11,19 @@ public class ClienteConverter {
 	
 	
 	public ClienteModel entityToModel(Cliente cliente) {
-		return new ClienteModel(cliente.getIdPersona(), cliente.getNombre(), cliente.getApellido(), cliente.getFechaNacimiento(), cliente.getDni(), /*H*/cliente.getIdPersona());
+		return new ClienteModel(cliente.getIdPersona(),
+				cliente.getNombre(),
+				cliente.getApellido(),
+				cliente.getFechaNacimiento(),
+				cliente.getDni(),
+				/*H*/cliente.getIdPersona());
 	}
 	
 	public Cliente modelToEntity(ClienteModel clienteModel) {
-		return new Cliente(clienteModel.getIdCliente(),  clienteModel.getNombre(),  clienteModel.getApellido(),  clienteModel.getFechaNacimiento(),  clienteModel.getDni());
+		return new Cliente(clienteModel.getIdCliente(),
+				clienteModel.getNombre(),
+				clienteModel.getApellido(),
+				clienteModel.getFechaNacimiento(),
+				clienteModel.getDni());
 	}
 }

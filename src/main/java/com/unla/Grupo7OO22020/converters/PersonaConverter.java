@@ -16,10 +16,18 @@ public class PersonaConverter {
 	private GerenteConverter gerenteConverter;
 	
 	public PersonaModel entityToModel(Persona persona) {
-		return new PersonaModel(persona.getIdPersona(),  persona.getNombre(),  persona.getApellido(),  persona.getFechaNacimiento(),  persona.getDni());
+		return new PersonaModel(persona.getIdPersona(),
+				persona.getNombre(),
+				persona.getApellido(),
+				persona.getFechaNacimiento(),
+				persona.getDni());
 	}
 	
 	public Persona modelToEntity(PersonaModel personaModel) {
-		return new Persona(personaModel.getIdPersona(),  personaModel.getNombre(),  personaModel.getApellido(),  personaModel.getFechaNacimiento(),  personaModel.getDni());
+		return new Persona(personaModel.getIdPersona(),
+				personaModel.getNombre(),
+				personaModel.getApellido(),
+				personaModel.getFechaNacimiento(),
+				personaModel.getDni());
 	}
 }

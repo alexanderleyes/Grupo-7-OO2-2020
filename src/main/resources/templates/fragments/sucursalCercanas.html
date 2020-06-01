@@ -1,0 +1,9 @@
+  			
+
+	<label for="name">Sucursales que disponen del Producto y Cantidad Solicitado</label>				
+    <select class="form-control" id="sucDestino.idSucursal" name="sucDestino.idSucursal" >	
+  		<option th:each= "s : ${sucursalesDes}" th:value="${s.idSucursal}" th:text ="${s.direccion}">		
+  	</select>
+<br>	
+
+ <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
