@@ -23,15 +23,15 @@ public class ItemConverter {
 		return new ItemModel(
 				item.getIdItem(),
 				productoConverter.entityToModel(item.getProducto()),
-				item.getCantidad()/*,
-				ventaConverter.entityToModel(item.getVenta())*/);
+				item.getCantidad(),
+				ventaConverter.entityToModel(item.getVenta()));
 	}
 	
 	public Item ModelToEntity(ItemModel itemModel) {
 		return new Item(
 				itemModel.getIdItem(),
 				productoConverter.modelToEntity(itemModel.getProducto()),
-				itemModel.getCantidad()/*,
-				ventaConverter.modelToEntity(itemModel.getVenta())*/);
+				itemModel.getCantidad(),
+				ventaConverter.modelToEntity(itemModel.getVenta()));
 	}
 }

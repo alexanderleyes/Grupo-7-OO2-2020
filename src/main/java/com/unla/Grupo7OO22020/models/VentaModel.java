@@ -1,7 +1,5 @@
 package com.unla.Grupo7OO22020.models;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class VentaModel{
 	
@@ -10,7 +8,7 @@ public class VentaModel{
 	private VendedorModel vendedor;
 	private PersonaModel cliente;
 	private EstadoVentaModel estado;
-	private Set<ItemModel> items = new HashSet<ItemModel>();
+	//private Set<ItemModel> items = new HashSet<ItemModel>();
 
 	public VentaModel() {
 	}
@@ -24,6 +22,8 @@ public class VentaModel{
 		this.cliente = cliente;
 		this.estado = estado;
 	}
+
+	
 
 	public long getIdVenta() {
 		return idVenta;
@@ -57,22 +57,22 @@ public class VentaModel{
 		this.cliente = cliente;
 	}
 
-	public EstadoVentaModel getEstadoVenta() {
+	public EstadoVentaModel getEstado() {
 		return estado;
 	}
 
-	public void setEstadoVenta(EstadoVentaModel estado) {
+	public void setEstado(EstadoVentaModel estado) {
 		this.estado = estado;
 	}
-
-	public Set<ItemModel> getItems() {
-		return items;
-	}
-
-	public void setItems(Set<ItemModel> items) {
-		this.items = items;
-	}
-
+	
+//	public Set<ItemModel> getItems() {
+//	return items;
+//}
+//
+//public void setItems(Set<ItemModel> items) {
+//	this.items = items;
+//}
+	
 	@Override
 	public String toString() {
 		return "VentaModel [idVenta=" + idVenta + ", sucursal=" + sucursal + ", vendedor=" + vendedor + ", cliente="

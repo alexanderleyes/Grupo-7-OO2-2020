@@ -63,12 +63,10 @@
           </ol>
         </div>        
        
-
-	<div class="text-left"><button id="altaVentaPopUp" class="bx bx-list-plus" title="Agregar una Venta"></button> -->
-       
+       <br>
        <!-- Botón que dispara el modal -->
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-		  Agregar
+		  Agregar una Venta
 		</button>
 
        </div>
@@ -77,8 +75,7 @@
         
         <br><br><br><br><br>
         
-         <div id="div-select-cercana" class="row"></div>
-         
+        
          <table class="table" id="table"  >
 			<thead>
 				<tr >
@@ -88,151 +85,33 @@
 					<th>Cliente</th>
 					<th>Estado</th>	
 					<th></th>	
-					<th></th>					
+									
 				</tr>
 			</thead>
 			<tbody>				
 				
 				<tr th:each="venta: ${ventas}">
-					<form th:action="@{/venta/modificar/{id}(id=${venta.idVenta})}" method="post" role="form" >
+					<form th:action="@{/venta/verDetalle/{id}(id=${venta.idVenta})}" method="post" role="form" >
 						<td><span th:text=${venta.idVenta}/></td>
 						<td><span th:text=${venta.sucursal.direccion}/></td>
 						<td><span th:text=${venta.vendedor.nombre}/></td>
 						<td><span th:text=${venta.cliente.nombre}/></td>
 						<td><span th:text=${venta.estado.nombre}/></td>
 						<td>
-							<input type="submit" name="modificar" value="M" />						
+							<input type="submit" name="verDetalle" value="D" />						
 						</td>
-					</form>	
+					</form>						
 					
-					<td>
-						<form th:action="@{/venta/eliminar/{id}(id=${venta.idVenta})}" method="post" role="form" >
-							<input type="submit"  name="eliminar" value="X" />
-						</form>
-					</td>
 				</tr>
 				
 			</tbody>
 		</table>  
 		
+		
         
 		<br><br><br>
 		
 
-       
-<!-- 		<br><br><br> -->
-<!-- 		<input type="button" class="add-row" value="+"> -->
-<!-- 		<input type="button" class="delete-row" value="-"> -->
-<!-- 		<table class="tableItems" id="tableItems"  > -->
-<!-- 			<thead> -->
-<!-- 				<tr > -->
-<!-- 					<th>ID </th> -->
-<!-- 					<th>Item </th>			 -->
-									
-<!-- 				</tr> -->
-<!-- 			</thead> -->
-<!-- 			<tbody>				 -->
-				
-<!-- 				<tr> -->
-<!-- 						<td id="id">id</td> -->
-<!-- 						<td id="item">item1</td>					 -->
-						
-					
-<!-- 				</tr> -->
-				
-<!-- 			</tbody> -->
-<!-- 		</table>  -->
-        
-
-<!--       </div> -->
-      
-      
-<!--       Popup -->
-<!-- 		<div id="popUpVentas" class="modal"> -->
-		
-<!-- 		  Modal content -->
-<!-- 		  <div class="modal-content"> -->
-<!-- 		    <span class="close">&times;</span> -->
-<!-- 		    <p>Iniciar una Venta</p> -->
-		    
-		    
-<!-- 		    <form th:action="@{/venta/agregar}" th:object="${venta}" method="post" role="form" > -->
-<!--               <div class="form-row" ;>               -->
-<!--                <div class="form-group col-md-6"> -->
-<!-- 				 <label for="name">Sucursal</label>				 -->
-<!-- 				    <select   class="form-control"  th:field="*{sucursal.idSucursal}" >				    -->
-<!-- 				  		<option th:each= "s : ${sucursales}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	 -->
-<!-- 				    </select> -->
-<!-- 				</div> -->
-				
-<!-- 				<div class="form-group col-md-6"> -->
-<!-- 				 <label for="name">Vendedor</label>				 -->
-<!--  				    <select  class="form-control"  th:field="*{vendedor.idPersona}" >				     -->
-<!--  				  		<option th:each= "v : ${vendedores}" th:value="${v.idPersona}" th:text ="${v.nombre}">	 -->
-<!--  				    </select> -->
-<!-- 				</div> -->
-				
-<!-- 				<div class="form-group col-md-6"> -->
-<!-- 				 <label for="name">Cliente</label>				 -->
-<!-- 				    <select   class="form-control"  th:field="*{cliente.idPersona}" >				    -->
-<!-- 				  		<option th:each= "c : ${clientes}" th:value="${c.idPersona}" th:text ="${c.nombre}">	 -->
-<!-- 				    </select> -->
-<!-- 				</div> -->
-				
-<!-- <!-- 				<div class="form-group col-md-6"> --> -->
-<!-- <!-- 				 <label for="name">Estado</label>				 --> -->
-<!-- <!-- 				    <select  class="form-control"  th:field="*{estado.idEstadoVenta}" >				    --> -->
-<!-- <!-- 				  		<option th:each= "e : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">	 --> -->
-<!-- <!-- 				    </select> --> -->
-<!-- <!-- 				</div> --> -->
-                                                
-<!--               </div>   -->
-<!--               </form>  -->
-              
-<!--                       <form th:object="${item}" method="post" role="form" > -->
-<!--         <div class="form-row" ;>       -->
-<!-- 			<div class="form-group col-md-6"> -->
-<!-- 				<label for="name">Producto</label>		      -->
-<!-- 		   		<select class="form-control"  th:field="*{producto.idProducto}" id="producto"><br> -->
-<!-- 		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	 -->
-<!-- 		    	</select> -->
-<!-- 	     	</div>         -->
-<!-- 			<div class="form-group col-md-6"> -->
-<!-- 		    	<label for="name">Cantidad</label> -->
-<!-- 		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  id="cantidad"/> -->
-<!-- 		    	<div class="validate"></div> -->
-<!-- 			</div>                               -->
-<!--         </div> -->
-<!--         </form>           -->
-<!-- 		<div class="text-left"><input type="button" class="add-row" value="Agregar"></div>     -->
-         
-
-<!-- 	         <table class="table" id="table"  > -->
-<!-- 				<thead> -->
-<!-- 					<tr > -->
-<!-- 						<th>ID </th> -->
-<!-- 						<th>Producto</th> -->
-<!-- 						<th>Cantidad </th> -->
-<!-- 						<th> </th> -->
-<!-- 						<th> </th>																 -->
-<!-- 					</tr> -->
-<!-- 				</thead> -->
-<!-- 				<tbody>	 -->
-					
-<!-- 				</tbody> -->
-<!-- 			</table> -->
-	 
-              
-              
-              
-                      
-<!--               <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>     -->
-              
-<!--        		</form>	 -->
-
-<!-- 		</div> -->
-		
-<!-- 		</div> -->
 		
 
 <!-- Modal -->
@@ -325,20 +204,20 @@
              
 <!-- 		<div class="text-left"><input type="button" class="add-row" value="Agregar" id="btnAgregar"></div>            -->
          
-			<table class="table" id="table1"  >
-				<thead>
-					<tr >
-						<th>ID </th>
-						<th>Producto</th>
-						<th>Cantidad </th>
-						<th> </th>
-						<th> </th>																
-					</tr>
-				</thead>
-				<tbody>	
+<!-- 			<table class="table" id="table1"  > -->
+<!-- 				<thead> -->
+<!-- 					<tr > -->
+<!-- 						<th>ID </th> -->
+<!-- 						<th>Producto</th> -->
+<!-- 						<th>Cantidad </th> -->
+<!-- 						<th> </th> -->
+<!-- 						<th> </th>																 -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody>	 -->
 					
-				</tbody>
-			</table>
+<!-- 				</tbody> -->
+<!-- 			</table> -->
 
 	  <div class="modal-footer">
 		<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 

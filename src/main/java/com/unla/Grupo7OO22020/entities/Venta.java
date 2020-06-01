@@ -1,7 +1,6 @@
 package com.unla.Grupo7OO22020.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -33,8 +31,8 @@ public class Venta {
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private EstadoVenta estado;	
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="venta")
-	private Set<Item> items = new HashSet<Item>();
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy="Item")
+//	private Set<Item> items = new HashSet<Item>();
 
 	public Venta() {}
 
@@ -87,12 +85,12 @@ public class Venta {
 		this.estado = estado;
 	}
 
-	public Set<Item> getItems() {
-		return items;
-	}
-
-	public void setItems(Set<Item> items) {
-		this.items = items;
-	}
+//	public Set<Item> getItems() {
+//		return items;
+//	}
+//
+//	public void setItems(Set<Item> items) {
+//		this.items = items;
+//	}
 
 }

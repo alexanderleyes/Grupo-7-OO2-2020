@@ -31,12 +31,12 @@ public class Item {
 	public Item() {		
 	}
 
-	public Item(long idItem, Producto producto, double cantidad /*, Venta venta*/) {
+	public Item(long idItem, Producto producto, double cantidad , Venta venta) {
 		super();
 		this.idItem = idItem;
 		this.producto = producto;
 		this.cantidad = cantidad;
-		// this.venta = venta;
+		this.venta = venta;
 	}
 
 	public Item(double cantidad) {

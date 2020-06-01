@@ -98,6 +98,8 @@ public class ViewRouteHelper {
 	public final static String venta_reload = "redirect:/"+ venta_idx;
 	
 	public final static String venta_items = "venta/venta_items";
+	
+	public final static String venta_detalles = "venta/venta_det";
 
 	
 	

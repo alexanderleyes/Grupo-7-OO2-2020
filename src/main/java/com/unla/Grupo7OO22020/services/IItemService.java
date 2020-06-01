@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.models.ItemModel;
+import com.unla.Grupo7OO22020.models.VentaModel;
 
 public interface IItemService {
 	
@@ -14,6 +15,8 @@ public interface IItemService {
 	public ItemModel insertOrUpdate(ItemModel itemModel);
 	
 	public boolean remove(long id);
+	
+	public List<ItemModel> findAllByVenta(VentaModel ventaModel);
 	
 
 }
