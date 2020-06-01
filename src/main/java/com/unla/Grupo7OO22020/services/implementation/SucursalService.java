@@ -100,13 +100,22 @@ public class SucursalService implements  ISucursalService{
 
 	@Override
 	public List<Sucursal> distancias(SucursalModel sucursal, ProductoModel producto, int cantidad) {
-		Producto productob = productoConverter.modelToEntity(producto);
-		List<Sucursal>sucursalesCom =new ArrayList<Sucursal>();
+		
+		List <Sucursal> sucursalesa = sucursalRepository.findAll();	
+		List<Sucursal> sucursales = new ArrayList<Sucursal>();
+		List<Sucursal>sucursalesCom =new ArrayList<Sucursal>();		
 		double[] miArray = new double[] {999999999,999999999,999999999,999999999};
 		int contador;
 		long[] idArray = new long[] {0,0,0,0};
 		SucursalModel sucursal2;		
-		List <Sucursal> sucursales = sucursalRepository.findByProdcuto(productob, cantidad);
+		
+		
+		for (Sucursal s: sucursalesa ) {
+			int stock = stock(s.getIdSucursal(),producto.getIdProducto());
+			if(stock >= cantidad){
+				sucursales.add(s);				
+			}
+		}
 		
 		
 		if(sucursales.size() <=2) {			
