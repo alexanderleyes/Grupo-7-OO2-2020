@@ -21,6 +21,7 @@ public interface ISucursalService {
 	public int stock (long idSucursal, long idProducto);
 	public List<Lote> stock  (long idSucursal, long idProducto, int cantidad);
 	public void consumir(long idSucursal, long idProducto, int cantidad);	
+	public boolean consumoitem(long idSucursal, long idProducto, int cantidad);
 	
 	
 	

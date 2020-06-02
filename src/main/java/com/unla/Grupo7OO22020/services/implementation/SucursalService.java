@@ -232,9 +232,19 @@ public class SucursalService implements  ISucursalService{
 		
 		
 	}
-
 	
-	
+	public boolean consumoitem(long idSucursal, long idProducto, int cantidad ){
+		int stock = stock(idSucursal,idProducto);
+		boolean respuesta; 
+		if(stock>=cantidad) {
+			consumir(idSucursal, idProducto,cantidad);
+			respuesta = true;
+		}else {
+			respuesta = false;
+		}
+		
+		return respuesta;
+	}
 	
 	
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.converters.ClienteConverter;
+import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.entities.EstadoVenta;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Producto;
@@ -25,6 +26,7 @@ import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.ClienteModel;
 import com.unla.Grupo7OO22020.models.EstadoVentaModel;
 import com.unla.Grupo7OO22020.models.ItemModel;
+import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.PersonaModel;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
@@ -33,6 +35,7 @@ import com.unla.Grupo7OO22020.models.VentaModel;
 import com.unla.Grupo7OO22020.services.IClienteService;
 import com.unla.Grupo7OO22020.services.IEstadoVentaService;
 import com.unla.Grupo7OO22020.services.IItemService;
+import com.unla.Grupo7OO22020.services.IPedidoService;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
@@ -73,6 +76,14 @@ public class VentaController {
 	@Autowired
 	@Qualifier("clienteConverter")
 	private ClienteConverter clienteConverter;
+	
+	@Autowired
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;
+	
+	@Autowired
+	@Qualifier("pedidoService")
+	private IPedidoService pedidoService;
 	
 	@GetMapping("/venta_idx")
 	public ModelAndView index(){
@@ -173,9 +184,36 @@ public class VentaController {
 		venta = ventaService.insertOrUpdate(venta);
 		
 		int largo = prodIndices.size();
+		boolean consumoitem;
 		for (int i = 0; i < largo; i++) {
 			ProductoModel productoModel = productoService.findByIdProducto(prodIndices.get(i));
 			double 		cantidad 	= Double.parseDouble(prodCantidades.get(i).toString());
+			
+			consumoitem = sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(), (int) cantidad);
+			System.out.println("rta consumo item:"+ consumoitem);
+		
+			List<Sucursal> resultado =  sucursalService.distancias(sucursalModel, productoModel,(int)cantidad);
+			int stock = sucursalService.stock(sucursalModel.getIdSucursal(), productoModel.getIdProducto());
+			
+			if(stock>=cantidad) {
+				sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(),(int)cantidad);
+			}else {
+			
+				SucursalModel sucModel = sucursalConverter.entityToModel(resultado.get(0));
+				System.out.println("suc model direcc: "+sucModel.getDireccion());
+				
+				PedidoModel pedidoModel = new PedidoModel();
+				pedidoModel.setSucOrigen(sucursalModel);
+				pedidoModel.setSucDestino(sucModel);
+				pedidoModel.setVendedorSolicita(vendedorModel);
+				pedidoModel.setProducto(productoModel);
+				pedidoModel.setCantidad(cantidad);
+
+				pedidoModel = pedidoService.insertOrUpdate(pedidoModel);
+				
+				
+			}
+			
 			ItemModel 	itemModel 	= new ItemModel(productoModel, cantidad, venta);
 			itemService.insertOrUpdate(itemModel);
 		}
