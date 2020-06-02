@@ -188,6 +188,8 @@ public class PedidoController {
 		String username 	= SecurityContextHolder.getContext().getAuthentication().getName();		
 		PedidoModel pedidoModel = pedidoService.findById(id);
 		pedidoModel.setVendedorDespacha(vendedorService.findByUsuario(username));
+		sucursalService.consumir(pedidoModel.getSucDestino().getIdSucursal(), pedidoModel.getProducto().getIdProducto(), (int) pedidoModel.getCantidad());
+
 		pedidoService.insertOrUpdate(pedidoModel);		
 		return mav;
 	}
