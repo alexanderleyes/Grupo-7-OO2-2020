@@ -84,6 +84,7 @@
 					<th>Vendedor</th>
 					<th>Cliente</th>
 					<th>Estado</th>	
+					<th>Fecha</th>	
 					<th></th>	
 									
 				</tr>
@@ -97,6 +98,7 @@
 						<td><span th:text=${venta.vendedor.nombre}/></td>
 						<td><span th:text=${venta.cliente.nombre}/></td>
 						<td><span th:text=${venta.estado.nombre}/></td>
+						<td><span th:text=${venta.fecha}/></td>
 						<td>
 							<input type="submit" name="verDetalle" value="D" />						
 						</td>
@@ -150,12 +152,13 @@
 				    </select>
 				</div>
 				
-<!-- 				<div class="form-group col-md-6"> -->
-<!-- 				 <label for="name">Estado</label>				 -->
-<!-- 				    <select  class="form-control"  th:field="*{estado.idEstadoVenta}" >				    -->
-<!-- 				  		<option th:each= "e : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">	 -->
-<!-- 				    </select> -->
-<!-- 				</div> -->
+				<div class="form-group col-md-6"> 
+ 				 <label for="name">Estado</label>				 
+ 				    <select  class="form-control"  th:field="*{estado.idEstadoVenta}" >				    
+ 				  		<option th:each= "e : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">	
+				    </select> 
+
+ 				</div> 
                                                 
               </div>
             

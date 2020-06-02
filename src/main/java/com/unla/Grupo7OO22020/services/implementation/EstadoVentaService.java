@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.EstadoVentaConverter;
 import com.unla.Grupo7OO22020.entities.EstadoVenta;
+import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.models.EstadoVentaModel;
+import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.repositories.IEstadoVentaRepository;
 import com.unla.Grupo7OO22020.services.IEstadoVentaService;
 
@@ -28,11 +30,15 @@ public class EstadoVentaService implements IEstadoVentaService{
 		return estadoVentaRepository.findAll();
 	}
 
+	
 	@Override
 	public EstadoVentaModel findByIdEstadoVenta(long id) {				
-		return estadoVentaConverter.entityToModel(estadoVentaRepository.findByIdEstadoVenta(id));
+		EstadoVenta estadoVenta = null;
+		estadoVenta = estadoVentaRepository.findByIdEstadoVenta(id);
+		return estadoVentaConverter.entityToModel(estadoVenta);
 	}
 
+	
 	@Override
 	public boolean remove(long id) {
 		try {

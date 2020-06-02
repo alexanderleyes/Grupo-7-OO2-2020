@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.converters.ClienteConverter;
+import com.unla.Grupo7OO22020.entities.EstadoVenta;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
@@ -22,6 +23,7 @@ import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.entities.VtaItems;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.ClienteModel;
+import com.unla.Grupo7OO22020.models.EstadoVentaModel;
 import com.unla.Grupo7OO22020.models.ItemModel;
 import com.unla.Grupo7OO22020.models.PersonaModel;
 import com.unla.Grupo7OO22020.models.ProductoModel;
@@ -105,6 +107,8 @@ public class VentaController {
 		ventaModel.setSucursal(sucursalService.findByIdSucursal(ventaModel.getSucursal().getIdSucursal()));
 		ventaModel.setVendedor(vendedorService.findByIdVendedor(ventaModel.getVendedor().getIdPersona()));
 		ventaModel.setCliente((PersonaModel) clienteService.findByIdCliente(ventaModel.getCliente().getIdPersona()));		
+		ventaModel.setEstado(estadoVentaService.findByIdEstadoVenta(ventaModel.getEstado().getIdEstadoVenta()));
+		
 		mav.addObject("venta", ventaModel);
 		mav.addObject("items", itemService.getAll());
 		mav.addObject("productos", productoService.getAll());
@@ -153,12 +157,16 @@ public class VentaController {
 		venta.setSucursal(sucursalModel);
 		VendedorModel 	vendedorModel	= vendedorService.findByIdVendedor(venta.getVendedor().getIdVendedor());
 		venta.setVendedor(vendedorModel);		
-		long id = 1;		
-		venta.setEstado(estadoVentaService.findByIdEstadoVenta(id));
+		
+		EstadoVentaModel estadoModel = estadoVentaService.findByIdEstadoVenta(venta.getEstado().getIdEstadoVenta());
+		venta.setEstado(estadoModel);
+		
 		
 		System.out.println("cli : " + clienteModel);	
 		System.out.println("suc : " + sucursalModel);	
 		System.out.println("ven : " + vendedorModel);	
+		System.out.println("est : " + estadoModel);
+		
 		List<Long> prodIndices  	= vtaItems.getListaIndices();
 		List<Long> prodCantidades 	= vtaItems.getListaCantidad();
 		

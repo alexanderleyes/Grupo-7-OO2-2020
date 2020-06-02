@@ -2,6 +2,9 @@ package com.unla.Grupo7OO22020.entities;
 
 
 
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 
 @Entity
@@ -30,6 +35,10 @@ public class Venta {
 
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private EstadoVenta estado;	
+	
+	@Column(name="fecha")
+	@CreationTimestamp
+	private LocalDate fecha;
 	
 //	@OneToMany(fetch=FetchType.LAZY, mappedBy="Item")
 //	private Set<Item> items = new HashSet<Item>();
@@ -84,6 +93,16 @@ public class Venta {
 	public void setEstado(EstadoVenta estado) {
 		this.estado = estado;
 	}
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
+	
+	
 
 //	public Set<Item> getItems() {
 //		return items;

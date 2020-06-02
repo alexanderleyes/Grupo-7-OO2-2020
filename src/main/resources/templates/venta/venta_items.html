@@ -96,9 +96,10 @@
 						<input name="vend" type="hidden" th:field="${venta.vendedor.idVendedor}">
 						<input name="suc" type="hidden" th:field="${venta.sucursal.idSucursal}">
 						<input name="cli" type="hidden" th:field="${venta.cliente.idPersona}">
+						<input name="est" type="hidden" th:field="${venta.estado.idEstadoVenta}">
 												
-						<input id="ids" name="ids" type="text" th:field="${vtaItems.ids}">
-						<input id="cnt" name="cnt" type="text" th:field="${vtaItems.cnt}">
+						<input id="ids" name="ids" type="hidden" th:field="${vtaItems.ids}">
+						<input id="cnt" name="cnt" type="hidden" th:field="${vtaItems.cnt}">
 						<input type="submit" id=btnRecorrer class="btn btn-primary" onclick="recorrerItems();" />
 					</form>
 					<br><br><br>
