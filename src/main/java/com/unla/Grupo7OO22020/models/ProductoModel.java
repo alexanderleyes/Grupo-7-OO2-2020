@@ -1,15 +1,9 @@
 package com.unla.Grupo7OO22020.models;
 
-import java.time.LocalDate;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class ProductoModel{
 	
-	private long idProducto;
-	
-	private String descripcion;
-	
+	private long idProducto;	
+	private String descripcion;	
 	private double precioUnitario;
 	
 	
@@ -46,6 +40,12 @@ public class ProductoModel{
 
 	public void setPrecioUnitario(double precioUnitario) {
 		this.precioUnitario = precioUnitario;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductoModel [idProducto=" + idProducto + ", descripcion=" + descripcion + ", precioUnitario="
+				+ precioUnitario + "]";
 	}
 	
 	

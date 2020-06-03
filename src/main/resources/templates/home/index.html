@@ -42,25 +42,11 @@
 
   <!-- ======= Header ======= -->
   <header id="header">
-    <div class="d-flex flex-column">
-
-      <div class="profile">
-        <img src="../img/hero.jpg" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html"><span th:text="${user.usuario}" /></a></h1>
-        <div class="social-links mt-3 text-center">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-      </div>
+    
 
       	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
 
-      <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
-
-    </div>
+     
   </header><!-- End Header -->
 	
   <main id="main">
@@ -70,27 +56,129 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>INICIO</h2>
+          <h2>Bienvenido</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
             <li>Inventario 002</li>
           </ol>
-        </div>
+        </div>        
+                
+        	<div sec:authorize="hasRole('VENDEDOR')">  
+	        	     	
+	        	<h1>
+					Sucursal <span th:text=${vendedor.sucursal.idSucursal}/> - <span th:text=${vendedor.sucursal.direccion}/>  		
+				</h1>				
+				<br> <br> <br> <br> <br>
+				<h3>
+					Solicitudes pendientes de envío.		
+				</h3>
+				<table class="table" id="table">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Sucursal Origen</th>					
+						<th scope="col">Vend Solicita</th>	
+						<th scope="col">Vend Despacha</th>					
+						<th scope="col">Producto</th>
+						<th scope="col">Cantidad</th>			
+						<th scope="col"></th>			
+					</tr>
+					<tbody>
+						<tr th:each="pedido : ${pedidos}">
+							<form th:action="@{/pedido/despachar/{id}(id=${pedido.idPedido})}" 	method="post" role="form">
+								<td><span th:text="${pedido.idPedido}" /></td>
+								<td><span th:text="${pedido.sucOrigen.direccion}" /></td>							
+								<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>
+								<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"/></td>
+								<td><span th:text="${pedido.producto.descripcion}" /></td>
+								<td><span th:text="${pedido.cantidad}" /></td>				
+								<td><input type="image" src="../../img/icons/despacha.png"  title="Despachar" /></td>
+							</form>			
+							
+						</tr>		
+					</tbody>
+				</table>
+				
+				Se supone que cuando se loguea a como vendedor aca aparecen las solicitudes de mercaderia que se hicieron a esta sucursal,
+				El vendedor decide preparar el pedido y despacharlo. En ese momento se consume la mercaderia y se agrega al vendedor que 
+				despachó al campo	correspondiente.
+				<br> falta  hacer que desaparezca de la lista cuando ya se despachó.		
+			</div>
+			<!-- ================================================================================================================== -->
+			
+			
+			
+				<div sec:authorize="hasRole('GERENTE')">  
+	        	 
+	        	
+	        	<h1>
+					Sucursal <span th:text=${sucursal.idSucursal}/> - <span th:text=${sucursal.direccion}/>  		
+				</h1>
+				
+				
+				
+				<br> <br> <br> <br> <br>
+				<h3>
+					Titulo para el gerente		
+				</h3>
+				
+				Aca creo que estaria copado que vayan las estadisticas y reportes del proximo hito,
+					
+				
+				
+				</div>		
+	<!-- ================================================================================================================== -->
+		
+          <div sec:authorize="hasRole('ADMIN')">         	  
+	        	
+	        	<h1>
+					El Admnistrador no esta asociado a ninguna sucursal   		
+				</h1>
+				
+					
+				
+				<br> <br> <br> <br> <br>
+				<h3>
+					Titulo para el ADMIN		
+				</h3>
+					
+					Aun no se decidio la info que va a visualizar el Adminisrador en el landing.
+					Todabia hay pantallazos y errores, aunque tenemos todas las partes contruidas 
+					faltan implementarlas y unirlas al 100% para que todo funcione bien. Por fa revisen!
+				
+				</div>	
+          
+          
+        
+      
 
-      </div>
+			
+		<div sec:authorize="hasRole('ADMIN')">  soy un admin</div>
+		
+		<div sec:authorize="hasRole('GERENTE')">  soy un gere</div>
+		
+		
+		
+	<br><div sec:authentication="principal.authorities"></div>		
+	
+	
+
+
+
+
+
+
+
+
+			</div>
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
 
-        <div class="portfolio-details-container">
+        
 
-          <div class="owl-carousel portfolio-details-carousel">
-            <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt="">
-            <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt="">
-          </div>
+         
 
           <div class="portfolio-info">
             <h3>Project information</h3>
@@ -101,15 +189,9 @@
               <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
             </ul>
           </div>
-
         </div>
 
-        <div class="portfolio-description">
-          <h2>This is an example of portfolio detail</h2>
-          <p>
-            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-          </p>
-        </div>
+       
 
       </div>
     </section><!-- End Portfolio Details Section -->
@@ -143,7 +225,6 @@
   <script src="../vendor/counterup/counterup.min.js"></script>
   <script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../vendor/venobox/venobox.min.js"></script>
-  <script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="../vendor/typed.js/typed.min.js"></script>
   <script src="../vendor/aos/aos.js"></script>
 

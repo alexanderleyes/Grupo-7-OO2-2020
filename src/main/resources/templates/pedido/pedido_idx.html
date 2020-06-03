@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>TPC - Pedidos</title>
+<meta content="" name="descriptison">
+<meta content="" name="keywords">
+
+<!-- Favicons -->
+<link href="../../img/favicon.png" rel="icon">
+<link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../vendor/icofont/icofont.min.css" rel="stylesheet">
+<link href="../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="../vendor/venobox/venobox.css" rel="stylesheet">
+<link href="../vendor/owl.carousel/../owl.carousel.min.css"
+	rel="stylesheet">
+<link href="../vendor/aos/aos.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="../css/style.css" rel="stylesheet">
+
+<!-- =======================================================
+  * Template Name: iPortfolio - v1.2.1
+  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+	<!-- ======= Mobile nav toggle button ======= -->
+	<button type="button" class="mobile-nav-toggle d-xl-none">
+		<i class="icofont-navigation-menu"></i>
+	</button>
+
+	<!-- ======= Header ======= -->
+	<header id="header">		
+
+			<!-- NAV-MENU!!!!! -->
+			<div th:insert="fragments/nav_menu :: nav_menu"></div>
+		
+	</header>
+	<!-- End Header -->
+
+	<main id="main">
+
+		<!-- ======= Breadcrumbs ======= -->
+		<section id="breadcrumbs" class="breadcrumbs">
+			<div class="container">
+
+				<div class="d-flex justify-content-between align-items-center">
+					<h2>Administrar Pedidos</h2>
+					<ol>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="index.html">Home</a></li>
+					</ol>
+				</div>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+		  			Realizar un Pedido
+		  		</button>				
+				<div sec:authorize="hasRole('VENDEDOR')"> 
+			
+					<br> <br>
+					<h3>
+					Hechos por mi
+				</h3>
+				<table class="table" id="table">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Solicitó</th>						
+						<th scope="col">Destino</th>
+						<th scope="col">Despachó</th>
+						<th scope="col">Producto</th>						
+						<th scope="col">Cantidad</th>
+					</tr>
+					
+					<tbody>
+						<tr th:each="pedido : ${pedidosMios}">
+						<form th:action="@{/pedido/modificar/{id}(id=${pedido.idPedido})}" method="post" role="form">
+							<td><span th:text="${pedido.idPedido}" /></td>
+							<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>
+							<td><span th:text="${pedido.sucDestino.direccion}" /></td>
+							<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"></span></td> 	
+							<td><span th:text="${pedido.producto.descripcion}" /></td>	
+							<td><span th:text="${pedido.cantidad}" /></td>
+							<td><input type="image" src="../../img/icons/lapiz.png"  title="Modificar" /></td>
+						</form>
+							
+						<td>
+						<form th:action="@{/pedido/delete/{id}(id=${pedido.idPedido})}" method="post" role="form" >
+							<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
+						</form>
+							
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				
+				
+				<br> <br>
+				<h3>
+					Desde mi Sucursal
+				</h3>
+				<table class="table" id="table">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Solicitó</th>						
+						<th scope="col">Destino</th>
+						<th scope="col">Despachó</th>
+						<th scope="col">Producto</th>						
+						<th scope="col">Cantidad</th>
+					</tr>
+					
+					<tbody>
+						<tr th:each="pedido : ${pedidosOri}">
+							<td><span th:text="${pedido.idPedido}" /></td>
+							<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>
+							<td><span th:text="${pedido.sucDestino.direccion}" /></td>
+							<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"></span></td> 	
+							<td><span th:text="${pedido.producto.descripcion}" /></td>	
+							<td><span th:text="${pedido.cantidad}" /></td>
+							
+						<td>
+							
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				
+				
+				
+				<br> <br>
+				<h3>
+					Hacia mi Sucursal
+				</h3>
+				<table class="table" id="table">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Solicitó</th>						
+						<th scope="col">Origen</th>
+						<th scope="col">Despachó</th>
+						<th scope="col">Producto</th>						
+						<th scope="col">Cantidad</th>
+					</tr>
+					
+					<tbody>
+						<tr th:each="pedido : ${pedidosDes}">
+							<td><span th:text="${pedido.idPedido}" /></td>
+							<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>
+							<td><span th:text="${pedido.sucOrigen.direccion}" /></td>
+							<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"></span></td> 	
+							<td><span th:text="${pedido.producto.descripcion}" /></td>	
+							<td><span th:text="${pedido.cantidad}" /></td>
+						<td>
+							
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				
+			</div>
+	<!-- ================================================================================================================== -->
+				
+		<div sec:authorize="hasRole('ADMIN')">
+			<br><br>
+				<h3>
+					Todos Los Pedidos
+				</h3>
+				<table class="table" id="table">
+					<tr>
+						<th scope="col">Id</th>						
+						<th scope="col">Solicita Suc.</th>
+						<th scope="col">Despacha Suc.</th>
+						<th scope="col">Solicita Vend.</th>
+						<th scope="col">Despacha Vend</th>
+						<th scope="col">Producto</th>						
+						<th scope="col">Cantidad</th>
+					</tr>
+					
+					<tbody>
+						<tr th:each="pedido : ${pedidos}">
+							<form th:action="@{/pedido/modificar/{id}(id=${pedido.idPedido})}" 	method="post" role="form">
+								<td><span th:text="${pedido.idPedido}" /></td>
+								<td><span th:text="${pedido.sucOrigen.direccion}" /></td>
+								<td><span th:text="${pedido.sucDestino.direccion}" /></td>
+								<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>							
+								<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"/></td> 	
+								<td><span th:text="${pedido.producto.descripcion}" /></td>
+								<td><span th:text="${pedido.cantidad}" /></td>								
+								<td><input type="image" src="../../img/icons/lapiz.png"  title="Modificar" ></td>								
+							</form>	
+							<td>
+								<form
+									th:action="@{/pedido/delete/{id}(id=${pedido.idPedido})}"
+									method="post" role="form"> 
+									<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
+								</form>	 
+							</td>																			
+						</tr>
+					</tbody>
+				</table>
+		
+		</div>
+				
+
+		
+	
+
+			</div>
+		</section>
+		<!-- End Breadcrumbs -->
+
+		<!-- ======= Portfolio Details Section ======= -->
+		<section id="portfolio-details" class="portfolio-details">
+			<div class="container">
+
+				
+				<div class="portfolio-description">
+					<h2>Info</h2>
+					<p>En pedidos mios visualiza los pedidos que realizo este vendedor en particular y puede modificar algo si quiere.
+						En los pedidos de la sucursal solo es para visualizar un general de los pedido que realizo esta sucursal.
+						Los pedidos no se van a hacer aca, la idea es que cuando haga el vendedor una venta ahí verifique el stock y si falta, genere una orden de pedido a la sucursal mas cercana de forma automatica y se notifique al vendedor.			
+						<br> Es la parte de ventas en la que esta trabando carla, esa parte es medio complicada pero esta avanzando bien.
+					</p>
+				</div>
+
+			</div>
+		</section>
+		<!-- End Portfolio Details Section -->
+		
+	</main>
+	
+	<!-----------POPUP-------------->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Realizar Pedido</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            
+		
+			<form action="#" th:action="@{/pedido/agregar}"th:object="${pedido}" method="post">
+			   <div class="form-row">
+				  <div class="form-group col-md-6">
+					 <label for="name">Sucursal Origen</label>
+					 <div id="sucdestino">
+						<select class="form-control"  th:field="*{sucOrigen.idSucursal}" onChange="cambiar()">
+						   <option th:each= "s : ${sucursalesOri}" th:value="${s.idSucursal}" th:text ="${s.direccion}">	
+						</select>
+					 </div>
+				  </div>
+				  <div class="form-group col-md-6">
+					 <label for="name">Vendedor Solicita</label>				
+					 <select class="form-control"  th:field="*{vendedorSolicita.idPersona}" >
+						<option th:each= "v : ${vendedoresOri}" th:value="${v.idPersona}" th:text ="${v.nombre}">	
+					 </select>
+				  </div>
+				  <div class="form-group col-md-6">
+					 <label for="name">Producto</label>				
+					 <select class="form-control"  th:field="*{producto.idProducto}" onChange="cambiar()">
+						<option   th:each= "p : ${productos}" th:value="${p.idProducto}" th:text ="${p.descripcion}">	
+					 </select>
+				  </div>
+				  <div class="form-group col-md-6">
+					 <label for="cantidad">Cantidad</label>
+					 <input  type="number" id="cantidad.producto"  th:field="*{cantidad}" class="form-control" onChange="cambiar()" />             
+					 <div class="validate"></div>
+				  </div>
+				  <div id="div-select-cercanas" ></div>
+			   </div>
+			</form>		
+			
+         
+            
+         </div>
+      </div>
+   </div>
+</div>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer id="footer">
+		<div class="container">
+			<div class="copyright">
+				&copy; Copyright <strong><span>iPortfolio</span></strong>
+			</div>
+			<div class="credits">
+				<!-- All the links in the footer should remain intact. -->
+				<!-- You can delete the links only if you purchased the pro version. -->
+				<!-- Licensing information: https://bootstrapmade.com/license/ -->
+				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+			</div>
+		</div>
+	</footer>
+	<!-- End  Footer -->
+
+	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+	<!-- Vendor JS Files -->
+	<script src="../vendor/jquery/jquery.min.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../vendor/jquery.easing/jquery.easing.min.js"></script>
+	<script src="../vendor/php-email-form/validate.js"></script>
+	<script src="../vendor/waypoints/jquery.waypoints.min.js"></script>
+	<script src="../vendor/counterup/counterup.min.js"></script>
+	<script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="../vendor/venobox/venobox.min.js"></script>
+	<script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
+	<script src="../vendor/typed.js/typed.min.js"></script>
+	<script src="../vendor/aos/aos.js"></script>
+
+	<!-- Template Main JS File -->
+		<script src="../js/main.js"></script>
+		<script>
+	
+	
+		function cambiar(){//	
+			idx=document.getElementById('sucOrigen.idSucursal').value;
+			idp=document.getElementById('producto.idProducto').value;
+			cant=document.getElementById('cantidad.producto').value;
+			idx = 0 + idx;
+			idp = 0 + idp;
+			cant = 0 + cant;		
+			
+	
+			if($.isNumeric(idx)  && cant > 0){
+				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+					method: "GET",
+				 	url: "/pedido/cercana/" + idx + "/" + idp+ "/" + cant,
+				})
+				.done(function(result) {
+					$("#div-select-cercanas").html(result);
+					
+				})
+				.fail(function() {
+					alert("error");
+				});
+			}else $("#div-select-cercanas").html("");			
+			
+		}
+		
+		
+		// POP UP ==============================================================================================
+
+		// Se obtiene el Popup
+		var modal = document.getElementById("popUpPedido");
+
+		// Se obtiene el botón que lo abre
+		var btn = document.getElementById("altaPedidoPopUp");
+
+		// Elemento <span> que cierra el Popup
+		var span = document.getElementsByClassName("close")[0];
+
+		// Cuando se hace click en el botón, se abre el Popup
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// Cuando se hace click en <span> (x), se cierra el Popup
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// Cuando se hace click en cualquier espacio fuera del Popup, éste se cierra
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+
+		</script>
+	
+</body>
+
+</html>

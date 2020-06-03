@@ -73,12 +73,12 @@ public class VendedorService implements  IVendedorService{
 		}				
 		return null ;
 		
-}	
+	}	
 	
 	
 	
 	@Override
-	public VendedorModel insertOrUpdate(VendedorModel vendedorModel) {
+	public VendedorModel insertOrUpdate(VendedorModel vendedorModel) {		
 		Vendedor vendedor = vendedorRepository.save(vendedorConverter.modelToEntity(vendedorModel));
 		return vendedorConverter.entityToModel(vendedor);
 	}

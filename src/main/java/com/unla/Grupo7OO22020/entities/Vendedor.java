@@ -1,6 +1,5 @@
 package com.unla.Grupo7OO22020.entities;
 
-
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
@@ -9,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name="vendedor")
@@ -30,6 +28,12 @@ public class Vendedor extends Empleado {
 		
 	}
 		
+	public Vendedor(  long idPersona, String nombre, String apellido, LocalDate fechaNacimiento, int dni,  String usuario, String password, String horaIngreso, String horasXjornada,
+			double plusSueldo, boolean baja) {		
+		super(idPersona, nombre, apellido, fechaNacimiento,	dni, usuario, password, horaIngreso, horasXjornada,	plusSueldo, baja);	
+	}
+
+
 	public Sucursal getSucursal() {
 		return sucursal;
 	}

@@ -6,18 +6,20 @@ import com.unla.Grupo7OO22020.models.ProductoModel;
 
 
 
-public interface IProductoService {
-
-	public ProductoModel findById(long id);
+public interface IProductoService {	
 
 	public List<Producto> getAll();
 
 	public ProductoModel insertOrUpdate(ProductoModel productoModel);
 
 	public boolean remove(long id);
-
+	
+	public boolean eliminar(long id);
 
 	public ProductoModel findByDescripcion(String name);
+
+	public ProductoModel findByIdProducto(long id);
+	
 
 
 

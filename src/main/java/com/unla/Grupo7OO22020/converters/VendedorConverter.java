@@ -16,12 +16,71 @@ public class VendedorConverter {
 	private SucursalConverter sucursalConverter;
 	
 	public VendedorModel entityToModel(Vendedor vendedor) {
-		return new VendedorModel(vendedor.getIdPersona(),  sucursalConverter.entityToModel(vendedor.getSucursal()), vendedor.getNombre(), vendedor.getApellido(), vendedor.getFechaNacimiento(), vendedor.getDni(), vendedor.getIdPersona(), vendedor.getUsuario(), vendedor.getPassword(), vendedor.getHoraIngreso(),
-				vendedor.getHorasXjornada(), vendedor.getPlusSueldo(), vendedor.getIdPersona());
+		return new VendedorModel(
+				vendedor.getIdPersona(),
+				sucursalConverter.entityToModel(vendedor.getSucursal()),
+				vendedor.getNombre(),
+				vendedor.getApellido(),
+				vendedor.getFechaNacimiento(),
+				vendedor.getDni(),
+				vendedor.getIdPersona(),
+				vendedor.getUsuario(),
+				vendedor.getPassword(),
+				vendedor.getHoraIngreso(),
+				vendedor.getHorasXjornada(),
+				vendedor.getPlusSueldo(),
+				vendedor.getIdPersona());
 	}
 	
+	public VendedorModel entityToModelSinSucursal(Vendedor vendedor) {
+		return new VendedorModel(
+				vendedor.getIdPersona(),
+				vendedor.getNombre(),
+				vendedor.getApellido(),
+				vendedor.getFechaNacimiento(),
+				vendedor.getDni(),
+				vendedor.getIdPersona(),
+				vendedor.getUsuario(),
+				vendedor.getPassword(),
+				vendedor.getHoraIngreso(),
+				vendedor.getHorasXjornada(),
+				vendedor.getPlusSueldo(),
+				vendedor.getIdPersona());
+	}
+	
+	
+	
+	
 	public Vendedor modelToEntity(VendedorModel vendedorModel) {
-		return new Vendedor(sucursalConverter.modelToEntity(vendedorModel.getSucursal()), vendedorModel.getIdPersona(),vendedorModel.getNombre(), vendedorModel.getApellido(), vendedorModel.getFechaNacimiento(), vendedorModel.getDni(),  vendedorModel.getUsuario(), 
-				vendedorModel.getPassword(), vendedorModel.getHoraIngreso(), vendedorModel.getHorasXjornada(), vendedorModel.getPlusSueldo(), vendedorModel.isBaja());
+		return new Vendedor(
+				sucursalConverter.modelToEntity(vendedorModel.getSucursal()),
+				vendedorModel.getIdPersona(),
+				vendedorModel.getNombre(),
+				vendedorModel.getApellido(),
+				vendedorModel.getFechaNacimiento(),
+				vendedorModel.getDni(),
+				vendedorModel.getUsuario(), 
+				vendedorModel.getPassword(),
+				vendedorModel.getHoraIngreso(),
+				vendedorModel.getHorasXjornada(),
+				vendedorModel.getPlusSueldo(),
+				vendedorModel.isBaja());
+	}
+	
+	
+	public Vendedor modelToEntitySinSucursal(VendedorModel vendedorModel) {
+		return new Vendedor(
+				sucursalConverter.modelToEntity(vendedorModel.getSucursal()),
+				vendedorModel.getIdPersona(),
+				vendedorModel.getNombre(),
+				vendedorModel.getApellido(),
+				vendedorModel.getFechaNacimiento(),
+				vendedorModel.getDni(),
+				vendedorModel.getUsuario(), 
+				vendedorModel.getPassword(),
+				vendedorModel.getHoraIngreso(),
+				vendedorModel.getHorasXjornada(),
+				vendedorModel.getPlusSueldo(),
+				vendedorModel.isBaja());
 	}
 }

@@ -42,25 +42,9 @@
 
   <!-- ======= Header ======= -->
   <header id="header">
-    <div class="d-flex flex-column">
 
-      <div class="profile">
-        <img src="../img/hero.jpg" alt="" class="img-fluid rounded-circle">
-        <!--<h1 class="text-light"><a href="index.html"><span th:text="${user.usuario}" /></a></h1>-->
-        <div class="social-links mt-3 text-center">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-      </div>
-
-     	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
-
-      <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
-
-    </div>
+  <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
+   
   </header><!-- End Header -->
 
   <main id="main">
@@ -76,6 +60,10 @@
             <li>Inventario 002</li>
           </ol>
         </div>
+    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+			Agregar un Cliente
+		</button>		
+        
         
         <br><br><br><br><br><br><br><br>
          <table class="table" id="table"  >
@@ -86,7 +74,8 @@
 					<th>Apellido</th>
 					<th>Fecha Nacimiento</th>
 					<th>Dni</th>	
-					<th></th>						
+					<th></th>	
+					<th></th>					
 				</tr>
 			</thead>
 			<tbody>				
@@ -99,13 +88,13 @@
 						<td><span th:text=${cliente.fechaNacimiento}/></td>
 						<td><span th:text=${cliente.dni}/></td>	
 						<td>
-							<input type="submit" name="modificar" value="M" />						
+							<input type="image" src="../../img/icons/lapiz.png"  title="Modificar" />					
 						</td>
 					</form>	
 					
 					<td>
 						<form th:action="@{/cliente/eliminar/{id}(id=${cliente.idPersona})}" method="post" role="form" >
-							<input type="submit"  name="eliminar" value="X" />
+							<input type="image" src="../../img/icons/basura.png"  title="Eliminar" />
 						</form>
 					</td>
 				</tr>
@@ -116,7 +105,55 @@
         
 		<br><br><br>
 		
-	<form action="#" th:action="@{/cliente/agregar}"th:object="${cliente}" method="post">
+<!-- 	<form action="#" th:action="@{/cliente/agregar}"th:object="${cliente}" method="post"> -->
+<!--               <div class="form-row" ;>   -->
+                          
+<!--                 <div class="form-group col-md-6"> -->
+<!--                   <label for="name">Nombre</label> -->
+<!--                   <input type="text" th:field="*{nombre}" class="form-control"  /> -->
+<!--                   <div class="validate"></div> -->
+<!--                 </div> -->
+                
+<!--                  <div class="form-group col-md-6"> -->
+<!--                   <label for="apellido">Apellido</label> -->
+<!--                   <input type="text" th:field="*{apellido}" class="form-control"  /> -->
+<!--                   <div class="validate"></div> -->
+<!--                 </div> -->
+                
+<!--                 <div class="form-group col-md-6"> -->
+<!-- 				  <label for="name">Fecha de Nacimiento</label> -->
+<!-- 				  <input type=date  th:field="*{fechaNacimiento}" class="form-control" /> -->
+<!-- 				  <div class="validate"></div> -->
+<!-- 				</div> -->
+                
+<!--                  <div class="form-group col-md-6"> -->
+<!--                   <label for="dni">Dni</label> -->
+<!--                   <input type="number" th:field="*{dni}" class="form-control" step="any" /> -->
+<!--                   <div class="validate"></div> -->
+<!--                 </div> -->
+                                                
+<!--               </div>           -->
+<!--               <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>     -->
+<!--        </form>	 -->
+        
+
+      </div>
+      
+      
+      
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Agregar un nuevo Cliente</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	           	<form action="#" th:action="@{/cliente/agregar}"th:object="${cliente}" method="post" id="form1">
               <div class="form-row" ;>  
                           
                 <div class="form-group col-md-6">
@@ -144,11 +181,29 @@
                 </div>
                                                 
               </div>          
-              <div class="text-left"><button type="submit">Agregar</button></div>    
-       </form>	
-        
-
-      </div>
+<!--               <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>     -->
+       		</form>   
+			    
+			    
+	
+		  <div class="modal-footer">
+			<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
+<!-- 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+	
+	        
+	      </div>
+		
+	
+		         
+	      </div>
+	
+	
+	    </div>
+	  </div>
+	</div>      
+      
+      
+      
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Details Section ======= -->

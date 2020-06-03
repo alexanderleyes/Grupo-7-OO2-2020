@@ -7,7 +7,7 @@ public class ViewRouteHelper {
 	/*LOGIN*/
 	public final static String login = "/user/login";
 
-	public final static String login_ok = "/home/index";
+	public final static String login_ok = "/home/index"; 
 
 	public final static String login_fail = "redirect:/loginfail";
 
@@ -19,7 +19,9 @@ public class ViewRouteHelper {
 
 	public final static String sucursal_reload = "redirect:/" + sucursal_idx;
 
-	public final static String cercana_view = "fragments/sucursalCercana";
+	public final static String cercana_view = "fragments/sucursalCercanas";
+	
+	public final static String cercana_sin = "fragments/sinCercanas";
 
 	/*GERENTE*/
 	public final static String gerente_idx = "gerente/gerente_idx";
@@ -72,6 +74,52 @@ public class ViewRouteHelper {
 	public final static String producto_idx = "producto/producto_idx";
 
 	public final static String producto_insert = "producto/producto_mod";
+	
+	public final static String producto_ranking = "producto/ranking";
+
 
 	public final static String producto_reload = "redirect:/"+ producto_idx;
+	
+	/*VENTAS*/
+
+	public final static String venta_idx = "venta/venta_idx";
+
+	public final static String venta_insert = "venta/venta_mod";
+
+	public final static String venta_reload = "redirect:/"+ venta_idx;
+	
+	public final static String venta_items = "venta/venta_items";
+	
+	public final static String venta_detalles = "venta/venta_det";
+
+	
+	
+	/*ESTADO DE VENTA*/
+
+	public final static String estadoVenta_idx = "estadoVenta/estadoVenta_idx";
+
+	public final static String estadoVenta_insert = "estadoVenta/estadoVenta_mod";
+
+	public final static String estadoVenta_reload = "redirect:/"+ estadoVenta_idx;	
+	/*PEDIDOS*/
+
+	public final static String pedido_idx = "pedido/pedido_idx";
+
+	public final static String pedido_insert = "pedido/pedido_mod";
+
+	public final static String pedido_reload = "redirect:/"+ pedido_idx;	
+	
+	
+	/*USER*/
+	public final static String logout = "user/logout";
+	public final static String home = "redirect:/home";
+
+	/*ITEMS*/
+
+	public final static String item_idx = "item/item_idx";
+
+	public final static String item_insert = "item/item_mod";
+
+	public final static String item_reload = "redirect:/"+ item_idx;	
+	
 }

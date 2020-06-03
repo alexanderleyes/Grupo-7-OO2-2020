@@ -93,10 +93,10 @@ public class GerenteService implements  IGerenteService{
 
 
 	@Override
-	public Object findByIdGerente(long id) {
-		Gerente empleado = null;
-		empleado = gerenteRepository.findByIdPersona(id);			
-		return gerenteConverter.entityToModel(empleado);
+	public GerenteModel findByIdGerente(long id) {
+		Gerente gerente = null;
+		gerente = gerenteRepository.findByIdPersona(id);			
+		return gerenteConverter.entityToModel(gerente);
 	}
 	
 	
