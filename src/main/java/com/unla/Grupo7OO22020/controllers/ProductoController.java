@@ -95,7 +95,7 @@ public class ProductoController {
 		List<Ranking>ran = rankingService.ranking();
 		for(Ranking r: ran) {
 			System.out.println("Producto: " + r.getnombreProd() + " Cantidad: " + r.getCantidad());
-		}
+		}		
 		return mav;
 	}
 		
