@@ -37,6 +37,7 @@ import com.unla.Grupo7OO22020.services.IEstadoVentaService;
 import com.unla.Grupo7OO22020.services.IItemService;
 import com.unla.Grupo7OO22020.services.IPedidoService;
 import com.unla.Grupo7OO22020.services.IProductoService;
+import com.unla.Grupo7OO22020.services.IRankingService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
 import com.unla.Grupo7OO22020.services.IVentaService;
@@ -84,6 +85,10 @@ public class VentaController {
 	@Autowired
 	@Qualifier("pedidoService")
 	private IPedidoService pedidoService;
+	
+	@Autowired
+	@Qualifier("rankingService")
+	private IRankingService rankingService;
 	
 	@GetMapping("/venta_idx")
 	public ModelAndView index(){
@@ -214,6 +219,8 @@ public class VentaController {
 				
 			}
 			
+			//rankingService.insertOrUpdate(productoModel.getDescripcion(),(int) cantidad);
+			rankingService.insertOrUpdate(productoModel.getDescripcion(), (int) cantidad);
 			ItemModel 	itemModel 	= new ItemModel(productoModel, cantidad, venta);
 			itemService.insertOrUpdate(itemModel);
 		}

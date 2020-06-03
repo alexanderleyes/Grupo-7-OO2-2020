@@ -74,6 +74,9 @@ public class ViewRouteHelper {
 	public final static String producto_idx = "producto/producto_idx";
 
 	public final static String producto_insert = "producto/producto_mod";
+	
+	public final static String producto_ranking = "producto/ranking";
+
 
 	public final static String producto_reload = "redirect:/"+ producto_idx;
 	

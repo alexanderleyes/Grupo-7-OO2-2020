@@ -14,12 +14,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.entities.Gerente;
 import com.unla.Grupo7OO22020.entities.Lote;
+import com.unla.Grupo7OO22020.entities.Ranking;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IProductoService;
+import com.unla.Grupo7OO22020.services.IRankingService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
+import com.unla.Grupo7OO22020.services.implementation.RankingService;
 
 @Controller
 @RequestMapping("sucursal")
@@ -36,6 +39,10 @@ public class SucursalController {
 	@Autowired
 	@Qualifier("gerenteService")
 	private IGerenteService gerenteService;
+	
+	@Autowired
+	@Qualifier("rankingService")
+	private IRankingService rankingService;
 	
 	@GetMapping("/sucursal_idx")
 	public ModelAndView sucursales(){
@@ -94,7 +101,7 @@ public class SucursalController {
 		//primer parametro idSucursal, segundo parmetro idProducto, tercer parametro cantidad
 		//idSucursal,idProducto,cantidad
 		sucursalService.consumir(1, 1, 10);
-			
+		
 		return ViewRouteHelper.sucursal_reload;
 	}
 		

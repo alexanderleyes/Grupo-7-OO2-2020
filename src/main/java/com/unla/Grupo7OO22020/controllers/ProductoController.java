@@ -1,4 +1,6 @@
 package com.unla.Grupo7OO22020.controllers;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.entities.Producto;
+import com.unla.Grupo7OO22020.entities.Ranking;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.services.IProductoService;
+import com.unla.Grupo7OO22020.services.IRankingService;
 
 
 
@@ -25,6 +29,10 @@ public class ProductoController {
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
+	
+	@Autowired
+	@Qualifier("rankingService")
+	private IRankingService rankingService;
 	
 	@GetMapping("/producto_idx")
 	public ModelAndView index() {
@@ -77,4 +85,18 @@ public class ProductoController {
 		productoModel = productoService.insertOrUpdate(productoModel);			
 		return ViewRouteHelper.producto_reload;
 	}	
+	
+	@PostMapping("/ranking")	
+	public ModelAndView ranking(){
+		
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_ranking);
+		mav.addObject("ranking", new Ranking());
+		mav.addObject("rankings",rankingService.ranking() );	
+		List<Ranking>ran = rankingService.ranking();
+		for(Ranking r: ran) {
+			System.out.println("Producto: " + r.getnombreProd() + " Cantidad: " + r.getCantidad());
+		}
+		return mav;
+	}
+		
 }
