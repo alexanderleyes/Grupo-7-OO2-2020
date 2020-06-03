@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
- <title>TPC - Lote</title>
+ <title>TPC - Lotes</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -61,7 +61,11 @@
             <li><a href="index.html">Home</a></li>
             <li>Inventario 002</li>
           </ol>
-        </div>        
+        </div>    
+        
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+			Agregar un Lote
+		</button>     
        
         
         <br><br><br><br><br>
@@ -104,32 +108,70 @@
 	<br><br><br>				 
 		 
 		 
-	 <h2>Nuevo Lote</h2>		 
-	<form th:action="@{/lote/agregar}" th:object="${lote}" method="post" role="form" >
-		<div class="form-row" ;>              
-			<div class="form-group col-md-6">
-		    	<label for="name">Cantidad</label>
-		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  />
-		    	<div class="validate"></div>
-			</div>
-			<div class="form-group col-md-6">
-				<label for="name">Producto</label>		     
-		   		<select class="form-control"  th:field="*{producto.idProducto}"><br>
-		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
-		    	</select>
-	     	</div>
-	     	<div class="form-group col-md-6">
-				<label for="name">Sucursal</label>		     
-		   		<select class="form-control"  th:field="*{sucursal.idSucursal}"><br>
-		        	<option th:each="s : ${sucursales}"  th:value="${(s.idSucursal)}" th:text="${s.direccion}"/>		         	
-		    	</select>
-	     	</div>                                     
-        </div>          
-		<div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>    
-	</form>	
+<!-- 	 <h2>Nuevo Lote</h2>		  -->
+	
         
 
       </div>
+      
+      
+      
+ 	   <!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Agregar un nuevo Lote</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	           	 
+			<form th:action="@{/lote/agregar}" th:object="${lote}" method="post" role="form" id="form1">
+				<div class="form-row" ;>              
+					<div class="form-group col-md-6">
+				    	<label for="name">Cantidad</label>
+				    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  />
+				    	<div class="validate"></div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="name">Producto</label>		     
+				   		<select class="form-control"  th:field="*{producto.idProducto}"><br>
+				        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
+				    	</select>
+			     	</div>
+			     	<div class="form-group col-md-6">
+						<label for="name">Sucursal</label>		     
+				   		<select class="form-control"  th:field="*{sucursal.idSucursal}"><br>
+				        	<option th:each="s : ${sucursales}"  th:value="${(s.idSucursal)}" th:text="${s.direccion}"/>		         	
+				    	</select>
+			     	</div>                                     
+		        </div>          
+<!-- 				<div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>     -->
+			</form>						    
+	
+			    
+	
+		  <div class="modal-footer">
+			<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
+<!-- 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+	      </div>
+		
+	
+		         
+	      </div>
+	
+	
+	    </div>
+	  </div>
+	</div>      
+      
+      
+      
+      
+      
+      
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Details Section ======= -->
