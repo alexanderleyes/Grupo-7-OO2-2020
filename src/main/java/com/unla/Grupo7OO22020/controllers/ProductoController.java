@@ -1,4 +1,5 @@
 package com.unla.Grupo7OO22020.controllers;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.unla.Grupo7OO22020.converters.SucursalConverter;
+import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Ranking;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.ProductoModel;
+import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.IRankingService;
+import com.unla.Grupo7OO22020.services.ISucursalService;
+import com.unla.Grupo7OO22020.services.IVentaService;
 
 
 
@@ -31,8 +37,20 @@ public class ProductoController {
 	private IProductoService productoService;
 	
 	@Autowired
+	@Qualifier("sucursalService")
+	private ISucursalService sucursalService;
+	
+	@Autowired
+	@Qualifier("ventaService")
+	private IVentaService ventaService;
+	
+	@Autowired
 	@Qualifier("rankingService")
 	private IRankingService rankingService;
+	
+	@Autowired
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;
 	
 	@GetMapping("/producto_idx")
 	public ModelAndView index() {
@@ -95,8 +113,29 @@ public class ProductoController {
 		List<Ranking>ran = rankingService.ranking();
 		for(Ranking r: ran) {
 			System.out.println("Producto: " + r.getnombreProd() + " Cantidad: " + r.getCantidad());
-		}
+		}		
 		return mav;
+	}
+	
+	@PostMapping("/productoporfecha")	
+	public String productoXfecha(){	
+		//FALTA VISTA, NO SALIO AUN XD 
+		
+		//pasar un id de sucursal ( que tenga ventas ) 
+		SucursalModel s = sucursalService.findByIdSucursal(5);
+		
+		//fechas entre la que se buscan los productos
+		LocalDate fechaUno = LocalDate.of(2020, 4, 3); 
+		LocalDate fechaDos = LocalDate.of(2020, 5, 3); 
+		
+		List<Item>result = ventaService.ProductosEntreFechasPorSucursal(sucursalConverter.modelToEntity(s), fechaUno, fechaDos);
+		
+		//aca imprime los productos x sucursal entre fechas
+		for(Item i : result) {
+			System.out.println("Sucursal: "+i.getVenta().getSucursal().getDireccion()+" Fecha: "+i.getVenta().getFecha()+ " Producto: "+i.getProducto().getDescripcion());
+		}
+		
+		return ViewRouteHelper.sucursal_reload;
 	}
 		
 }

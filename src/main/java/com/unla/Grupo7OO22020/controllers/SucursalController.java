@@ -1,4 +1,5 @@
 package com.unla.Grupo7OO22020.controllers;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -12,16 +13,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.unla.Grupo7OO22020.converters.SucursalConverter;
+import com.unla.Grupo7OO22020.converters.VentaConverter;
 import com.unla.Grupo7OO22020.entities.Gerente;
+import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Lote;
 import com.unla.Grupo7OO22020.entities.Ranking;
 import com.unla.Grupo7OO22020.entities.Sucursal;
+import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.IRankingService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
+import com.unla.Grupo7OO22020.services.IVentaService;
 import com.unla.Grupo7OO22020.services.implementation.RankingService;
 
 @Controller
@@ -41,8 +47,16 @@ public class SucursalController {
 	private IGerenteService gerenteService;
 	
 	@Autowired
+	@Qualifier("ventaService")
+	private IVentaService ventaService;
+	
+	@Autowired
 	@Qualifier("rankingService")
 	private IRankingService rankingService;
+	
+	@Autowired
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;
 	
 	@GetMapping("/sucursal_idx")
 	public ModelAndView sucursales(){
@@ -96,13 +110,6 @@ public class SucursalController {
 		return ViewRouteHelper.sucursal_reload;
 	}
 	
-	@PostMapping("/consumir")	
-	public String consumirProducto(){	
-		//primer parametro idSucursal, segundo parmetro idProducto, tercer parametro cantidad
-		//idSucursal,idProducto,cantidad
-		sucursalService.consumir(1, 1, 10);
-		
-		return ViewRouteHelper.sucursal_reload;
-	}
+	
 		
 }
