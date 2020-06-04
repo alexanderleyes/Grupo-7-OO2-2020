@@ -18,8 +18,10 @@ import com.unla.Grupo7OO22020.converters.ClienteConverter;
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.entities.EstadoVenta;
 import com.unla.Grupo7OO22020.entities.Item;
+import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
+import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.entities.VtaItems;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
@@ -94,6 +96,7 @@ public class VentaController {
 	public ModelAndView index(){
 			System.out.println("enruta: " +ViewRouteHelper.venta_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.venta_idx);
+			
 			String username = SecurityContextHolder.getContext().getAuthentication().getName();			
 			VendedorModel vendedorModel= vendedorService.findByUsuario(username);	
 			

@@ -62,6 +62,10 @@
           </ol>
         </div>
         
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+					Agregar un Vendedor
+		</button> 
+        
         Hay que decidir si los empleados pueden ver esta lista y si sirve para algo =). No se podria modificar datos de otros empleados logicamente. Falta implementar eso.
         
         
@@ -109,8 +113,23 @@
 		</table>    
 		  
 	 <br><br><br>
+		
+	
+	
+	   <!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Agregar un nuevo Vendedor</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	           	 
 		<div class="row" data-aos="fade-in">      
-			<form action="#" th:action="@{/vendedor/agregar}" th:object="${vendedor}" method="post" role="form" >
+			<form action="#" th:action="@{/vendedor/agregar}" th:object="${vendedor}" method="post" role="form" id="form1" >
        		<div class="form-row" >              
 				<div class="form-group col-md-6">
 				  <label for="name">Nombre</label>
@@ -157,15 +176,32 @@
 				    </select>
 				</div>
 			
-							                                    
-			</div>		                        
-			<div class="text-left">
-				 <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>				
-			</div>
-		</form>	
-     
+								                                    
+				</div>		                        
+				<div class="text-left">
+<!-- 					 <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>				 -->
+				</div>
+			</form>	
 
-	</div>
+			</div>				    
+	
+			    
+	
+		  <div class="modal-footer">
+			<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
+<!-- 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+	      </div>
+		
+	
+		         
+	      </div>
+	
+	
+	    </div>
+	  </div>
+	</div> 
+	
+	
 </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Details Section ======= -->

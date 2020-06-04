@@ -18,10 +18,8 @@ import com.unla.Grupo7OO22020.entities.Sucursal;
 public interface IRankingRepository  extends JpaRepository<Ranking, Serializable>{
 
 	
-	@Query("SELECT r FROM Ranking r group by r.nombreProd order by cantidad desc")
+	@Query("SELECT new com.unla.Grupo7OO22020.entities.Ranking(COUNT(r.idRanking) as idProducto ,r.nombreProd as nombreProd ,SUM(r.cantidad) as cantidad) FROM Ranking r group by r.nombreProd order by SUM(r.cantidad) desc")
 	public abstract List<Ranking> ranking();
-	
-	
-	
+
 
 }

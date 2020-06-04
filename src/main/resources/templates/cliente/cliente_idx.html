@@ -60,6 +60,10 @@
             <li>Inventario 002</li>
           </ol>
         </div>
+    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+			Agregar un Cliente
+		</button>		
+        
         
         <br><br><br><br><br><br><br><br>
          <table class="table" id="table"  >
@@ -70,7 +74,8 @@
 					<th>Apellido</th>
 					<th>Fecha Nacimiento</th>
 					<th>Dni</th>	
-					<th></th>						
+					<th></th>	
+					<th></th>					
 				</tr>
 			</thead>
 			<tbody>				
@@ -100,7 +105,55 @@
         
 		<br><br><br>
 		
-	<form action="#" th:action="@{/cliente/agregar}"th:object="${cliente}" method="post">
+<!-- 	<form action="#" th:action="@{/cliente/agregar}"th:object="${cliente}" method="post"> -->
+<!--               <div class="form-row" ;>   -->
+                          
+<!--                 <div class="form-group col-md-6"> -->
+<!--                   <label for="name">Nombre</label> -->
+<!--                   <input type="text" th:field="*{nombre}" class="form-control"  /> -->
+<!--                   <div class="validate"></div> -->
+<!--                 </div> -->
+                
+<!--                  <div class="form-group col-md-6"> -->
+<!--                   <label for="apellido">Apellido</label> -->
+<!--                   <input type="text" th:field="*{apellido}" class="form-control"  /> -->
+<!--                   <div class="validate"></div> -->
+<!--                 </div> -->
+                
+<!--                 <div class="form-group col-md-6"> -->
+<!-- 				  <label for="name">Fecha de Nacimiento</label> -->
+<!-- 				  <input type=date  th:field="*{fechaNacimiento}" class="form-control" /> -->
+<!-- 				  <div class="validate"></div> -->
+<!-- 				</div> -->
+                
+<!--                  <div class="form-group col-md-6"> -->
+<!--                   <label for="dni">Dni</label> -->
+<!--                   <input type="number" th:field="*{dni}" class="form-control" step="any" /> -->
+<!--                   <div class="validate"></div> -->
+<!--                 </div> -->
+                                                
+<!--               </div>           -->
+<!--               <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>     -->
+<!--        </form>	 -->
+        
+
+      </div>
+      
+      
+      
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Agregar un nuevo Cliente</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	           	<form action="#" th:action="@{/cliente/agregar}"th:object="${cliente}" method="post" id="form1">
               <div class="form-row" ;>  
                           
                 <div class="form-group col-md-6">
@@ -128,11 +181,29 @@
                 </div>
                                                 
               </div>          
-              <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>    
-       </form>	
-        
-
-      </div>
+<!--               <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>     -->
+       		</form>   
+			    
+			    
+	
+		  <div class="modal-footer">
+			<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
+<!-- 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+	
+	        
+	      </div>
+		
+	
+		         
+	      </div>
+	
+	
+	    </div>
+	  </div>
+	</div>      
+      
+      
+      
     </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Details Section ======= -->

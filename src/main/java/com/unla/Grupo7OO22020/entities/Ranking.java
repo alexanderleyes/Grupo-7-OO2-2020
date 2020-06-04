@@ -24,6 +24,15 @@ public class Ranking {
 	public Ranking() {
 	}
 
+	
+	public Ranking(long idRanking, String nombreProd, long cantidad) {
+		super();
+		this.idRanking = idRanking;
+		this.nombreProd = nombreProd;
+		this.cantidad = (int) cantidad;
+	}
+
+
 	public Ranking(String nombreProd, int cantidad) {
 		super();
 		this.nombreProd = nombreProd;
@@ -60,6 +69,11 @@ public class Ranking {
 
 	public void setNombreProd(String nombreProd) {
 		this.nombreProd = nombreProd;
+	}
+
+	@Override
+	public String toString() {
+		return "Ranking [idRanking=" + idRanking + ", nombreProd=" + nombreProd + ", cantidad=" + cantidad + "]";
 	}
 
 	

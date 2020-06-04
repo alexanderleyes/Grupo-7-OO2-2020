@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>TPC - Sucursal</title>
+<title>TPC - Productos</title>
 <meta content="" name="descriptison">
 <meta content="" name="keywords">
 
@@ -68,7 +68,9 @@
 						<li>Inventario 002</li>
 					</ol>
 				</div>
-
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+					Agregar un Producto
+				</button>
 
 				<br> <br> <br> <br> <br>
 
@@ -76,9 +78,11 @@
 
 				<table class="table" id="table">
 					<tr>
-						<th scope="col">id</th>
-						<th scope="col">Descripcion</th>
+						<th scope="col">ID</th>
+						<th scope="col">Descripción</th>
 						<th scope="col">Precio</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
 
 					</tr>
 					</thead>
@@ -106,11 +110,32 @@
 
 				<br> <br> <br>
 
-		<form action="#" th:action="@{/producto/agregar}"th:object="${producto}" method="post">
+		
+		<form th:action="@{/producto/ranking}" th:object="${producto}" method="post" role="form" >
+              
+           <div class="text-left"><button type="submit" class="btn btn-primary">Ranking</button></div>    
+       </form>  
+		
+			</div>
+			
+			
+			<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">Agregar un nuevo Producto</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	           	 
+			   <form action="#" th:action="@{/producto/agregar}"th:object="${producto}" method="post" id="form1">
               <div class="form-row">  
                           
                 <div class="form-group col-md-6">
-                  <label for="desc">Descripcion</label>
+                  <label for="desc">Descripción</label>
                   <input type="text" th:field="*{descripcion}" class="form-control"  />
                   <div class="validate"></div>
                 </div>
@@ -122,15 +147,29 @@
                 </div>            
                 
                                                 
-              </div>          
-              <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
-       </form>	
-		<form th:action="@{/producto/ranking}" th:object="${producto}" method="post" role="form" >
-              
-           <div class="text-left"><button type="submit" class="btn btn-primary">Ranking</button></div>    
-       </form>  
+		        </div>          
+<!-- 		    <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>     -->
+		       </form>	 
+	
+			    
+	
+		  <div class="modal-footer">
+			<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
+<!-- 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+	      </div>
 		
-			</div>
+	
+		         
+	      </div>
+	
+	
+	    </div>
+	  </div>
+	</div> 	
+			
+			
+			
+			
 		</section>
 		<!-- End Breadcrumbs -->
 
