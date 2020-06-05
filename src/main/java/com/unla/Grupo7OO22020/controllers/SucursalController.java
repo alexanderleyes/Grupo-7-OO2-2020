@@ -99,16 +99,6 @@ public class SucursalController {
 	}
 	
 	
-	@PostMapping("/stock")	
-	public String stockSucursal(){	
-		//No le puse parametros de entrada xq no se donde lo van a implementear
-		//Primer parametro es el idSucursal, el segundo es el idProducto
-		//suc, producto
-		
-		int lote =sucursalService.stock(1,4);
-		System.out.println("Stock disponible del producto seleccionado  -->  " + lote);
-		return ViewRouteHelper.sucursal_reload;
-	}
 	
 	
 		

@@ -118,9 +118,11 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/productoporfecha")	
-	public String productoXfecha(){	
+	public ModelAndView productoXfecha(){	
 		//FALTA VISTA, NO SALIO AUN XD 
 		
+		
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_prodxfecha);
 		//pasar un id de sucursal ( que tenga ventas ) 
 		SucursalModel s = sucursalService.findByIdSucursal(5);
 		
@@ -135,7 +137,7 @@ public class ProductoController {
 			System.out.println("Sucursal: "+i.getVenta().getSucursal().getDireccion()+" Fecha: "+i.getVenta().getFecha()+ " Producto: "+i.getProducto().getDescripcion());
 		}
 		
-		return ViewRouteHelper.sucursal_reload;
+		return mav;
 	}
 		
 }

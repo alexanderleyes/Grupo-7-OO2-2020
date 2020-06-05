@@ -113,7 +113,13 @@
 		
 		<form th:action="@{/producto/ranking}" th:object="${producto}" method="post" role="form" >
               
-           <div class="text-left"><button type="submit" class="btn btn-primary">Ranking</button></div>    
+           <div class="text-left"><button type="submit" class="btn btn-primary">Ranking</button></div>  
+            
+       </form>  
+		
+		<form th:action="@{/producto/productoporfecha}" th:object="${producto}" method="post" role="form" >   
+           
+           <div class="text-left"><button type="submit" class="btn btn-primary">ProductoXFecha</button></div>  
        </form>  
 		
 			</div>
