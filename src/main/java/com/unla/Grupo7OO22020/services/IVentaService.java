@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.unla.Grupo7OO22020.entities.Item;
+import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Venta;
@@ -18,6 +19,6 @@ public interface IVentaService {
 	public List<Venta> ventasPorSucursal(Sucursal sucursal,LocalDate fechaUno, LocalDate fechaDos);
 	public List<Item> itemsPorVenta(Venta venta);
 	public List<Item> ProductosEntreFechasPorSucursal(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos);
-	
+	public void EstadoFinalizado(List<Pedido>lstPedidos,VentaModel venta);
 	
 }

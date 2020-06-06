@@ -1,5 +1,6 @@
 package com.unla.Grupo7OO22020.models;
 
+import java.time.LocalDate;
 
 public class VentaModel{
 	
@@ -8,6 +9,7 @@ public class VentaModel{
 	private VendedorModel vendedor;
 	private PersonaModel cliente;
 	private EstadoVentaModel estado;
+	private LocalDate fecha;
 	//private Set<ItemModel> items = new HashSet<ItemModel>();
 
 	public VentaModel() {
@@ -65,6 +67,8 @@ public class VentaModel{
 		this.estado = estado;
 	}
 	
+	
+	
 //	public Set<ItemModel> getItems() {
 //	return items;
 //}
@@ -73,6 +77,14 @@ public class VentaModel{
 //	this.items = items;
 //}
 	
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
+
 	@Override
 	public String toString() {
 		return "VentaModel [idVenta=" + idVenta + ", sucursal=" + sucursal + ", vendedor=" + vendedor + ", cliente="

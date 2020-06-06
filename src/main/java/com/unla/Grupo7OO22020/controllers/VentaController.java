@@ -188,6 +188,8 @@ public class VentaController {
 		
 		List<Long> prodIndices  	= vtaItems.getListaIndices();
 		List<Long> prodCantidades 	= vtaItems.getListaCantidad();
+		int contador = 0 ;
+		
 		
 		venta = ventaService.insertOrUpdate(venta);
 		
@@ -204,7 +206,9 @@ public class VentaController {
 			int stock = sucursalService.stock(sucursalModel.getIdSucursal(), productoModel.getIdProducto());
 			
 			if(stock>=cantidad) {
+				contador++;
 				sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(),(int)cantidad);
+				
 			}else {
 			
 				SucursalModel sucModel = sucursalConverter.entityToModel(resultado.get(0));
@@ -216,9 +220,13 @@ public class VentaController {
 				pedidoModel.setVendedorSolicita(vendedorModel);
 				pedidoModel.setProducto(productoModel);
 				pedidoModel.setCantidad(cantidad);
+				pedidoModel.setIdVenta(venta.getIdVenta());
 
-				pedidoModel = pedidoService.insertOrUpdate(pedidoModel);
-				
+				//Si tenemos que hacer el pedido a una sucursal, se setea el estado PENDIENTE 
+				EstadoVentaModel estadoV = estadoVentaService.findByIdEstadoVenta(2);
+				venta.setEstado(estadoV);
+				ventaService.insertOrUpdate(venta);
+				pedidoService.insertOrUpdate(pedidoModel);
 				
 			}
 			
@@ -228,9 +236,13 @@ public class VentaController {
 			itemService.insertOrUpdate(itemModel);
 		}
 		
-		/********************************/
-		/**Aca deberia estar la logica para consumir el stock que tengo y/o enviar la solicitud de stock a otra sucursal**/
-		/********************************/		
+		if(contador == largo) {
+			//Si tenemos el lote de todos los productos de la venta, directamente setea FINALIZADO 
+			EstadoVentaModel estadoV = estadoVentaService.findByIdEstadoVenta(3);
+			venta.setEstado(estadoV);
+			ventaService.insertOrUpdate(venta);
+		}
+		
 		
 		return mav;
 	}

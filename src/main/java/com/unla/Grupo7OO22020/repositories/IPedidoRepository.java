@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Vendedor;
+import com.unla.Grupo7OO22020.models.PedidoModel;
 
 @Repository("pedidoRepository")
 public abstract interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
@@ -30,4 +31,6 @@ public abstract interface IPedidoRepository extends JpaRepository<Pedido, Serial
 	@Query("SELECT p FROM Pedido p WHERE  p.vendedorSolicita = (:vendedor)")
 	public abstract List<Pedido> findAllByVendedor(@Param("vendedor") Vendedor vendedor );
 	
+	@Query("SELECT p FROM Pedido p WHERE p.idVenta = (:id)")
+	public abstract List<Pedido> findAllByIDVenta(long id);
 }

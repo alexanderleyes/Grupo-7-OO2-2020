@@ -18,18 +18,26 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.converters.VendedorConverter;
+import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Vendedor;
+import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
+import com.unla.Grupo7OO22020.models.EstadoVentaModel;
+import com.unla.Grupo7OO22020.models.ItemModel;
 import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
+import com.unla.Grupo7OO22020.models.VentaModel;
+import com.unla.Grupo7OO22020.services.IEstadoVentaService;
+import com.unla.Grupo7OO22020.services.IItemService;
 import com.unla.Grupo7OO22020.services.IPedidoService;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
+import com.unla.Grupo7OO22020.services.IVentaService;
 
 @Controller
 @PreAuthorize("hasRole('ADMIN') or hasRole('VENDEDOR')")
@@ -53,6 +61,14 @@ public class PedidoController {
 	private IProductoService productoService;
 	
 	@Autowired
+	@Qualifier("ventaService")
+	private IVentaService ventaService;
+	
+	@Autowired
+	@Qualifier("estadoVentaService")
+	private IEstadoVentaService estadoVentaService;
+	
+	@Autowired
 	@Qualifier("sucursalConverter")
 	private SucursalConverter sucursalConverter;
 	
@@ -60,6 +76,10 @@ public class PedidoController {
 	@Qualifier("vendedorConverter")
 	private VendedorConverter vendedorConverter;
 	
+	@Autowired
+	@Qualifier("itemService")
+	private IItemService itemService;
+
 	@GetMapping("/pedido_idx")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.pedido_idx);
@@ -188,9 +208,17 @@ public class PedidoController {
 		String username 	= SecurityContextHolder.getContext().getAuthentication().getName();		
 		PedidoModel pedidoModel = pedidoService.findById(id);
 		pedidoModel.setVendedorDespacha(vendedorService.findByUsuario(username));
+		VentaModel venta = ventaService.findByIdVenta(pedidoModel.getIdVenta());
 		sucursalService.consumir(pedidoModel.getSucDestino().getIdSucursal(), pedidoModel.getProducto().getIdProducto(), (int) pedidoModel.getCantidad());
-
-		pedidoService.insertOrUpdate(pedidoModel);		
+		
+		List<Pedido> lstPedidos = pedidoService.findAllByIDVenta(pedidoModel.getIdVenta());
+	
+		pedidoService.insertOrUpdate(pedidoModel);
+		
+		//para setear estado FINALIZADO una vez que esten todos los pedidos despachados 
+		ventaService.EstadoFinalizado(lstPedidos, venta);
+		ventaService.insertOrUpdate(venta);
+		
 		return mav;
 	}
 	

@@ -61,6 +61,8 @@ public class ItemModel {
 	public void setVenta(VentaModel venta) {
 		this.venta = venta;
 	}
+	
+	
 
 	@Override
 	public String toString() {

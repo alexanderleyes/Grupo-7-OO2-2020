@@ -37,6 +37,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (21),(22);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,6 +197,7 @@ CREATE TABLE `pedido` (
   `suc_origen_id_sucursal` bigint DEFAULT NULL,
   `vendedor_despacha_id_vendedor` bigint DEFAULT NULL,
   `vendedor_solicita_id_vendedor` bigint DEFAULT NULL,
+  `id_venta` bigint DEFAULT NULL,
   PRIMARY KEY (`id_pedido`),
   KEY `FKhwr210k74q8di57sc14qi1w4m` (`producto_id_producto`),
   KEY `FKbvcgdxew27qo9ne68u37ikb4k` (`suc_destino_id_sucursal`),
@@ -216,7 +218,6 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,10,2,3,3,NULL,12);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,7 +235,7 @@ CREATE TABLE `persona` (
   `fecha_nacimiento` date DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_persona`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,7 +244,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'Leyes',1,'2020-05-01','Alex'),(2,'Martinez',2,'2020-05-02','Carla'),(3,'Lescano',3,'2020-05-03','Solange'),(4,'Aguirre',4,'2020-05-04','Diego'),(5,'Jaldin',5,'2020-05-05','Micaela'),(6,'Empleado11',11,'2020-05-01','Empleado'),(7,'Empleado12',22,'2020-05-02','Empleado'),(8,'Empleado13',13,'2020-05-03','Empleado'),(9,'Empleado21',21,'2020-05-01','Empleado'),(10,'Empleado22',22,'2020-05-02','Empleado'),(11,'Empleado23',23,'2020-05-03','Empleado'),(12,'Empleado31',31,'2020-05-01','Empleado'),(13,'Empleado32',32,'2020-05-02','Empleado'),(14,'Empleado33',33,'2020-05-03','Empleado'),(15,'Empleado41',41,'2020-05-01','Empleado'),(16,'Empleado42',42,'2020-05-23','Empleado'),(17,'Empleado43',43,'2020-05-03','Empleado'),(18,'Empleado51',51,'2020-05-01','Empleado'),(19,'Empleado52',52,'2020-05-02','E'),(20,'Empleado53',53,'2020-05-03','Empleado');
+INSERT INTO `persona` VALUES (1,'Leyes',1,'2020-05-01','Alex'),(2,'Martinez',2,'2020-05-02','Carla'),(3,'Lescano',3,'2020-05-03','Solange'),(4,'Aguirre',4,'2020-05-04','Diego'),(5,'Jaldin',5,'2020-05-05','Micaela'),(6,'Empleado11',11,'2020-05-01','Empleado'),(7,'Empleado12',22,'2020-05-02','Empleado'),(8,'Empleado13',13,'2020-05-03','Empleado'),(9,'Empleado21',21,'2020-05-01','Empleado'),(10,'Empleado22',22,'2020-05-02','Empleado'),(11,'Empleado23',23,'2020-05-03','Empleado'),(12,'Empleado31',31,'2020-05-01','Empleado'),(13,'Empleado32',32,'2020-05-02','Empleado'),(14,'Empleado33',33,'2020-05-03','Empleado'),(15,'Empleado41',41,'2020-05-01','Empleado'),(16,'Empleado42',42,'2020-05-23','Empleado'),(17,'Empleado43',43,'2020-05-03','Empleado'),(18,'Empleado51',51,'2020-05-01','Empleado'),(19,'Empleado52',52,'2020-05-02','E'),(20,'Empleado53',53,'2020-05-03','Empleado'),(21,'Cliente1',124578,'1990-12-12','Cliente'),(22,'Cliente2',986532,'1999-10-05','Cliente');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -482,4 +483,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-03 17:57:26
+-- Dump completed on 2020-06-05 19:51:05

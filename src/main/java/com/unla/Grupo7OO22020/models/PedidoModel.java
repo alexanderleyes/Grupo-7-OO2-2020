@@ -13,6 +13,8 @@ public class PedidoModel{
 	private VendedorModel vendedorDespacha;
 	private ProductoModel producto;
 	private double cantidad;
+	private long idVenta;
+	
 
 	public PedidoModel() {
 	}
@@ -42,6 +44,33 @@ public class PedidoModel{
 		this.cantidad = cantidad;
 	}
 
+
+	public PedidoModel(long idPedido, SucursalModel sucOrigen, SucursalModel sucDestino, VendedorModel vendedorSolicita,
+			 ProductoModel producto, double cantidad, long idVenta) {
+		super();
+		this.idPedido = idPedido;
+		this.sucOrigen = sucOrigen;
+		this.sucDestino = sucDestino;
+		this.vendedorSolicita = vendedorSolicita;
+		this.producto = producto;
+		this.cantidad = cantidad;
+		this.idVenta = idVenta;
+	}
+
+	
+	
+	public PedidoModel(long idPedido, SucursalModel sucOrigen, SucursalModel sucDestino, VendedorModel vendedorSolicita,
+			VendedorModel vendedorDespacha, ProductoModel producto, double cantidad, long idVenta) {
+		super();
+		this.idPedido = idPedido;
+		this.sucOrigen = sucOrigen;
+		this.sucDestino = sucDestino;
+		this.vendedorSolicita = vendedorSolicita;
+		this.vendedorDespacha = vendedorDespacha;
+		this.producto = producto;
+		this.cantidad = cantidad;
+		this.idVenta = idVenta;
+	}
 
 	public long getIdPedido() {
 		return idPedido;
@@ -98,7 +127,18 @@ public class PedidoModel{
 	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
+	
+	
 
+	public long getIdVenta() {
+		return idVenta;
+	}
+
+	public void setIdVenta(long idVenta) {
+		this.idVenta = idVenta;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "PedidoModel [idPedido=" + idPedido + ", sucOrigen=" + sucOrigen + ", sucDestino=" + sucDestino
@@ -106,5 +146,6 @@ public class PedidoModel{
 				+ producto + ", cantidad=" + cantidad + "]";
 	}
 
+	
 
 }

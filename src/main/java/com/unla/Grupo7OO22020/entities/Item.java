@@ -25,6 +25,7 @@ public class Item {
 	@Column(name="cantidad")
 	private double cantidad;
 	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Venta venta;	
 
@@ -37,6 +38,7 @@ public class Item {
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.venta = venta;
+		
 	}
 
 	public Item(double cantidad) {
@@ -75,5 +77,8 @@ public class Item {
 	public void setVenta(Venta venta) {
 		this.venta = venta;
 	}
+
+	
+	
 	
 }

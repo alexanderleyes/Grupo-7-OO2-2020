@@ -24,6 +24,8 @@ public interface IPedidoService {
 	public List<PedidoModel> findAllByVendedor(VendedorModel vendedor);
 
 	public List<PedidoModel> findAllBySucursalOri(SucursalModel sucursal);
+	
+	public List<Pedido> findAllByIDVenta(long id);
 
 
 

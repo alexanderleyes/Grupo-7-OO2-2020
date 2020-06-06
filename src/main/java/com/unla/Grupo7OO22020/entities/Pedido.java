@@ -36,6 +36,9 @@ public class Pedido {
 	@Column(name="cantidad")
 	private double cantidad;
 	
+	@Column(name="idVenta")
+	private long idVenta;
+	
 
 	public Pedido() {
 		
@@ -63,6 +66,35 @@ public class Pedido {
 		this.vendedorSolicita = vendedorSolicita;
 		this.producto = producto;
 		this.cantidad = cantidad;
+	}
+
+	
+	public Pedido(long idPedido, Sucursal sucOrigen, Sucursal sucDestino, Vendedor vendedorSolicita,
+			 Producto producto, double cantidad, long idVenta) {
+		super();
+		this.idPedido = idPedido;
+		this.sucOrigen = sucOrigen;
+		this.sucDestino = sucDestino;
+		this.vendedorSolicita = vendedorSolicita;
+		this.producto = producto;
+		this.cantidad = cantidad;
+		this.idVenta = idVenta;
+	
+	}
+	
+	
+
+	public Pedido(long idPedido, Sucursal sucOrigen, Sucursal sucDestino, Vendedor vendedorSolicita,
+			Vendedor vendedorDespacha, Producto producto, double cantidad, long idVenta) {
+		super();
+		this.idPedido = idPedido;
+		this.sucOrigen = sucOrigen;
+		this.sucDestino = sucDestino;
+		this.vendedorSolicita = vendedorSolicita;
+		this.vendedorDespacha = vendedorDespacha;
+		this.producto = producto;
+		this.cantidad = cantidad;
+		this.idVenta = idVenta;
 	}
 
 	public long getIdPedido() {
@@ -120,5 +152,17 @@ public class Pedido {
 	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
+
+	public long getIdVenta() {
+		return idVenta;
+	}
+
+	public void setIdVenta(long idVenta) {
+		this.idVenta = idVenta;
+	}
+
+	
+	
+	
 
 	}

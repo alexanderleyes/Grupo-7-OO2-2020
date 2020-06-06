@@ -70,4 +70,59 @@ public class PedidoConverter {
 				pedidoModel.getCantidad());
 		
 	}
+	
+	/*****************************************************************************************/
+	
+	public PedidoModel entityToModelSinDespachanteConIdVenta(Pedido pedido) {
+		return new PedidoModel(
+				pedido.getIdPedido(),
+				sucursalConverter.entityToModel(pedido.getSucOrigen()),
+				sucursalConverter.entityToModel(pedido.getSucDestino()),
+				vendedorConverter.entityToModel(pedido.getVendedorSolicita()),				
+				productoConverter.entityToModel(pedido.getProducto()), 
+				pedido.getCantidad(),
+				pedido.getIdVenta());
+	}
+	
+	
+	public Pedido modelToEntitySinDespachanteConIdVenta(PedidoModel pedidoModel) {
+		return new Pedido(
+				pedidoModel.getIdPedido(),
+				sucursalConverter.modelToEntity(pedidoModel.getSucOrigen()),
+				sucursalConverter.modelToEntity(pedidoModel.getSucDestino()),
+				vendedorConverter.modelToEntity(pedidoModel.getVendedorSolicita()),				
+				productoConverter.modelToEntity(pedidoModel.getProducto()), 
+				pedidoModel.getCantidad(),
+				pedidoModel.getIdVenta()
+				);
+	}
+	
+	/***********************************************************************************************/
+	
+	public PedidoModel entityToModelConDespachanteConId(Pedido pedido) {
+		return new PedidoModel(
+				pedido.getIdPedido(),
+				sucursalConverter.entityToModel(pedido.getSucOrigen()),
+				sucursalConverter.entityToModel(pedido.getSucDestino()),
+				vendedorConverter.entityToModel(pedido.getVendedorSolicita()),	
+				vendedorConverter.entityToModel(pedido.getVendedorDespacha()),
+				productoConverter.entityToModel(pedido.getProducto()), 
+				pedido.getCantidad(),
+				pedido.getIdVenta());
+	}
+	
+	
+	public Pedido modelToEntityConDespachanteConIdVenta(PedidoModel pedidoModel) {
+		return new Pedido(
+				pedidoModel.getIdPedido(),
+				sucursalConverter.modelToEntity(pedidoModel.getSucOrigen()),
+				sucursalConverter.modelToEntity(pedidoModel.getSucDestino()),
+				vendedorConverter.modelToEntity(pedidoModel.getVendedorSolicita()),	
+				vendedorConverter.modelToEntity(pedidoModel.getVendedorDespacha()),
+				productoConverter.modelToEntity(pedidoModel.getProducto()), 
+				pedidoModel.getCantidad(),
+				pedidoModel.getIdVenta()
+				);
+	}
+	
 }

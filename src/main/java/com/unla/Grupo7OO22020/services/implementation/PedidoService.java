@@ -11,10 +11,12 @@ import com.unla.Grupo7OO22020.converters.PedidoConverter;
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.converters.VendedorConverter;
 import com.unla.Grupo7OO22020.entities.Pedido;
+import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.repositories.IPedidoRepository;
+import com.unla.Grupo7OO22020.repositories.IVentaRepository;
 import com.unla.Grupo7OO22020.services.IPedidoService;
 
 @Service("pedidoService")
@@ -23,6 +25,10 @@ public class PedidoService implements IPedidoService{
 	@Autowired
 	@Qualifier("pedidoRepository")
 	private IPedidoRepository pedidoRepository;
+	
+	@Autowired
+	@Qualifier("ventaRepository")
+	private IVentaRepository ventaRepository;
 	
 	@Autowired
 	@Qualifier("pedidoConverter")
@@ -46,11 +52,31 @@ public class PedidoService implements IPedidoService{
 	public PedidoModel insertOrUpdate(PedidoModel pedidoModel) {
 		Pedido pedido = null;
 		PedidoModel pedidoModelAux = null;
+		
+		
 		if (pedidoModel.getVendedorDespacha() == null) {
-			pedido = pedidoRepository.save(pedidoConverter.modelToEntitySinDespachante(pedidoModel));
+			
+			Venta v  = ventaRepository.findByIdVenta(pedidoModel.getIdVenta()); 
+			if(v.getEstado().getIdEstadoVenta()==2) {
+				
+				pedido = pedidoRepository.save(pedidoConverter.modelToEntitySinDespachanteConIdVenta(pedidoModel));
+				
+			}else {
+			
+				pedido = pedidoRepository.save(pedidoConverter.modelToEntitySinDespachante(pedidoModel));
+			
+			}
 		}
 		else{
-			pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
+			Venta v = ventaRepository.findByIdVenta(pedidoModel.getIdVenta());
+			if(v.getEstado().getIdEstadoVenta()==3) {
+				
+				pedido = pedidoRepository.save(pedidoConverter.modelToEntityConDespachanteConIdVenta(pedidoModel));
+			}else {
+			
+				pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
+			
+			}
 		}
 		
 		
@@ -80,9 +106,20 @@ public class PedidoService implements IPedidoService{
 		Pedido pedido = pedidoRepository.findByIdPedido(id);
 		PedidoModel pedidoModel = null;
 		if (pedido.getVendedorDespacha() != null) {
-			pedidoModel = pedidoConverter.entityToModel(pedido);	
+			
+			
+			pedidoModel = pedidoConverter.entityToModel(pedido);
+			
+			
 		}else {
-			pedidoModel =  pedidoConverter.entityToModelSinDespachante(pedido);	
+			
+			if(pedido.getIdVenta()!=0) {
+				pedidoModel = pedidoConverter.entityToModelSinDespachanteConIdVenta(pedido);
+			}else {
+				
+				pedidoModel =  pedidoConverter.entityToModelSinDespachante(pedido);	
+			}
+			
 		}
 		return pedidoModel;
 	}
@@ -142,6 +179,16 @@ public class PedidoService implements IPedidoService{
 			}	
 	    }		
 		return pedidosModels;	
+	}
+
+	@Override
+	public List<Pedido> findAllByIDVenta(long id) {
+		
+		
+		List<Pedido> pedidos= pedidoRepository.findAllByIDVenta(id);
+		
+		
+		return pedidos;
 	}	
 
 }
