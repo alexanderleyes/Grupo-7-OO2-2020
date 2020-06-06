@@ -136,11 +136,6 @@ public class VentaController {
 		mav.addObject("vtaItems", new VtaItems());
 		System.out.println( "sucursal " + ventaModel.getSucursal().getIdSucursal());			
 		
-		//ventaModel = ventaService.insertOrUpdate(ventaModel);	
-		
-		
-//		return ViewRouteHelper.venta_reload;
-		
 		mav.setViewName(ViewRouteHelper.venta_items);
 		return mav;	
 	}
@@ -192,10 +187,12 @@ public class VentaController {
 		venta = ventaService.insertOrUpdate(venta);
 		
 		int largo = prodIndices.size();
+		double suma = 0;
 		boolean consumoitem;
 		for (int i = 0; i < largo; i++) {
 			ProductoModel productoModel = productoService.findByIdProducto(prodIndices.get(i));
 			double 		cantidad 	= Double.parseDouble(prodCantidades.get(i).toString());
+			suma += cantidad * productoModel.getPrecioUnitario();
 			
 			consumoitem = sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(), (int) cantidad);
 			System.out.println("rta consumo item:"+ consumoitem);
@@ -222,10 +219,15 @@ public class VentaController {
 				
 			}
 			
-			//rankingService.insertOrUpdate(productoModel.getDescripcion(),(int) cantidad);
+			
 			rankingService.insertOrUpdate(productoModel.getDescripcion(), (int) cantidad);
 			ItemModel 	itemModel 	= new ItemModel(productoModel, cantidad, venta);
 			itemService.insertOrUpdate(itemModel);
+			
+			
+			double comision = suma * 0.05;
+			vendedorModel.setPlusSueldo(vendedorModel.getPlusSueldo() + comision);
+			vendedorService.insertOrUpdate(vendedorModel);
 		}
 		
 		/********************************/
