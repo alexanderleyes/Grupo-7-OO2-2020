@@ -190,7 +190,17 @@ public class PedidoController {
 		pedidoModel.setVendedorDespacha(vendedorService.findByUsuario(username));
 		sucursalService.consumir(pedidoModel.getSucDestino().getIdSucursal(), pedidoModel.getProducto().getIdProducto(), (int) pedidoModel.getCantidad());
 
-		pedidoService.insertOrUpdate(pedidoModel);		
+		pedidoService.insertOrUpdate(pedidoModel);	
+		//------------
+		double comision = pedidoModel.getProducto().getPrecioUnitario() * pedidoModel.getCantidad() * 0.02;
+		double comision2 = pedidoModel.getProducto().getPrecioUnitario() * pedidoModel.getCantidad() * 0.03;
+		
+		
+		
+		pedidoModel.getVendedorDespacha().setPlusSueldo(pedidoModel.getVendedorDespacha().getPlusSueldo() + comision);
+		pedidoModel.getVendedorSolicita().setPlusSueldo(pedidoModel.getVendedorSolicita().getPlusSueldo() + comision2);
+		vendedorService.insertOrUpdate(pedidoModel.getVendedorDespacha());
+		vendedorService.insertOrUpdate(pedidoModel.getVendedorSolicita());
 		return mav;
 	}
 	

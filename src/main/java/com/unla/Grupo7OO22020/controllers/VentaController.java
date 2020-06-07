@@ -192,8 +192,7 @@ public class VentaController {
 		for (int i = 0; i < largo; i++) {
 			ProductoModel productoModel = productoService.findByIdProducto(prodIndices.get(i));
 			double 		cantidad 	= Double.parseDouble(prodCantidades.get(i).toString());
-			suma += cantidad * productoModel.getPrecioUnitario();
-			
+				
 			consumoitem = sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(), (int) cantidad);
 			System.out.println("rta consumo item:"+ consumoitem);
 		
@@ -202,6 +201,9 @@ public class VentaController {
 			
 			if(stock>=cantidad) {
 				sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(),(int)cantidad);
+				double comision = cantidad * productoModel.getPrecioUnitario() * 0.05;
+				vendedorModel.setPlusSueldo(vendedorModel.getPlusSueldo() + comision);
+				vendedorService.insertOrUpdate(vendedorModel);
 			}else {
 			
 				SucursalModel sucModel = sucursalConverter.entityToModel(resultado.get(0));
@@ -214,8 +216,7 @@ public class VentaController {
 				pedidoModel.setProducto(productoModel);
 				pedidoModel.setCantidad(cantidad);
 
-				pedidoModel = pedidoService.insertOrUpdate(pedidoModel);
-				
+				pedidoModel = pedidoService.insertOrUpdate(pedidoModel);				
 				
 			}
 			
@@ -225,9 +226,7 @@ public class VentaController {
 			itemService.insertOrUpdate(itemModel);
 			
 			
-			double comision = suma * 0.05;
-			vendedorModel.setPlusSueldo(vendedorModel.getPlusSueldo() + comision);
-			vendedorService.insertOrUpdate(vendedorModel);
+			
 		}
 		
 		/********************************/
