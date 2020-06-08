@@ -58,7 +58,8 @@ public class SucursalController {
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.sucursal_idx);	
 			mav.addObject("sucursal", new Sucursal());
 			mav.addObject("sucursales", sucursalService.getAll());
-			mav.addObject("gerentes", gerenteService.getAll());
+			//mav.addObject("gerentes", gerenteService.getAll());
+			mav.addObject("gerentes", gerenteService.findByDisponibles());
 			mav.addObject("gerente", new Gerente());		
 			return mav;			
 		}
