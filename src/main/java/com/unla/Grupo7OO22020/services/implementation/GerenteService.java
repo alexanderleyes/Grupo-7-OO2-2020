@@ -1,5 +1,6 @@
 package com.unla.Grupo7OO22020.services.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.GerenteConverter;
 import com.unla.Grupo7OO22020.entities.Gerente;
+import com.unla.Grupo7OO22020.entities.Pedido;
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.models.GerenteModel;
+import com.unla.Grupo7OO22020.models.PedidoModel;
+import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.repositories.IGerenteRepository;
+import com.unla.Grupo7OO22020.repositories.ISucursalRepository;
 import com.unla.Grupo7OO22020.services.IGerenteService;
 
 @Service("gerenteService")
@@ -18,6 +24,10 @@ public class GerenteService implements  IGerenteService{
 	@Autowired
 	@Qualifier("gerenteRepository")
 	private IGerenteRepository gerenteRepository;
+	
+	@Autowired
+	@Qualifier("sucursalRepository")
+	private ISucursalRepository sucursalRepository;
 	
 	@Autowired
 	@Qualifier("gerenteConverter")
@@ -99,6 +109,26 @@ public class GerenteService implements  IGerenteService{
 		return gerenteConverter.entityToModel(gerente);
 	}
 	
-	
+	@Override
+	public List<Gerente> findByDisponibles(){
+		
+		List<Gerente> gerentesDisponibles = new ArrayList<Gerente>();
+		List<Gerente> gerentes = gerenteRepository.findAll();
+		List<Sucursal> sucursales = sucursalRepository.findAll();
+		for(Gerente g: gerentes) {
+			boolean encontro = false;
+			for(Sucursal s: sucursales) {			
+				if(g.getIdPersona() == s.getGerente().getIdPersona() ) {
+					encontro = true;
+					//break;
+				}
+			}
+			if(!encontro) {
+				gerentesDisponibles.add(g);			
+			
+			}
+		}
+		return gerentesDisponibles;
+		}		
 	
 }

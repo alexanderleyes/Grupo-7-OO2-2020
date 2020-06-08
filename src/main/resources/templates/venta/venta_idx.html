@@ -64,11 +64,12 @@
         </div>        
        
        <br>
-<!-- Botón que dispara el modal -->
-		<input type="image" src="../../img/icons/anadir.png"  title="Realzar una Venta" data-toggle="modal" data-target="#exampleModalCenter"/>			
+       <!-- Botón que dispara el modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+		  Agregar una Venta
+		</button>
 
-
-       
+       </div>    
         
         
         <br><br><br><br><br>
@@ -98,23 +99,17 @@
 						<td><span th:text=${venta.estado.nombre}/></td>
 						<td><span th:text=${venta.fecha}/></td>
 						<td>
-							<input type="image" src="../../img/icons/ver_detalle.png"  title="Vusualizar" data-toggle="modal" data-target="#exampleModalCenter"/>			
-							
-							<input type="submit" name="verDetalle" value="D" />						
+							<!--  <input type="submit" name="verDetalle" value="D" /> -->		
+							<input type="image" src="../../img/icons/Consulta.png" alt="Submit" name= "verDetalle" > 				
 						</td>
 					</form>						
 					
 				</tr>
 				
 			</tbody>
-		</table>  
-		
-		
+		</table>  		
         
-		<br><br><br>
-		
-
-		
+		<br><br><br>		
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -163,108 +158,44 @@
               </div>
             
               
-           </form>   
-                
-              
-		
-<!--         <form th:object="${item}" method="post" role="form" > -->
-		
-<!--         <div class="form-row" ;>       -->
-<!-- 			<div class="form-group col-md-6"> -->
+           </form>     
 			 
 			 <table>
   			<tbody>
 			<tr th:each="item,items : *{items}">
 				<td th:text="${items.count}"/>
-      		
-			
-<!-- 				<label for="name">Producto</label>		      -->
-<!-- 		   		<select class="form-control"  th:field="*{producto.idProducto}" id="producto"><br> -->
-<!-- 		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	 -->
-<!-- 		    	</select> -->
-		    	
+	    	
 		    	<select th:field="*{items[__${items.index}__].producto}">
 		          <option th:each="p : ${productos}" 
 		                  th:value="${p.idProducto}" 
 		                  th:text="${p.descripcion}"/>
-		        </select>
-		   
+		        </select>   
 		    	
 		    	
-
-
 		    	<label for="name">Cantidad</label>
 		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  id="cantidad"/>
 		    	<div class="validate"></div>
-
         
          </tr>	
         </tbody>
-
-
 		</table>
              
 
-
 	  <div class="modal-footer">
-		<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
-<!--       	<button type="submit" class="btn btn-primary">Guardar</button> -->
+		<div class="text-left">
+		<button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-        
+       
       </div>
-	
-
 	         
       </div>
-
-
     </div>
   </div>
-</div>
-
-
-
-
-		
+</div>	
 
       
     </section><!-- End Breadcrumbs -->
-
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
-
-        <div class="portfolio-details-container">
-
-<!--           <div class="owl-carousel portfolio-details-carousel"> -->
-<!--             <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt=""> -->
-<!--             <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt=""> -->
-<!--             <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt=""> -->
-<!--           </div> -->
-
-          <div class="portfolio-info">
-            <h3>Project information</h3>
-            <ul>
-              <li><strong>Category</strong>: OO2"</li>
-              <li><strong>Client</strong>: ASU Company</li>
-              <li><strong>Project date</strong>: 01 March, 2020</li>
-              <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-            </ul>
-          </div>
-
-        </div>
-
-        <div class="portfolio-description">
-          <h2>This is an example of portfolio detail</h2>
-          <p>
-            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-          </p>
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Details Section -->
-
+  
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -352,9 +283,7 @@
 	                }
 	            });
 	        });
-	    }); 
-	 
-	 
+	    }); 	 
 	 
 	
 	</script>
