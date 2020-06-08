@@ -66,14 +66,13 @@ public class VendedorController {
 		System.out.println("emp add: ");	
 	
 		vendedorModel.setPassword(String.valueOf(vendedorModel.getDni()));
-		vendedorModel.setUsuario("DNI"+String.valueOf(vendedorModel.getDni()));		
+		vendedorModel.setUsuario(vendedorModel.getApellido());
 		vendedorModel.setSucursal(sucursalService.findByIdSucursal(vendedorModel.getSucursal().getIdSucursal()));
 		vendedorModel = vendedorService.insertOrUpdate(vendedorModel);		
 		
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);		
         long id_empleado = vendedorModel.getIdPersona(); ///Obtengo el id del Vendedor para que coincida con el user le asigno el mismo id, sino genera otro distinto es mas dificil conectarlos.
-		
-        String username = "DNI"+String.valueOf(vendedorModel.getDni());
+		String username = vendedorModel.getApellido(); // Al crear un nuevo empleado el usuario por defecto es el apellido
         String passEcriptado = bCryptPasswordEncoder.encode(Integer.toString(vendedorModel.getDni()));   // Al crear un nuevo empleado el password por defecto es el dni
         User user = new User(id_empleado, username, passEcriptado, true);    
         UserRole role = new UserRole(user , "ROLE_VENDEDOR");       

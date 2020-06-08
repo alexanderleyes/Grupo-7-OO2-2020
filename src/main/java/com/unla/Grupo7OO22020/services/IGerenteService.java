@@ -13,5 +13,5 @@ public interface IGerenteService {
 	public GerenteModel findByDni(int dni);
 	public GerenteModel findByUsuario(String usuario);
 	public GerenteModel findByIdGerente(long id);
-	public List<Gerente> findByDisponibles();
+	
 }

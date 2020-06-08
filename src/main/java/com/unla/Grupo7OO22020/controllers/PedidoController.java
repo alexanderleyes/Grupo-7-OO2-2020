@@ -1,8 +1,6 @@
 package com.unla.Grupo7OO22020.controllers;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,10 +24,14 @@ import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
+import com.unla.Grupo7OO22020.models.VentaModel;
+import com.unla.Grupo7OO22020.services.IEstadoVentaService;
+import com.unla.Grupo7OO22020.services.IItemService;
 import com.unla.Grupo7OO22020.services.IPedidoService;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
+import com.unla.Grupo7OO22020.services.IVentaService;
 
 @Controller
 @PreAuthorize("hasRole('ADMIN') or hasRole('VENDEDOR')")
@@ -53,6 +55,14 @@ public class PedidoController {
 	private IProductoService productoService;
 	
 	@Autowired
+	@Qualifier("ventaService")
+	private IVentaService ventaService;
+	
+	@Autowired
+	@Qualifier("estadoVentaService")
+	private IEstadoVentaService estadoVentaService;
+	
+	@Autowired
 	@Qualifier("sucursalConverter")
 	private SucursalConverter sucursalConverter;
 	
@@ -60,6 +70,10 @@ public class PedidoController {
 	@Qualifier("vendedorConverter")
 	private VendedorConverter vendedorConverter;
 	
+	@Autowired
+	@Qualifier("itemService")
+	private IItemService itemService;
+
 	@GetMapping("/pedido_idx")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.pedido_idx);
@@ -188,19 +202,17 @@ public class PedidoController {
 		String username 	= SecurityContextHolder.getContext().getAuthentication().getName();		
 		PedidoModel pedidoModel = pedidoService.findById(id);
 		pedidoModel.setVendedorDespacha(vendedorService.findByUsuario(username));
+		VentaModel venta = ventaService.findByIdVenta(pedidoModel.getIdVenta());
 		sucursalService.consumir(pedidoModel.getSucDestino().getIdSucursal(), pedidoModel.getProducto().getIdProducto(), (int) pedidoModel.getCantidad());
-
-		pedidoService.insertOrUpdate(pedidoModel);	
-		//------------
-		double comision = pedidoModel.getProducto().getPrecioUnitario() * pedidoModel.getCantidad() * 0.02;
-		double comision2 = pedidoModel.getProducto().getPrecioUnitario() * pedidoModel.getCantidad() * 0.03;
 		
+		List<Pedido> lstPedidos = pedidoService.findAllByIDVenta(pedidoModel.getIdVenta());
+	
+		pedidoService.insertOrUpdate(pedidoModel);
 		
+		//para setear estado FINALIZADO una vez que esten todos los pedidos despachados 
+		ventaService.EstadoFinalizado(lstPedidos, venta);
+		ventaService.insertOrUpdate(venta);
 		
-		pedidoModel.getVendedorDespacha().setPlusSueldo(pedidoModel.getVendedorDespacha().getPlusSueldo() + comision);
-		pedidoModel.getVendedorSolicita().setPlusSueldo(pedidoModel.getVendedorSolicita().getPlusSueldo() + comision2);
-		vendedorService.insertOrUpdate(pedidoModel.getVendedorDespacha());
-		vendedorService.insertOrUpdate(pedidoModel.getVendedorSolicita());
 		return mav;
 	}
 	
