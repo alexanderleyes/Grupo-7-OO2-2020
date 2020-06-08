@@ -64,13 +64,11 @@
         </div>        
        
        <br>
-       <!-- Botón que dispara el modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-		  Agregar una Venta
-		</button>
+<!-- Botón que dispara el modal -->
+		<input type="image" src="../../img/icons/anadir.png"  title="Realzar una Venta" data-toggle="modal" data-target="#exampleModalCenter"/>			
 
-       </div>
-      
+
+       
         
         
         <br><br><br><br><br>
@@ -100,6 +98,8 @@
 						<td><span th:text=${venta.estado.nombre}/></td>
 						<td><span th:text=${venta.fecha}/></td>
 						<td>
+							<input type="image" src="../../img/icons/ver_detalle.png"  title="Vusualizar" data-toggle="modal" data-target="#exampleModalCenter"/>			
+							
 							<input type="submit" name="verDetalle" value="D" />						
 						</td>
 					</form>						
@@ -191,36 +191,20 @@
 		   
 		    	
 		    	
-<!-- 	     	</div>         -->
-<!-- 			<div class="form-group col-md-6"> -->
+
+
 		    	<label for="name">Cantidad</label>
 		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  id="cantidad"/>
 		    	<div class="validate"></div>
-<!-- 			</div>                               -->
-<!--         </div> -->
+
         
          </tr>	
         </tbody>
-<!--         </form>  -->
+
 
 		</table>
              
-<!-- 		<div class="text-left"><input type="button" class="add-row" value="Agregar" id="btnAgregar"></div>            -->
-         
-<!-- 			<table class="table" id="table1"  > -->
-<!-- 				<thead> -->
-<!-- 					<tr > -->
-<!-- 						<th>ID </th> -->
-<!-- 						<th>Producto</th> -->
-<!-- 						<th>Cantidad </th> -->
-<!-- 						<th> </th> -->
-<!-- 						<th> </th>																 -->
-<!-- 					</tr> -->
-<!-- 				</thead> -->
-<!-- 				<tbody>	 -->
-					
-<!-- 				</tbody> -->
-<!-- 			</table> -->
+
 
 	  <div class="modal-footer">
 		<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 

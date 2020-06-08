@@ -53,45 +53,55 @@
 							<h2><b>Vendedor:  </b><span th:text=${venta.vendedor.apellido} />, <span th:text=${venta.vendedor.nombre}/></h2>
 						</div>
 						<div class="form-group col-md-6">
-							<h2><b>Sucursal: </b><span th:text=${venta.sucursal.idSucursal}/> - <span th:text=${venta.sucursal.direccion}/></h2>
+							<h2><b>Sucursal: </b><span th:text=${venta.sucursal.idSucursal} id="sucursal"/> - <span th:text=${venta.sucursal.direccion}/></h2>
 						</div>
 						<div class="form-group col-md-6">
 							<h2><b>Cliente:  </b><span th:text=${venta.cliente.apellido}/>, <span th:text=${venta.cliente.nombre}/></h2>
 						</div>
 					</div>
-					<br><br><br>
+					<br>
+					
+					<input type="image" src="../../img/icons/mas.png"  title="Agregar Item"  class="add-row" />	
+					<input type="image" src="../../img/icons/stock.png"  title="Consultar Stock" onClick="verStock();"/>
+<!-- 					<input type="image" src="../../img/icons/stock.png"  title="Consultar Stock" data-trigger="focus"  data-toggle="popover" onClick="verStock();"/> -->
+							
 					<form th:object="${item}" method="post" role="form" >
 						<div class="form-row" >
 							<div class="form-group col-md-6">
 								<label for="name">Producto</label>		     
-								<select class="form-control"  th:field="*{producto.idProducto}" id="producto">
-									<br>
+								<select class="form-control"  th:field="*{producto.idProducto}" id="producto" onChange="verStock(), cambiar();" onClick="verStock(), cambiar();">									
 									<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
 								</select>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="name">Cantidad</label>
-								<input type="number" min="0" step="1" th:field="*{cantidad}" class="form-control"  id="cantidad"palceholder="4"/>
+								<input type="number" min="0" step="1" th:field="*{cantidad}" class="form-control"  id="cantidad" palceholder="4" onChange="verStock(), cambiar();"/>
 								<div class="validate"></div>
-							</div>
+							</div>	
+							<div class="form-group col-md-6">
+								<label for="name">Disponible</label>
+								<span id="ver-stock" ></span>
+								<div class="validate"></div>
+							</div>				
+							
+							<div id="div-select-cercanas" ></div>
 						</div>
 					</form>
-					<div class="text-left"><input type="button" class="add-row" value="Agregar"></div>
-					<form th:action="@{/venta/revisa}" method="post" role="form">
-						<table class="table" id="table"  >
-							<thead>
-								<tr >
-									<th>ID </th>
-									<th>Producto</th>
-									<th>Cantidad </th>
-									<th> </th>
-									<th> </th>
-								</tr>
-							</thead>
-							<tbody>	
-							</tbody>
-						</table>
-					</form>
+					
+					<table class="table" id="table"  >
+						<thead>
+							<tr >
+								<th>ID </th>
+								<th>Producto</th>
+								<th>Cantidad </th>
+								<th>Se pedira a..</th>									
+								<th> </th>								
+							</tr>
+						</thead>
+						<tbody>	
+						</tbody>
+					</table>
+					
 					<form th:action="@{/venta/revisa}" method="post" role="form" >
 						<input name="vend" type="hidden" th:field="${venta.vendedor.idVendedor}">
 						<input name="suc" type="hidden" th:field="${venta.sucursal.idSucursal}">
@@ -100,7 +110,9 @@
 												
 						<input id="ids" name="ids" type="hidden" th:field="${vtaItems.ids}">
 						<input id="cnt" name="cnt" type="hidden" th:field="${vtaItems.cnt}">
-						<input type="submit" id=btnRecorrer class="btn btn-primary" onclick="recorrerItems();" />
+ 						<input id="sux" name="sux" type="hidden" th:field="${vtaItems.sux}"> 
+						
+						<input type="image" src="../../img/icons/factura.png"  title="Finalizar"  onclick="recorrerItems();" />						
 					</form>
 					<br><br><br>
 				</div>
@@ -110,11 +122,7 @@
 			<section id="portfolio-details" class="portfolio-details">
 				<div class="container">
 					<div class="portfolio-details-container">
-						<!--           <div class="owl-carousel portfolio-details-carousel"> -->
-						<!--             <img src="../img/portfolio-details-1.jpg" class="img-fluid" alt=""> -->
-						<!--             <img src="../img/portfolio-details-2.jpg" class="img-fluid" alt=""> -->
-						<!--             <img src="../img/portfolio-details-3.jpg" class="img-fluid" alt=""> -->
-						<!--           </div> -->
+		
 						<div class="portfolio-info">
 							<h3>Project information</h3>
 							<ul>
@@ -126,9 +134,8 @@
 						</div>
 					</div>
 					<div class="portfolio-description">
-						<h2>This is an example of portfolio detail</h2>
+						<h2></h2>
 						<p>
-							Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
 						</p>
 					</div>
 				</div>
@@ -173,41 +180,122 @@
 			           var id =  $("#producto").val();
 			           var producto =  $("#producto option:selected").text();
 			           var cantidad =  $("#cantidad").val();
+			           var idSuc  = new Number($("#sucursalDes option:selected").val());
+			           var sucNom = $("#sucursalDes option:selected").text();
+			           console.log(idSuc);
+			           console.log(sucNom);
+			           
 			           if(cantidad > 0 ){            	
 			           
-			           	var markup = "<tr><td>" + id + "</td><td>" + producto + "</td><td> " + cantidad + "</td></tr> ";
+			           	var markup = "<tr><td>" + id + "</td><td>" + producto + "</td>  <td> " + cantidad + "</td><td>"+ sucNom +"</td><td style=\"visibility:hidden;\"> "+ idSuc + "</td>  <td><input type=\"image\" src=\"../../img/icons/quitar.png\"  title=\"Quitar Item\"  class=\"delete-row\" /></td> </tr> ";
 			           $("table tbody").append(markup);
 			           }
-			       });
-			       
-			       // Find and remove selected table rows
-			       $(".delete-row").click(function(){
-			           $("table tbody").find('input[id="record"]').each(function(){
-			               if($(this).is(":checked")){
-			                   $(this).parents("tr").remove();
-			               }
-			           });
-			       });
-			   });    
+			       });	       
+			      
+			   });  			
+			
+			$(function () {
+			    $(document).on('click', '.delete-row', function (event) {
+			        event.preventDefault();
+			        $(this).closest('tr').remove();
+			    });
+			});
 			
 			
 			function recorrerItems() {
-			var ids = '' 
-			var cnt = ''
+				var ids = '' 
+				var cnt = ''
+				var sux = ''
+				
 			
 				for(var i=0; i<table.rows.length; i++)	{
 					
 				if (i != 0){							
 					ids = ids + '_' + table.rows[i].cells[0].innerHTML
-						cnt = cnt + '_' + table.rows[i].cells[2].innerHTML
+					cnt = cnt + '_' + table.rows[i].cells[2].innerHTML
+					
+					if(table.rows[i].cells[4].innerHTML == " NaN"){
+						sux = sux + '_' + 0
+					}else{
+						sux = sux + '_' + table.rows[i].cells[4].innerHTML
+					}
+						
+					
 				}			
 					console.log(ids)
 					console.log(cnt)
+				
 				$("#ids").val(ids)
 				$("#cnt").val(cnt)
+				$("#sux").val(sux)
 				
 				}
 			}	
+			
+			
+			$(function () {
+				  $('[data-toggle="popover"]').popover()
+				})
+				
+			$('.popover-dismiss').popover({
+  				trigger: 'focus'
+			})	
+			
+			function verStock(){ // Visualiza el stock del producto solicitado
+				var idProd =  $("#producto").val();
+	           	var idSucu =  document.getElementById('sucursal').innerHTML;
+	           	
+	           	console.log(idProd);
+	           	console.log(idSucu);
+	           	
+	          
+					$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+						method: "GET",
+					 	url: "/sucursal/stock/" + idSucu + "/" + idProd,
+					})
+					
+					.done(function(result) {
+						$("#ver-stock").html(result);
+						
+					})
+					
+					.fail(function() {
+						alert("error");
+					});
+			}
+			
+			function cambiar(){//Refresca los combos con sucursales cercanas
+				
+				var idx		= document.getElementById('sucursal').innerHTML;
+				var idp		= $("#producto").val();				
+				var cant	= $("#cantidad").val();
+ 				var stock	= document.getElementById('idStock').innerHTML;
+ 				cant		= new Number(cant);
+ 				stock		= new Number(stock);
+				
+// 				idx 	= 0 + idx;
+// 				idp 	= 0 + idp;
+// 				cant 	=  cant;
+//  				stock	=   stock;
+ 				console.log(stock)
+					
+ 				 				
+					if($.isNumeric(idx)  && cant > 0 && stock < cant){
+						$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+							method: "GET",
+						 	url: "/sucursal/cercana/" + idx + "/" + idp+ "/" + cant,
+						})
+						.done(function(result) {
+							$("#div-select-cercanas").html(result);
+							
+						})
+						.fail(function() {
+							alert("error");
+						});
+					}else {
+						$("#div-select-cercanas").html("")				
+					}
+			}
 			
 		</script>
 	</body>

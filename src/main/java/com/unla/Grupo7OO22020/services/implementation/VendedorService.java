@@ -1,13 +1,17 @@
 package com.unla.Grupo7OO22020.services.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.converters.VendedorConverter;
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Vendedor;
+import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.repositories.IVendedorRepository;
 import com.unla.Grupo7OO22020.services.IVendedorService;
@@ -22,6 +26,12 @@ public class VendedorService implements  IVendedorService{
 	@Autowired
 	@Qualifier("vendedorConverter")
 	private VendedorConverter vendedorConverter;
+	
+	@Autowired
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;	
+	
+	
 	
 	@Override
 	public List<Vendedor> getAll(){
@@ -101,6 +111,14 @@ public class VendedorService implements  IVendedorService{
 		return vendedorConverter.entityToModel(empleado);
 	}
 	
-	
-	
+	@Override
+	public List<VendedorModel>  findAllBySucursal(SucursalModel sucursalModel){
+		Sucursal sucursal = sucursalConverter.modelToEntity(sucursalModel);
+		List<Vendedor> vendedores = vendedorRepository.findAllBySucursal(sucursal);
+		List<VendedorModel> vendedoresModels = new ArrayList<VendedorModel>();
+		for(Vendedor v: vendedores) {
+			vendedoresModels.add(vendedorConverter.entityToModel(v));
+		}
+		return vendedoresModels;		
+	}
 }

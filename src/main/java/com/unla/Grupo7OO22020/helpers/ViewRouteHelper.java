@@ -79,8 +79,9 @@ public class ViewRouteHelper {
 	
 	public final static String producto_prodxfecha = "producto/prodXfecha";
 
-
 	public final static String producto_reload = "redirect:/"+ producto_idx;
+	
+	public final static String producto_stock = "fragments/popOverStock";
 	
 	/*VENTAS*/
 

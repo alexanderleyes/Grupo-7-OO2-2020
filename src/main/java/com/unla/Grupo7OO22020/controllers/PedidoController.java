@@ -1,8 +1,6 @@
 package com.unla.Grupo7OO22020.controllers;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,14 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.converters.VendedorConverter;
-import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Vendedor;
-import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
-import com.unla.Grupo7OO22020.models.EstadoVentaModel;
-import com.unla.Grupo7OO22020.models.ItemModel;
 import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;

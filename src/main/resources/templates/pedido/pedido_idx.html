@@ -63,13 +63,11 @@
 				<div class="d-flex justify-content-between align-items-center">
 					<h2>Administrar Pedidos</h2>
 					<ol>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="index.html">Home</a></li>
+						<li><a th:href="@{/home}">Home</a></li>						
 					</ol>
 				</div>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-		  			Realizar un Pedido
-		  		</button>				
+				    	 <input type="image" src="../../img/icons/anadir.png"  title="Realzar un Pedido" data-toggle="modal" data-target="#exampleModalCenter"/>			
+			
 				<div sec:authorize="hasRole('VENDEDOR')"> 
 			
 					<br> <br>
@@ -335,15 +333,16 @@
 	
 	
 		function cambiar(){//	
-			idx=document.getElementById('sucOrigen.idSucursal').value;
-			idp=document.getElementById('producto.idProducto').value;
-			cant=document.getElementById('cantidad.producto').value;
-			idx = 0 + idx;
-			idp = 0 + idp;
-			cant = 0 + cant;		
+			idx		= document.getElementById('sucOrigen.idSucursal').value;
+			idp		= document.getElementById('producto.idProducto').value;
+			cant	= document.getElementById('cantidad.producto').value;
+			stock	= document.getElementById('cantidad.producto').value;
+			idx 	= 0 + idx;
+			idp 	= 0 + idp;
+			cant 	= 0 + cant;		
 			
 	
-			if($.isNumeric(idx)  && cant > 0){
+			if($.isNumeric(idx)  && cant > 0 && ){
 				$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
 					method: "GET",
 				 	url: "/pedido/cercana/" + idx + "/" + idp+ "/" + cant,

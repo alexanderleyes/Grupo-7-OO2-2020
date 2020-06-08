@@ -58,8 +58,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>Bienvenido</h2>
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inventario 002</li>
+             <li><a th:href="@{/home}">Home</a></li>
           </ol>
         </div>        
                 
@@ -96,12 +95,9 @@
 							
 						</tr>		
 					</tbody>
-				</table>
+				</table>	
 				
-				Se supone que cuando se loguea a como vendedor aca aparecen las solicitudes de mercaderia que se hicieron a esta sucursal,
-				El vendedor decide preparar el pedido y despacharlo. En ese momento se consume la mercaderia y se agrega al vendedor que 
-				despachó al campo	correspondiente.
-				<br> falta  hacer que desaparezca de la lista cuando ya se despachó.		
+				<br>	
 			</div>
 			<!-- ================================================================================================================== -->
 			
@@ -109,20 +105,17 @@
 			
 				<div sec:authorize="hasRole('GERENTE')">  
 	        	 
-	        	
-	        	<h1>
-					Sucursal <span th:text=${sucursal.idSucursal}/> - <span th:text=${sucursal.direccion}/>  		
-				</h1>
-				
-				
-				
-				<br> <br> <br> <br> <br>
-				<h3>
-					Titulo para el gerente		
-				</h3>
-				
-				Aca creo que estaria copado que vayan las estadisticas y reportes del proximo hito,
-					
+	        		
+		        	<h1>
+						Gerente de Sucursal <span th:text=${sucursal.idSucursal}/> - <span th:text=${sucursal.direccion}/>  		
+					</h1>
+					<br><br>
+					<h2>
+						<b>
+						Producto mas Vendido   
+						</b>
+						<br><span th:text=${masVendido.nombreProd}/> - <span th:text=${masVendido.cantidad}/>
+					</h2>
 				
 				
 				</div>		
@@ -154,7 +147,6 @@
 			
 		<div sec:authorize="hasRole('ADMIN')">  soy un admin</div>
 		
-		<div sec:authorize="hasRole('GERENTE')">  soy un gere</div>
 		
 		
 		

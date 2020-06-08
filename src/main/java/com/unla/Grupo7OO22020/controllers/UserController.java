@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.unla.Grupo7OO22020.entities.Ranking;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.GerenteModel;
 import com.unla.Grupo7OO22020.models.PedidoModel;
@@ -20,6 +20,7 @@ import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IPedidoService;
+import com.unla.Grupo7OO22020.services.IRankingService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 import com.unla.Grupo7OO22020.services.IVendedorService;
 
@@ -46,6 +47,11 @@ public class UserController {
 	@Autowired
 	@Qualifier("sucursalService")
 	private ISucursalService sucursalService;
+	
+
+	@Autowired
+	@Qualifier("rankingService")
+	private IRankingService rankingService;
 	
 	
 	@GetMapping("/login")
@@ -96,6 +102,7 @@ public class UserController {
 			   SucursalModel sucursalModel =  sucursalService.findByGerente(gerenteModel);
 			   mav.addObject("gerente", gerenteModel);
 			   mav.addObject("sucursal", sucursalModel);
+			   mav.addObject("masVendido" , rankingService.ranking().get(0));
 			   break;
 		   default : 		
 		}

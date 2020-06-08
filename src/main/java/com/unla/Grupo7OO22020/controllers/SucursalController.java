@@ -1,7 +1,5 @@
 package com.unla.Grupo7OO22020.controllers;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,21 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
-import com.unla.Grupo7OO22020.converters.VentaConverter;
 import com.unla.Grupo7OO22020.entities.Gerente;
-import com.unla.Grupo7OO22020.entities.Item;
-import com.unla.Grupo7OO22020.entities.Lote;
-import com.unla.Grupo7OO22020.entities.Ranking;
+import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
-import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
+import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.IRankingService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
 import com.unla.Grupo7OO22020.services.IVentaService;
-import com.unla.Grupo7OO22020.services.implementation.RankingService;
 
 @Controller
 @RequestMapping("sucursal")
@@ -99,7 +93,42 @@ public class SucursalController {
 	}
 	
 	
+	@GetMapping("/stock/{idSucursal}/{idProducto}")
+	public ModelAndView cercanas(@PathVariable("idSucursal") long idSucursal,@PathVariable("idProducto") long idProducto) {
+		ModelAndView mav = new ModelAndView();		
 	
+		int cantStock = sucursalService.stock(idSucursal, idProducto);	
+		mav.addObject("cantStock", cantStock);
+		mav.setViewName(ViewRouteHelper.producto_stock); 		
+		return mav;
+		
+	}
 	
+	@GetMapping("/cercana/{id}/{idp}/{cant}")
+	public ModelAndView cercanas(@PathVariable("id") long id,@PathVariable("idp") long idp,@PathVariable("cant") int cant) {
+		ModelAndView mAV = new ModelAndView();
+		
+		System.out.println("cerc sucursal: " + id);
+	
+		SucursalModel sucursal = sucursalService.findByIdSucursal(id);		
+		ProductoModel producto = productoService.findByIdProducto(idp);
+		
+		mAV.addObject("sucursal", new Sucursal());
+		mAV.addObject("producto", new Producto());	
+		
+		
+		List<Sucursal> resultado =  sucursalService.distancias(sucursal,producto,cant);
+	
+		if (resultado.size() >0) {
+			mAV.setViewName(ViewRouteHelper.cercana_view); 
+			mAV.addObject("sucursalesDes", resultado);			
+		}
+		else {	
+			mAV.setViewName(ViewRouteHelper.cercana_sin); 		
+		}
+		
+		return mAV;
+		
+	}
 		
 }

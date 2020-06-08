@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.converters.ClienteConverter;
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
+import com.unla.Grupo7OO22020.converters.VendedorConverter;
 import com.unla.Grupo7OO22020.entities.EstadoVenta;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
@@ -27,6 +28,7 @@ import com.unla.Grupo7OO22020.entities.VtaItems;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.ClienteModel;
 import com.unla.Grupo7OO22020.models.EstadoVentaModel;
+import com.unla.Grupo7OO22020.models.GerenteModel;
 import com.unla.Grupo7OO22020.models.ItemModel;
 import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.PersonaModel;
@@ -36,6 +38,7 @@ import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.models.VentaModel;
 import com.unla.Grupo7OO22020.services.IClienteService;
 import com.unla.Grupo7OO22020.services.IEstadoVentaService;
+import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IItemService;
 import com.unla.Grupo7OO22020.services.IPedidoService;
 import com.unla.Grupo7OO22020.services.IProductoService;
@@ -65,6 +68,10 @@ public class VentaController {
 	private IVendedorService vendedorService;
 	
 	@Autowired
+	@Qualifier("gerenteService")
+	private IGerenteService gerenteService;
+	
+	@Autowired
 	@Qualifier("itemService")
 	private IItemService itemService;
 	
@@ -85,6 +92,11 @@ public class VentaController {
 	private SucursalConverter sucursalConverter;
 	
 	@Autowired
+	@Qualifier("vendedorConverter")
+	private VendedorConverter vendedorConverter;
+	
+	
+	@Autowired
 	@Qualifier("pedidoService")
 	private IPedidoService pedidoService;
 	
@@ -96,22 +108,43 @@ public class VentaController {
 	public ModelAndView index(){
 			System.out.println("enruta: " +ViewRouteHelper.venta_idx);
 			ModelAndView mav = new ModelAndView(ViewRouteHelper.venta_idx);
-			
-			String username = SecurityContextHolder.getContext().getAuthentication().getName();			
-			VendedorModel vendedorModel= vendedorService.findByUsuario(username);	
-			
-			List<VendedorModel> vendedores = new ArrayList<VendedorModel>();
-			vendedores.add(vendedorModel);
-			mav.addObject("vendedores", vendedores);
-			
+			String username 	= SecurityContextHolder.getContext().getAuthentication().getName();		
+			String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();		
 			List<SucursalModel> sucursales = new ArrayList<SucursalModel>();
-			sucursales.add(vendedorModel.getSucursal());
-			mav.addObject("sucursales", sucursales);
+			List<VendedorModel> vendedores = new ArrayList<VendedorModel>();			
 			
+			switch(roleString)				{ 				  
+			   case "[ROLE_ADMIN]":				      
+				   System.out.println("cosas de admin");
+				 
+				   for (Sucursal s : sucursalService.getAll()) {
+					   sucursales.add(sucursalConverter.entityToModel(s));
+				   }
+				   for (Vendedor v : vendedorService.getAll()) {
+					   vendedores.add(vendedorConverter.entityToModel(v));
+				   }				  
+				   break;
+			   case "[ROLE_VENDEDOR]" :
+					VendedorModel vendedorModel= vendedorService.findByUsuario(username);					
+					vendedores.add(vendedorModel);									
+					sucursales.add(vendedorModel.getSucursal());
+					break;
+			   case "[ROLE_GERENTE]" :					       
+				   System.out.println("cosas de gerente");
+				   GerenteModel gerenteModel = gerenteService.findByUsuario(username);
+				   SucursalModel sucursalModel =  sucursalService.findByGerente(gerenteModel);
+				   sucursales.add(sucursalModel);
+				   vendedores = vendedorService.findAllBySucursal(sucursalModel);				 
+				   break;
+			   default : 		
+			}
+			
+			
+			mav.addObject("sucursales", sucursales);					
 			mav.addObject("sucursal", new Sucursal());
 			mav.addObject("venta", new Venta());			
-			mav.addObject("ventas", ventaService.getAll());	
-			
+			mav.addObject("ventas", ventaService.getAll());
+			mav.addObject("vendedores", vendedores);	
 			mav.addObject("clientes", clienteService.getAll());
 			mav.addObject("estados", estadoVentaService.getAll());
 			
@@ -129,7 +162,6 @@ public class VentaController {
 		ventaModel.setEstado(estadoVentaService.findByIdEstadoVenta(ventaModel.getEstado().getIdEstadoVenta()));
 		
 		mav.addObject("venta", ventaModel);
-		mav.addObject("items", itemService.getAll());
 		mav.addObject("productos", productoService.getAll());
 		mav.addObject("producto", new Producto());
 		mav.addObject("item", new Item());
@@ -166,42 +198,43 @@ public class VentaController {
 	
 	@PostMapping("/revisa")	
 	public ModelAndView revisaItems(VtaItems vtaItems, VentaModel venta){	
-		ModelAndView 	mav 				= new ModelAndView(ViewRouteHelper.venta_reload);
-		
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.venta_reload);	
 		
 		System.out.println("REV venta: " + venta.toString());
+		
 		ClienteModel 	clienteModel 	= clienteService.findByIdCliente(venta.getCliente().getIdPersona());	
 		venta.setCliente(clienteModel);
 		SucursalModel 	sucursalModel 	= sucursalService.findByIdSucursal(venta.getSucursal().getIdSucursal());
 		venta.setSucursal(sucursalModel);
 		VendedorModel 	vendedorModel	= vendedorService.findByIdVendedor(venta.getVendedor().getIdVendedor());
 		venta.setVendedor(vendedorModel);		
-		
 		EstadoVentaModel estadoModel = estadoVentaService.findByIdEstadoVenta(venta.getEstado().getIdEstadoVenta());
 		venta.setEstado(estadoModel);
-		
-		
-		System.out.println("cli : " + clienteModel);	
-		System.out.println("suc : " + sucursalModel);	
-		System.out.println("ven : " + vendedorModel);	
-		System.out.println("est : " + estadoModel);
-		
+				
 		List<Long> prodIndices  	= vtaItems.getListaIndices();
 		List<Long> prodCantidades 	= vtaItems.getListaCantidad();
-		int contador = 0 ;
+		List<Long> sucursales 		= vtaItems.getListaSucusales();
 		
-		
+		int contador = 0 ;		
 		venta = ventaService.insertOrUpdate(venta);
 		
 		int largo = prodIndices.size();
+		
 		boolean consumoitem;
+		
 		for (int i = 0; i < largo; i++) {
-			ProductoModel productoModel = productoService.findByIdProducto(prodIndices.get(i));
-			double 		cantidad 	= Double.parseDouble(prodCantidades.get(i).toString());
-			
+			ProductoModel 	productoModel 	= productoService.findByIdProducto(prodIndices.get(i));
+			double 			cantidad 		= Double.parseDouble(prodCantidades.get(i).toString());
+			SucursalModel 	sucDestino = new SucursalModel();
+			sucDestino.setDireccion("StockPropio");
+			if(sucursales.get(i) != 0) {
+				sucDestino		= sucursalService.findByIdSucursal(sucursales.get(i));
+			}
 			consumoitem = sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(), (int) cantidad);
 			System.out.println("rta consumo item:"+ consumoitem);
-		
+			
+			System.out.println("productoModel: " + productoModel.getDescripcion() + " - cantidad: " + cantidad + " - sucDestino: " + sucDestino.getDireccion());
+			
 			List<Sucursal> resultado =  sucursalService.distancias(sucursalModel, productoModel,(int)cantidad);
 			int stock = sucursalService.stock(sucursalModel.getIdSucursal(), productoModel.getIdProducto());
 			
@@ -216,7 +249,7 @@ public class VentaController {
 				
 				PedidoModel pedidoModel = new PedidoModel();
 				pedidoModel.setSucOrigen(sucursalModel);
-				pedidoModel.setSucDestino(sucModel);
+				pedidoModel.setSucDestino(sucDestino); // sucModel
 				pedidoModel.setVendedorSolicita(vendedorModel);
 				pedidoModel.setProducto(productoModel);
 				pedidoModel.setCantidad(cantidad);
@@ -230,7 +263,6 @@ public class VentaController {
 				
 			}
 			
-			//rankingService.insertOrUpdate(productoModel.getDescripcion(),(int) cantidad);
 			rankingService.insertOrUpdate(productoModel.getDescripcion(), (int) cantidad);
 			ItemModel 	itemModel 	= new ItemModel(productoModel, cantidad, venta);
 			itemService.insertOrUpdate(itemModel);

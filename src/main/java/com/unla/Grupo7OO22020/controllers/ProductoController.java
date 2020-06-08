@@ -17,6 +17,7 @@ import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Ranking;
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
@@ -138,6 +139,6 @@ public class ProductoController {
 		}
 		
 		return mav;
-	}
+	}	
 		
 }
