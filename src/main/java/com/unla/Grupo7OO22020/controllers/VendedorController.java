@@ -61,6 +61,23 @@ public class VendedorController {
 			return mav;			
 		}	
 	
+	
+	@GetMapping("/vendedor_sueldos")
+	public ModelAndView reporte_sueldos(){
+			System.out.println("enruta: " +ViewRouteHelper.vendedor_sueldos);
+			ModelAndView mav = new ModelAndView(ViewRouteHelper.vendedor_sueldos);
+			mav.addObject("vendedor", new Vendedor());
+			mav.addObject("sucursal", new Sucursal());
+			mav.addObject("vendedores", vendedorService.getAll());	
+			mav.addObject("sucursales", sucursalService.getAll());
+			
+			Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			mav.addObject("user", userDet);
+			return mav;			
+		}	
+	
+	
+	
 	@PostMapping("/agregar")	
 	public String agregarVendedor(VendedorModel vendedorModel){
 		System.out.println("emp add: ");	

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -38,10 +39,8 @@ public class Venta {
 	
 	@Column(name="fecha")
 	@CreationTimestamp
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fecha;
-	
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy="Item")
-//	private Set<Item> items = new HashSet<Item>();
 
 	public Venta() {}
 

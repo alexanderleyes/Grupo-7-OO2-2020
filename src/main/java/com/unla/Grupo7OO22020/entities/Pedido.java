@@ -1,5 +1,6 @@
 package com.unla.Grupo7OO22020.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -39,13 +41,15 @@ public class Pedido {
 	@Column(name="idVenta")
 	private long idVenta;
 	
+	@OneToOne(optional = true, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Item item;
 
 	public Pedido() {
 		
 	}
 	
 	public Pedido(long idPedido, Sucursal sucOrigen, Sucursal sucDestino, Vendedor vendedorSolicita,
-			Vendedor vendedorDespacha, Producto producto, double cantidad) {
+			Vendedor vendedorDespacha, Producto producto, double cantidad, Item item) {
 		super();
 		this.idPedido = idPedido;
 		this.sucOrigen = sucOrigen;
@@ -54,11 +58,12 @@ public class Pedido {
 		this.vendedorDespacha = vendedorDespacha;
 		this.producto = producto;
 		this.cantidad = cantidad;
+		this.item = item;
 	}
 	
 	
 	public Pedido(long idPedido, Sucursal sucOrigen, Sucursal sucDestino, Vendedor vendedorSolicita,
-			 Producto producto, double cantidad) {
+			 Producto producto, double cantidad, Item item) {
 		super();
 		this.idPedido = idPedido;
 		this.sucOrigen = sucOrigen;
@@ -66,11 +71,12 @@ public class Pedido {
 		this.vendedorSolicita = vendedorSolicita;
 		this.producto = producto;
 		this.cantidad = cantidad;
+		this.item = item;
 	}
 
 	
 	public Pedido(long idPedido, Sucursal sucOrigen, Sucursal sucDestino, Vendedor vendedorSolicita,
-			 Producto producto, double cantidad, long idVenta) {
+			 Producto producto, double cantidad, Item item, long idVenta) {
 		super();
 		this.idPedido = idPedido;
 		this.sucOrigen = sucOrigen;
@@ -79,13 +85,14 @@ public class Pedido {
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.idVenta = idVenta;
+		this.item = item;
 	
 	}
 	
 	
 
 	public Pedido(long idPedido, Sucursal sucOrigen, Sucursal sucDestino, Vendedor vendedorSolicita,
-			Vendedor vendedorDespacha, Producto producto, double cantidad, long idVenta) {
+			Vendedor vendedorDespacha, Producto producto, double cantidad, Item item, long idVenta) {
 		super();
 		this.idPedido = idPedido;
 		this.sucOrigen = sucOrigen;
@@ -95,6 +102,7 @@ public class Pedido {
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.idVenta = idVenta;
+		this.item = item;
 	}
 
 	public long getIdPedido() {
@@ -161,7 +169,13 @@ public class Pedido {
 		this.idVenta = idVenta;
 	}
 
-	
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}	
 	
 	
 

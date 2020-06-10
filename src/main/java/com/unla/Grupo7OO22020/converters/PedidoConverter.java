@@ -22,10 +22,9 @@ public class PedidoConverter {
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
 	
-	
-	
-	
-	
+	@Autowired
+	@Qualifier("itemConverter")
+	private ItemConverter itemConverter;	
 	
 	public PedidoModel entityToModel(Pedido pedido) {
 		return new PedidoModel(
@@ -35,7 +34,8 @@ public class PedidoConverter {
 				vendedorConverter.entityToModel(pedido.getVendedorSolicita()),
 				vendedorConverter.entityToModel(pedido.getVendedorDespacha()),
 				productoConverter.entityToModel(pedido.getProducto()), 
-				pedido.getCantidad());
+				pedido.getCantidad(),
+				itemConverter.entityToModel(pedido.getItem()));
 	}
 	
 	public PedidoModel entityToModelSinDespachante(Pedido pedido) {
@@ -45,9 +45,9 @@ public class PedidoConverter {
 				sucursalConverter.entityToModel(pedido.getSucDestino()),
 				vendedorConverter.entityToModel(pedido.getVendedorSolicita()),				
 				productoConverter.entityToModel(pedido.getProducto()), 
-				pedido.getCantidad());
-	}
-	
+				pedido.getCantidad(),
+				itemConverter.entityToModel(pedido.getItem()));
+	}	
 	
 	/***********************************************************************************/
 	public Pedido modelToEntitySinDespachante(PedidoModel pedidoModel) {
@@ -57,7 +57,8 @@ public class PedidoConverter {
 				sucursalConverter.modelToEntity(pedidoModel.getSucDestino()),
 				vendedorConverter.modelToEntity(pedidoModel.getVendedorSolicita()),				
 				productoConverter.modelToEntity(pedidoModel.getProducto()), 
-				pedidoModel.getCantidad());
+				pedidoModel.getCantidad(),
+				itemConverter.ModelToEntity(pedidoModel.getItem()));
 	}
 	public Pedido modelToEntity(PedidoModel pedidoModel) {
 		return new Pedido(
@@ -67,7 +68,8 @@ public class PedidoConverter {
 				vendedorConverter.modelToEntity(pedidoModel.getVendedorSolicita()),
 				vendedorConverter.modelToEntity(pedidoModel.getVendedorDespacha()),
 				productoConverter.modelToEntity(pedidoModel.getProducto()),
-				pedidoModel.getCantidad());
+				pedidoModel.getCantidad(),
+				itemConverter.ModelToEntity(pedidoModel.getItem()));
 		
 	}
 	
@@ -81,6 +83,7 @@ public class PedidoConverter {
 				vendedorConverter.entityToModel(pedido.getVendedorSolicita()),				
 				productoConverter.entityToModel(pedido.getProducto()), 
 				pedido.getCantidad(),
+				itemConverter.entityToModel(pedido.getItem()),
 				pedido.getIdVenta());
 	}
 	
@@ -93,6 +96,7 @@ public class PedidoConverter {
 				vendedorConverter.modelToEntity(pedidoModel.getVendedorSolicita()),				
 				productoConverter.modelToEntity(pedidoModel.getProducto()), 
 				pedidoModel.getCantidad(),
+				itemConverter.ModelToEntity(pedidoModel.getItem()),
 				pedidoModel.getIdVenta()
 				);
 	}
@@ -108,6 +112,7 @@ public class PedidoConverter {
 				vendedorConverter.entityToModel(pedido.getVendedorDespacha()),
 				productoConverter.entityToModel(pedido.getProducto()), 
 				pedido.getCantidad(),
+				itemConverter.entityToModel(pedido.getItem()),
 				pedido.getIdVenta());
 	}
 	
@@ -121,6 +126,7 @@ public class PedidoConverter {
 				vendedorConverter.modelToEntity(pedidoModel.getVendedorDespacha()),
 				productoConverter.modelToEntity(pedidoModel.getProducto()), 
 				pedidoModel.getCantidad(),
+				itemConverter.ModelToEntity(pedidoModel.getItem()),
 				pedidoModel.getIdVenta()
 				);
 	}

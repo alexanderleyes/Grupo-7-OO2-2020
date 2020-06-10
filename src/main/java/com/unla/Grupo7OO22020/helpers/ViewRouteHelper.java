@@ -33,6 +33,8 @@ public class ViewRouteHelper {
 
 	/*VENDEDOR*/
 	public final static String vendedor_idx = "vendedor/vendedor_idx";
+	
+	public final static String vendedor_sueldos = "vendedor/vendedor_sueldos";
 
 	public final static String vendedor_insert = "vendedor/vendedor_mod";
 

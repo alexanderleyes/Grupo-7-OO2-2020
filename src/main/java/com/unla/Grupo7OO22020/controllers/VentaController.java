@@ -225,6 +225,11 @@ public class VentaController {
 		for (int i = 0; i < largo; i++) {
 			ProductoModel 	productoModel 	= productoService.findByIdProducto(prodIndices.get(i));
 			double 			cantidad 		= Double.parseDouble(prodCantidades.get(i).toString());
+			
+			
+			ItemModel 	itemModel 	= new ItemModel(productoModel, cantidad, venta);
+			itemModel = itemService.insertOrUpdate(itemModel);
+			
 			SucursalModel 	sucDestino = new SucursalModel();
 			sucDestino.setDireccion("StockPropio");
 			if(sucursales.get(i) != 0) {
@@ -256,19 +261,22 @@ public class VentaController {
 				pedidoModel.setVendedorSolicita(vendedorModel);
 				pedidoModel.setProducto(productoModel);
 				pedidoModel.setCantidad(cantidad);
+				pedidoModel.setItem(itemModel);
 				pedidoModel.setIdVenta(venta.getIdVenta());
 
 				//Si tenemos que hacer el pedido a una sucursal, se setea el estado PENDIENTE 
 				EstadoVentaModel estadoV = estadoVentaService.findByIdEstadoVenta(2);
 				venta.setEstado(estadoV);
 				ventaService.insertOrUpdate(venta);
+				
+				
 				pedidoService.insertOrUpdate(pedidoModel);
 				
 			}
 			
 			rankingService.insertOrUpdate(productoModel.getDescripcion(), (int) cantidad);
-			ItemModel 	itemModel 	= new ItemModel(productoModel, cantidad, venta);
-			itemService.insertOrUpdate(itemModel);
+//			ItemModel 	itemModel 	= new ItemModel(productoModel, cantidad, venta);
+//			itemService.insertOrUpdate(itemModel);
 		}
 		
 		if(contador == largo) {

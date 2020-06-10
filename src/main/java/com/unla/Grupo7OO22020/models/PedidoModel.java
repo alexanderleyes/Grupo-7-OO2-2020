@@ -13,6 +13,7 @@ public class PedidoModel{
 	private VendedorModel vendedorDespacha;
 	private ProductoModel producto;
 	private double cantidad;
+	private ItemModel item;
 	private long idVenta;
 	
 
@@ -20,7 +21,7 @@ public class PedidoModel{
 	}
 
 	public PedidoModel(long idPedido, SucursalModel sucOrigen, SucursalModel sucDestino, VendedorModel vendedorSolicita,
-			VendedorModel vendedorDespacha, ProductoModel producto, double cantidad) {
+			VendedorModel vendedorDespacha, ProductoModel producto, double cantidad, ItemModel item) {
 		super();
 		this.setIdPedido(idPedido);
 		this.sucOrigen = sucOrigen;
@@ -29,12 +30,13 @@ public class PedidoModel{
 		this.vendedorDespacha = vendedorDespacha;
 		this.producto = producto;
 		this.cantidad = cantidad;
+		this.item = item;
 	}
 	
 	
 	/*Constructor Sin despachante*/
 	public PedidoModel(long idPedido, SucursalModel sucOrigen, SucursalModel sucDestino, VendedorModel vendedorSolicita,
-			ProductoModel producto, double cantidad) {
+			ProductoModel producto, double cantidad,ItemModel item) {
 		super();
 		this.setIdPedido(idPedido);
 		this.sucOrigen = sucOrigen;
@@ -42,11 +44,12 @@ public class PedidoModel{
 		this.vendedorSolicita = vendedorSolicita;		
 		this.producto = producto;
 		this.cantidad = cantidad;
+		this.item = item;
 	}
 
 
 	public PedidoModel(long idPedido, SucursalModel sucOrigen, SucursalModel sucDestino, VendedorModel vendedorSolicita,
-			 ProductoModel producto, double cantidad, long idVenta) {
+			 ProductoModel producto, double cantidad, ItemModel item, long idVenta) {
 		super();
 		this.idPedido = idPedido;
 		this.sucOrigen = sucOrigen;
@@ -55,12 +58,13 @@ public class PedidoModel{
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.idVenta = idVenta;
+		this.item = item;
 	}
 
 	
 	
 	public PedidoModel(long idPedido, SucursalModel sucOrigen, SucursalModel sucDestino, VendedorModel vendedorSolicita,
-			VendedorModel vendedorDespacha, ProductoModel producto, double cantidad, long idVenta) {
+			VendedorModel vendedorDespacha, ProductoModel producto, double cantidad, ItemModel item, long idVenta) {
 		super();
 		this.idPedido = idPedido;
 		this.sucOrigen = sucOrigen;
@@ -70,6 +74,7 @@ public class PedidoModel{
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.idVenta = idVenta;
+		this.item = item;
 	}
 
 	public long getIdPedido() {
@@ -136,9 +141,16 @@ public class PedidoModel{
 
 	public void setIdVenta(long idVenta) {
 		this.idVenta = idVenta;
+	}	
+	
+	public ItemModel getItem() {
+		return item;
 	}
-	
-	
+
+	public void setItem(ItemModel item) {
+		this.item = item;
+	}
+
 	@Override
 	public String toString() {
 		return "PedidoModel [idPedido=" + idPedido + ", sucOrigen=" + sucOrigen + ", sucDestino=" + sucDestino
