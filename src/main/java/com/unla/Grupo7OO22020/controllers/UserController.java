@@ -1,6 +1,8 @@
 package com.unla.Grupo7OO22020.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Ranking;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.GerenteModel;
@@ -19,6 +22,7 @@ import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
 import com.unla.Grupo7OO22020.services.IGerenteService;
+import com.unla.Grupo7OO22020.services.IParametroService;
 import com.unla.Grupo7OO22020.services.IPedidoService;
 import com.unla.Grupo7OO22020.services.IRankingService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
@@ -52,6 +56,12 @@ public class UserController {
 	@Autowired
 	@Qualifier("rankingService")
 	private IRankingService rankingService;
+	
+
+	@Autowired
+	@Qualifier("parametroService")
+	private IParametroService parametroService;
+	
 	
 	
 	@GetMapping("/login")
@@ -102,7 +112,52 @@ public class UserController {
 			   SucursalModel sucursalModel =  sucursalService.findByGerente(gerenteModel);
 			   mav.addObject("gerente", gerenteModel);
 			   mav.addObject("sucursal", sucursalModel);
-			   mav.addObject("masVendido" , rankingService.ranking().get(0));
+			   List<Ranking> ranking = rankingService.ranking();
+			   mav.addObject("rankingProd" , ranking);
+			   
+			   /********************RANKING PRODUCTOS************************/			   
+			   Map<String, Integer> barProd = new HashMap<>();
+			   long idParametro = 1;
+			   int cantidad = Integer.parseInt(parametroService.findByIdParametro(idParametro).getValor());
+			   
+			   if (cantidad == 0 ) {
+				   cantidad = 999999;
+			   }
+			   if (cantidad >ranking.size()) {
+				   cantidad = ranking.size();
+			   }
+			   
+			   
+			   for(int i=0 ; i<cantidad; i++) {	
+				   barProd.put(ranking.get(i).getNombreProd(), ranking.get(i).getCantidad());
+				}			   
+			   mav.addObject("bar", barProd);			   
+			   /********************RANKING PRODUCTOS************************/	
+			   
+			   /**********************PLUS COMISIONES************************/		
+			   List<VendedorModel> vendedores = vendedorService.findAllBySucursal(sucursalModel);
+			   Map<String, Double> prodChart = new HashMap<>();
+			   String texto = null;
+			   idParametro = 2;
+			   cantidad = Integer.parseInt(parametroService.findByIdParametro(idParametro).getValor());
+			   
+			   if (cantidad == 0 ) {
+				   cantidad = 999999;
+			   }			   
+			   if (cantidad >vendedores.size()) {
+				   cantidad = vendedores.size();
+			   }
+			  
+			   
+			   for(int i=0 ; i<cantidad; i++) {	
+				   prodChart.put(vendedores.get(i).getApellido(), vendedores.get(i).getPlusSueldo());
+				}		   
+			   mav.addObject("prodChart", prodChart);
+			   /**********************PLUS COMISIONES************************/		
+			   
+			   
+			   
+
 			   break;
 		   default : 		
 		}

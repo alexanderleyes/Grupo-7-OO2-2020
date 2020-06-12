@@ -1,190 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>TPC - Democratizacion de Stock</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="../../img/favicon.png" rel="icon">
-  <link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="../vendor/owl.carousel/../owl.carousel.min.css" rel="stylesheet">
-  <link href="../vendor/aos/aos.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="../css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: iPortfolio - v1.2.1
-  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
-  <!-- ======= Mobile nav toggle button ======= -->
-  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
-
-  <!-- ======= Header ======= -->
-  <header id="header">
-    
-
-      	 <!-- NAV-MENU!!!!! --> <div th:insert="fragments/nav_menu :: nav_menu">  </div>
-
-     
-  </header><!-- End Header -->
-	
-  <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Bienvenido</h2>
-          <ol>
-             <li><a th:href="@{/home}">Home</a></li>
-          </ol>
-        </div>        
-                
-        	<div sec:authorize="hasRole('VENDEDOR')">  
-	        	     	
-	        	<h1>
-					Sucursal <span th:text=${vendedor.sucursal.idSucursal}/> - <span th:text=${vendedor.sucursal.direccion}/>  		
-				</h1>				
-				<br> <br> <br> <br> <br>
-				<h3>
-					Solicitudes pendientes de envío.		
-				</h3>
-				<table class="table" id="table">
-					<tr>
-						<th scope="col">Id</th>
-						<th scope="col">Sucursal Origen</th>					
-						<th scope="col">Vend Solicita</th>	
-						<th scope="col">Vend Despacha</th>					
-						<th scope="col">Producto</th>
-						<th scope="col">Cantidad</th>			
-						<th scope="col"></th>			
-					</tr>
-					<tbody>
-						<tr th:each="pedido : ${pedidos}">
-							<form th:action="@{/pedido/despachar/{id}(id=${pedido.idPedido})}" 	method="post" role="form">
-								<td><span th:text="${pedido.idPedido}" /></td>
-								<td><span th:text="${pedido.sucOrigen.direccion}" /></td>							
-								<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>
-								<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"/></td>
-								<td><span th:text="${pedido.producto.descripcion}" /></td>
-								<td><span th:text="${pedido.cantidad}" /></td>				
-								<td><input type="image" src="../../img/icons/despacha.png"  title="Despachar" /></td>
-							</form>			
+<html lang="en">	
+		<head>
+			<meta charset="utf-8">
+			<meta content="width=device-width, initial-scale=1.0" name="viewport">
+			<title>TPC - Democratizacion de Stock</title>
+			<meta content="" name="descriptison">
+			<meta content="" name="keywords">
+			<!-- Favicons -->
+			<link href="../../img/favicon.png" rel="icon">
+			<link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
+			<!-- Google Fonts -->
+			<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+			<!-- Vendor CSS Files -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+			<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+			<link href="../vendor/icofont/icofont.min.css" rel="stylesheet">
+			<link href="../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+			<link href="../vendor/venobox/venobox.css" rel="stylesheet">
+			<link href="../vendor/owl.carousel/../owl.carousel.min.css" rel="stylesheet">
+			<link href="../vendor/aos/aos.css" rel="stylesheet">
+			<!-- Template Main CSS File -->
+			<link href="../css/style.css" rel="stylesheet">
+			<!-- =======================================================
+				* Template Name: iPortfolio - v1.2.1
+				* Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+				* Author: BootstrapMade.com
+				* License: https://bootstrapmade.com/license/
+				======================================================== -->
+		</head>
+		<body>
+			<!-- ======= Mobile nav toggle button ======= -->
+			<button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+			<!-- ======= Header ======= -->
+			<header id="header">
+				<!-- NAV-MENU!!!!! --> 
+				<div th:insert="fragments/nav_menu :: nav_menu">  </div>
+			</header>
+			<!-- End Header -->
+			<main id="main">
+				<!-- ======= Breadcrumbs ======= -->
+				<section id="breadcrumbs" class="breadcrumbs">
+					<div class="container">
+						<div class="d-flex justify-content-between align-items-center">
+							<h2>Bienvenido</h2>
+							<ol>
+								<li><a th:href="@{/home}">Home</a></li>
+								<li><a th:href="@{/parametro/parametro_idx}">Parametros</a></li>
+							</ol>
+						</div>
+						<div sec:authorize="hasRole('VENDEDOR')">
+							<h1>
+								Sucursal <span th:text=${vendedor.sucursal.idSucursal}/> - <span th:text=${vendedor.sucursal.direccion}/>  		
+							</h1>
+							<br> <br> <br> <br> <br>
+							<h3>
+								Solicitudes pendientes de envío.		
+							</h3>
+							<table class="table" id="table">
+								<tr>
+									<th scope="col">Id</th>
+									<th scope="col">Sucursal Origen</th>
+									<th scope="col">Vend Solicita</th>
+									<th scope="col">Vend Despacha</th>
+									<th scope="col">Producto</th>
+									<th scope="col">Cantidad</th>
+									<th scope="col"></th>
+								</tr>
+								<tbody>
+									<tr th:each="pedido : ${pedidos}">
+										<form th:action="@{/pedido/despachar/{id}(id=${pedido.idPedido})}" 	method="post" role="form">
+											<td><span th:text="${pedido.idPedido}" /></td>
+											<td><span th:text="${pedido.sucOrigen.direccion}" /></td>
+											<td><span th:text="${pedido.vendedorSolicita.apellido}" /></td>
+											<td><span th:if="${pedido.vendedorDespacha != null}" th:text="${pedido.vendedorDespacha.apellido}"/></td>
+											<td><span th:text="${pedido.producto.descripcion}" /></td>
+											<td><span th:text="${pedido.cantidad}" /></td>
+											<td><input type="image" src="../../img/icons/despacha.png"  title="Despachar" /></td>
+										</form>
+									</tr>
+								</tbody>
+							</table>
+							<br>	
+						</div>
+						<!-- ================================================================================================================== -->
+						<div sec:authorize="hasRole('GERENTE')">
+							<h1>
+								Gerente de Sucursal <span th:text=${sucursal.idSucursal}/> - <span th:text=${sucursal.direccion}/>  		
+							</h1>
+							<br><br>
+							<h2>
+							</h2>
+							<div class="pieChart">
+								<h2 align="center">Productos mas vendidos</h2>
+								<div id="barChart" style="width: 80%; height: 400px; margin: 0 auto"></div>
+								<br>
+								<div id="empChart" style="width: 80%; height: 400px; margin: 0 auto"></div>
+							</div>
 							
-						</tr>		
-					</tbody>
-				</table>	
+						</div>
+						<!-- ================================================================================================================== -->
+						<div sec:authorize="hasRole('ADMIN')">
+							<h1>
+								El Admnistrador no esta asociado a ninguna sucursal   		
+							</h1>
+							<br> <br> <br> <br> <br>
+							<h3>
+								Titulo para el ADMIN		
+							</h3>
+							Aun no se decidio la info que va a visualizar el Adminisrador en el landing.
+							Todabia hay pantallazos y errores, aunque tenemos todas las partes contruidas 
+							faltan implementarlas y unirlas al 100% para que todo funcione bien. Por fa revisen!
+						</div>
+						<br>
+					</div>
+				</section>
+				<!-- End Breadcrumbs -->				
+			</main>
+			<!-- End #main -->
+			
+			<div th:insert="fragments/info :: info" />  	
+			<!-- ======= Footer ======= -->
+			<div th:insert="fragments/footer :: footer" />  	
+			
+			<!-- End  Footer -->
+			<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+			<!-- Vendor JS Files -->
+			<script src="../vendor/jquery/jquery.min.js"></script>
+			<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+			<script src="../vendor/jquery.easing/jquery.easing.min.js"></script>
+			<script src="../vendor/php-email-form/validate.js"></script>
+			<script src="../vendor/waypoints/jquery.waypoints.min.js"></script>
+			<script src="../vendor/counterup/counterup.min.js"></script>
+			<script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
+			<script src="../vendor/venobox/venobox.min.js"></script>
+			<script src="../vendor/typed.js/typed.min.js"></script>
+			<script src="../vendor/aos/aos.js"></script>
+			<!-- Template Main JS File -->
+			<script src="../js/main.js"></script>
+			<!--  Scrpt para que anden los graficos -->
+			<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+			<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script src="https://code.highcharts.com/highcharts.js"></script>
+			<script src="https://code.highcharts.com/modules/exporting.js"></script>
+			
+			
+			<script th:inline="javascript">
+				$(function(){
+				Highcharts.chart('barChart', {
+				    chart: {
+				        type: 'column'
+				    },
+				    title: {
+				        text: ''
+				    },
+				    subtitle: {
+				        text: 'Mostrando  historicos'
+				    },
+				    xAxis: {
+				        categories: [[${bar.keySet()}]],
+				        crosshair: true
+				    },
+				    yAxis: {
+				        min: 0,
+				        max:50,
+				        title: {
+				            text: 'Unidades Vendidas'
+				        }
+				    },
+				    tooltip: {
+				        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+				        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				        '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+				        footerFormat: '</table>',
+				        shared: true,
+				        useHTML: true
+				    },
+				    plotOptions: {
+				        column: {
+				            pointPadding: 0.2,
+				            borderWidth: 0
+				        }
+				    },
+				    series: [{
+				        name: 'Vendidos',
+				        data: [[${bar.values()}]]
+				    }]
+				});
+				});
 				
-				<br>	
-			</div>
-			<!-- ================================================================================================================== -->
+				
+				
+				var chart = Highcharts.chart('empChart', {
+
+				    title: {
+				        text: 'Comisiones de Vendedores'
+				    },
+
+				    subtitle: {
+				        text: ''
+				    },
+
+				    xAxis: {
+				        categories: [[${prodChart.keySet()}]]
+				    },
+				    yAxis: {				       
+				        title: {
+				            text: 'Comisiones $'
+				        }
+				    },
+				    chart: {
+			            inverted: true,
+			            polar: false
+			        },
+			        
+				    series: [{
+				        type: 'column',
+				        name: '$ ',
+				        colorByPoint: true,
+				        data: [[${prodChart.values()}]],
+				        showInLegend: false
+				    }]
+
+				});
+
+
+				
+				
+				
+			</script>
 			
 			
 			
-				<div sec:authorize="hasRole('GERENTE')">  
-	        	 
-	        		
-		        	<h1>
-						Gerente de Sucursal <span th:text=${sucursal.idSucursal}/> - <span th:text=${sucursal.direccion}/>  		
-					</h1>
-					<br><br>
-					<h2>
-						<b>
-						Producto mas Vendido   
-						</b>
-						<br><span th:text=${masVendido.nombreProd}/> - <span th:text=${masVendido.cantidad}/>
-					</h2>
-				
-				
-				</div>		
-	<!-- ================================================================================================================== -->
-		
-          <div sec:authorize="hasRole('ADMIN')">         	  
-	        	
-	        	<h1>
-					El Admnistrador no esta asociado a ninguna sucursal   		
-				</h1>
-				
-					
-				
-				<br> <br> <br> <br> <br>
-				<h3>
-					Titulo para el ADMIN		
-				</h3>
-					
-					Aun no se decidio la info que va a visualizar el Adminisrador en el landing.
-					Todabia hay pantallazos y errores, aunque tenemos todas las partes contruidas 
-					faltan implementarlas y unirlas al 100% para que todo funcione bien. Por fa revisen!
-				
-				</div>	
 			
-		<div sec:authorize="hasRole('ADMIN')">  soy un admin</div>
-		
-		
-	<br><div sec:authentication="principal.authorities"></div>		
-
-			</div>
-    </section><!-- End Breadcrumbs -->
-
-    
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>iPortfolio</span></strong>
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End  Footer -->
-
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="../vendor/php-email-form/validate.js"></script>
-  <script src="../vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="../vendor/counterup/counterup.min.js"></script>
-  <script src="../vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../vendor/venobox/venobox.min.js"></script>
-  <script src="../vendor/typed.js/typed.min.js"></script>
-  <script src="../vendor/aos/aos.js"></script>
-
-  <!-- Template Main JS File -->
-  
-  <script src="../js/main.js"></script>
-
-</body>
-
-</html>
+		</body>
+	</html>

@@ -1,5 +1,8 @@
 package com.unla.Grupo7OO22020.services.implementation;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +61,8 @@ public class RankingService implements IRankingService{
 
 	@Override
 	public List<Ranking> ranking() {
-		List<Ranking> ranking = rankingRepository.ranking();
-		return ranking;
+		List<Ranking> listaRanking = rankingRepository.ranking();
+		return listaRanking;
 	}
 
 }

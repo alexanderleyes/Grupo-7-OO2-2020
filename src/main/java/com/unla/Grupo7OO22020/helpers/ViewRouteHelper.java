@@ -127,4 +127,13 @@ public class ViewRouteHelper {
 
 	public final static String item_reload = "redirect:/"+ item_idx;	
 	
+	
+	/*PARAMETRO*/
+
+	public final static String parametro_idx = "parametro/parametro_idx";
+
+	public final static String parametro_reload = "redirect:/"+ parametro_idx;	
+	
+	public final static String parametro_insert = "parametro/parametro_mod";
+	
 }
