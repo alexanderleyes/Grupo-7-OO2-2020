@@ -169,7 +169,7 @@ CREATE TABLE `lote` (
   KEY `FKgjwtuns0ratna5ksah8km5lmn` (`sucursal_id`),
   CONSTRAINT `FKgjwtuns0ratna5ksah8km5lmn` FOREIGN KEY (`sucursal_id`) REFERENCES `sucursal` (`id_sucursal`),
   CONSTRAINT `FKwxvc6m52c8dknmu27ylt62su` FOREIGN KEY (`producto_id_producto`) REFERENCES `producto` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,8 +178,33 @@ CREATE TABLE `lote` (
 
 LOCK TABLES `lote` WRITE;
 /*!40000 ALTER TABLE `lote` DISABLE KEYS */;
-INSERT INTO `lote` VALUES (1,20,_binary '\0','2020-05-30',1,1),(2,50,_binary '\0','2020-05-30',4,1),(3,54,_binary '\0','2020-05-30',10,1),(4,52,_binary '\0','2020-05-30',4,2),(5,35,_binary '\0','2020-05-30',10,2),(6,65,_binary '\0','2020-05-30',6,2),(7,52,_binary '\0','2020-05-30',4,3),(8,25,_binary '\0','2020-05-30',2,3),(9,34,_binary '\0','2020-05-30',9,3),(10,34,_binary '\0','2020-05-30',6,4),(11,58,_binary '\0','2020-05-30',7,4),(12,123,_binary '\0','2020-05-30',8,4),(13,35,_binary '\0','2020-05-30',1,5),(14,32,_binary '\0','2020-05-30',5,5),(15,45,_binary '\0','2020-05-30',3,5),(16,43,_binary '\0','2020-05-30',2,3),(17,36,_binary '\0','2020-05-30',2,4),(18,67,_binary '\0','2020-05-30',1,5),(19,26,_binary '\0','2020-05-30',7,1);
 /*!40000 ALTER TABLE `lote` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `parametro`
+--
+
+DROP TABLE IF EXISTS `parametro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `parametro` (
+  `id_parametro` bigint NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `valor` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_parametro`),
+  UNIQUE KEY `UK_7lcqgmverxweo8wl60x26gwdl` (`descripcion`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parametro`
+--
+
+LOCK TABLES `parametro` WRITE;
+/*!40000 ALTER TABLE `parametro` DISABLE KEYS */;
+INSERT INTO `parametro` VALUES (1,'cantidad','4'),(2,'cantidadVend','0');
+/*!40000 ALTER TABLE `parametro` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -192,13 +217,15 @@ DROP TABLE IF EXISTS `pedido`;
 CREATE TABLE `pedido` (
   `id_pedido` bigint NOT NULL AUTO_INCREMENT,
   `cantidad` double DEFAULT NULL,
+  `id_venta` bigint DEFAULT NULL,
+  `item_id_item` bigint DEFAULT NULL,
   `producto_id_producto` bigint DEFAULT NULL,
   `suc_destino_id_sucursal` bigint DEFAULT NULL,
   `suc_origen_id_sucursal` bigint DEFAULT NULL,
   `vendedor_despacha_id_vendedor` bigint DEFAULT NULL,
   `vendedor_solicita_id_vendedor` bigint DEFAULT NULL,
-  `id_venta` bigint DEFAULT NULL,
   PRIMARY KEY (`id_pedido`),
+  KEY `FKs2kudlu7nc9ls6yon0r1yy9s5` (`item_id_item`),
   KEY `FKhwr210k74q8di57sc14qi1w4m` (`producto_id_producto`),
   KEY `FKbvcgdxew27qo9ne68u37ikb4k` (`suc_destino_id_sucursal`),
   KEY `FKrb2chdbrbkirp20i2nabu1qh` (`suc_origen_id_sucursal`),
@@ -208,8 +235,9 @@ CREATE TABLE `pedido` (
   CONSTRAINT `FKfb2qrxo595cxlnm1xryvb0obt` FOREIGN KEY (`vendedor_solicita_id_vendedor`) REFERENCES `vendedor` (`id_vendedor`),
   CONSTRAINT `FKhwr210k74q8di57sc14qi1w4m` FOREIGN KEY (`producto_id_producto`) REFERENCES `producto` (`id_producto`),
   CONSTRAINT `FKkkmgs264u2u8stxj59in4e5v4` FOREIGN KEY (`vendedor_despacha_id_vendedor`) REFERENCES `vendedor` (`id_vendedor`),
-  CONSTRAINT `FKrb2chdbrbkirp20i2nabu1qh` FOREIGN KEY (`suc_origen_id_sucursal`) REFERENCES `sucursal` (`id_sucursal`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FKrb2chdbrbkirp20i2nabu1qh` FOREIGN KEY (`suc_origen_id_sucursal`) REFERENCES `sucursal` (`id_sucursal`),
+  CONSTRAINT `FKs2kudlu7nc9ls6yon0r1yy9s5` FOREIGN KEY (`item_id_item`) REFERENCES `item` (`id_item`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,6 +489,7 @@ CREATE TABLE `vta_items` (
   `id` bigint NOT NULL,
   `cnt` varchar(255) DEFAULT NULL,
   `ids` varchar(255) DEFAULT NULL,
+  `sux` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -483,4 +512,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-05 19:51:05
+-- Dump completed on 2020-06-12 17:32:55
