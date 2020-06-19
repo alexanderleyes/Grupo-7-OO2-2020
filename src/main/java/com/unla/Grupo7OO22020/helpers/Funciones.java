@@ -300,4 +300,18 @@ public class Funciones {
 
 		return distanciaPivote;
 	}
+	
+	public static LocalDate stringToLocalDate(String fechaString) {		
+		
+		String s = fechaString.charAt(0) +""+ fechaString.charAt(1) +""+ fechaString.charAt(2) +""+ fechaString.charAt(3);
+		int anio =  Integer.parseInt(s);	
+		s = fechaString.charAt(5) +""+ fechaString.charAt(6);
+		int mes =  Integer.parseInt(s);
+		s = fechaString.charAt(8) +""+ fechaString.charAt(9);
+		int dia =  Integer.parseInt(s);
+		
+		
+		return LocalDate.of(anio, mes, dia);
+		
+	}
 }

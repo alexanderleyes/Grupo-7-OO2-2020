@@ -125,8 +125,8 @@ public class PedidoService implements IPedidoService{
 	}
 
 	@Override
-	public List<PedidoModel>  findAllBySucursalDes(SucursalModel sucursal) {			
-		List<Pedido> pedidosEntities = pedidoRepository.findAllBySucursalDes(sucursalConverter.modelToEntity(sucursal));
+	public List<PedidoModel>  findAllBySucursalDesPending(SucursalModel sucursal) {			
+		List<Pedido> pedidosEntities = pedidoRepository.findAllBySucursalDesPending(sucursalConverter.modelToEntity(sucursal));
 		List<PedidoModel> pedidosModels = new ArrayList<PedidoModel>();
 		for (Pedido p : pedidosEntities) {
 			if (p.getVendedorDespacha() == null) {
@@ -169,6 +169,7 @@ public class PedidoService implements IPedidoService{
 
 	@Override
 	public List<PedidoModel> findAllBySucursalExceptVendedor(SucursalModel sucursal, VendedorModel vendedor) {
+	
 		List<Pedido> pedidosEntities = pedidoRepository.findAllBySucursalExceptVendedor(sucursalConverter.modelToEntity(sucursal), vendedorConverter.modelToEntity(vendedor));
 		List<PedidoModel> pedidosModels = new ArrayList<PedidoModel>();
 		for (Pedido p : pedidosEntities) {
@@ -189,6 +190,20 @@ public class PedidoService implements IPedidoService{
 		
 		
 		return pedidos;
+	}
+
+	@Override
+	public List<PedidoModel> findAllBySucursalDes(SucursalModel sucursal) {
+		List<Pedido> pedidosEntities = pedidoRepository.findAllBySucursalDes(sucursalConverter.modelToEntity(sucursal));
+		List<PedidoModel> pedidosModels = new ArrayList<PedidoModel>();
+		for (Pedido p : pedidosEntities) {
+			if (p.getVendedorDespacha() == null) {
+				pedidosModels.add(pedidoConverter.entityToModelSinDespachante(p));
+			}else {
+				pedidosModels.add(pedidoConverter.entityToModel(p));
+			}			
+	    }		
+		return pedidosModels;	
 	}	
 
 }

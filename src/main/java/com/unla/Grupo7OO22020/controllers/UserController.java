@@ -1,5 +1,6 @@
 package com.unla.Grupo7OO22020.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Ranking;
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.GerenteModel;
 import com.unla.Grupo7OO22020.models.PedidoModel;
@@ -94,15 +96,18 @@ public class UserController {
 		ModelAndView mav 	= new ModelAndView(ViewRouteHelper.login_ok);		
 		String username 	= SecurityContextHolder.getContext().getAuthentication().getName();		
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();		
+		List<SucursalModel> sucursales = new ArrayList<SucursalModel>();
 		
 		switch(roleString)				{ 				  
 		   case "[ROLE_ADMIN]":				      
 			   System.out.println("cosas de admin");
+			   mav.addObject("sucursal", new Sucursal());
+			   mav.addObject("sucursales", sucursalService.getAll());
 			   break;
 		   case "[ROLE_VENDEDOR]" :
 			   System.out.println("cosas de vendedor");
 			   VendedorModel vendedorModel =  vendedorService.findByUsuario(username);
-			   List<PedidoModel> pedidos =  pedidoService.findAllBySucursalDes(vendedorModel.getSucursal());
+			   List<PedidoModel> pedidos =  pedidoService.findAllBySucursalDesPending(vendedorModel.getSucursal());
 			   mav.addObject("vendedor", vendedorModel);
 			   mav.addObject("pedidos", pedidos);
 			   break;
@@ -112,6 +117,8 @@ public class UserController {
 			   SucursalModel sucursalModel =  sucursalService.findByGerente(gerenteModel);
 			   mav.addObject("gerente", gerenteModel);
 			   mav.addObject("sucursal", sucursalModel);
+			   sucursales.add(sucursalModel);
+			   mav.addObject("sucursales", sucursales);
 			   List<Ranking> ranking = rankingService.ranking();
 			   mav.addObject("rankingProd" , ranking);
 			   

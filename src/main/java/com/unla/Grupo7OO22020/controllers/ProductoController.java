@@ -1,10 +1,13 @@
 package com.unla.Grupo7OO22020.controllers;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,9 +21,14 @@ import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Ranking;
 import com.unla.Grupo7OO22020.entities.Sucursal;
+import com.unla.Grupo7OO22020.helpers.Funciones;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
+import com.unla.Grupo7OO22020.models.GerenteModel;
+import com.unla.Grupo7OO22020.models.ItemModel;
+import com.unla.Grupo7OO22020.models.LoteModel;
 import com.unla.Grupo7OO22020.models.ProductoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
+import com.unla.Grupo7OO22020.services.IGerenteService;
 import com.unla.Grupo7OO22020.services.IProductoService;
 import com.unla.Grupo7OO22020.services.IRankingService;
 import com.unla.Grupo7OO22020.services.ISucursalService;
@@ -46,12 +54,19 @@ public class ProductoController {
 	private IVentaService ventaService;
 	
 	@Autowired
+	@Qualifier("gerenteService")
+	private IGerenteService gerenteService;
+	
+	@Autowired
 	@Qualifier("rankingService")
 	private IRankingService rankingService;
+	
 	
 	@Autowired
 	@Qualifier("sucursalConverter")
 	private SucursalConverter sucursalConverter;
+	
+
 	
 	@GetMapping("/producto_idx")
 	public ModelAndView index() {
@@ -118,27 +133,33 @@ public class ProductoController {
 		return mav;
 	}
 	
-	@PostMapping("/productoporfecha")	
-	public ModelAndView productoXfecha(){	
-		//FALTA VISTA, NO SALIO AUN XD 
+	@GetMapping("/productosPorFecha/{desde}/{hasta}/{tipo}/{idSuc}")	
+	public ModelAndView productosPorFecha( @PathVariable("desde") String desdeString,  @PathVariable("hasta") String hastaString, @PathVariable("tipo") String tipo, @PathVariable("idSuc") long idSuc){
+		
+		String username 			= SecurityContextHolder.getContext().getAuthentication().getName();	
+		GerenteModel gerenteModel 	= gerenteService.findByUsuario(username);
+		SucursalModel sucursalModel =  sucursalService.findByIdSucursal(idSuc);
+		ModelAndView  mav = new ModelAndView(); 
+		
+		LocalDate desde = Funciones.stringToLocalDate(desdeString);
+		LocalDate hasta = Funciones.stringToLocalDate(hastaString);
 		
 		
-		ModelAndView mav = new ModelAndView(ViewRouteHelper.producto_prodxfecha);
-		//pasar un id de sucursal ( que tenga ventas ) 
-		SucursalModel s = sucursalService.findByIdSucursal(5);
-		
-		//fechas entre la que se buscan los productos
-		LocalDate fechaUno = LocalDate.of(2020, 4, 3); 
-		LocalDate fechaDos = LocalDate.of(2020, 5, 3); 
-		
-		List<Item>result = ventaService.ProductosEntreFechasPorSucursal(sucursalConverter.modelToEntity(s), fechaUno, fechaDos);
-		
-		//aca imprime los productos x sucursal entre fechas
-		for(Item i : result) {
-			System.out.println("Sucursal: "+i.getVenta().getSucursal().getDireccion()+" Fecha: "+i.getVenta().getFecha()+ " Producto: "+i.getProducto().getDescripcion());
-		}
-		
+		switch(tipo) { 				  
+		 	case "ventas":
+		 		List<Item> items = ventaService.ProductosEntreFechasPorSucursal(sucursalConverter.modelToEntity(sucursalModel), desde, hasta);
+		 		if (items.size() > 0) {
+		 			mav.addObject("items", items);			 		
+			 		mav.setViewName(ViewRouteHelper.productoxfecha);
+		 		}else {
+		 			mav.setViewName(ViewRouteHelper.sin_registros);
+		 		}		 		
+		 		break;		   
+		 	default : 		
+		}	
+	
+	
 		return mav;
-	}	
+	}
 		
 }

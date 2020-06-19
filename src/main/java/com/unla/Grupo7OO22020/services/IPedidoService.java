@@ -17,7 +17,7 @@ public interface IPedidoService {
 
 	public boolean remove(long id);	
 
-	public List<PedidoModel> findAllBySucursalDes(SucursalModel sucursal);
+	public List<PedidoModel> findAllBySucursalDesPending(SucursalModel sucursal);
 
 	public List<PedidoModel> findAllBySucursalExceptVendedor(SucursalModel sucursal, VendedorModel vendedor);
 
@@ -27,6 +27,9 @@ public interface IPedidoService {
 	
 	public List<Pedido> findAllByIDVenta(long id);
 
+	public List<PedidoModel> findAllBySucursalDes(SucursalModel sucursal);
+	
+	
 
 
 	

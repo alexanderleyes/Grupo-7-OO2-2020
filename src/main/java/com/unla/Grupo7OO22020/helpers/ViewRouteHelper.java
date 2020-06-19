@@ -106,6 +106,8 @@ public class ViewRouteHelper {
 	public final static String estadoVenta_insert = "estadoVenta/estadoVenta_mod";
 
 	public final static String estadoVenta_reload = "redirect:/"+ estadoVenta_idx;	
+	
+	
 	/*PEDIDOS*/
 
 	public final static String pedido_idx = "pedido/pedido_idx";
@@ -117,6 +119,7 @@ public class ViewRouteHelper {
 	
 	/*USER*/
 	public final static String logout = "user/logout";
+	
 	public final static String home = "redirect:/home";
 
 	/*ITEMS*/
@@ -135,5 +138,12 @@ public class ViewRouteHelper {
 	public final static String parametro_reload = "redirect:/"+ parametro_idx;	
 	
 	public final static String parametro_insert = "parametro/parametro_mod";
+	
+	
+	
+	/*REPORTES*/
+	public final static String productoxfecha = "fragments/productoxfecha";
+	
+	public final static String sin_registros = "fragments/sinRegistros";
 	
 }

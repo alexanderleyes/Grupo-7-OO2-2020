@@ -106,7 +106,7 @@ public class PedidoController {
 			   mav.addObject("pedidosDes", pedidoService.findAllBySucursalDes(vendedorModel.getSucursal()));
 			   
 			   //Pedidos desde mi sucrsal
-			   mav.addObject("pedidosOri", pedidoService.findAllBySucursalOri(vendedorModel.getSucursal()));
+			   mav.addObject("pedidosOri", pedidoService.findAllBySucursalExceptVendedor(vendedorModel.getSucursal(), vendedorModel));
 			   
 			   List<Vendedor> vendedoresOri = new ArrayList<Vendedor>();
 			   vendedoresOri.add(vendedorConverter.modelToEntity(vendedorService.findByUsuario(username))); // una lista solo conmigo
@@ -152,7 +152,7 @@ public class PedidoController {
 			   mav.addObject("productos", productoService.getAll());			   
 			   break;
 		   case "[ROLE_VENDEDOR]" : 			   
-			   
+			   System.out.println("cosas de vendedor");
 			   VendedorModel vendedorModel = vendedorService.findByUsuario(username);			   
 			   List<Sucursal> sucursalMia = new ArrayList<Sucursal>();			   
 			   sucursalMia.add(sucursalConverter.modelToEntity(vendedorModel.getSucursal()));
@@ -166,12 +166,13 @@ public class PedidoController {
 			   mav.addObject("productos", productoService.getAll());
 			   
 
-			   System.out.println("cosas de vendedor");
+			   
 			// pedidos a mi sucursal
 			   mav.addObject("pedidosDes", pedidoService.findAllBySucursalDes(vendedorModel.getSucursal()));			
 			   
-			// pedidos desde mi sucursal
-			   mav.addObject("pedidosOri", pedidoService.findAllBySucursalOri(vendedorModel.getSucursal()));		
+			// pedidos desde mi sucursal que no son hechos por mi
+			   mav.addObject("pedidosOri", pedidoService.findAllBySucursalExceptVendedor(vendedorModel.getSucursal(), vendedorModel));
+			  
 			   break;
 		   case "[ROLE_GERENTE]" :					       
 			   System.out.println("cosas de gerente");

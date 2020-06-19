@@ -36,22 +36,34 @@ public class Venta {
 
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	private EstadoVenta estado;	
-	
-	@Column(name="fecha")
+		
 	@CreationTimestamp
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fecha;
 
 	public Venta() {}
-
-	public Venta(long idVenta, Sucursal sucursal, Vendedor vendedor, Persona cliente, EstadoVenta estado) {
+	
+	public Venta(long idVenta, Sucursal sucursal, Vendedor vendedor, Persona cliente, EstadoVenta estado,
+			LocalDate fecha) {
 		super();
 		this.idVenta = idVenta;
 		this.sucursal = sucursal;
 		this.vendedor = vendedor;
 		this.cliente = cliente;
 		this.estado = estado;
+		this.fecha = fecha;
 	}
+	
+	public Venta(Sucursal sucursal, Vendedor vendedor, Persona cliente, EstadoVenta estado,
+			LocalDate fecha) {
+		super();		
+		this.sucursal = sucursal;
+		this.vendedor = vendedor;
+		this.cliente = cliente;
+		this.estado = estado;
+		this.fecha = fecha;
+	}
+
+
 
 	public long getIdVenta() {
 		return idVenta;
@@ -100,15 +112,9 @@ public class Venta {
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
 	
 	
 
-//	public Set<Item> getItems() {
-//		return items;
-//	}
-//
-//	public void setItems(Set<Item> items) {
-//		this.items = items;
-//	}
-
+	
 }

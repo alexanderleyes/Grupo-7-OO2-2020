@@ -28,13 +28,17 @@ public class VentaConverter {
 	@Qualifier("estadoVentaConverter")
 	private EstadoVentaConverter estadoVentaConverter;	
 	
+	
+	
 	public VentaModel entityToModel(Venta venta) { 
 		return new VentaModel(
 				venta.getIdVenta(), 
 				sucursalConverter.entityToModel(venta.getSucursal()),
 				vendedorConverter.entityToModel(venta.getVendedor()),
 				personaConverter.entityToModel(venta.getCliente()),
-				estadoVentaConverter.entityToModel(venta.getEstado()));
+				estadoVentaConverter.entityToModel(venta.getEstado()),
+				venta.getFecha());
+		       
 	}
 	
 
@@ -46,6 +50,7 @@ public class VentaConverter {
 				sucursalConverter.modelToEntity(ventaModel.getSucursal()),
 				vendedorConverter.modelToEntity(ventaModel.getVendedor()),
 				personaConverter.modelToEntity(ventaModel.getCliente()),
-				estadoVentaConverter.modelToEntity(ventaModel.getEstado()));
+				estadoVentaConverter.modelToEntity(ventaModel.getEstado()),
+				ventaModel.getFecha());
 	}
 }

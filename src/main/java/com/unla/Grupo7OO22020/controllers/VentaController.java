@@ -1,4 +1,5 @@
 package com.unla.Grupo7OO22020.controllers;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,7 @@ import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.entities.VtaItems;
+import com.unla.Grupo7OO22020.helpers.Funciones;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.ClienteModel;
 import com.unla.Grupo7OO22020.models.EstadoVentaModel;
@@ -112,11 +114,13 @@ public class VentaController {
 			String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();		
 			List<SucursalModel> sucursales = new ArrayList<SucursalModel>();
 			List<VendedorModel> vendedores = new ArrayList<VendedorModel>();			
+			List<VentaModel> 	ventas 	   = new ArrayList<VentaModel>();
 			
 			switch(roleString)				{ 				  
 			   case "[ROLE_ADMIN]":				      
-				   System.out.println("cosas de admin");
-				 
+				   System.out.println("cosas de admin");				   
+				   mav.addObject("ventas", ventaService.getAll());
+				   mav.addObject("vendedores", vendedores);	
 				   for (Sucursal s : sucursalService.getAll()) {
 					   sucursales.add(sucursalConverter.entityToModel(s));
 				   }
@@ -125,16 +129,21 @@ public class VentaController {
 				   }				  
 				   break;
 			   case "[ROLE_VENDEDOR]" :
-					VendedorModel vendedorModel= vendedorService.findByUsuario(username);					
+				    VendedorModel vendedorModel= vendedorService.findByUsuario(username);					
 					vendedores.add(vendedorModel);									
 					sucursales.add(vendedorModel.getSucursal());
+					ventas = ventaService.ventasPorSucursal(vendedorModel.getSucursal());
+					mav.addObject("ventas", ventas);
+					mav.addObject("vendedores", vendedores);
 					break;
 			   case "[ROLE_GERENTE]" :					       
 				   System.out.println("cosas de gerente");
 				   GerenteModel gerenteModel = gerenteService.findByUsuario(username);
 				   SucursalModel sucursalModel =  sucursalService.findByGerente(gerenteModel);
-				   sucursales.add(sucursalModel);
-				   vendedores = vendedorService.findAllBySucursal(sucursalModel);				 
+				   sucursales.add(sucursalModel);				   
+				   mav.addObject("vendedores", vendedorService.findAllBySucursal(sucursalModel));	
+				   ventas = ventaService.ventasPorSucursal(sucursalModel);
+				   mav.addObject("ventas", ventas);
 				   break;
 			   default : 		
 			}
@@ -143,8 +152,6 @@ public class VentaController {
 			mav.addObject("sucursales", sucursales);					
 			mav.addObject("sucursal", new Sucursal());
 			mav.addObject("venta", new Venta());			
-			mav.addObject("ventas", ventaService.getAll());
-			mav.addObject("vendedores", vendedores);	
 			mav.addObject("clientes", clienteService.getAll());
 			mav.addObject("estados", estadoVentaService.getAll());
 			
@@ -315,5 +322,7 @@ public class VentaController {
 		System.out.println("ERASE venta: " );		
 		ventaService.remove(idVenta);
 		return ViewRouteHelper.venta_reload;
-	}		
+	}
+	
+	
 }

@@ -25,7 +25,10 @@ public interface IVentaRepository extends JpaRepository<Venta, Serializable>{
 	public Venta findByIdVenta(long id);
 	
 	@Query("SELECT v FROM Venta v WHERE v.sucursal = (:sucursal) and v.fecha BETWEEN (:fechaUno) AND (:fechaDos)")
-	public abstract List<Venta> ventasPorSucursal(@Param("sucursal") Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos);
+	public abstract List<Venta> ventasPorSucursalEntreFechas(@Param("sucursal") Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos);
+	
+	@Query("SELECT v FROM Venta v WHERE v.sucursal = (:sucursal)")
+	public abstract List<Venta> ventasPorSucursal(@Param("sucursal") Sucursal sucursal);
 	
 	@Query("SELECT i FROM Item i WHERE i.venta = (:venta)")
 	public List<Item> itemsPorVenta(Venta venta);

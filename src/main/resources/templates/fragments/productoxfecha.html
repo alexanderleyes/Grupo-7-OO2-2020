@@ -1,0 +1,14 @@
+<table class="table" id="table"  >
+	<thead>
+		<tr>															
+			<th>Producto</th>
+			<th>Cantidad</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="item: ${items}">
+			<td><span th:text="${item.producto.descripcion}"  /></td>									
+			<td><span th:text="${item.cantidad}" /></td>		
+		</tr>
+	</tbody>
+</table>

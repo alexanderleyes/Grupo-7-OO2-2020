@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.ProductoConverter;
+import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.converters.VentaConverter;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.models.EstadoVentaModel;
+import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VentaModel;
 import com.unla.Grupo7OO22020.repositories.IVentaRepository;
 import com.unla.Grupo7OO22020.services.IEstadoVentaService;
@@ -34,6 +36,10 @@ public class VentaService implements IVentaService {
 	@Autowired
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
+	
+	@Autowired
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;
 
 	@Override
 	public List<Venta> getAll() {
@@ -67,8 +73,8 @@ public class VentaService implements IVentaService {
 	}
 
 	@Override
-	public List<Venta> ventasPorSucursal(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos) {
-		List<Venta> lstVentas = ventaRepository.ventasPorSucursal(sucursal, fechaUno, fechaDos);
+	public List<Venta> ventasPorSucursalEntreFechas(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos) {
+		List<Venta> lstVentas = ventaRepository.ventasPorSucursalEntreFechas(sucursal, fechaUno, fechaDos);
 
 		return lstVentas;
 	}
@@ -82,7 +88,7 @@ public class VentaService implements IVentaService {
 	@Override
 	public List<Item> ProductosEntreFechasPorSucursal(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos) {
 
-		List<Venta> lstVentas = ventasPorSucursal(sucursal, fechaUno, fechaDos);
+		List<Venta> lstVentas = ventasPorSucursalEntreFechas(sucursal, fechaUno, fechaDos);
 		List<Item> lstItems = new ArrayList();
 		List<Item> lstItemsResult = new ArrayList();
 		for (Venta v : lstVentas) {
@@ -93,11 +99,25 @@ public class VentaService implements IVentaService {
 
 				lstItemsResult.add(i);
 			}
-
 		}
-
 		return lstItemsResult;
 	}
+	
+	@Override
+	public List<VentaModel> ventasPorSucursal(SucursalModel sucursalModel) {
+		
+		List<VentaModel> ventasModel = new ArrayList<VentaModel>();
+		List<Venta> ventasEntities = ventaRepository.ventasPorSucursal(sucursalConverter.modelToEntity(sucursalModel));
+		
+		for (Venta venta : ventasEntities) {
+			ventasModel.add(ventaConverter.entityToModel(venta));			
+		}
+		
+		return ventasModel;
+	}
+	
+	
+	
 
 	//para setear estado FINALIZADO una vez que esten todos los pedidos despachados 
 	public void EstadoFinalizado(List<Pedido> lstPedidos, VentaModel venta) {
