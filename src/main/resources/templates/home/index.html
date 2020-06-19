@@ -12,7 +12,6 @@
 			<!-- Google Fonts -->
 			<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 			<!-- Vendor CSS Files -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 			<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 			<link href="../vendor/icofont/icofont.min.css" rel="stylesheet">
 			<link href="../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -83,14 +82,18 @@
 							<br>	
 						</div>
 						<!-- ================================================================================================================== -->
-						<div sec:authorize="hasRole('GERENTE')">
+							<div sec:authorize="hasRole('GERENTE')">
+													
 							<h1>
 								Gerente de Sucursal <span th:text=${sucursal.idSucursal}/> - <span th:text=${sucursal.direccion}/>  		
 							</h1>
 							<br><br>
-							<h2>
-							</h2>
-							<div class="pieChart">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+								Ver reportes por Fecha
+							</button>  
+													
+							<br>
+							<div class="Charts">
 								<h2 align="center">Productos mas vendidos</h2>
 								<div id="barChart" style="width: 80%; height: 400px; margin: 0 auto"></div>
 								<br>
@@ -101,20 +104,73 @@
 						<!-- ================================================================================================================== -->
 						<div sec:authorize="hasRole('ADMIN')">
 							<h1>
-								El Admnistrador no esta asociado a ninguna sucursal   		
+								Admnistrador  		
 							</h1>
-							<br> <br> <br> <br> <br>
-							<h3>
-								Titulo para el ADMIN		
-							</h3>
-							Aun no se decidio la info que va a visualizar el Adminisrador en el landing.
-							Todabia hay pantallazos y errores, aunque tenemos todas las partes contruidas 
-							faltan implementarlas y unirlas al 100% para que todo funcione bien. Por fa revisen!
+							<h2>
+								No estas asociado a ninguna sucursal   		
+							</h2>
+							<br> <br> 
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+								Ver reportes por Fecha
+							</button>  
+							
 						</div>
 						<br>
 					</div>
 				</section>
-				<!-- End Breadcrumbs -->				
+				<!-- End Breadcrumbs -->
+
+			<!-- Modal -->
+	<div sec:authorize="hasAnyRole('GERENTE', 'ADMIN')">
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		   <div class="modal-dialog modal-dialog-centered" role="document">
+		      <div class="modal-content">
+		         <div class="modal-header">
+		            <h5 class="modal-title" id="exampleModalCenterTitle">Reportes por Fecha</h5>
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		            </button>
+		         </div>
+		       
+	        	<div class="form-row" >	     
+					<div class="form-group col-md-6">
+						<label for="name">Desde</label>	
+						<input type=date class="form-control" id="fecDesde"/>
+						<div class="validate"></div>
+					</div>
+			
+					<div class="form-group col-md-6">
+						<label for="name">Hasta</label>
+					 	<input type=date class="form-control" id="fecHasta"/>
+						<div class="validate" ></div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="name">Tipo</label>	
+						<select class="form-control" name="name" id="tipo">
+						  <option value="ventas">Ventas</option>
+						  <option value="comisiones">Comisiones</option>						  
+						</select>						
+					</div>
+					<div class="form-group col-md-6">
+						<label for="name">Sucursal</label>		     
+				   		<select class="form-control"  th:field="*{sucursal.idSucursal}" id="sucursal"><br>
+				        	<option th:each="s : ${sucursales}"  th:value="${(s.idSucursal)}" th:text="${s.direccion}"/>		         	
+				    	</select>
+			     	</div> 
+					<div class="form-group col-md-6">						
+						<input type="image" src="../img/icons/confirma1.png"  title="Emitir reporte" onClick="verReporte();"/>	
+					</div>					
+				</div>									
+				
+				<div id="div-reporteXfecha" ></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+			
 			</main>
 			<!-- End #main -->
 			
@@ -143,94 +199,122 @@
 			<script src="https://code.highcharts.com/highcharts.js"></script>
 			<script src="https://code.highcharts.com/modules/exporting.js"></script>
 			
+			<div sec:authorize="hasRole('GERENTE')">
+				<script th:inline="javascript">
+					$(function(){
+					Highcharts.chart('barChart', {
+					    chart: {
+					        type: 'column'
+					    },
+					    title: {
+					        text: ''
+					    },
+					    subtitle: {
+					        text: 'Mostrando  historicos'
+					    },
+					    xAxis: {
+					        categories: [[${bar.keySet()}]],
+					        crosshair: true
+					    },
+					    yAxis: {
+					        min: 0,
+					        max:50,
+					        title: {
+					            text: 'Unidades Vendidas'
+					        }
+					    },
+					    tooltip: {
+					        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+					        '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+					        footerFormat: '</table>',
+					        shared: true,
+					        useHTML: true
+					    },
+					    plotOptions: {
+					        column: {
+					            pointPadding: 0.2,
+					            borderWidth: 0
+					        }
+					    },
+					    series: [{
+					        name: 'Vendidos',
+					        data: [[${bar.values()}]]
+					    }]
+					});
+					});
+					
+					
+					
+					var chart = Highcharts.chart('empChart', {
+	
+					    title: {
+					        text: 'Comisiones de Vendedores'
+					    },
+	
+					    subtitle: {
+					        text: ''
+					    },
+	
+					    xAxis: {
+					        categories: [[${prodChart.keySet()}]]
+					    },
+					    yAxis: {				       
+					        title: {
+					            text: 'Comisiones $'
+					        }
+					    },
+					    chart: {
+				            inverted: true,
+				            polar: false
+				        },
+				        
+					    series: [{
+					        type: 'column',
+					        name: '$ ',
+					        colorByPoint: true,
+					        data: [[${prodChart.values()}]],
+					        showInLegend: false
+					    }]
+	
+					});
+	
+					
+				</script>
+			</div>
 			
-			<script th:inline="javascript">
-				$(function(){
-				Highcharts.chart('barChart', {
-				    chart: {
-				        type: 'column'
-				    },
-				    title: {
-				        text: ''
-				    },
-				    subtitle: {
-				        text: 'Mostrando  historicos'
-				    },
-				    xAxis: {
-				        categories: [[${bar.keySet()}]],
-				        crosshair: true
-				    },
-				    yAxis: {
-				        min: 0,
-				        max:50,
-				        title: {
-				            text: 'Unidades Vendidas'
-				        }
-				    },
-				    tooltip: {
-				        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-				        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-				        '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-				        footerFormat: '</table>',
-				        shared: true,
-				        useHTML: true
-				    },
-				    plotOptions: {
-				        column: {
-				            pointPadding: 0.2,
-				            borderWidth: 0
-				        }
-				    },
-				    series: [{
-				        name: 'Vendidos',
-				        data: [[${bar.values()}]]
-				    }]
-				});
-				});
-				
-				
-				
-				var chart = Highcharts.chart('empChart', {
-
-				    title: {
-				        text: 'Comisiones de Vendedores'
-				    },
-
-				    subtitle: {
-				        text: ''
-				    },
-
-				    xAxis: {
-				        categories: [[${prodChart.keySet()}]]
-				    },
-				    yAxis: {				       
-				        title: {
-				            text: 'Comisiones $'
-				        }
-				    },
-				    chart: {
-			            inverted: true,
-			            polar: false
-			        },
-			        
-				    series: [{
-				        type: 'column',
-				        name: '$ ',
-				        colorByPoint: true,
-				        data: [[${prodChart.values()}]],
-				        showInLegend: false
-				    }]
-
-				});
-
-
-				
-				
-				
+			
+			<script>
+			
+				function verReporte(){ // Visualiza el stock del producto solicitado
+					var fecDesde =  $("#fecDesde").val();
+		           	var fecHasta =  $("#fecHasta").val();
+		         	var tipo	 =  $("#tipo").val();
+		           	var idSuc	 =  new Number($("#sucursal option:selected").val());
+		           	
+		           	
+				          if (fecDesde != "" && fecHasta != ""){
+				        	  console.log(fecDesde);
+					           	console.log(fecHasta);
+					         	console.log(tipo);
+					         	console.log(idSuc);
+				         
+								$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+									method: "GET",
+								 	url: "/producto/productosPorFecha/" + fecDesde + "/" + fecHasta+ "/" + tipo+ "/" + idSuc,
+								})
+								
+								.done(function(result) {
+									$("#div-reporteXfecha").html(result);
+									
+								})
+								
+								.fail(function() {
+									alert("error");
+								});
+				          }
+				  }
 			</script>
-			
-			
-			
 			
 		</body>
 	</html>

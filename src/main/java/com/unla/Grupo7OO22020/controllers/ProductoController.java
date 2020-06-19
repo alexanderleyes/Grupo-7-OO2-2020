@@ -143,13 +143,14 @@ public class ProductoController {
 		
 		LocalDate desde = Funciones.stringToLocalDate(desdeString);
 		LocalDate hasta = Funciones.stringToLocalDate(hastaString);
-		
+		System.out.println("llega");
 		
 		switch(tipo) { 				  
 		 	case "ventas":
 		 		List<Item> items = ventaService.ProductosEntreFechasPorSucursal(sucursalConverter.modelToEntity(sucursalModel), desde, hasta);
 		 		if (items.size() > 0) {
-		 			mav.addObject("items", items);			 		
+		 			mav.addObject("items", items);
+		 			
 			 		mav.setViewName(ViewRouteHelper.productoxfecha);
 		 		}else {
 		 			mav.setViewName(ViewRouteHelper.sin_registros);
