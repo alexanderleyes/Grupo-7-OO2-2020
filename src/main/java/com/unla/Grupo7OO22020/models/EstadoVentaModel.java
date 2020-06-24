@@ -8,18 +8,14 @@ public class EstadoVentaModel {
 	
 	public EstadoVentaModel() {}
 	
-	public EstadoVentaModel(long idEstadoVenta, String nombre, String descripcion /*, VentaModel venta*/) {
+	public EstadoVentaModel(long idEstadoVenta, String nombre, String descripcion) {
+		super();
 		this.idEstadoVenta = idEstadoVenta;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		//this.venta = venta;
 	}
-	
-	public EstadoVentaModel(String nombre, String descripcion/*, VentaModel venta*/) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		//this.venta = venta;
-	}
+
+
 
 	public long getIdEstadoVenta() {
 		return idEstadoVenta;
@@ -45,18 +41,12 @@ public class EstadoVentaModel {
 		this.descripcion = descripcion;
 	}
 
-//	public VentaModel getVenta() {
-//		return venta;
-//	}
-//
-//	public void setVenta(VentaModel venta) {
-//		this.venta = venta;
-//	}
-
 	@Override
 	public String toString() {
 		return "EstadoVentaModel [idEstadoVenta=" + idEstadoVenta + ", nombre=" + nombre + ", descripcion="
 				+ descripcion + "]";
-	}	
+	}
+	
+	
 
 }

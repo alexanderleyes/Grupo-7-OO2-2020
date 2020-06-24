@@ -222,24 +222,6 @@
 			</div>
 		</section>
 		<!-- End Breadcrumbs -->
-
-		<!-- ======= Portfolio Details Section ======= -->
-		<section id="portfolio-details" class="portfolio-details">
-			<div class="container">
-
-				
-				<div class="portfolio-description">
-					<h2>Info</h2>
-					<p>En pedidos mios visualiza los pedidos que realizo este vendedor en particular y puede modificar algo si quiere.
-						En los pedidos de la sucursal solo es para visualizar un general de los pedido que realizo esta sucursal.
-						Los pedidos no se van a hacer aca, la idea es que cuando haga el vendedor una venta ahí verifique el stock y si falta, genere una orden de pedido a la sucursal mas cercana de forma automatica y se notifique al vendedor.			
-						<br> Es la parte de ventas en la que esta trabando carla, esa parte es medio complicada pero esta avanzando bien.
-					</p>
-				</div>
-
-			</div>
-		</section>
-		<!-- End Portfolio Details Section -->
 		
 	</main>
 	
@@ -295,22 +277,18 @@
 </div>
 	<!-- End #main -->
 
-	<!-- ======= Footer ======= -->
-	<footer id="footer">
-		<div class="container">
-			<div class="copyright">
-				&copy; Copyright <strong><span>iPortfolio</span></strong>
-			</div>
-			<div class="credits">
-				<!-- All the links in the footer should remain intact. -->
-				<!-- You can delete the links only if you purchased the pro version. -->
-				<!-- Licensing information: https://bootstrapmade.com/license/ -->
-				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-			</div>
-		</div>
-	</footer>
-	<!-- End  Footer -->
+	<!-- ======= Portfolio Details Section ======= -->
+			
+			<div th:insert="fragments/info :: info" />  	
+			
+			<!-- End Portfolio Details Section -->
+		</main>
+		<!-- End #main -->
+		<!-- ======= Footer ======= -->
+		<div th:insert="fragments/footer :: footer" />  
+		
+	
+		<!-- End  Footer -->
 
 	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
