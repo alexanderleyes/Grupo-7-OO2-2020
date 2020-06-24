@@ -156,63 +156,34 @@
  				  		<option th:each= "e : ${estados}" th:value="${e.idEstadoVenta}" th:text ="${e.nombre}">	
 				    </select> 
 
- 				</div> 
-                                                
-              </div>
-            
-              
+ 				</div>                                                 
+              </div>              
            </form>   
-                
-              
-		
-<!--         <form th:object="${item}" method="post" role="form" > -->
-		
-<!--         <div class="form-row" ;>       -->
-<!-- 			<div class="form-group col-md-6"> -->
-			 
+
 			 <table>
   			<tbody>
 			<tr th:each="item,items : *{items}">
 				<td th:text="${items.count}"/>
-      		
-			
-<!-- 				<label for="name">Producto</label>		      -->
-<!-- 		   		<select class="form-control"  th:field="*{producto.idProducto}" id="producto"><br> -->
-<!-- 		        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	 -->
-<!-- 		    	</select> -->
-		    	
+				
 		    	<select th:field="*{items[__${items.index}__].producto}">
 		          <option th:each="p : ${productos}" 
 		                  th:value="${p.idProducto}" 
 		                  th:text="${p.descripcion}"/>
 		        </select>
-		   
-		    	
-		    	
-
 
 		    	<label for="name">Cantidad</label>
 		    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  id="cantidad"/>
 		    	<div class="validate"></div>
 
-        
          </tr>	
         </tbody>
-
-
 		</table>
-             
-
-
 	  <div class="modal-footer">
 		<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
 <!--       	<button type="submit" class="btn btn-primary">Guardar</button> -->
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
-        
       </div>
-	
-
 	         
       </div>
 
@@ -227,26 +198,19 @@
 		
 
       
-    </section><!-- End Breadcrumbs -->
+    </section>
+    <!-- End Breadcrumbs -->
 
-    
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>iPortfolio</span></strong>
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End  Footer -->
+    <!-- ======= Portfolio Details Section ======= -->
+			
+		<div th:insert="fragments/info :: info" />  	
+		
+		<!-- End Portfolio Details Section -->
+	</main>
+	<!-- End #main -->
+	<!-- ======= Footer ======= -->
+	<div th:insert="fragments/footer :: footer" /> 	
+	<!-- End  Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 

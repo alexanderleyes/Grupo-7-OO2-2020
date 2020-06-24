@@ -140,7 +140,16 @@
 				</div>					
 			<!-- End Modal -->
 			
-		</main>
+	<!-- ======= Portfolio Details Section ======= -->
+			
+		<div th:insert="fragments/info :: info" />  	
+		
+		<!-- End Portfolio Details Section -->
+	</main>
+	<!-- End #main -->
+	<!-- ======= Footer ======= -->
+	<div th:insert="fragments/footer :: footer" /> 	
+	<!-- End  Footer -->
 		<!-- End #main -->
 		<!-- ======= Footer ======= -->
 		<footer id="footer">
@@ -174,6 +183,8 @@
 		<!-- Template Main JS File -->
 		<script src="../js/main.js"></script>
 		<script>
+		
+		
 			$(document).ready(function(){
 			       $(".add-row").click(function(){
 			           var id =  $("#producto").val();
@@ -272,10 +283,7 @@
  				cant		= new Number(cant);
  				stock		= new Number(stock);
 				
-// 				idx 	= 0 + idx;
-// 				idp 	= 0 + idp;
-// 				cant 	=  cant;
-//  				stock	=   stock;
+
  				console.log(stock)
 					
  				 				

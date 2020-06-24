@@ -23,48 +23,64 @@ public class EstadoVenta {
 	@Column(name="descripcion")	
 	private String descripcion;
 	
-//	@ManyToOne(optional = true, fetch = FetchType.EAGER)
-//	private Venta venta;	
-	
+
 	public EstadoVenta() {}
 
-	public EstadoVenta(long idEstadoVenta, String nombre, String descripcion /*, Venta venta*/) {
+
+
+	public EstadoVenta(long idEstadoVenta, String nombre, String descripcion) {
+		super();
 		this.idEstadoVenta = idEstadoVenta;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-//		this.venta = venta;
 	}
+
+
 
 	public long getIdEstadoVenta() {
 		return idEstadoVenta;
 	}
 
+
+
 	public void setIdEstadoVenta(long idEstadoVenta) {
 		this.idEstadoVenta = idEstadoVenta;
 	}
+
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
+
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-//	public Venta getVenta() {
-//		return venta;
-//	}
-//
-//	public void setVenta(Venta venta) {
-//		this.venta = venta;
-//	}	
+
+
+	@Override
+	public String toString() {
+		return "EstadoVenta [idEstadoVenta=" + idEstadoVenta + ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ "]";
+	}
+
 	
+	
+	
+
 }

@@ -129,8 +129,9 @@ public class LoteController {
 	}
 
 	@PostMapping("/eliminar/{id}")
-	public String delete(@PathVariable("id") int id) {
-		loteService.eliminar(id);
+	public String delete(@PathVariable("id") long id) {
+		 System.out.println("eliminar lote: " + id);
+		loteService.remove(id);
 		return ViewRouteHelper.lote_reload;
 	}
 	
