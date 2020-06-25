@@ -215,9 +215,10 @@ public class VentaController {
 		venta.setSucursal(sucursalModel);
 		VendedorModel 	vendedorModel	= vendedorService.findByIdVendedor(venta.getVendedor().getIdVendedor());
 		venta.setVendedor(vendedorModel);		
-		EstadoVentaModel estadoModel = estadoVentaService.findByIdEstadoVenta(venta.getEstado().getIdEstadoVenta());
+		EstadoVentaModel estadoModel = estadoVentaService.findByIdEstadoVenta(1); //venta.getEstado().getIdEstadoVenta());
 		venta.setEstado(estadoModel);
-				
+		
+		
 		List<Long> prodIndices  	= vtaItems.getListaIndices();
 		List<Long> prodCantidades 	= vtaItems.getListaCantidad();
 		List<Long> sucursales 		= vtaItems.getListaSucusales();

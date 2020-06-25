@@ -121,4 +121,11 @@ public class VendedorService implements  IVendedorService{
 		}
 		return vendedoresModels;		
 	}
+	
+	@Override
+	public List<Vendedor>  findAllBySucursal(Sucursal sucursal){		
+		List<Vendedor> vendedores = vendedorRepository.findAllBySucursal(sucursal);
+		
+		return vendedores;		
+	}
 }

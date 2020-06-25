@@ -1,0 +1,25 @@
+ <table class="table"   >
+			<thead>
+				<tr >
+					<th>ID </th>
+					<th>Nombre </th>
+					<th>Apellido</th>
+					<th>Sucursal</th>
+					<th>Plus Sueldo</th>								
+								
+				</tr>
+			</thead>
+			<tbody>				
+			
+				<tr th:each="vendedor: ${vendedores}">
+					<form th:action="@{/vendedor/modificar/{id}(id=${vendedor.idPersona})}" method="post" role="form" >
+						<td><span th:text=${vendedor.idPersona}/></td>
+						<td><span th:text=${vendedor.nombre}/></td>
+						<td><span th:text=${vendedor.apellido}/></td>
+						<td><span th:text=${vendedor.sucursal.direccion}/></td>	
+						<td><span th:text=${vendedor.plusSueldo}/></td>									
+						
+					</form>							
+				</tr>
+			</tbody>
+		</table>    

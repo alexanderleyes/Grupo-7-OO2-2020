@@ -21,6 +21,7 @@ import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Ranking;
 import com.unla.Grupo7OO22020.entities.Sucursal;
+import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.helpers.Funciones;
 import com.unla.Grupo7OO22020.helpers.ViewRouteHelper;
 import com.unla.Grupo7OO22020.models.GerenteModel;
@@ -155,7 +156,13 @@ public class ProductoController {
 		 		}else {
 		 			mav.setViewName(ViewRouteHelper.sin_registros);
 		 		}		 		
-		 		break;		   
+		 		break;		
+		 	case "comisiones":
+		 		List<Vendedor> vendedores = ventaService.comisionesEntreFechas(sucursalConverter.modelToEntity(sucursalModel), desde, hasta);
+		 		mav.addObject("vendedores", vendedores);
+		 		mav.setViewName(ViewRouteHelper.comisionesxfecha);
+		 		break;
+		 			
 		 	default : 		
 		}	
 	

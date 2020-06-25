@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Vendedor;
@@ -36,4 +37,7 @@ public abstract interface IPedidoRepository extends JpaRepository<Pedido, Serial
 	
 	@Query("SELECT p FROM Pedido p WHERE p.idVenta = (:id)")
 	public abstract List<Pedido> findAllByIDVenta(long id);
+	
+	@Query("SELECT p FROM Pedido p WHERE p.item = (:item)")
+	public abstract Pedido findByItem(@Param("item") Item item);
 }

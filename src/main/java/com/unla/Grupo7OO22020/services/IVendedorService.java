@@ -2,6 +2,7 @@ package com.unla.Grupo7OO22020.services;
 
 import java.util.List;
 
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
@@ -15,5 +16,6 @@ public interface IVendedorService {
 	public VendedorModel findByUsuario(String usuario);
 	public VendedorModel findByIdVendedor(long id);
 	public List<VendedorModel> findAllBySucursal(SucursalModel sucursalModel);
+	public List<Vendedor> findAllBySucursal(Sucursal sucursal);
 	
 }

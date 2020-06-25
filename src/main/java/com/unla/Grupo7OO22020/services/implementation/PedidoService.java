@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.unla.Grupo7OO22020.converters.PedidoConverter;
 import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.converters.VendedorConverter;
+import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.models.PedidoModel;
@@ -205,5 +206,9 @@ public class PedidoService implements IPedidoService{
 	    }		
 		return pedidosModels;	
 	}	
+	
+	public Pedido findByItem(Item item) {
+		return pedidoRepository.findByItem(item);
+	}
 
 }
