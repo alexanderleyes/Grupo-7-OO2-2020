@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Producto;
 import com.unla.Grupo7OO22020.entities.Sucursal;
-import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 
@@ -34,7 +33,4 @@ public interface IVentaRepository extends JpaRepository<Venta, Serializable>{
 	@Query("SELECT i FROM Item i WHERE i.venta = (:venta)")
 	public List<Item> itemsPorVenta(Venta venta);
 	
-	@Query("SELECT i FROM Item i JOIN FETCH i.venta v WHERE v.vendedor = (:vendedor) and v.fecha BETWEEN (:fechaUno) AND (:fechaDos)")
-	public List<Item> itemsVentasPorVendedorEntreFechas(@Param("vendedor") Vendedor vendedor, LocalDate fechaUno, LocalDate fechaDos);
-	// sacar
 }
