@@ -2,6 +2,7 @@ package com.unla.Grupo7OO22020.services;
 
 import java.util.List;
 
+import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
@@ -28,6 +29,8 @@ public interface IPedidoService {
 	public List<Pedido> findAllByIDVenta(long id);
 
 	public List<PedidoModel> findAllBySucursalDes(SucursalModel sucursal);
+	
+	public Pedido findByItem(Item item);
 
 
 }

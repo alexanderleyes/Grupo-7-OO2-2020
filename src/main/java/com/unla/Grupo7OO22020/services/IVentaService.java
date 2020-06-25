@@ -6,6 +6,7 @@ import java.util.List;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Sucursal;
+import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VentaModel;
@@ -20,5 +21,5 @@ public interface IVentaService {
 	public List<Item> ProductosEntreFechasPorSucursal(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos);
 	public void EstadoFinalizado(List<Pedido>lstPedidos,VentaModel venta);
 	public List<VentaModel> ventasPorSucursal(SucursalModel sucursalModel);
-	
+	public List<Vendedor> comisionesEntreFechas(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos);
 }

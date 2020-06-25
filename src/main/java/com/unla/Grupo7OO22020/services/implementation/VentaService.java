@@ -14,12 +14,15 @@ import com.unla.Grupo7OO22020.converters.VentaConverter;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
 import com.unla.Grupo7OO22020.entities.Sucursal;
+import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.models.EstadoVentaModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VentaModel;
 import com.unla.Grupo7OO22020.repositories.IVentaRepository;
 import com.unla.Grupo7OO22020.services.IEstadoVentaService;
+import com.unla.Grupo7OO22020.services.IPedidoService;
+import com.unla.Grupo7OO22020.services.IVendedorService;
 import com.unla.Grupo7OO22020.services.IVentaService;
 
 @Service("ventaService")
@@ -49,6 +52,15 @@ public class VentaService implements IVentaService {
 	@Autowired
 	@Qualifier("estadoVentaService")
 	private IEstadoVentaService estadoVentaService;
+	
+	@Autowired
+	@Qualifier("vendedorService")
+	private IVendedorService vendedorService;	
+	
+
+	@Autowired
+	@Qualifier("pedidoService")
+	private IPedidoService pedidoService;	
 
 	@Override
 	public VentaModel findByIdVenta(long id) {
@@ -138,5 +150,30 @@ public class VentaService implements IVentaService {
 			}
 
 		}
+	}
+	
+	public List<Vendedor> comisionesEntreFechas(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos) {
+		double comision;
+		List<Vendedor> lstVendedores =  vendedorService.findAllBySucursal(sucursal);
+		for (Vendedor v : lstVendedores) {
+			v.setPlusSueldo(0); // inicializo la comision de cada vendedor antes de recalcular las nuevas solicitadas.
+			List<Item> lstItems = ventaRepository.itemsVentasPorVendedorEntreFechas(v, fechaUno, fechaDos);
+			for (Item i : lstItems) {
+				Pedido pedido = pedidoService.findByItem(i);
+				if(pedido == null) {
+					comision = i.getCantidad() * i.getProducto().getPrecioUnitario() * 0.05;
+					v.setPlusSueldo(v.getPlusSueldo() + comision);
+				}else {				
+					comision = i.getCantidad() * i.getProducto().getPrecioUnitario() * 0.03;
+					v.setPlusSueldo(v.getPlusSueldo() + comision);
+					
+					comision = i.getCantidad() * i.getProducto().getPrecioUnitario() * 0.02;
+					pedido.getVendedorDespacha().setPlusSueldo(v.getPlusSueldo() + comision);
+				}
+			}
+		}
+		
+		
+		return lstVendedores;
 	}
 }
