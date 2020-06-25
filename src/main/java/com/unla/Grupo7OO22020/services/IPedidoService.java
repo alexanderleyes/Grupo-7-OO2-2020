@@ -28,11 +28,6 @@ public interface IPedidoService {
 	public List<Pedido> findAllByIDVenta(long id);
 
 	public List<PedidoModel> findAllBySucursalDes(SucursalModel sucursal);
-	
-	
-
-
-	
 
 
 }

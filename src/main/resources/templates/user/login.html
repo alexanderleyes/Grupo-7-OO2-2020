@@ -65,8 +65,8 @@
 		<div class="hero-container" data-aos="fade-in">
 			<h1>Trabajo Final OO2</h1>
 			<p>
-				I'm <span class="typed"
-					data-typed-items="Alexander Leyes, Carla Martinez, Rodrigo Aguirre"></span>
+				We Are <span class="typed"
+					data-typed-items="Alexander Leyes, Carla Martinez, Rodrigo Aguirre, Solange Lescano, Micaela Jaldin"></span>
 			</p>
 		</div>
 
@@ -117,29 +117,13 @@
 			</div>
 		</section>
 		<!-- End Login Section -->
-	Hacer los insert en workbrench, uno es para el user el otro para el rol. Una vez Ingresado se puede hacer dar de alta gerentes y vendedores el usuario por defecto que se les crea es el apellido, la contraseña su dni. Recordarlo por que lo encripta y no se puede ver en sql.
-				<br>INSERT INTO `grupo-7-bdd-oo2-2020`.`user` (`id`, `createdat`, `enabled`, `password`, `updatedat`, `username`) VALUES ('1', '2020-05-24 02:01:31', 1, '$2a$04$lL2txe9OQXcjHxLvqwPGJ.0BjmTYt0pcH0SZ9KVR8iEOH340Faufa', '2020-05-24 02:01:31', 'user');
-				<br>INSERT INTO `grupo-7-bdd-oo2-2020`.`user_role` (`id`, `createdat`, `role`, `updatedat`, `user_id`) VALUES ('1', '2020-05-23 00:00:00', 'ROLE_ADMIN', '2020-05-23 00:00:00', '1');<br>Usuario: user
-				<br>pass: 123
-	</main>
+		</main>
 	<!-- End #main -->
 		
 
 	<!-- ======= Footer ======= -->
-	<footer id="footer">
-		<div class="container">
-			<div class="copyright">
-				&copy; Copyright <strong><span>iPortfolio</span></strong>
-			</div>
-			<div class="credits">
-				<!-- All the links in the footer should remain intact. -->
-				<!-- You can delete the links only if you purchased the pro version. -->
-				<!-- Licensing information: https://bootstrapmade.com/license/ -->
-				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-			</div>
-		</div>
-	</footer>
+			<div th:insert="fragments/footer :: footer" />  
+
 	<!-- End  Footer -->
 
 	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>

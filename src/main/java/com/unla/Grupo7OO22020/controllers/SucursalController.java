@@ -80,6 +80,9 @@ public class SucursalController {
 		ModelAndView mav = new ModelAndView(ViewRouteHelper.sucursal_insert);
 		mav.addObject("sucursal", sucursalService.findByIdSucursal(id));
 		
+		mav.addObject("gerentes", gerenteService.getAll());
+		mav.addObject("gerente", new Gerente());	
+		
 		Object userDet =  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		mav.addObject("user", userDet);
 		return mav;

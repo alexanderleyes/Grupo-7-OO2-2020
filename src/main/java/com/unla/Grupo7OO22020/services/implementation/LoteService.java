@@ -78,17 +78,6 @@ public class LoteService implements ILoteService {
 		}
 	}
 	
-	@Override
-	public boolean eliminar(long id) {
-		if(loteRepository.findById(id).get().getCantidad() == 0)
-		{
-			return remove(id);
-		}else {
-
-			return false;
-		}
-	}	
-	
 
 
 	@Override
