@@ -151,4 +151,14 @@ public class ViewRouteHelper {
 	
 	public final static String comisionesxfecha = "fragments/comisiones";
 	
+	/*HISTORICO COMISIONES*/
+	public final static String historicoCom_idx = "historicoComisiones/historicoComisiones_idx";
+	
+	public final static String historico_cie = "historicoComisiones/cierre";
+	
+	public final static String historico_cieno = "historicoComisiones/cierreno";
+	
+	public final static String historico_ciesi = "historicoComisiones/cierresi";
+	
+	
 }

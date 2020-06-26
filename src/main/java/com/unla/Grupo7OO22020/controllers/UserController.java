@@ -160,8 +160,7 @@ public class UserController {
 				   prodChart.put(vendedores.get(i).getApellido(), vendedores.get(i).getPlusSueldo());
 				}		   
 			   mav.addObject("prodChart", prodChart);
-			   /**********************PLUS COMISIONES************************/		
-			   
+			   /**********************PLUS COMISIONES************************/	   
 			   
 			   
 

@@ -1,0 +1,18 @@
+<table class="table" id="table"  >
+	<thead>
+		<tr >																			
+			<th>Fecha Cierre</th>
+			<th>Vendedor</th>
+			<th>Comision</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="historicoComisiones: ${historicos}">															
+			<td><span th:text="${historicoComisiones.fecha}" /></td>
+			<td><span th:text="${historicoComisiones.vendedor.apellido}" /></td>	
+			<td><span th:text="${historicoComisiones.comision}" /></td>								
+		<td>
+			</td>
+		</tr>
+	</tbody>
+</table>

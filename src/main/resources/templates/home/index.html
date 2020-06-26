@@ -45,6 +45,9 @@
 							<ol>
 								<li><a th:href="@{/home}">Home</a></li>
 								<li><a th:href="@{/parametro/parametro_idx}">Parametros</a></li>
+								<div sec:authorize="hasAnyRole('GERENTE')">
+								<li>&nbsp / <a th:href="@{/historicoComisiones/historicoComisiones_idx}">Historico de Comisiones</a> </li>
+								</div>
 							</ol>
 						</div>
 						<div sec:authorize="hasRole('VENDEDOR')">
@@ -90,7 +93,12 @@
 							<br><br>
 							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
 								Ver reportes por Fecha
-							</button>  
+							</button> 
+							
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cierreModal" onClick="cierreMes();">
+								Cierre de Mes
+							</button>
+							
 													
 							<br>
 							<div class="Charts">
@@ -163,6 +171,29 @@
 				</div>									
 				<div id="div-mensaje" ></div>
 				<div id="div-reporteXfecha" ></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div sec:authorize="hasAnyRole('GERENTE', 'ADMIN')">
+		<div class="modal fade" id="cierreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		   <div class="modal-dialog modal-dialog-centered" role="document">
+		      <div class="modal-content">
+		         <div class="modal-header">
+		            <h5 class="modal-title" id="exampleModalCenterTitle">Cierre del Mes</h5>
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		            </button>
+		         </div>
+		       <div class="modal-body">
+				      <div id="div-cierre" ></div>
+				      </div>
+				      <div class="modal-footer">
+				       
+				      </div>
+	        									
+				
 				</div>
 			</div>
 		</div>
@@ -355,8 +386,43 @@
 				          }
 				  }
 				
+				function cierreMes(){ // Visualiza el stock del producto solicitado							
 				
+					
+					var f		  = new Date();
+		           	var fecHoy = f.getFullYear();
+		           	
+		           	if ((f.getMonth() +1) < 10){
+		           		var fecHoy =  fecHoy+ "-0"+(f.getMonth() +1);
+		           	}else{
+		           		var fecHoy =  fecHoy+ "-"+(f.getMonth() +1);
+		           	}
+		           	
+		        	if (f.getDate()  < 10){
+		           		var fecHoy =  fecHoy + "-0" + f.getDate();
+		           	}else{
+		           		var fecHoy =  fecHoy + "-" + f.getDate();
+		           	}		           	
+		           						
+				         
+					$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+						method: "GET",
+					 	url: "/historicoComisiones/cierreMes/" + fecHoy,
+					})
+					
+					.done(function(result) {
+						$("#div-cierre").html(result);
+						
+					})
+					
+					.fail(function() {
+						alert("error");
+					});
+					
+					
+				}     			
 				
+				 
 			</script>
 			
 		</body>
