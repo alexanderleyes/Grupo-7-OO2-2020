@@ -12,6 +12,7 @@ import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.converters.VendedorConverter;
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
+import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.entities.Venta;
 import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
@@ -70,14 +71,15 @@ public class PedidoService implements IPedidoService{
 		}
 		else{
 			Venta v = ventaRepository.findByIdVenta(pedidoModel.getIdVenta());
-			if(v.getEstado().getIdEstadoVenta()==3) {
+			//if(v.getEstado().getIdEstadoVenta()==3) {
 				
 				pedido = pedidoRepository.save(pedidoConverter.modelToEntityConDespachanteConIdVenta(pedidoModel));
-			}else {
-			
-				pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
-			
-			}
+			//} 
+				//else				{
+//			
+//				pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
+//			
+//			}
 		}
 		
 		
@@ -167,6 +169,11 @@ public class PedidoService implements IPedidoService{
 	    }		
 		return pedidosModels;	
 	}
+	
+	public List<Pedido> findAllByVendedorDes(Vendedor vendedor){
+		List<Pedido> pedidos = pedidoRepository.findAllByVendedorDes(vendedor);
+		return pedidos;
+	}
 
 	@Override
 	public List<PedidoModel> findAllBySucursalExceptVendedor(SucursalModel sucursal, VendedorModel vendedor) {
@@ -206,8 +213,11 @@ public class PedidoService implements IPedidoService{
 	    }		
 		return pedidosModels;	
 	}	
+	
 	public Pedido findByItem(Item item) {
-		return pedidoRepository.findByItem(item);
+		Pedido pedido = null;
+		pedido = pedidoRepository.findByItem(item);
+		return pedido;
 	}
 }
 

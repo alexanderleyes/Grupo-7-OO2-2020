@@ -35,6 +35,9 @@ public abstract interface IPedidoRepository extends JpaRepository<Pedido, Serial
 	@Query("SELECT p FROM Pedido p WHERE  p.vendedorSolicita = (:vendedor)")
 	public abstract List<Pedido> findAllByVendedor(@Param("vendedor") Vendedor vendedor );
 	
+	@Query("SELECT p FROM Pedido p WHERE  p.vendedorDespacha= (:vendedor)")
+	public abstract List<Pedido> findAllByVendedorDes(@Param("vendedor") Vendedor vendedor );
+	
 	@Query("SELECT p FROM Pedido p WHERE p.idVenta = (:id)")
 	public abstract List<Pedido> findAllByIDVenta(long id);
 	

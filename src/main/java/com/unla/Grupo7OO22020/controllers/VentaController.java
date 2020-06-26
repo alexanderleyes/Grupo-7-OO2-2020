@@ -253,7 +253,7 @@ public class VentaController {
 			
 			if(stock>=cantidad) {
 				contador++;
-				sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(),(int)cantidad);
+//				sucursalService.consumoitem(sucursalModel.getIdSucursal(), productoModel.getIdProducto(),(int)cantidad);
 				double comision = cantidad * productoModel.getPrecioUnitario() * 0.05;
 				vendedorModel.setPlusSueldo(vendedorModel.getPlusSueldo() + comision);
 				vendedorService.insertOrUpdate(vendedorModel);

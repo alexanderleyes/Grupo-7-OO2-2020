@@ -161,6 +161,7 @@ public class ProductoController {
 		 	case "comisiones":
 		 		List<Vendedor> vendedores = ventaService.comisionesEntreFechas(sucursalConverter.modelToEntity(sucursalModel), desde, hasta);
 		 		mav.addObject("vendedores", vendedores);
+//		 		mav.setViewName(ViewRouteHelper.vendedor_sueldos);
 		 		mav.setViewName(ViewRouteHelper.comisionesxfecha);
 		 		break;
 		 		
