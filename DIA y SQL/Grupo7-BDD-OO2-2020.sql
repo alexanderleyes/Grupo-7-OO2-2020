@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `grupo-7-bdd-oo2-2020` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE  IF NOT EXISTS `grupo-7-bdd-oo2-2020`;
 USE `grupo-7-bdd-oo2-2020`;
--- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: grupo-7-bdd-oo2-2020
 -- ------------------------------------------------------
--- Server version	5.7.27-log
+-- Server version	8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -17,15 +17,17 @@ USE `grupo-7-bdd-oo2-2020`;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
 --
 -- Dumping data for table `cliente`
 --
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (21),(22);
+INSERT INTO `cliente` VALUES (21),(22),(23);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Dumping data for table `empleado`
@@ -33,9 +35,10 @@ UNLOCK TABLES;
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (_binary '\0','11:27','13:27','1',100,'Leyes',1),(_binary '\0','12:28','16:28','2',200,'Martinez',2),(_binary '\0','11:30','12:30','3',300,'Lescano',3),(_binary '\0','11:31','11:31','4',400,'Aguirre',4),(_binary '\0','11:32','11:32','5',500,'Jaldin',5),(_binary '\0','11:46','11:46','11',260,'Empleado11',6),(_binary '\0','11:48','11:48','22',120,'Empleado12',7),(_binary '\0','11:49','11:49','13',130,'Empleado13',8),(_binary '\0','11:50','11:51','21',210,'Empleado21',9),(_binary '\0','11:51','11:51','22',220,'Empleado22',10),(_binary '\0','12:54','12:54','23',230,'Empleado23',11),(_binary '\0','11:58','11:58','31',310,'Empleado31',12),(_binary '\0','11:58','13:58','32',320,'Empleado32',13),(_binary '\0','13:00','14:00','33',330,'Empleado33',14),(_binary '\0','11:02','12:02','41',410,'Empleado41',15),(_binary '\0','15:03','11:08','42',420,'Empleado42',16),(_binary '\0','15:04','17:04','43',430,'Empleado43',17),(_binary '\0','12:05','13:05','51',520,'Empleado51',18),(_binary '\0','12:07','12:07','52',520,'Empleado52',19),(_binary '\0','12:09','13:09','53',530,'Empleado53',20);
+INSERT INTO `empleado` VALUES (_binary '\0','11:27','13:27','1',0,'Leyes',1),(_binary '\0','12:28','16:28','2',0,'Martinez',2),(_binary '\0','11:30','12:30','3',0,'Lescano',3),(_binary '\0','11:31','11:31','4',0,'Aguirre',4),(_binary '\0','11:32','11:32','5',0,'Jaldin',5),(_binary '\0','11:46','11:46','11',0,'Empleado11',6),(_binary '\0','11:48','11:48','22',0,'Empleado12',7),(_binary '\0','11:49','11:49','13',0,'Empleado13',8),(_binary '\0','11:50','11:51','21',0,'Empleado21',9),(_binary '\0','11:51','11:51','22',0,'Empleado22',10),(_binary '\0','12:54','12:54','23',0,'Empleado23',11),(_binary '\0','11:58','11:58','31',0,'Empleado31',12),(_binary '\0','11:58','13:58','32',0,'Empleado32',13),(_binary '\0','13:00','14:00','33',0,'Empleado33',14),(_binary '\0','11:02','12:02','41',0,'Empleado41',15),(_binary '\0','15:03','11:08','42',0,'Empleado42',16),(_binary '\0','15:04','17:04','43',0,'Empleado43',17),(_binary '\0','12:05','13:05','51',0,'Empleado51',18),(_binary '\0','12:07','12:07','52',0,'Empleado52',19),(_binary '\0','12:09','13:09','53',0,'Empleado53',20);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Dumping data for table `estado_venta`
@@ -47,6 +50,7 @@ INSERT INTO `estado_venta` VALUES (1,'inicial','inicial'),(2,'pendiente','pendie
 /*!40000 ALTER TABLE `estado_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Dumping data for table `gerente`
 --
@@ -56,6 +60,17 @@ LOCK TABLES `gerente` WRITE;
 INSERT INTO `gerente` VALUES ('2020-05-01',1),('2020-05-02',2),('2020-05-03',3),('2020-05-04',4),('2020-05-05',5);
 /*!40000 ALTER TABLE `gerente` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+--
+-- Dumping data for table `historico_comisiones`
+--
+
+LOCK TABLES `historico_comisiones` WRITE;
+/*!40000 ALTER TABLE `historico_comisiones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historico_comisiones` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 --
 -- Dumping data for table `item`
@@ -67,6 +82,7 @@ INSERT INTO `item` VALUES (1,10,10,1),(2,2,8,1),(3,2,4,1),(4,3,1,2);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Dumping data for table `lote`
 --
@@ -76,6 +92,7 @@ LOCK TABLES `lote` WRITE;
 INSERT INTO `lote` VALUES (1,14,_binary '\0','2020-05-29',1,1),(2,50,_binary '\0','2020-05-30',4,1),(3,44,_binary '\0','2020-05-29',10,1),(4,52,_binary '\0','2020-05-30',4,2),(5,35,_binary '\0','2020-05-30',10,2),(6,65,_binary '\0','2020-05-30',6,2),(7,48,_binary '\0','2020-05-29',4,3),(8,25,_binary '\0','2020-05-30',2,3),(9,34,_binary '\0','2020-05-30',9,3),(10,34,_binary '\0','2020-05-30',6,4),(11,58,_binary '\0','2020-05-30',7,4),(12,121,_binary '\0','2020-05-29',8,4),(13,35,_binary '\0','2020-05-30',1,5),(14,32,_binary '\0','2020-05-30',5,5),(15,45,_binary '\0','2020-05-30',3,5),(16,43,_binary '\0','2020-05-30',2,3),(17,36,_binary '\0','2020-05-30',2,4),(18,67,_binary '\0','2020-05-30',1,5),(19,26,_binary '\0','2020-05-30',7,1);
 /*!40000 ALTER TABLE `lote` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Dumping data for table `parametro`
@@ -87,6 +104,7 @@ INSERT INTO `parametro` VALUES (1,'Productos','5'),(2,'Empleados','3');
 /*!40000 ALTER TABLE `parametro` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Dumping data for table `pedido`
 --
@@ -97,15 +115,17 @@ INSERT INTO `pedido` VALUES (1,10,10,1,3,6,12,0,NULL),(2,2,8,4,3,15,12,0,NULL);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Dumping data for table `persona`
 --
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'Leyes',1,'2020-05-01','Alex'),(2,'Martinez',2,'2020-05-02','Carla'),(3,'Lescano',3,'2020-05-03','Solange'),(4,'Aguirre',4,'2020-05-04','Diego'),(5,'Jaldin',5,'2020-05-05','Micaela'),(6,'Empleado11',11,'2020-05-01','Empleado'),(7,'Empleado12',22,'2020-05-02','Empleado'),(8,'Empleado13',13,'2020-05-03','Empleado'),(9,'Empleado21',21,'2020-05-01','Empleado'),(10,'Empleado22',22,'2020-05-02','Empleado'),(11,'Empleado23',23,'2020-05-03','Empleado'),(12,'Empleado31',31,'2020-05-01','Empleado'),(13,'Empleado32',32,'2020-05-02','Empleado'),(14,'Empleado33',33,'2020-05-03','Empleado'),(15,'Empleado41',41,'2020-05-01','Empleado'),(16,'Empleado42',42,'2020-05-23','Empleado'),(17,'Empleado43',43,'2020-05-03','Empleado'),(18,'Empleado51',51,'2020-05-01','Empleado'),(19,'Empleado52',52,'2020-05-02','E'),(20,'Empleado53',53,'2020-05-03','Empleado'),(21,'Cliente1',124578,'1990-12-12','Cliente'),(22,'Cliente2',986532,'1999-10-05','Cliente');
+INSERT INTO `persona` VALUES (1,'Leyes',1,'2020-05-01','Alex'),(2,'Martinez',2,'2020-05-02','Carla'),(3,'Lescano',3,'2020-05-03','Solange'),(4,'Aguirre',4,'2020-05-04','Diego'),(5,'Jaldin',5,'2020-05-05','Micaela'),(6,'Empleado11',11,'2020-05-01','Empleado'),(7,'Empleado12',22,'2020-05-02','Empleado'),(8,'Empleado13',13,'2020-05-03','Empleado'),(9,'Empleado21',21,'2020-05-01','Empleado'),(10,'Empleado22',22,'2020-05-02','Empleado'),(11,'Empleado23',23,'2020-05-03','Empleado'),(12,'Empleado31',31,'2020-05-01','Empleado'),(13,'Empleado32',32,'2020-05-02','Empleado'),(14,'Empleado33',33,'2020-05-03','Empleado'),(15,'Empleado41',41,'2020-05-01','Empleado'),(16,'Empleado42',42,'2020-05-23','Empleado'),(17,'Empleado43',43,'2020-05-03','Empleado'),(18,'Empleado51',51,'2020-05-01','Empleado'),(19,'Empleado52',52,'2020-05-02','Empleado'),(20,'Empleado53',53,'2020-05-03','Empleado'),(21,'Vranic',124578,'1990-12-12','Alejandra'),(22,'Siciliano',986532,'1999-10-05','Gustavo'),(23,'Mansilla',68971,'1990-08-29','Romina');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Dumping data for table `producto`
@@ -117,15 +137,6 @@ INSERT INTO `producto` VALUES (1,'campera','2020-05-30',1000),(2,'Remera','2020-
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Dumping data for table `ranking`
---
-
-LOCK TABLES `ranking` WRITE;
-/*!40000 ALTER TABLE `ranking` DISABLE KEYS */;
-INSERT INTO `ranking` VALUES (1,10,'sweter'),(2,2,'camisa'),(3,2,'zapatillas'),(4,3,'campera');
-/*!40000 ALTER TABLE `ranking` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping data for table `sucursal`
@@ -147,6 +158,7 @@ INSERT INTO `user` VALUES (1,'2020-05-24 02:01:31.000000',_binary '','$2a$04$lL
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Dumping data for table `user_role`
 --
@@ -157,7 +169,7 @@ INSERT INTO `user_role` VALUES (1,'2020-05-23 00:00:00.000000','ROLE_ADMIN','202
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
+
 -- Dumping data for table `vendedor`
 --
 
@@ -167,15 +179,7 @@ INSERT INTO `vendedor` VALUES (6,1),(7,1),(8,1),(9,2),(10,2),(11,2),(12,3),(13,3
 /*!40000 ALTER TABLE `vendedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Dumping data for table `venta`
---
 
-LOCK TABLES `venta` WRITE;
-/*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (1,NULL,21,3,3,12),(2,'2020-06-21',21,3,1,6);
-/*!40000 ALTER TABLE `venta` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping data for table `vta_items`
@@ -195,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-24 18:47:14
+-- Dump completed on 2020-06-26 20:26:18
