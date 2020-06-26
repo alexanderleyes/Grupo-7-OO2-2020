@@ -69,7 +69,7 @@
 						<div class="form-row" >
 							<div class="form-group col-md-6">
 								<label for="name">Producto</label>		     
-								<select class="form-control"  th:field="*{producto.idProducto}" id="producto" onChange="verStock(), cambiar();" onClick="verStock(), cambiar();">									
+								<select class="form-control"  th:field="*{producto.idProducto}" id="producto" onChange="verStock(), cambiar();">									
 									<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
 								</select>
 							</div>
@@ -254,9 +254,7 @@
 			function verStock(){ // Visualiza el stock del producto solicitado
 				var idProd =  $("#producto").val();
 	           	var idSucu =  document.getElementById('sucursal').innerHTML;
-	           	
-	           	console.log(idProd);
-	           	console.log(idSucu);
+	           
 	           	
 	          
 					$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
@@ -276,6 +274,8 @@
 			
 			function cambiar(){//Refresca los combos con sucursales cercanas
 				
+				$("#div-select-cercanas").html("<h2><span text=\"0\" id=\"idStock\"/> </h2>");
+			
 				var idx		= document.getElementById('sucursal').innerHTML;
 				var idp		= $("#producto").val();				
 				var cant	= $("#cantidad").val();
@@ -284,10 +284,11 @@
  				stock		= new Number(stock);
 				
 
- 				console.log(stock)
+ 				console.log("stock: " + stock)
+ 				console.log("cant: " + cant)
 					
  				 				
-					if($.isNumeric(idx)  && cant > 0 && stock < cant){
+					if($.isNumeric(idx)  && cant > 0){
 						$.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
 							method: "GET",
 						 	url: "/sucursal/cercana/" + idx + "/" + idp+ "/" + cant,
