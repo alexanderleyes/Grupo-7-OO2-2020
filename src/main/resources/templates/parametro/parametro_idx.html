@@ -83,7 +83,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form th:action="@{/parametro/agregar}" th:object="${parametro}" method="post" role="form" >
+								<form th:action="@{/parametro/agregar}" th:object="${parametro}" method="post" role="form" onsubmit="return validarForm();" >
 									<input type="hidden" th:field="*{idParametro}" name="idParametro" class="form-control"  />
 									<div class="form-row" ;>										
 										<div class="form-group col-md-6">
@@ -97,7 +97,12 @@
 											<div class="validate"></div>
 										</div>											
 									</div>
-									<input type="image" src="../../img/icons/confirma.png"  title="Confirmar Cambios" />
+									<div id="div-mensaje" ></div>
+									<div class="modal-footer">
+										<input type="image" src="../../img/icons/confirma.png"  title="Confirmar Cambios" />
+								        
+								      </div>
+									
 								</form>
 								
 							</div>
@@ -152,12 +157,36 @@
 				des = des.replace("</span>", "");
 				$("#descripcion").val(des)
 				
-					var val = this.cells[2].innerHTML
+				var val = this.cells[2].innerHTML
 				val = val.replace("<span>", "");
 				val = val.replace("</span>", ""); 
+				$("#valor").val(val)
 			}
 		}	
-	
+		
+		
+		function validarForm(){
+			
+			$("#valor").css("background-color", "#ffffff");
+						
+			var valor 	= $("#valor").val();
+			var val		= "S"		
+					
+			if (valor == ""){
+				val = "N"
+				$("#valor").css("background-color", "#FEDBDB");
+			}
+			
+			
+			if (val == "S"){					
+		     console.log(" valida form OK")
+		     	return true;
+		     } else{
+		    	$("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+		       console.log("NO valida form")
+		       return false;
+			}
+		}	
 		</script>
  
  

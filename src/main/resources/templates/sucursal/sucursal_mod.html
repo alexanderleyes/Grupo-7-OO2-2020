@@ -62,37 +62,37 @@
           </ol>
         </div>        
        
-		<form th:action="@{/sucursal/agregar}" th:object="${sucursal}" method="post" role="form" >         
+		<form th:action="@{/sucursal/agregar}" th:object="${sucursal}" method="post" role="form"   onsubmit="return validarForm();">         
 			 <input type="hidden" th:field="*{idSucursal}" class="form-control" />
 				<div class="form-row" ;>  
 				
 				<div class="form-group col-md-6">
                   <label for="name">Direccion</label>
-                  <input type="text" th:field="*{direccion}" class="form-control"  />
+                  <input type="text" th:field="*{direccion}" class="form-control"  id="dire"/>
                   <div class="validate"></div>
                 </div>
                 
                 <div class="form-group col-md-6">
                   <label for="name">Localidad</label>
-                  <input type="text" th:field="*{localidad}"  class="form-control" />
+                  <input type="text" th:field="*{localidad}"  class="form-control"  id="loca"/>
                   <div class="validate"></div>
                 </div>
                 
                                          
                 <div class="form-group col-md-6">
                   <label for="float">Latitud</label>
-                  <input type="number" th:field="*{latitud}" class="form-control" step="any" />
+                  <input type="number" th:field="*{latitud}" class="form-control" step="any"  id="lat"/>
                   <div class="validate"></div>
                 </div>
                 
                 <div class="form-group col-md-6">
                   <label for="name">Telefono</label>
-                  <input type="number" th:field="*{telefono}" class="form-control" step="any" />
+                  <input type="number" th:field="*{telefono}" class="form-control" step="any" id="tel"/>
                   <div class="validate"></div>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name">Longitud</label>
-                  <input type="number" th:field="*{longitud}" class="form-control" step="any" />
+                  <input type="number" th:field="*{longitud}" class="form-control" step="any"  id="lon"/>
                   <div class="validate"></div>
                 </div>
                 
@@ -105,7 +105,11 @@
                                                 
               </div>     
               
-              	<div class="text-left"><button type="submit" class="btn btn-primary">Confirmar</button></div>    
+              <div id="div-mensaje" ></div>
+				<div class="modal-footer">
+					<input type="image" src="../../img/icons/confirma.png"  title="Confirmar" />
+			        
+			      </div>  
               </form>	
         
 
@@ -142,7 +146,55 @@
 
   <!-- Template Main JS File -->
   <script src="../../js/main.js"></script>
-	
+  <script>
+		function validarForm(){
+			$("#dire").css("background-color", "#ffffff");
+			$("#loca").css("background-color", "#ffffff");
+			$("#lat").css("background-color", "#ffffff");
+			$("#tel").css("background-color", "#ffffff");
+			$("#lon").css("background-color", "#ffffff");
+			
+			var dire 	= $("#dire").val();
+			var loca	= $("#loca").val();
+			var lat 	= new Number($("#lat").val());
+			var tel 	= new Number($("#tel").val());
+			var lon 	= new Number($("#lon").val());			
+			var val		= "S"		
+			
+			if (dire == ""){
+				$("#dire").css("background-color", "#FEDBDB");
+				val = "N"				
+			}
+			if (loca == ""){				
+				val = "N"
+				$("#loca").css("background-color", "#FEDBDB");
+			}
+			if (lat == ""){
+				val = "N"
+				$("#lat").css("background-color", "#FEDBDB");
+			}
+			
+			if (tel <= 0){
+				val = "N"
+				$("#tel").css("background-color", "#FEDBDB");
+			}
+			
+			if (lon <= 0){
+				val = "N"
+				$("#lon").css("background-color", "#FEDBDB");
+			}
+			
+			
+			if (val == "S"){					
+		     console.log(" valida form OK")
+		     	return true;
+		     } else{
+		    	$("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+		       console.log("NO valida form")
+		       return false;
+			}
+		}	
+	</script>	
 </body>
 
 </html>

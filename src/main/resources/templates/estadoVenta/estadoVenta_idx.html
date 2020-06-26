@@ -80,13 +80,13 @@
                   <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content">
                         <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalCenterTitle">Agregar un nuevo Cliente</h5>
+                           <h5 class="modal-title" id="exampleModalCenterTitle">Agregar un nuevo Estado</h5>
                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                            <span aria-hidden="true">&times;</span>
                            </button>
                         </div>
                         <div class="modal-body">
-                           <form th:action="@{/estadoVenta/agregar}" th:object="${estadoVenta}" method="post" role="form" >
+                           <form th:action="@{/estadoVenta/agregar}" th:object="${estadoVenta}" method="post" role="form"  onsubmit="return validarForm();">
                               <div class="form-row" ;>
                                  <div class="form-group col-md-6">
                                     <label for="name">Nombre</label>
@@ -99,6 +99,7 @@
                                     <div class="validate"></div>
                                  </div>
                               </div>
+                              <div id="div-mensaje" ></div>
                               <div class="modal-footer">
                                  <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>
                               </div>
@@ -110,6 +111,7 @@
                <!-- End Modal -->
             </div>
          </section>
+         
          <!-- End Breadcrumbs -->
          <!-- ======= Portfolio Details Section ======= -->
          <div th:insert="fragments/info :: info" />
@@ -162,6 +164,38 @@
              modal.style.display = "none";
            }
          }
+         
+        
+ 		function validarForm(){
+ 			$("#nombre").css("background-color", "#ffffff");
+ 			$("#apellido").css("background-color", "#ffffff");
+ 			$("#fnac").css("background-color", "#ffffff");
+ 			$("#dni").css("background-color", "#ffffff");
+ 			
+ 			var nombre 	= $("#nombre").val();
+ 			var desc	= $("#descripcion").val(); 			
+ 			var val		= "S"	
+ 		
+ 			
+ 			if (nombre == ""){
+ 				$("#nombre").css("background-color", "#FEDBDB");
+ 				val = "N"				
+ 			}
+ 			if (desc == ""){				
+ 				val = "N"
+ 				$("#descripcion").css("background-color", "#FEDBDB");
+ 			} 
+ 				
+ 			
+ 			if (val == "S"){					
+ 		     console.log(" valida form OK")
+ 		     	return true;
+ 		     } else{
+ 		    	 $("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+ 		       return false;
+ 			}
+ 		}	
+ 	
          
       </script>
    </body>

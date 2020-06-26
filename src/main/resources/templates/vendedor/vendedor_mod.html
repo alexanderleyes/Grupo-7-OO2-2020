@@ -62,52 +62,52 @@
           </ol>
         </div>        
        
-		<form th:action="@{/vendedor/modificar_aplicar}" th:object="${vendedor}" method="post" role="form" >    
+		<form th:action="@{/vendedor/modificar_aplicar}" th:object="${vendedor}" method="post" role="form" onsubmit="return validarForm();">    
 	
 			 <input type="hidden" th:field="*{idPersona}" class="form-control" />
 			
               <div class="form-row" ;>              
                 <div class="form-group col-md-6">
                   <label for="name">Nombre</label>
-                  <input type="text" th:field="*{nombre}" class="form-control"  />
+                  <input type="text" th:field="*{nombre}" class="form-control"  id="nom"/>
                   <div class="validate"></div>
                 </div> 
                 <br>
                 <div class="form-group col-md-6">
                   <label for="name">Apellido</label>
-                  <input type="text" th:field="*{apellido}"  class="form-control"  />
+                  <input type="text" th:field="*{apellido}"  class="form-control"  id="ape"/>
                   <div class="validate"></div>
                 </div>
                 <br>
                 <div class="form-group col-md-6">
                   <label for="name">Fecha de Nacimiento</label>
-                  <input type="date" th:field="*{fechaNacimiento}"  class="form-control"  />
+                  <input type="date" th:field="*{fechaNacimiento}"  class="form-control"  id="fnac"/>
                   <div class="validate"></div>
                 </div>
                 <br>
                 <div class="form-group col-md-6">
                   <label for="name">DNI</label>
-                  <input type="number" th:field="*{dni}" class="form-control"  />
+                  <input type="number" th:field="*{dni}" class="form-control"  id="dni"/>
                   <div class="validate"></div>
                 </div>
                 <br>
                 
                 <div class="form-group col-md-6">
                   <label for="name">Horario de Ingreso</label>
-                  <input type="time" th:field="*{horaIngreso}" class="form-control"   />
+                  <input type="time" th:field="*{horaIngreso}" class="form-control"  id="hing" />
                   <div class="validate"></div>
                 </div>
                 <br>
                 
                  <div class="form-group col-md-6">
                   <label for="name">Jornada</label>
-                  <input type="time" th:field="*{horasXjornada}"  class="form-control" />
+                  <input type="time" th:field="*{horasXjornada}"  class="form-control" id="hjor"/>
                   <div class="validate"></div>
                 </div>
                 <br>  
                  <div class="form-group col-md-6">
                   <label for="name">Plus Sueldo</label>
-                  <input type="number" th:field="*{plusSueldo}"  class="form-control"  />
+                  <input type="number" th:field="*{plusSueldo}"  class="form-control"  id="psueldo"/>
                   <div class="validate"></div>
                 </div>
                 <br> 
@@ -131,7 +131,11 @@
               </div>         
               
               
-            <div class="text-left"><button type="submit" class="btn btn-primary">Confirmar</button></div>    
+            <div id="div-mensaje" ></div>
+				<div class="modal-footer">
+					<input type="image" src="../../img/icons/confirma.png"  title="Confirmar" />
+			        
+			      </div>     
               </form>	
         
 
@@ -166,6 +170,73 @@
 
   <!-- Template Main JS File -->
   <script src="../../js/main.js"></script>
+ <script>
+		function validarForm(){
+			$("#nom").css("background-color", "#ffffff");
+			$("#ape").css("background-color", "#ffffff");
+			$("#fnac").css("background-color", "#ffffff");
+			$("#dni").css("background-color", "#ffffff");
+			$("#hing").css("background-color", "#ffffff");
+			$("#hjor").css("background-color", "#ffffff");
+			$("#psueldo").css("background-color", "#ffffff");
+			
+			var nom 	= $("#nom").val();
+			var ape		= $("#ape").val();
+			var fnac 	= document.getElementById("fnac").value;
+			var dni 	= new Number($("#dni").val());
+			var hing 	= document.getElementById("hing").value;
+			var hjor 	= document.getElementById("hjor").value;
+			var psueldo = new Number($("#psueldo").val());
+			var val		= "S"
+			
+		
+			
+			if (nom == ""){
+				$("#nom").css("background-color", "#FEDBDB");
+				val = "N"				
+			}
+			if (ape == ""){				
+				val = "N"
+				$("#ape").css("background-color", "#FEDBDB");
+			}
+			if (fnac == ""){
+				val = "N"
+				$("#fnac").css("background-color", "#FEDBDB");
+			}
+			
+			if (dni <= 0){
+				val = "N"
+				$("#dni").css("background-color", "#FEDBDB");
+			}
+			
+			if (hing == ""){
+				val = "N"
+				$("#hing").css("background-color", "#FEDBDB");
+			}
+			
+			if (hjor == ""){
+				val = "N"
+				$("#hjor").css("background-color", "#FEDBDB");
+			}
+			
+			if (psueldo < 0){
+				val = "N"
+				$("#psueldo").css("background-color", "#FEDBDB");
+			}
+			
+			
+			
+			if (val == "S"){					
+		     console.log(" valida form OK")
+		     	return true;
+		     } else{
+		    	$("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+		       console.log("NO valida form")
+		       return false;
+			}
+			return false;
+		}	
+	</script>
 	
 </body>
 

@@ -64,7 +64,7 @@
           </ol>
         </div>        
        
-		<form th:action="@{/estadoVenta/agregar}" th:object="${estadoVenta}" method="post" role="form" >         
+		<form th:action="@{/estadoVenta/agregar}" th:object="${estadoVenta}" method="post" role="form" onsubmit="return validarForm();" >         
 		<input type="hidden" th:field="*{idEstadoVenta}" name="id" class="form-control"  />
 			
               <div class="form-row" ;>
@@ -83,14 +83,17 @@
                 <br>
                                                       
               </div> 
-              
+              	<div id="div-mensaje" ></div>
               	<div class="text-left"><button type="submit" class="btn btn-primary">Confirmar</button></div>    
               </form>	
         
 
       </div>
+     
     </section>
     <!-- End Breadcrumbs -->
+    
+    
 	<!-- ======= Portfolio Details Section ======= -->
 			
 			<div th:insert="fragments/info :: info" />  	
@@ -121,6 +124,43 @@
 
   <!-- Template Main JS File -->
   <script src="../../js/main.js"></script>
+  
+   <script>
+            
+         
+        
+ 		function validarForm(){
+ 			$("#nombre").css("background-color", "#ffffff");
+ 			$("#apellido").css("background-color", "#ffffff");
+ 			$("#fnac").css("background-color", "#ffffff");
+ 			$("#dni").css("background-color", "#ffffff");
+ 			
+ 			var nombre 	= $("#nombre").val();
+ 			var desc	= $("#descripcion").val(); 			
+ 			var val		= "S"	
+ 		
+ 			
+ 			if (nombre == ""){
+ 				$("#nombre").css("background-color", "#FEDBDB");
+ 				val = "N"				
+ 			}
+ 			if (desc == ""){				
+ 				val = "N"
+ 				$("#descripcion").css("background-color", "#FEDBDB");
+ 			} 
+ 				
+ 			
+ 			if (val == "S"){					
+ 		     console.log(" valida form OK")
+ 		     	return true;
+ 		     } else{
+ 		    	 $("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+ 		       return false;
+ 			}
+ 		}	
+ 	
+         
+      </script>
 </body>
 
 </html>

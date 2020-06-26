@@ -101,34 +101,37 @@ public class ViewRouteHelper {
 	
 	/*ESTADO DE VENTA*/
 
-	public final static String estadoVenta_idx = "estadoVenta/estadoVenta_idx";
+	public final static String estadoVenta_idx 		= "estadoVenta/estadoVenta_idx";
 
-	public final static String estadoVenta_insert = "estadoVenta/estadoVenta_mod";
+	public final static String estadoVenta_insert 	= "estadoVenta/estadoVenta_mod";
 
-	public final static String estadoVenta_reload = "redirect:/"+ estadoVenta_idx;	
+	public final static String estadoVenta_reload 	= "redirect:/"+ estadoVenta_idx;	
 	
 	
 	/*PEDIDOS*/
 
-	public final static String pedido_idx = "pedido/pedido_idx";
+	public final static String pedido_idx 		= "pedido/pedido_idx";
 
-	public final static String pedido_insert = "pedido/pedido_mod";
+	public final static String pedido_insert 	= "pedido/pedido_mod";
 
-	public final static String pedido_reload = "redirect:/"+ pedido_idx;	
+	public final static String pedido_reload 	= "redirect:/"+ pedido_idx;	
 	
 	
 	/*USER*/
-	public final static String logout = "user/logout";
+	public final static String logout 		= "user/logout";
 	
-	public final static String home = "redirect:/home";
+	public final static String home 		= "redirect:/home";
+	
+	public final static String errovalida 	= "fragments/errovalida";
+	
 
 	/*ITEMS*/
 
-	public final static String item_idx = "item/item_idx";
+	public final static String item_idx 	= "item/item_idx";
 
-	public final static String item_insert = "item/item_mod";
+	public final static String item_insert 	= "item/item_mod";
 
-	public final static String item_reload = "redirect:/"+ item_idx;	
+	public final static String item_reload 	= "redirect:/"+ item_idx;	
 	
 	
 	/*PARAMETRO*/

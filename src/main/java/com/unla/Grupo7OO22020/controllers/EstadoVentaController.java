@@ -17,7 +17,7 @@ import com.unla.Grupo7OO22020.models.EstadoVentaModel;
 import com.unla.Grupo7OO22020.services.IEstadoVentaService;
 
 @Controller
-@PreAuthorize("hasRole('ADMIN') or hasRole('VENDEDOR')")
+@PreAuthorize("hasRole('ADMIN') or hasRole('GERENTE')")
 @RequestMapping("estadoVenta")
 public class EstadoVentaController {
 	

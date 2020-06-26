@@ -60,24 +60,28 @@
           </ol>
         </div>        
        
-		<form th:action="@{/producto/agregar}" th:object="${producto}" method="post" role="form" >         
+		<form th:action="@{/producto/agregar}" th:object="${producto}" method="post" role="form" onsubmit="return validarForm();">         
 	<input type="hidden" th:field="*{idProducto}" name="id" class="form-control"  />
 			
               <div class="form-row" ;>              
                 <div class="form-group col-md-6">
                   <label for="name">Descripcion</label>
-                  <input type="text" th:field="*{descripcion}" name="descripcion" class="form-control"  />
+                  <input type="text" th:field="*{descripcion}" name="descripcion" class="form-control" id="desc" />
                   <div class="validate"></div>
                 </div> 
                 <br>
                 <div class="form-group col-md-6">
                   <label for="name">Precio</label>
-                  <input type="text" th:field="*{precioUnitario}" name="precioUnitario" class="form-control"  />
+                  <input type="number" th:field="*{precioUnitario}" step="any" name="precioUnitario" class="form-control"  id="prec"/>
                   <div class="validate"></div>
                 </div>
                                                       
               </div> 
-              	<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Confirmar</button></div>
+              	 <div id="div-mensaje" ></div>
+				<div class="modal-footer">
+					<input type="image" src="../../img/icons/confirma.png"  title="Confirmar" />
+			        
+			      </div>              
               </form>	
         
 
@@ -115,23 +119,35 @@
   <!-- Template Main JS File -->
   <script src="../../js/main.js"></script>
 	<script>
-	window.onload = function(){
-	var table = document.getElementById('table'), idx;			
-		for(var i=0; i<table.rows.length; i++)
-		{	
+		function validarForm(){
+			$("#desc").css("background-color", "#ffffff");
+			$("#prec").css("background-color", "#ffffff");
 			
-			table.rows[i].onclick = function(){
-					idx = this.rowIndex;	
-					console.log(this.cells[1].innerHTML)
-					//document.getElementById("id".value) = this.cells[0].innerHTML;
-					document.getElementById("nombre".value) = this.cells[1].innerHTML;
-					//document.getElementById("apellido".value) = this.cells[2].innerHTML;
-					//document.getElementById("fechaNacimientdo".value) = this.cells[3].innerHTML;
-					//document.getElementById("dni".value) = this.cells[4].innerHTML;
-				}
-			}	
-	}
-		</script>
+			var desc 	=  $("#desc").val();		
+			var prec 	= new Number($("#prec").val());
+			var val		= "S"
+			
+			if (desc == ""){
+				val = "N"
+				$("#desc").css("background-color", "#FEDBDB");
+			}			
+						
+			if (prec <= 0){
+				val = "N"
+				$("#prec").css("background-color", "#FEDBDB");
+			}
+			
+			
+			if (val == "S"){					
+		     console.log(" valida form OK")
+		     	return true;
+		     } else{
+		    	$("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+		       console.log("NO valida form")
+		       return false;
+			}
+		}	
+	</script>
 </body>
 
 </html>

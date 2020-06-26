@@ -94,25 +94,25 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form action="#" th:action="@{/producto/agregar}"th:object="${producto}" method="post" id="form1">
+								<form action="#" th:action="@{/producto/agregar}"th:object="${producto}" method="post" onsubmit="return validarForm();">
 									<div class="form-row">
 										<div class="form-group col-md-6">
 											<label for="desc">Descripción</label>
-											<input type="text" th:field="*{descripcion}" class="form-control"  />
+											<input type="text" th:field="*{descripcion}" class="form-control" id="desc" />
 											<div class="validate"></div>
 										</div>
 										<div class="form-group col-md-6">
 											<label for="apellido">Precio</label>
-											<input type="number" step="any" th:field="*{precioUnitario}" class="form-control"  />
+											<input type="number" step="any" th:field="*{precioUnitario}" class="form-control" id="prec" />
 											<div class="validate"></div>
 										</div>
 									</div>
-									<!-- 		    <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>     -->
+									<div id="div-mensaje" ></div>
+										<div class="modal-footer">
+										<input type="image" src="../../img/icons/confirma.png"  title="Confirmar" />								        
+								      </div> 						            	
 								</form>
-								<div class="modal-footer">
-									<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div>
-									<!-- 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
-								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -142,6 +142,35 @@
 		<script src="../vendor/aos/aos.js"></script>
 		<!-- Template Main JS File -->
 		<script src="../js/main.js"></script>
-		<script></script>
+		<script>
+		function validarForm(){
+			$("#desc").css("background-color", "#ffffff");
+			$("#prec").css("background-color", "#ffffff");
+			
+			var desc 	=  $("#desc").val();		
+			var prec 	= new Number($("#prec").val());
+			var val		= "S"
+			
+			if (desc == ""){
+				val = "N"
+				$("#desc").css("background-color", "#FEDBDB");
+			}			
+						
+			if (prec <= 0){
+				val = "N"
+				$("#prec").css("background-color", "#FEDBDB");
+			}
+			
+			
+			if (val == "S"){					
+		     console.log(" valida form OK")
+		     	return true;
+		     } else{
+		    	$("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+		       console.log("NO valida form")
+		       return false;
+			}
+		}	
+	</script>
 	</body>
 </html>

@@ -101,17 +101,8 @@
 				
 			</tbody>
 		</table>  
-		
-        
-	<br><br><br>				 
-		 
-		 
-
-        
-
+	<br><br><br>	
       </div>
-      
-      
       
  	   <!-- Modal -->
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -125,37 +116,33 @@
 	      </div>
 	      <div class="modal-body">
 	           	 
-			<form th:action="@{/lote/agregar}" th:object="${lote}" method="post" role="form" id="form1">
+			<form th:action="@{/lote/agregar}" th:object="${lote}" method="post" role="form" id="form1"   onsubmit="return validarForm();">
 				<div class="form-row" ;>              
 					<div class="form-group col-md-6">
 				    	<label for="name">Cantidad</label>
-				    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  />
+				    	<input type="number" step="any" th:field="*{cantidad}" class="form-control"  id="cant"/>
 				    	<div class="validate"></div>
 					</div>
 					<div class="form-group col-md-6">
 						<label for="name">Producto</label>		     
 				   		<select class="form-control"  th:field="*{producto.idProducto}"><br>
-				        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}"/>		         	
+				        	<option th:each="p : ${productos}"  th:value="${(p.idProducto)}" th:text="${p.descripcion}" id="prod"/>		         	
 				    	</select>
 			     	</div>
 			     	<div class="form-group col-md-6">
 						<label for="name">Sucursal</label>		     
 				   		<select class="form-control"  th:field="*{sucursal.idSucursal}"><br>
-				        	<option th:each="s : ${sucursales}"  th:value="${(s.idSucursal)}" th:text="${s.direccion}"/>		         	
+				        	<option th:each="s : ${sucursales}"  th:value="${(s.idSucursal)}" th:text="${s.direccion}" id="suc"/>		         	
 				    	</select>
 			     	</div>                                     
 		        </div>          
-			</form>						    
-	
-			    
-	
-		  <div class="modal-footer">
+			</form>	
+		<div id="div-mensaje" ></div>
+		  <div class="modal-footer">		  	
 			<div class="text-left">
 				<button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
 	      </div>
 		
-	
-		         
 	      </div>
 	
 	
@@ -191,7 +178,28 @@
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-
+	<script>
+		function validarForm(){
+			$("#cant").css("background-color", "#ffffff");
+				
+			var cant 	= new Number($("#cant").val());
+			var val		= "S"
+			
+			if (cant <= 0){
+				val = "N"
+				$("#cant").css("background-color", "#FEDBDB");
+			}			
+				
+			console.log(" cant: " + cant)
+			if (val == "S"){					
+		     console.log(" valida form OK")
+		     	return true;
+		     } else{
+		    	 $("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+			}
+			return false;
+		}	
+	</script>
 </body>
 
 </html>

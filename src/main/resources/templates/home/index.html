@@ -161,7 +161,7 @@
 						<input type="image" src="../img/icons/confirma1.png"  title="Emitir reporte" onClick="verReporte();"/>	
 					</div>					
 				</div>									
-				
+				<div id="div-mensaje" ></div>
 				<div id="div-reporteXfecha" ></div>
 				</div>
 			</div>
@@ -287,8 +287,48 @@
 			<script>
 			
 				function verReporte(){ // Visualiza el stock del producto solicitado
+					
 					var fecDesde =  $("#fecDesde").val();
 		           	var fecHasta =  $("#fecHasta").val();
+		           	var f		  = new Date();
+		           	var fecHoy = f.getFullYear()
+		           	
+		           	if ((f.getMonth() +1) < 10){
+		           		var fecHoy =  fecHoy+ "-0"+(f.getMonth() +1);
+		           	}else{
+		           		var fecHoy =  fecHoy+ "-"+(f.getMonth() +1);
+		           	}
+		           	
+		        	if (f.getDate()  < 10){
+		           		var fecHoy =  fecHoy + "-0" + f.getDate();
+		           	}else{
+		           		var fecHoy =  fecHoy + "-" + f.getDate();
+		           	}
+		           	
+		           	
+					var val		= "S"					
+					
+					$("#div-mensaje").html("")
+					$("#div-reporteXfecha").html("");
+					
+					if (fecDesde >  fecHasta){	
+						$("#div-mensaje").html("<p style=\"color:red\">Fecha Desde debe ser menor a Fecha Hasta</p>")
+						val = "N"				
+					}
+					
+					if (fecHasta > fecHoy){	
+						$("#div-mensaje").html("<p style=\"color:red\">No puedes ver el futuro</p>")
+						val = "N"				
+					}
+					
+					if (val == "S"){					
+				     console.log(" valida form OK")				     	
+				     } else{
+				       console.log("NO valida form")
+				       return false;
+					}		
+					
+
 		         	var tipo	 =  $("#tipo").val();
 		           	var idSuc	 =  new Number($("#sucursal option:selected").val());
 		           	
@@ -314,6 +354,9 @@
 								});
 				          }
 				  }
+				
+				
+				
 			</script>
 			
 		</body>

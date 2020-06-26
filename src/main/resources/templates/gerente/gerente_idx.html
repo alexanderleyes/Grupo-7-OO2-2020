@@ -127,72 +127,70 @@
 	      <div class="modal-body">
 	           	 
 			    <div class="row" data-aos="fade-in">      
-			<form th:action="@{/gerente/agregar}" th:object="${gerente}" method="post" role="form" id="form1" >
-       		<div class="form-row" >              
-				<div class="form-group col-md-6">
-				  <label for="name">Nombre</label>
-				  <input type="text" th:field="*{nombre}" class="form-control"  />
-				  <div class="validate"></div>
-				</div>
-				<div class="form-group col-md-6">
-				  <label for="name">Apellido</label>
-				  <input type="text"  th:field="*{apellido}" class="form-control"   />
-				  <div class="validate"></div>
-				</div>
-				<div class="form-group col-md-6">
-				  <label for="name">Fecha de Nacimiento</label>				 
-				  <input type=date  th:field="*{fechaNacimiento}" class="form-control" />
-				  <div class="validate"></div>
-				</div>
-				<div class="form-group col-md-6">
-				  <label for="name">DNI</label>
-				  <input type="number"  th:field="*{dni}" class="form-control"  id="dni"  />
-				  <div class="validate"></div>
-				</div> 
-				<div class="form-group col-md-6">
-				  <label for="name">HoraIngreso</label>
-				  <input type=time  th:field="*{horaIngreso}" class="form-control"  />
-				  <div class="validate"></div>
-				</div>
-				<div class="form-group col-md-6">
-				  <label for="name">Jornada</label>
-				  <input type="time"  th:field="*{horasXjornada}" class="form-control"   />
-				  <div class="validate"></div>
-				</div>
-				 <div class="form-group col-md-6">
-				  <label for="name">Plus Sueldo</label>
-				  <input type=number  th:field="*{plusSueldo}" class="form-control"   />
-				  <div class="validate"></div>
-				</div>
-				 <div class="form-group col-md-6">
-				  <label for="name">Fecha Ascenso</label>
-				  <input type=date  th:field="*{fechaAscenso}" class="form-control" />
-				  <div class="validate"></div>
-				</div>		                                     
-			</div>		                        
-			<div class="text-left">
-<!-- 				 <div class="text-left"><button type="submit" class="btn btn-primary" >Agregar</button></div>				 -->
+			<form th:action="@{/gerente/agregar}" th:object="${gerente}" method="post" role="form" id="form1"  onsubmit="return validarForm();" >
+	       		<div class="form-row" >              
+					<div class="form-group col-md-6">
+					  <label for="name">Nombre</label>
+					  <input type="text" th:field="*{nombre}" class="form-control"  />
+					  <div class="validate"></div>
 					</div>
-				</form>	
+					<div class="form-group col-md-6">
+					  <label for="name">Apellido</label>
+					  <input type="text"  th:field="*{apellido}" class="form-control"   />
+					  <div class="validate"></div>
+					</div>
+					<div class="form-group col-md-6">
+					  <label for="name">Fecha de Nacimiento</label>				 
+					  <input type=date  th:field="*{fechaNacimiento}" class="form-control" id="fnac"/>
+					  <div class="validate"></div>
+					</div>
+					<div class="form-group col-md-6">
+					  <label for="name">DNI</label>
+					  <input type="number"  th:field="*{dni}" class="form-control"  id="dni"  />
+					  <div class="validate"></div>
+					</div> 
+					<div class="form-group col-md-6">
+					  <label for="name">HoraIngreso</label>
+					  <input type=time  th:field="*{horaIngreso}" class="form-control" id="horaing" />
+					  <div class="validate"></div>
+					</div>
+					<div class="form-group col-md-6">
+					  <label for="name">Jornada</label>
+					  <input type="time"  th:field="*{horasXjornada}" class="form-control"  id="horajor" />
+					  <div class="validate"></div>
+					</div>
+					 <div class="form-group col-md-6">
+					  <label for="name">Plus Sueldo</label>
+					  <input type=number  th:field="*{plusSueldo}" class="form-control" id="pSueldo"  />
+					  <div class="validate"></div>
+					</div>
+					 <div class="form-group col-md-6">
+					  <label for="name">Fecha Ascenso</label>
+					  <input type=date  th:field="*{fechaAscenso}" class="form-control" id="fasc"/>
+					  <div class="validate"></div>
+					</div>		                                     
+				</div> 
+				
+				 <div id="div-mensaje" ></div>
+				<div class="modal-footer">
+					<input type="image" src="../../img/icons/confirma.png"  title="Confirmar" />
+			        
+			      </div>     
+              	    
+			</form>	
 		     
 		
 			</div>
-	
-			    
-	
-		  <div class="modal-footer">
-			<div class="text-left"><button type="submit" class="btn btn-primary" form="form1" >Agregar</button></div> 
-<!-- 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
-	      </div>
-		
-	
+			
 		         
 	      </div>
 	
 	
 	    </div>
 	  </div>
-	</div> 
+	</div>
+	
+	
 	
 </section><!-- End Breadcrumbs -->
 	<!-- ======= Portfolio Details Section ======= -->
@@ -225,7 +223,82 @@
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-
+	
+	<script>
+		function validarForm(){			
+			
+			$("#nombre").css("background-color", "#ffffff");
+			$("#apellido").css("background-color", "#ffffff");
+			$("#fnac").css("background-color", "#ffffff");
+			$("#dni").css("background-color", "#ffffff");
+			$("#horaing").css("background-color", "#ffffff");
+			$("#horajor").css("background-color", "#ffffff");
+			$("#pSueldo").css("background-color", "#ffffff");			
+			$("#fasc").css("background-color", "#ffffff");
+						
+			
+			var nombre 	= $("#nombre").val();
+			var apellido= $("#apellido").val();
+			var fnac 	= document.getElementById("fnac").value;
+			var dni 	= new Number($("#dni").val());
+			var horaing = document.getElementById("horaing").value;
+			var horajor = document.getElementById("horajor").value;
+			var pSueldo =  new Number($("#pSueldo").val());
+			var fasc 	= document.getElementById("fasc").value;			
+			var val		= "S"
+			
+		
+			
+			if (nombre == ""){
+				$("#nombre").css("background-color", "#FEDBDB");
+				val = "N"				
+			}
+			if (apellido == ""){				
+				val = "N"
+				$("#apellido").css("background-color", "#FEDBDB");
+			}
+			if (fnac == ""){
+				val = "N"
+				$("#fnac").css("background-color", "#FEDBDB");
+			}
+			
+			if (dni <= 0){
+				val = "N"
+				$("#dni").css("background-color", "#FEDBDB");
+			}
+			
+			if (horaing == ""){
+				$("#horaing").css("background-color", "#FEDBDB");
+				val = "N"				
+			}
+			if (horajor == ""){				
+				val = "N"
+				$("#horajor").css("background-color", "#FEDBDB");
+			} 
+			
+			if (pSueldo <= 0){
+				val = "N"
+				$("#pSueldo").css("background-color", "#FEDBDB");
+			}
+			
+			if (fasc == ""){
+				val = "N"
+				$("#fasc").css("background-color", "#FEDBDB");
+			}
+			
+			
+			
+			
+			if (val == "S"){					
+		     console.log(" valida form OK")
+		     	return true;
+		     } else{
+		    	 $("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+		       return false;
+			}
+		}	
+	</script>
+	
 </body>
 
 </html>

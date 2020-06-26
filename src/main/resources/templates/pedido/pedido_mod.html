@@ -62,7 +62,7 @@
         </div>        
        
 		
-		<form th:action="@{/pedido/agregar}" th:object="${pedido}" method="post" role="form" >    
+		<form th:action="@{/pedido/agregar}" th:object="${pedido}" method="post" role="form" onsubmit="return validarForm();" >    
 		
 			<input type="hidden" th:field="*{idPedido}" class="form-control"  />     
               <div class="form-row">
@@ -106,13 +106,17 @@
 
                   <div class="form-group col-md-6">
                   <label for="name">Cantidad</label>
-                  <input type="number" step="any" th:field="*{cantidad}" name="cantidad" class="form-control"  />
+                  <input type="number" step="any" th:field="*{cantidad}" name="cantidad" class="form-control"  id="cantidad"/>
                   <div class="validate"></div>
                 </div>
                 
                                                                                                                             
               </div>          
-              <div class="text-left"><button type="submit" class="btn btn-primary">Agregar</button></div>    
+              <div id="div-mensaje" ></div>
+			<div class="modal-footer">
+				<input type="image" src="../../img/icons/confirma.png"  title="Confirmar Cambios" />
+		        
+		      </div> 
        </form>	
         
 
@@ -149,7 +153,30 @@
 
   <!-- Template Main JS File -->
   <script src="../../js/main.js"></script>
-	
+	<script>
+		function validarForm(){
+			
+			$("#cantidad").css("background-color", "#ffffff");
+			
+			var cantidad 	= new Number($("#cantidad").val());
+			var val		= "S"
+						
+			if (cantidad <= 0){
+				val = "N"
+				$("#cantidad").css("background-color", "#FEDBDB");
+			}
+			
+			
+			if (val == "S"){					
+		     console.log(" valida form OK")
+		     	return true;
+		     } else{
+		    	$("#div-mensaje").html("<p style=\"color:red\">Complete los Campos</p>")
+		       console.log("NO valida form")
+		       return false;
+			}
+		}	
+	</script>
 </body>
 
 </html>
