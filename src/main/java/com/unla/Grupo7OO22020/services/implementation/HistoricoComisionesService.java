@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.unla.Grupo7OO22020.converters.HistoricoComisionesConverter;
 import com.unla.Grupo7OO22020.entities.HistoricoComisiones;
+import com.unla.Grupo7OO22020.entities.Sucursal;
 import com.unla.Grupo7OO22020.models.HistoricoComisionesModel;
 import com.unla.Grupo7OO22020.repositories.IHistoricoComisionesRepository;
 import com.unla.Grupo7OO22020.services.IHistoricoComisionesService;
@@ -60,6 +61,13 @@ public class HistoricoComisionesService implements  IHistoricoComisionesService{
 		List<HistoricoComisiones> historicos = null;
 		historicos = historicoComisionesRepository.findByFecha(fecha);			
 		return historicos;
+	}
+
+	@Override
+	public List<HistoricoComisiones> findByFechaAndSucursal(LocalDate fecha, Sucursal sucursal) {
+		List<HistoricoComisiones> historicos = null;
+		historicos = historicoComisionesRepository.findByFechaAndSucursal(fecha, sucursal);			
+		return historicos;		
 	}
 	
 	

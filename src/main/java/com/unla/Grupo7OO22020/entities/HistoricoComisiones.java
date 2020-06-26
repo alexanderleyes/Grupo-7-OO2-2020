@@ -26,64 +26,90 @@ public class HistoricoComisiones {
 	
 	private double 	 comision;		
 	
-	public HistoricoComisiones() {}	
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)	
+	private Sucursal sucursal;
 	
+	public HistoricoComisiones() {}
 
-	public HistoricoComisiones(long idHistorico, LocalDate fecha, Vendedor vendedor, double comision) {
+	
+	public HistoricoComisiones(long idHistorico, LocalDate fecha, Vendedor vendedor, double comision,
+			Sucursal sucursal) {
 		super();
 		this.idHistorico = idHistorico;
 		this.fecha = fecha;
 		this.vendedor = vendedor;
 		this.comision = comision;
+		this.sucursal = sucursal;
 	}
 	
-	public HistoricoComisiones( LocalDate fecha, Vendedor vendedor, double comision) {
-		super();
+	public HistoricoComisiones(LocalDate fecha, Vendedor vendedor, double comision,
+			Sucursal sucursal) {
+		super();		
 		this.fecha = fecha;
 		this.vendedor = vendedor;
 		this.comision = comision;
+		this.sucursal = sucursal;
 	}
-
-
 
 
 	public long getIdHistorico() {
 		return idHistorico;
 	}
 
+
 	public void setIdHistorico(long idHistorico) {
 		this.idHistorico = idHistorico;
 	}
+
 
 	public LocalDate getFecha() {
 		return fecha;
 	}
 
+
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
 
 	public Vendedor getVendedor() {
 		return vendedor;
 	}
 
+
 	public void setVendedor(Vendedor vendedor) {
 		this.vendedor = vendedor;
 	}
+
 
 	public double getComision() {
 		return comision;
 	}
 
+
 	public void setComision(double comision) {
 		this.comision = comision;
 	}
 
+
+	public Sucursal getSucursal() {
+		return sucursal;
+	}
+
+
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
+	}
+
+
 	@Override
 	public String toString() {
 		return "HistoricoComisiones [idHistorico=" + idHistorico + ", fecha=" + fecha + ", vendedor=" + vendedor
-				+ ", comision=" + comision + "]";
-	};
+				+ ", comision=" + comision + ", sucursal=" + sucursal + "]";
+	}	
+	
+
+	
 	
 	
 	

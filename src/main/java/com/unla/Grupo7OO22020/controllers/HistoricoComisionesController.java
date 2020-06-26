@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.Grupo7OO22020.converters.HistoricoComisionesConverter;
+import com.unla.Grupo7OO22020.converters.SucursalConverter;
 import com.unla.Grupo7OO22020.converters.VendedorConverter;
 import com.unla.Grupo7OO22020.converters.VentaConverter;
 import com.unla.Grupo7OO22020.entities.Gerente;
@@ -59,6 +60,10 @@ public class HistoricoComisionesController {
 	@Qualifier("vendedorConverter")
 	private VendedorConverter vendedorConverter;
 	
+	@Autowired
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;
+	
 	@GetMapping("/historicoComisiones_idx")
 	public ModelAndView historicosComisiones(){
 			System.out.println("enruta: " +ViewRouteHelper.historicoCom_idx);
@@ -83,30 +88,36 @@ public class HistoricoComisionesController {
 		int ultimoDiaMes = Funciones.traerCantDiasDeUnMes(Funciones.traerAnio(fecha), Funciones.traerMes(fecha)-1);
 		ModelAndView mav = new ModelAndView();
 		
-		if (ultimoDiaMes == Funciones.traerDia(fecha)) {
+		if (ultimoDiaMes != Funciones.traerDia(fecha)) {
 			mav.setViewName(ViewRouteHelper.historico_cie);			
 		}else {
 			mav.setViewName(ViewRouteHelper.historico_cieno);
 			return mav;			
 		}
 		
-		List<HistoricoComisiones> historicosAux= historicoComisionesService.findByFecha(fecha);
-		if (historicoComisionesService.findByFecha(fecha).size() > 0) {
+		String username 	= SecurityContextHolder.getContext().getAuthentication().getName();
+		GerenteModel gerente		= gerenteService.findByUsuario(username);
+		SucursalModel sucursal		= sucursalService.findByGerente(gerente);
+		
+		List<HistoricoComisiones> historicosAux = historicoComisionesService.findByFechaAndSucursal(fecha, sucursalConverter.modelToEntity(sucursal));	
+		
+		System.out.println("cantidad : " +historicosAux.size());
+		
+		if (historicosAux.size() > 0) {
 			mav.setViewName(ViewRouteHelper.historico_ciesi);
 			return mav;	
 		}
 		
 		List<HistoricoComisiones> historicos = new ArrayList<HistoricoComisiones>();
-		String username 	= SecurityContextHolder.getContext().getAuthentication().getName();
-		GerenteModel gerente		= gerenteService.findByUsuario(username);
-		SucursalModel sucursal		= sucursalService.findByGerente(gerente);
+		
 		List<VendedorModel> vendedores = vendedorService.findAllBySucursal(sucursal);
+		
 		HistoricoComisiones historico = new HistoricoComisiones();
 		for(VendedorModel v: vendedores) {
 			Vendedor vendedor = vendedorConverter.modelToEntitySinSucursal(v);
 			
 			
-			historico = new HistoricoComisiones(LocalDate.now(), vendedor, vendedor.getPlusSueldo());			
+			historico = new HistoricoComisiones(LocalDate.now(), vendedor, vendedor.getPlusSueldo(), sucursalConverter.modelToEntity(sucursal));			
 			historico = historicoComisionesService.insertOrUpdate(historico);
 			historicos.add(historico);
 			

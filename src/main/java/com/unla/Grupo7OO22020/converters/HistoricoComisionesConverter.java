@@ -14,12 +14,17 @@ public class HistoricoComisionesConverter {
 	@Qualifier("vendedorConverter")
 	private VendedorConverter vendedorConverter;
 	
+	@Autowired
+	@Qualifier("sucursalConverter")
+	private SucursalConverter sucursalConverter;
+	
 	public HistoricoComisionesModel entityToModel(HistoricoComisiones historico) {
 		return new HistoricoComisionesModel(
 				historico.getIdHistorico(),				
 				historico.getFecha(),
 				vendedorConverter.entityToModel(historico.getVendedor()),
-				historico.getComision());			
+				historico.getComision(),
+				sucursalConverter.entityToModel(historico.getSucursal()));			
 	}
 	
 	public HistoricoComisiones modelToEntity(HistoricoComisionesModel historico) {
@@ -27,7 +32,8 @@ public class HistoricoComisionesConverter {
 				historico.getIdHistorico(),				
 				historico.getFecha(),
 				vendedorConverter.modelToEntity(historico.getVendedor()),
-				historico.getComision());
+				historico.getComision(),
+				sucursalConverter.modelToEntity(historico.getSucursal()));
 	}
 
 }

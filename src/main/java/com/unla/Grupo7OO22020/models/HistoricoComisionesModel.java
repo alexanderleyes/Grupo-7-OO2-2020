@@ -8,17 +8,20 @@ public class HistoricoComisionesModel {
 	private long 	 		idHistorico;
 	private LocalDate 		fecha;
 	private VendedorModel 	vendedor;
-	private double 	 		comision;		
+	private double 	 		comision;	
+	private SucursalModel	sucursal;
 	
 	public HistoricoComisionesModel() {}
 
-
-	public HistoricoComisionesModel(long idHistorico, LocalDate fecha, VendedorModel vendedor, double comision) {
+	
+	public HistoricoComisionesModel(long idHistorico, LocalDate fecha, VendedorModel vendedor, double comision,
+			SucursalModel sucursal) {
 		super();
-		this.idHistorico 	= idHistorico;
-		this.fecha 			= fecha;
-		this.vendedor 		= vendedor;
-		this.comision 		= comision;
+		this.idHistorico = idHistorico;
+		this.fecha = fecha;
+		this.vendedor = vendedor;
+		this.comision = comision;
+		this.sucursal = sucursal;
 	}
 
 	public long getIdHistorico() {
@@ -53,11 +56,23 @@ public class HistoricoComisionesModel {
 		this.comision = comision;
 	}
 
+	public SucursalModel getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(SucursalModel sucursal) {
+		this.sucursal = sucursal;
+	}
+
+
 	@Override
 	public String toString() {
 		return "HistoricoComisionesModel [idHistorico=" + idHistorico + ", fecha=" + fecha + ", vendedor=" + vendedor
-				+ ", comision=" + comision + "]";
+				+ ", comision=" + comision + ", sucursal=" + sucursal + "]";
 	}
+
+	
+	
 
 
 }
