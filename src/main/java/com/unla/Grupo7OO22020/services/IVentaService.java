@@ -22,4 +22,5 @@ public interface IVentaService {
 	public void EstadoFinalizado(List<Pedido>lstPedidos,VentaModel venta);
 	public List<VentaModel> ventasPorSucursal(SucursalModel sucursalModel);
 	public List<Vendedor> comisionesEntreFechas(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos);
+	public Venta ventasEntreFechas(long idVenta, LocalDate fechaUno, LocalDate fechaDos);
 }

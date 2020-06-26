@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.unla.Grupo7OO22020.entities.Item;
 import com.unla.Grupo7OO22020.entities.Pedido;
+import com.unla.Grupo7OO22020.entities.Vendedor;
 import com.unla.Grupo7OO22020.models.PedidoModel;
 import com.unla.Grupo7OO22020.models.SucursalModel;
 import com.unla.Grupo7OO22020.models.VendedorModel;
@@ -23,6 +24,8 @@ public interface IPedidoService {
 	public List<PedidoModel> findAllBySucursalExceptVendedor(SucursalModel sucursal, VendedorModel vendedor);
 
 	public List<PedidoModel> findAllByVendedor(VendedorModel vendedor);
+	
+	public List<Pedido> findAllByVendedorDes(Vendedor vendedor);
 
 	public List<PedidoModel> findAllBySucursalOri(SucursalModel sucursal);
 	

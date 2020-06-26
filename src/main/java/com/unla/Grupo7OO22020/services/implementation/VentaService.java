@@ -154,10 +154,12 @@ public class VentaService implements IVentaService {
 	
 	public List<Vendedor> comisionesEntreFechas(Sucursal sucursal, LocalDate fechaUno, LocalDate fechaDos) {
 		double comision;
-		List<Vendedor> lstVendedores =  vendedorService.findAllBySucursal(sucursal);
+		List<Vendedor> lstVendedores = vendedorService.findAllBySucursal(sucursal);		
+		
 		for (Vendedor v : lstVendedores) {
-			v.setPlusSueldo(0); // inicializo la comision de cada vendedor antes de recalcular las nuevas solicitadas.
+			v.setPlusSueldo(0);
 			List<Item> lstItems = ventaRepository.itemsVentasPorVendedorEntreFechas(v, fechaUno, fechaDos);
+			
 			for (Item i : lstItems) {
 				Pedido pedido = pedidoService.findByItem(i);
 				if(pedido == null) {
@@ -167,13 +169,28 @@ public class VentaService implements IVentaService {
 					comision = i.getCantidad() * i.getProducto().getPrecioUnitario() * 0.03;
 					v.setPlusSueldo(v.getPlusSueldo() + comision);
 					
-					comision = i.getCantidad() * i.getProducto().getPrecioUnitario() * 0.02;
-					pedido.getVendedorDespacha().setPlusSueldo(v.getPlusSueldo() + comision);
+					
 				}
 			}
+			
+			List<Pedido> lstPedidos = pedidoService.findAllByVendedorDes(v);
+			for (Pedido p : lstPedidos) {
+				Venta venta = ventasEntreFechas(p.getIdVenta(), fechaUno, fechaDos);
+				if (venta != null){
+					comision = p.getCantidad() * p.getProducto().getPrecioUnitario() * 0.02;
+					v.setPlusSueldo(v.getPlusSueldo() + comision);
+				}
+			}
+			
 		}
 		
 		
 		return lstVendedores;
+	}
+	
+	public Venta ventasEntreFechas(long idVenta, LocalDate fechaUno, LocalDate fechaDos) {
+		Venta venta = null;
+		venta = ventaRepository.ventasEntreFechas(idVenta, fechaUno, fechaDos);
+		return venta;
 	}
 }
