@@ -122,6 +122,9 @@ public class VentaService implements IVentaService {
 		List<Venta> ventasEntities = ventaRepository.ventasPorSucursal(sucursalConverter.modelToEntity(sucursalModel));
 		
 		for (Venta venta : ventasEntities) {
+			if (venta.getFecha() != null) {
+				venta.setFecha(venta.getFecha().plusDays(1));
+			}
 			ventasModel.add(ventaConverter.entityToModel(venta));			
 		}
 		

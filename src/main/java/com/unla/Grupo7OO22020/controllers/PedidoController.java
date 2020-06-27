@@ -212,6 +212,7 @@ public class PedidoController {
 		
 		//para setear estado FINALIZADO una vez que esten todos los pedidos despachados 
 		ventaService.EstadoFinalizado(lstPedidos, venta);
+		venta.setFecha(venta.getFecha().plusDays(1));
 		ventaService.insertOrUpdate(venta);
 		
 		double comision = pedidoModel.getProducto().getPrecioUnitario() * pedidoModel.getCantidad() * 0.02;

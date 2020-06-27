@@ -30,21 +30,19 @@ public class VentaConverter {
 	
 	
 	
-	public VentaModel entityToModel(Venta venta) { 
+	public VentaModel entityToModel(Venta venta) { 		
 		return new VentaModel(
 				venta.getIdVenta(), 
 				sucursalConverter.entityToModel(venta.getSucursal()),
 				vendedorConverter.entityToModel(venta.getVendedor()),
 				personaConverter.entityToModel(venta.getCliente()),
 				estadoVentaConverter.entityToModel(venta.getEstado()),
-				venta.getFecha());
-		       
+				venta.getFecha());		       
 	}
 	
 
 	
-	public Venta modelToEntity(VentaModel ventaModel) { 
-		
+	public Venta modelToEntity(VentaModel ventaModel) { 		
 		return new Venta(
 				ventaModel.getIdVenta(), 
 				sucursalConverter.modelToEntity(ventaModel.getSucursal()),

@@ -153,7 +153,8 @@ public class VentaController {
 			mav.addObject("sucursal", new Sucursal());
 			mav.addObject("venta", new Venta());			
 			mav.addObject("clientes", clienteService.getAll());
-			mav.addObject("estados", estadoVentaService.getAll());
+			
+			
 			
 			
 			return mav;			
@@ -166,7 +167,7 @@ public class VentaController {
 		ventaModel.setSucursal(sucursalService.findByIdSucursal(ventaModel.getSucursal().getIdSucursal()));
 		ventaModel.setVendedor(vendedorService.findByIdVendedor(ventaModel.getVendedor().getIdPersona()));
 		ventaModel.setCliente((PersonaModel) clienteService.findByIdCliente(ventaModel.getCliente().getIdPersona()));		
-		ventaModel.setEstado(estadoVentaService.findByIdEstadoVenta(ventaModel.getEstado().getIdEstadoVenta()));
+
 		
 		mav.addObject("venta", ventaModel);
 		mav.addObject("productos", productoService.getAll());
