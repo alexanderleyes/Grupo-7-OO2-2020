@@ -73,17 +73,6 @@ UNLOCK TABLES;
 
 
 --
--- Dumping data for table `item`
---
-
-LOCK TABLES `item` WRITE;
-/*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,10,10,1),(2,2,8,1),(3,2,4,1),(4,3,1,2);
-/*!40000 ALTER TABLE `item` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
---
 -- Dumping data for table `lote`
 --
 
@@ -102,17 +91,6 @@ LOCK TABLES `parametro` WRITE;
 /*!40000 ALTER TABLE `parametro` DISABLE KEYS */;
 INSERT INTO `parametro` VALUES (1,'Productos','5'),(2,'Empleados','3');
 /*!40000 ALTER TABLE `parametro` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
---
--- Dumping data for table `pedido`
---
-
-LOCK TABLES `pedido` WRITE;
-/*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,10,10,1,3,6,12,0,NULL),(2,2,8,4,3,15,12,0,NULL);
-/*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

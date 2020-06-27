@@ -32,8 +32,6 @@
           	<li><a th:href="@{/vendedor/vendedor_idx}"><i class="bx bx-user"></i> <span>Vendedores</span></a></li>
           	<li><a th:href="@{/cliente/cliente_idx}"><i class="bx bx-user"></i> <span>Clientes</span></a></li>          
           	<li><a th:href="@{/venta/venta_idx}"><i class="bx bx-barcode"></i> Ventas </a></li>          
-          	<li><a th:href="@{/sucursal/sucursal_idx}"><i class="bx bx-buildings"></i> Sucursales</a></li>
-          	<li><a th:href="@{/producto/producto_idx}"><i class="bx bx-store-alt"></i> Productos</a></li>
           	<li><a th:href="@{/lote/lote_idx}"><i class="bx bx-server"></i> Lotes </a></li>        	
         </div> 
         <div sec:authorize="hasRole('ADMIN')">
